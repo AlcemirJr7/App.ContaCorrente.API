@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace App.ContaCorrente.Infra.Data.ConfiguracoesEntidades
 {
-    public class LancamentosConfiguracao : IEntityTypeConfiguration<Lancamentos>
+    public class LancamentosConfiguracao : IEntityTypeConfiguration<Lancamento>
     {
-        public void Configure(EntityTypeBuilder<Lancamentos> builder)
+        public void Configure(EntityTypeBuilder<Lancamento> builder)
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Observacao).HasMaxLength(1000);

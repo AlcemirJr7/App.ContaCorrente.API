@@ -19,6 +19,7 @@ namespace App.ContaCorrente.API.Controllers
         }
 
         [HttpGet]
+        [Produces("application/json")]
         public async Task<ActionResult<IEnumerable<BancoDTO>>> GetBancos()
         {
             var bancos = await _bancoServico.GetBancosAsync();
@@ -30,6 +31,7 @@ namespace App.ContaCorrente.API.Controllers
         }
 
         [HttpGet("{codigo:int}",Name = "GetBanco")]
+        [Produces("application/json")]
         public async Task<ActionResult<BancoDTO>> GetBanco(int? codigo)
         {
             var banco = await _bancoServico.GetBancoPeloIdAsync(codigo.Value);
@@ -41,6 +43,7 @@ namespace App.ContaCorrente.API.Controllers
         }
 
         [HttpPost]
+        [Produces("application/json")]
         public async Task<ActionResult> PostBanco([FromBody] BancoDTO bancoDto)
         {
             if (bancoDto == null) return BadRequest(Mensagens.DataInvalida);
@@ -51,6 +54,7 @@ namespace App.ContaCorrente.API.Controllers
         }
         
         [HttpPut]
+        [Produces("application/json")]
         public async Task<ActionResult<BancoDTO>> PutBanco(int? id,[FromBody] BancoDTO bancoDto)
         {
             if(id != bancoDto.Id) return BadRequest(Mensagens.DataInvalida);

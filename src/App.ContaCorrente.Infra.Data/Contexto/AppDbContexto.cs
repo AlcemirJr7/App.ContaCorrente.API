@@ -17,8 +17,8 @@ namespace App.ContaCorrente.Infra.Data.Contexto
         public DbSet<Correntista> Correntistas { get; set; }
         public DbSet<Emprestimo> Emprestimos { get; set; }
         public DbSet<Endereco> Enderecos { get; set; }
-        public DbSet<Lancamentos> Lancamentos { get; set; }
-        public DbSet<LancamentosFuturos> LancamentosFuturos { get; set; }
+        public DbSet<Lancamento> Lancamentos { get; set; }
+        public DbSet<LancamentoFuturo> LancamentosFuturos { get; set; }
         public DbSet<LocalTrabalhoPessoa> LocalTrabalhoPessoas { get; set; }
         public DbSet<Pagamento> Pagamentos { get; set; }
         public DbSet<ParcelasEmprestimo> ParcelasEmprestimos { get; set; }

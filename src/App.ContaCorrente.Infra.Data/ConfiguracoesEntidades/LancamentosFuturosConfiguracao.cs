@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace App.ContaCorrente.Infra.Data.ConfiguracoesEntidades
 {
-    public class LancamentosFuturosConfiguracao : IEntityTypeConfiguration<LancamentosFuturos>
+    public class LancamentosFuturosConfiguracao : IEntityTypeConfiguration<LancamentoFuturo>
     {
-        public void Configure(EntityTypeBuilder<LancamentosFuturos> builder)
+        public void Configure(EntityTypeBuilder<LancamentoFuturo> builder)
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Valor).HasPrecision(25, 2).IsRequired();

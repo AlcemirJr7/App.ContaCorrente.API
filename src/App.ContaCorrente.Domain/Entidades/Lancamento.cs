@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace App.ContaCorrente.Domain.Entidades
 {
-    public class Lancamentos
+    public class Lancamento
     {
         public int Id { get; protected set; }
 
@@ -25,19 +25,19 @@ namespace App.ContaCorrente.Domain.Entidades
 
         public Historico Historico { get; set; }
 
-        public Lancamentos(DateTime dataLancamento, decimal valor,string? observacao)
+        public Lancamento(DateTime dataLancamento, decimal valor,string? observacao)
         {
             ValidarEntidade(dataLancamento, valor, observacao);
         }
 
-        public Lancamentos(int id,DateTime dataLancamento, decimal valor, string? observacao)
+        public Lancamento(int id,DateTime dataLancamento, decimal valor, string? observacao)
         {
             DomainExcepitonValidacao.When(id < 0, "Id invalido.");
             Id = id;
             ValidarEntidade(dataLancamento, valor, observacao);
         }
 
-        public Lancamentos(DateTime dataLancamento, decimal valor, string? observacao,int correntistaId, int historicoId)
+        public Lancamento(DateTime dataLancamento, decimal valor, string? observacao,int correntistaId, int historicoId)
         {
             ValidarEntidade(dataLancamento, valor, observacao);
             CorrentistaId = correntistaId;

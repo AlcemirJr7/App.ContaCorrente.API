@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace App.ContaCorrente.Domain.Entidades
 {
-    public class LancamentosFuturos
+    public class LancamentoFuturo
     {
         public int Id { get; protected set; }
 
@@ -30,19 +30,19 @@ namespace App.ContaCorrente.Domain.Entidades
 
         public Correntista Correntista { get; set; }
 
-        public LancamentosFuturos(decimal valor,DateTime dataCadastro,DateTime dataParaLancamento, EnumLancamentosFuturos flagLancamento, DateTime? dataLancamento)
+        public LancamentoFuturo(decimal valor,DateTime dataCadastro,DateTime dataParaLancamento, EnumLancamentosFuturos flagLancamento, DateTime? dataLancamento)
         {
             ValidarEntidade(valor, dataCadastro, dataParaLancamento, flagLancamento, dataLancamento);
         }
 
-        public LancamentosFuturos(int id,decimal valor, DateTime dataCadastro, DateTime dataParaLancamento, EnumLancamentosFuturos flagLancamento, DateTime? dataLancamento)
+        public LancamentoFuturo(int id,decimal valor, DateTime dataCadastro, DateTime dataParaLancamento, EnumLancamentosFuturos flagLancamento, DateTime? dataLancamento)
         {
             DomainExcepitonValidacao.When(id < 0, "Id invalido.");
             Id = id;
             ValidarEntidade(valor, dataCadastro, dataParaLancamento, flagLancamento, dataLancamento);
         }
 
-        public LancamentosFuturos(decimal valor, DateTime dataCadastro, DateTime dataParaLancamento, EnumLancamentosFuturos flagLancamento, DateTime? dataLancamento, int historicoId, int correntistaId)
+        public LancamentoFuturo(decimal valor, DateTime dataCadastro, DateTime dataParaLancamento, EnumLancamentosFuturos flagLancamento, DateTime? dataLancamento, int historicoId, int correntistaId)
         {
             ValidarEntidade(valor, dataCadastro, dataParaLancamento, flagLancamento, dataLancamento);
             HistoricoId = historicoId;

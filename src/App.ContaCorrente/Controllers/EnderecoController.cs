@@ -20,6 +20,7 @@ namespace App.ContaCorrente.API.Controllers
 
 
         [HttpGet("{id:int}", Name = "GetEndereco")]
+        [Produces("application/json")]
         public async Task<ActionResult<EnderecoDTO>> GetEndereco(int? id)             
         {
                         
@@ -51,6 +52,7 @@ namespace App.ContaCorrente.API.Controllers
         }
 
         [HttpPut("{id:int}")]
+        [Produces("application/json")]
         public async Task<ActionResult<EnderecoDTO>> PutEndereco(int? id,[FromBody] EnderecoDTO enderecoDto)
         {
             if (enderecoDto == null) return BadRequest(Mensagens.DataInvalida);
@@ -71,6 +73,7 @@ namespace App.ContaCorrente.API.Controllers
         }
 
         [HttpDelete("{id:int}")]
+        [Produces("application/json")]
         public async Task<ActionResult<EnderecoDTO>> PutEndereco(int? id)
         {            
          

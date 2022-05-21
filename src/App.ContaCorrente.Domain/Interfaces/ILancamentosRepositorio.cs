@@ -9,13 +9,13 @@ namespace App.ContaCorrente.Domain.Interfaces
 {
     public interface ILancamentosRepositorio : IDisposable
     {
-        Task<Lancamentos> GetPeloIdAsync(int? id);
+        Task<Lancamento> GetPeloIdAsync(int? id);
 
-        Task<IEnumerable<Lancamentos>> GetPeloCorrentistaIdAsync(int? id);
+        Task<IEnumerable<Lancamento>> GetPeloCorrentistaIdAsync(int? id);
 
-        Task<Lancamentos> AlterarAsync(Lancamentos lancamentos);
+        Task<Lancamento> AlterarAsync(Lancamento lancamentos);
 
-        Task<Lancamentos> CriarAsync(Lancamentos lancamentos);
+        Task<Lancamento> CriarAsync(Lancamento lancamentos);
 
     }
 }
