@@ -1,0 +1,394 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\alcem\\source\\repos\\App.ContaCorrente\\App.ContaCorrente\\App.ContaCorrente.API.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\alcem\\source\\repos\\App.ContaCorrente\\App.ContaCorrente.Application\\App.ContaCorrente.Application.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\alcem\\source\\repos\\App.ContaCorrente\\App.ContaCorrente.Application\\App.ContaCorrente.Application.csproj",
+        "projectName": "App.ContaCorrente.Application",
+        "projectPath": "C:\\Users\\alcem\\source\\repos\\App.ContaCorrente\\App.ContaCorrente.Application\\App.ContaCorrente.Application.csproj",
+        "packagesPath": "C:\\Users\\alcem\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\alcem\\source\\repos\\App.ContaCorrente\\App.ContaCorrente.Application\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\alcem\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\alcem\\source\\repos\\App.ContaCorrente\\App.ContaCorrente.Domain\\App.ContaCorrente.Domain.csproj": {
+                "projectPath": "C:\\Users\\alcem\\source\\repos\\App.ContaCorrente\\App.ContaCorrente.Domain\\App.ContaCorrente.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[11.0.1, )"
+            },
+            "MediatR": {
+              "target": "Package",
+              "version": "[10.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\alcem\\source\\repos\\App.ContaCorrente\\App.ContaCorrente.Domain\\App.ContaCorrente.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\alcem\\source\\repos\\App.ContaCorrente\\App.ContaCorrente.Domain\\App.ContaCorrente.Domain.csproj",
+        "projectName": "App.ContaCorrente.Domain",
+        "projectPath": "C:\\Users\\alcem\\source\\repos\\App.ContaCorrente\\App.ContaCorrente.Domain\\App.ContaCorrente.Domain.csproj",
+        "packagesPath": "C:\\Users\\alcem\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\alcem\\source\\repos\\App.ContaCorrente\\App.ContaCorrente.Domain\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\alcem\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Cryptography.KeyDerivation": {
+              "target": "Package",
+              "version": "[6.0.5, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\alcem\\source\\repos\\App.ContaCorrente\\App.ContaCorrente.Infra.Data\\App.ContaCorrente.Infra.Data.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\alcem\\source\\repos\\App.ContaCorrente\\App.ContaCorrente.Infra.Data\\App.ContaCorrente.Infra.Data.csproj",
+        "projectName": "App.ContaCorrente.Infra.Data",
+        "projectPath": "C:\\Users\\alcem\\source\\repos\\App.ContaCorrente\\App.ContaCorrente.Infra.Data\\App.ContaCorrente.Infra.Data.csproj",
+        "packagesPath": "C:\\Users\\alcem\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\alcem\\source\\repos\\App.ContaCorrente\\App.ContaCorrente.Infra.Data\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\alcem\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\alcem\\source\\repos\\App.ContaCorrente\\App.ContaCorrente.Domain\\App.ContaCorrente.Domain.csproj": {
+                "projectPath": "C:\\Users\\alcem\\source\\repos\\App.ContaCorrente\\App.ContaCorrente.Domain\\App.ContaCorrente.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "None",
+              "target": "Package",
+              "version": "[6.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[6.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.5, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\alcem\\source\\repos\\App.ContaCorrente\\App.ContaCorrente.Infra.IoC\\App.ContaCorrente.Infra.IoC.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\alcem\\source\\repos\\App.ContaCorrente\\App.ContaCorrente.Infra.IoC\\App.ContaCorrente.Infra.IoC.csproj",
+        "projectName": "App.ContaCorrente.Infra.IoC",
+        "projectPath": "C:\\Users\\alcem\\source\\repos\\App.ContaCorrente\\App.ContaCorrente.Infra.IoC\\App.ContaCorrente.Infra.IoC.csproj",
+        "packagesPath": "C:\\Users\\alcem\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\alcem\\source\\repos\\App.ContaCorrente\\App.ContaCorrente.Infra.IoC\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\alcem\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\alcem\\source\\repos\\App.ContaCorrente\\App.ContaCorrente.Application\\App.ContaCorrente.Application.csproj": {
+                "projectPath": "C:\\Users\\alcem\\source\\repos\\App.ContaCorrente\\App.ContaCorrente.Application\\App.ContaCorrente.Application.csproj"
+              },
+              "C:\\Users\\alcem\\source\\repos\\App.ContaCorrente\\App.ContaCorrente.Domain\\App.ContaCorrente.Domain.csproj": {
+                "projectPath": "C:\\Users\\alcem\\source\\repos\\App.ContaCorrente\\App.ContaCorrente.Domain\\App.ContaCorrente.Domain.csproj"
+              },
+              "C:\\Users\\alcem\\source\\repos\\App.ContaCorrente\\App.ContaCorrente.Infra.Data\\App.ContaCorrente.Infra.Data.csproj": {
+                "projectPath": "C:\\Users\\alcem\\source\\repos\\App.ContaCorrente\\App.ContaCorrente.Infra.Data\\App.ContaCorrente.Infra.Data.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[11.0.0, )"
+            },
+            "MediatR.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[10.0.1, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[6.0.5, )"
+            },
+            "Swashbuckle.AspNetCore.Swagger": {
+              "target": "Package",
+              "version": "[6.3.1, )"
+            },
+            "Swashbuckle.AspNetCore.SwaggerGen": {
+              "target": "Package",
+              "version": "[6.3.1, )"
+            },
+            "Swashbuckle.AspNetCore.SwaggerUI": {
+              "target": "Package",
+              "version": "[6.3.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\alcem\\source\\repos\\App.ContaCorrente\\App.ContaCorrente\\App.ContaCorrente.API.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\alcem\\source\\repos\\App.ContaCorrente\\App.ContaCorrente\\App.ContaCorrente.API.csproj",
+        "projectName": "App.ContaCorrente.API",
+        "projectPath": "C:\\Users\\alcem\\source\\repos\\App.ContaCorrente\\App.ContaCorrente\\App.ContaCorrente.API.csproj",
+        "packagesPath": "C:\\Users\\alcem\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\alcem\\source\\repos\\App.ContaCorrente\\App.ContaCorrente\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\alcem\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\alcem\\source\\repos\\App.ContaCorrente\\App.ContaCorrente.Infra.IoC\\App.ContaCorrente.Infra.IoC.csproj": {
+                "projectPath": "C:\\Users\\alcem\\source\\repos\\App.ContaCorrente\\App.ContaCorrente.Infra.IoC\\App.ContaCorrente.Infra.IoC.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.3.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

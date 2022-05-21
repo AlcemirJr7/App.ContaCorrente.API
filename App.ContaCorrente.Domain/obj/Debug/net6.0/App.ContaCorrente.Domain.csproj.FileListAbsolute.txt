@@ -1,0 +1,14 @@
+C:\Users\alcem\source\repos\App.ContaCorrente\App.ContaCorrente.Domain\bin\Debug\net6.0\App.ContaCorrente.Domain.deps.json
+C:\Users\alcem\source\repos\App.ContaCorrente\App.ContaCorrente.Domain\bin\Debug\net6.0\App.ContaCorrente.Domain.dll
+C:\Users\alcem\source\repos\App.ContaCorrente\App.ContaCorrente.Domain\bin\Debug\net6.0\App.ContaCorrente.Domain.pdb
+C:\Users\alcem\source\repos\App.ContaCorrente\App.ContaCorrente.Domain\obj\Debug\net6.0\App.ContaCorrente.Domain.csproj.AssemblyReference.cache
+C:\Users\alcem\source\repos\App.ContaCorrente\App.ContaCorrente.Domain\obj\Debug\net6.0\App.ContaCorrente.Domain.Mensagem.Mensagens.resources
+C:\Users\alcem\source\repos\App.ContaCorrente\App.ContaCorrente.Domain\obj\Debug\net6.0\App.ContaCorrente.Domain.csproj.GenerateResource.cache
+C:\Users\alcem\source\repos\App.ContaCorrente\App.ContaCorrente.Domain\obj\Debug\net6.0\App.ContaCorrente.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\alcem\source\repos\App.ContaCorrente\App.ContaCorrente.Domain\obj\Debug\net6.0\App.ContaCorrente.Domain.AssemblyInfoInputs.cache
+C:\Users\alcem\source\repos\App.ContaCorrente\App.ContaCorrente.Domain\obj\Debug\net6.0\App.ContaCorrente.Domain.AssemblyInfo.cs
+C:\Users\alcem\source\repos\App.ContaCorrente\App.ContaCorrente.Domain\obj\Debug\net6.0\App.ContaCorrente.Domain.csproj.CoreCompileInputs.cache
+C:\Users\alcem\source\repos\App.ContaCorrente\App.ContaCorrente.Domain\obj\Debug\net6.0\App.ContaCorrente.Domain.dll
+C:\Users\alcem\source\repos\App.ContaCorrente\App.ContaCorrente.Domain\obj\Debug\net6.0\refint\App.ContaCorrente.Domain.dll
+C:\Users\alcem\source\repos\App.ContaCorrente\App.ContaCorrente.Domain\obj\Debug\net6.0\App.ContaCorrente.Domain.pdb
+C:\Users\alcem\source\repos\App.ContaCorrente\App.ContaCorrente.Domain\obj\Debug\net6.0\ref\App.ContaCorrente.Domain.dll
