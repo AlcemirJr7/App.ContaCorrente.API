@@ -11,10 +11,10 @@ namespace App.ContaCorrente.Application.Servicos.Interfaces
     {
         Task<EnderecoDTO> GetPeloIdAsync(int? id);
 
-        Task<EnderecoDTO> AlterarAsync(EnderecoDTO enderecoDto);
+        Task AlterarAsync(EnderecoDTO enderecoDto);
 
         Task CriarAsync(EnderecoDTO enderecoDto);
 
-        Task<EnderecoDTO> DeletarAsync(int? id);
+        Task DeletarAsync(int? id);
     }
 }

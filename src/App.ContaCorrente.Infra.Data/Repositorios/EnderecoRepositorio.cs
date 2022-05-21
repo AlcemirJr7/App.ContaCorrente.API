@@ -19,9 +19,19 @@ namespace App.ContaCorrente.Infra.Data.Repositorios
         {
             _appDbContexto = appDbContexto;
         }
-        public Task<Endereco> AlterarAsync(Endereco endereco)
+        public async Task<Endereco> AlterarAsync(Endereco endereco)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _appDbContexto.Update(endereco);
+                await _appDbContexto.SaveChangesAsync();
+            }
+            catch 
+            {
+                throw new DomainException(Mensagens.ErroAoAlterarEntidade);
+            }
+
+            return endereco;
         }
 
         public async Task<Endereco> CriarAsync(Endereco endereco)
@@ -41,9 +51,19 @@ namespace App.ContaCorrente.Infra.Data.Repositorios
 
         }
 
-        public Task<Endereco> DeletarAsync(int? id)
+        public async Task<Endereco> DeletarAsync(Endereco endereco)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _appDbContexto.Enderecos.Remove(endereco);
+                await _appDbContexto.SaveChangesAsync();
+            }
+            catch 
+            {
+                throw new DomainException(Mensagens.ErroAoDeletarEntidade);
+            }
+
+            return endereco;
         }
 
         public void Dispose()

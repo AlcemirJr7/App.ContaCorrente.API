@@ -49,5 +49,50 @@ namespace App.ContaCorrente.API.Controllers
             return new CreatedAtRouteResult("GetEndereco", new { id = enderecoDto.Id }, enderecoDto);
 
         }
+
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult<EnderecoDTO>> PutEndereco(int? id,[FromBody] EnderecoDTO enderecoDto)
+        {
+            if (enderecoDto == null) return BadRequest(Mensagens.DataInvalida);
+
+            if (id == null) return BadRequest(Mensagens.DataInvalida);
+
+            try
+            {
+                enderecoDto.Id = id.Value;
+                await _enderecoServico.AlterarAsync(enderecoDto);
+            }
+            catch (DomainException e)
+            {
+                BadRequest(e.Message);
+            }
+
+            return Ok(enderecoDto);
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult<EnderecoDTO>> PutEndereco(int? id)
+        {            
+         
+            if (id == null) return BadRequest(Mensagens.DataInvalida);
+
+            var enderecoDto = await _enderecoServico.GetPeloIdAsync(id);
+
+            if(enderecoDto == null)
+            {
+                return BadRequest(Mensagens.EntidadeNaoEncontrada);
+            }
+
+            try
+            {                
+                await _enderecoServico.DeletarAsync(id);
+            }
+            catch (DomainException e)
+            {
+                BadRequest(e.Message);
+            }
+
+            return Ok(enderecoDto);
+        }
     }
 }

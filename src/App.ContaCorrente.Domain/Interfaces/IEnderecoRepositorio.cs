@@ -15,7 +15,7 @@ namespace App.ContaCorrente.Domain.Interfaces
 
         Task<Endereco> CriarAsync(Endereco endereco);
 
-        Task<Endereco> DeletarAsync(int? id);
+        Task<Endereco> DeletarAsync(Endereco endereco);
 
     }
 }

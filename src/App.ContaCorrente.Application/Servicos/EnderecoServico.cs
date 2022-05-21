@@ -24,9 +24,10 @@ namespace App.ContaCorrente.Application.Servicos
             _mapper = mapper;            
         }
 
-        public Task<EnderecoDTO> AlterarAsync(EnderecoDTO enderecoDto)
+        public async Task AlterarAsync(EnderecoDTO enderecoDto)
         {
-            throw new NotImplementedException();
+            var enderecoAlterarCommand = _mapper.Map<EnderecoAlterarCommand>(enderecoDto);            
+            await _mediator.Send(enderecoAlterarCommand);
         }
 
         public async Task CriarAsync(EnderecoDTO enderecoDto)
@@ -35,9 +36,17 @@ namespace App.ContaCorrente.Application.Servicos
             await _mediator.Send(enderecoCriarCommand);
         }
 
-        public Task<EnderecoDTO> DeletarAsync(int? id)
+        public async Task DeletarAsync(int? id)
         {
-            throw new NotImplementedException();
+            var enderecoDeletarCommand = new EnderecoDeletarCommand(id.Value);
+
+            if(enderecoDeletarCommand == null)
+            {
+                throw new DomainException(Mensagens.EntidadeNaoCarregada);
+            }
+
+            await _mediator.Send(enderecoDeletarCommand);  
+
         }
 
         public async Task<EnderecoDTO> GetPeloIdAsync(int? id)

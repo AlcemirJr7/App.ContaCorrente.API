@@ -126,6 +126,9 @@
   <data name="EntidadeNaoCarregada" xml:space="preserve">
     <value>0005| Entidade não pode ser carregada.</value>
   </data>
+  <data name="EntidadeNaoEncontrada" xml:space="preserve">
+    <value>0008| Entidade não encontrada.</value>
+  </data>
   <data name="ErroAoAlterarEntidade" xml:space="preserve">
     <value>0002| Erro ao alterar entidade.</value>
   </data>
@@ -134,6 +137,9 @@
   </data>
   <data name="ErroAoCriarEntidade" xml:space="preserve">
     <value>0001| Erro ao criar entidade.</value>
+  </data>
+  <data name="ErroAoDeletarEntidade" xml:space="preserve">
+    <value>0009| Erro ao deletar entidade.</value>
   </data>
   <data name="ErroAoEfetuarConsulta" xml:space="preserve">
     <value>0004| Erro ao efetuar consulta dos dados.</value>
