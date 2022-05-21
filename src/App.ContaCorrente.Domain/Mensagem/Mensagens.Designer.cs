@@ -88,6 +88,15 @@ namespace App.ContaCorrente.Domain.Mensagem {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a 0008| Entidade não encontrada..
+        /// </summary>
+        public static string EntidadeNaoEncontrada {
+            get {
+                return ResourceManager.GetString("EntidadeNaoEncontrada", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a 0002| Erro ao alterar entidade..
         /// </summary>
         public static string ErroAoAlterarEntidade {
@@ -111,6 +120,15 @@ namespace App.ContaCorrente.Domain.Mensagem {
         public static string ErroAoCriarEntidade {
             get {
                 return ResourceManager.GetString("ErroAoCriarEntidade", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a 0009| Erro ao deletar entidade..
+        /// </summary>
+        public static string ErroAoDeletarEntidade {
+            get {
+                return ResourceManager.GetString("ErroAoDeletarEntidade", resourceCulture);
             }
         }
         

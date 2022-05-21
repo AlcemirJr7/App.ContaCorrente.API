@@ -14,7 +14,8 @@ namespace App.ContaCorrente.Application.Mapeamentos
         public DomainToDTOMapeamentoProfile()
         {
             CreateMap<Banco, BancoDTO>().ReverseMap();
-            
+            CreateMap<Endereco, EnderecoDTO>().ReverseMap();
+
         }
     }
 }
