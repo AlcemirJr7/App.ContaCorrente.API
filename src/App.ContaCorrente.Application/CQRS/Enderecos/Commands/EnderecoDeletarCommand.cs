@@ -6,14 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace App.ContaCorrente.Application.CQRS.Bancos.Commands
+namespace App.ContaCorrente.Application.CQRS.Enderecos.Commands
 {
-    public abstract class BancoCommnad : IRequest<Banco>
+    public class EnderecoDeletarCommand : IRequest<Endereco>
     {
         public int Id { get; set; }
-
-        public string Nome { get; set; }
-
-        public string NomeCompleto { get; set; }
+        public EnderecoDeletarCommand(int id)
+        {
+            Id = id;
+        }
     }
 }

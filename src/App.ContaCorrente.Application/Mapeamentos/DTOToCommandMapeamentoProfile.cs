@@ -1,4 +1,5 @@
 ﻿using App.ContaCorrente.Application.CQRS.Bancos.Commands;
+using App.ContaCorrente.Application.CQRS.Enderecos.Commands;
 using App.ContaCorrente.Application.DTOs;
 using AutoMapper;
 using System;
@@ -13,9 +14,15 @@ namespace App.ContaCorrente.Application.Mapeamentos
     {
         public DTOToCommandMapeamentoProfile()
         {
+            //Banco
             CreateMap<BancoDTO, BancoCriarCommnad>();
             CreateMap<BancoDTO, BancoAlterarCommnad>();
-            
+
+            //Endereco
+            CreateMap<EnderecoDTO, EnderecoCriarCommand>();
+            CreateMap<EnderecoDTO, EnderecoAlterarCommand>();
+            CreateMap<EnderecoDTO, EnderecoDeletarCommand>();
+
         }
     }
 }

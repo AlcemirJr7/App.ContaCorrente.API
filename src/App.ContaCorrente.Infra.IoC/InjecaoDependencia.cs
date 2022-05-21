@@ -26,11 +26,13 @@ namespace App.ContaCorrente.Infra.IoC
 
             //repositorios
             services.AddScoped<IBancoRepositorio, BancoRepositorio>();
+            services.AddScoped<IEnderecoRepositorio, EnderecoRepositorio>();
 
 
             // serviços
             services.AddScoped<IBancoServico, BancoServico>();
-            
+            services.AddScoped<IEnderecoServico, EnderecoServico>();
+
 
 
             var myHandlers = AppDomain.CurrentDomain.Load("App.ContaCorrente.Application");
