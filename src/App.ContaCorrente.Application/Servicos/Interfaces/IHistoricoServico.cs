@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace App.ContaCorrente.Domain.Interfaces
+namespace App.ContaCorrente.Application.Servicos.Interfaces
 {
-    public interface IHistoricoRepositorio : IDisposable
+    public interface IHistoricoServico
     {
         Task<IEnumerable<Historico>> GetHistoricosAsync();
 
@@ -16,7 +16,5 @@ namespace App.ContaCorrente.Domain.Interfaces
         Task<Historico> AlterarAsync(Historico historico);
 
         Task<Historico> CriarAsync(Historico historico);
-
-
     }
 }

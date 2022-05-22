@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace App.ContaCorrente.Application.CQRS.Enderecos.Commands
 {
-    public class EnderecoCommand : IRequest<Endereco>
+    public abstract class EnderecoCommand : IRequest<Endereco>
     {
         public int Id { get; set; }
 

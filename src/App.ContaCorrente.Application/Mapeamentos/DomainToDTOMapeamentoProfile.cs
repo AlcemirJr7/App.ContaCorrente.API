@@ -15,6 +15,7 @@ namespace App.ContaCorrente.Application.Mapeamentos
         {
             CreateMap<Banco, BancoDTO>().ReverseMap();
             CreateMap<Endereco, EnderecoDTO>().ReverseMap();
+            CreateMap<Historico, HistoricoDTO>().ReverseMap();
 
         }
     }

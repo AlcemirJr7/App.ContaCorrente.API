@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace App.ContaCorrente.Domain.Enumerador
 {
-    public enum EnumLancamentosFuturos
+    public enum EnumLancamentoFuturo
     {
         Pendente = 1,
         Efetuado = 2

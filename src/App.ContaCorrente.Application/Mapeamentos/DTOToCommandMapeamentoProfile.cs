@@ -23,6 +23,9 @@ namespace App.ContaCorrente.Application.Mapeamentos
             CreateMap<EnderecoDTO, EnderecoAlterarCommand>();
             CreateMap<EnderecoDTO, EnderecoDeletarCommand>();
 
+            //Historico
+            CreateMap<HistoricoDTO, EnderecoCriarCommand>();
+            CreateMap<HistoricoDTO, EnderecoAlterarCommand>();
         }
     }
 }

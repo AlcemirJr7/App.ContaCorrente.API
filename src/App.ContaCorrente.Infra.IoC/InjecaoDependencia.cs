@@ -27,6 +27,7 @@ namespace App.ContaCorrente.Infra.IoC
             //repositorios
             services.AddScoped<IBancoRepositorio, BancoRepositorio>();
             services.AddScoped<IEnderecoRepositorio, EnderecoRepositorio>();
+            services.AddScoped<IHistoricoRepositorio, HistoricoRepositorio>();
 
 
             // serviços

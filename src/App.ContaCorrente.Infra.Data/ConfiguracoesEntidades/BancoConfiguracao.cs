@@ -15,7 +15,7 @@ namespace App.ContaCorrente.Infra.Data.ConfiguracoesEntidades
         {
             builder.HasKey(t => t.Id);
             builder.Property(p => p.Nome).HasMaxLength(200).IsRequired();
-            builder.Property(p => p.NomeCompleto).HasMaxLength(500).IsRequired();
+            builder.Property(p => p.NomeCompleto).HasMaxLength(500).IsRequired();            
         }
     }
 }
