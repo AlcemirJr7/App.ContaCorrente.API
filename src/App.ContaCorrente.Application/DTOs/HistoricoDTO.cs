@@ -13,15 +13,13 @@ namespace App.ContaCorrente.Application.DTOs
     {
         [JsonIgnore]
         public int Id { get; set; }
-
-        [Required(ErrorMessage = "Descrição é obrigatorio.")]
+        
         public string Descricao { get; set; }
 
         /// <summary>
         /// 1 - Débito
         /// 2 - Crédito
-        /// </summary>
-        [Required(ErrorMessage = "Tipo debito credito é obrigatorio.")]
+        /// </summary>        
         public EnumHistoricoDebitoCredito TipoDebitoCredito { get; set; }
 
         [JsonIgnore]        

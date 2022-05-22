@@ -10,6 +10,7 @@ namespace App.ContaCorrente.Domain.Validacoes
     
     public class DomainExcepitonValidacao : Exception
     {        
+        
         public  DomainExcepitonValidacao(string error) : base(error)
         { }
         

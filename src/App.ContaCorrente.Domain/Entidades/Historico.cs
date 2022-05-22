@@ -39,10 +39,10 @@ namespace App.ContaCorrente.Domain.Entidades
         private void ValidarEntidade(string descricao, EnumHistoricoDebitoCredito tipoDebitoCredito)
         {
             DomainExcepitonValidacao.When(string.IsNullOrEmpty(descricao), "Descrição do histórico deve ser informado.");
-            DomainExcepitonValidacao.When(Enum.IsDefined(typeof(EnumHistoricoDebitoCredito), tipoDebitoCredito), "Tipo debito credito invalido.");
+            DomainExcepitonValidacao.When(!Enum.IsDefined(typeof(EnumHistoricoDebitoCredito), tipoDebitoCredito), "Tipo debito credito invalido.");
 
             Descricao = descricao;
-            DataCriacao = DateTime.UtcNow;
+            DataCriacao = DateTime.Now;
             TipoDebitoCredito = tipoDebitoCredito;
         }
     }

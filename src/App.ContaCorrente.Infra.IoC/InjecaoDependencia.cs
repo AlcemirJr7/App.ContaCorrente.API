@@ -33,9 +33,9 @@ namespace App.ContaCorrente.Infra.IoC
             // serviços
             services.AddScoped<IBancoServico, BancoServico>();
             services.AddScoped<IEnderecoServico, EnderecoServico>();
+            services.AddScoped<IHistoricoServico, HistoricoServico>();
 
-
-
+            
             var myHandlers = AppDomain.CurrentDomain.Load("App.ContaCorrente.Application");
             services.AddMediatR(myHandlers);
 

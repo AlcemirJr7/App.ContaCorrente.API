@@ -1,5 +1,6 @@
 ﻿using App.ContaCorrente.Application.CQRS.Bancos.Commands;
 using App.ContaCorrente.Application.CQRS.Enderecos.Commands;
+using App.ContaCorrente.Application.CQRS.Historicos.Commands;
 using App.ContaCorrente.Application.DTOs;
 using AutoMapper;
 using System;
@@ -24,8 +25,8 @@ namespace App.ContaCorrente.Application.Mapeamentos
             CreateMap<EnderecoDTO, EnderecoDeletarCommand>();
 
             //Historico
-            CreateMap<HistoricoDTO, EnderecoCriarCommand>();
-            CreateMap<HistoricoDTO, EnderecoAlterarCommand>();
+            CreateMap<HistoricoDTO, HistoricoCriarCommand>();
+            
         }
     }
 }

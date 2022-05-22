@@ -1,4 +1,6 @@
-﻿using App.ContaCorrente.Application.Servicos.Interfaces;
+﻿using App.ContaCorrente.Application.CQRS.Historicos.Commands;
+using App.ContaCorrente.Application.DTOs;
+using App.ContaCorrente.Application.Servicos.Interfaces;
 using App.ContaCorrente.Domain.Entidades;
 using AutoMapper;
 using MediatR;
@@ -20,22 +22,23 @@ namespace App.ContaCorrente.Application.Servicos
             _mapper = mapper;
         }
 
-        public Task<Historico> AlterarAsync(Historico historico)
+        public Task AlterarAsync(HistoricoDTO historicoDto)
         {
             throw new NotImplementedException();
         }        
 
-        public Task<Historico> CriarAsync(Historico historico)
+        public async Task CriarAsync(HistoricoDTO historicoDto)
         {
-            throw new NotImplementedException();
+            var historicoCriarCommand = _mapper.Map<HistoricoCriarCommand>(historicoDto);
+            await _mediator.Send(historicoCriarCommand);
         }        
 
-        public Task<IEnumerable<Historico>> GetHistoricosAsync()
+        public Task<IEnumerable<HistoricoDTO>> GetHistoricosAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task<Historico> GetPeloIdAsync(int? id)
+        public Task<HistoricoDTO> GetPeloIdAsync(int? id)
         {
             throw new NotImplementedException();
         }
