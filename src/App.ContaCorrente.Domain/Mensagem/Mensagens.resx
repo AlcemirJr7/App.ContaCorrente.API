@@ -123,6 +123,9 @@
   <data name="DataInvalida" xml:space="preserve">
     <value>0006| Data invalida.</value>
   </data>
+  <data name="EnderecoInvalido" xml:space="preserve">
+    <value>0010| Endereço informado não existe.</value>
+  </data>
   <data name="EntidadeNaoCarregada" xml:space="preserve">
     <value>0005| Entidade não pode ser carregada.</value>
   </data>

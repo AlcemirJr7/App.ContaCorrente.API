@@ -1,4 +1,5 @@
-﻿using App.ContaCorrente.Application.DTOs;
+﻿using App.ContaCorrente.Application.CQRS.Pessoas.Commands;
+using App.ContaCorrente.Application.DTOs;
 using App.ContaCorrente.Application.Servicos.Interfaces;
 using AutoMapper;
 using MediatR;
@@ -28,7 +29,8 @@ namespace App.ContaCorrente.Application.Servicos
 
         public async Task CriarAsync(PessoaDTO pessoaDto)
         {
-            throw new NotImplementedException();
+            var pessoaCriarCommand = _mapper.Map<PessoaCriarCommand>(pessoaDto);
+            await _mediator.Send(pessoaCriarCommand);   
         }
 
         public async Task<PessoaDTO> GetPeloIdAsync(int? id)

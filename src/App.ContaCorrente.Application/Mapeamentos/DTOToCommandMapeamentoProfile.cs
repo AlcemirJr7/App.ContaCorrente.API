@@ -2,6 +2,7 @@
 using App.ContaCorrente.Application.CQRS.Enderecos.Commands;
 using App.ContaCorrente.Application.CQRS.Historicos.Commands;
 using App.ContaCorrente.Application.CQRS.LocalTrabalhos.Commands;
+using App.ContaCorrente.Application.CQRS.Pessoas.Commands;
 using App.ContaCorrente.Application.DTOs;
 using AutoMapper;
 
@@ -29,7 +30,7 @@ namespace App.ContaCorrente.Application.Mapeamentos
             CreateMap<LocalTrabalhoDTO, LocalTrabalhoAlterarCommand>();
 
             //Pessoa
-
+            CreateMap<PessoaDTO, PessoaCriarCommand>();
         }
     }
 }

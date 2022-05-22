@@ -1,12 +1,16 @@
-﻿using App.ContaCorrente.Domain.Enumerador;
-using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
+﻿using App.ContaCorrente.Domain.Entidades;
+using App.ContaCorrente.Domain.Enumerador;
+using MediatR;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace App.ContaCorrente.Application.DTOs
+namespace App.ContaCorrente.Application.CQRS.Pessoas.Commands
 {
-    public class PessoaDTO
+    public abstract class PessoaCommand : IRequest<Pessoa>
     {
-        [JsonIgnore]
         public int Id { get; set; }
 
         public string Nome { get; set; }
@@ -15,7 +19,7 @@ namespace App.ContaCorrente.Application.DTOs
 
         public long NumeroDocumento { get; set; }
 
-        public EnumPessoa TipoPessoa { get;  set; }
+        public EnumPessoa TipoPessoa { get; set; }
 
         public long NumeroTelefone1 { get; set; }
 
@@ -25,13 +29,10 @@ namespace App.ContaCorrente.Application.DTOs
 
         public string? Email2 { get; set; }
 
-        [DataType(DataType.Date)]
         public DateTime DataNascimento { get; set; }
 
-        [JsonIgnore]
         public DateTime DataCadastro { get; set; }
 
-        public int EnderecoId { get; set; }        
-        
+        public int EnderecoId { get; set; }
     }
 }
