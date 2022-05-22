@@ -1,6 +1,7 @@
 ﻿using App.ContaCorrente.Application.CQRS.Bancos.Commands;
 using App.ContaCorrente.Application.CQRS.Enderecos.Commands;
 using App.ContaCorrente.Application.CQRS.Historicos.Commands;
+using App.ContaCorrente.Application.CQRS.LocalTrabalhoPessoas.Commands;
 using App.ContaCorrente.Application.DTOs;
 using AutoMapper;
 using System;
@@ -27,6 +28,9 @@ namespace App.ContaCorrente.Application.Mapeamentos
             //Historico
             CreateMap<HistoricoDTO, HistoricoCriarCommand>();
             CreateMap<HistoricoDTO, HistoricoAlterarCommand>();
+
+            //LocalTrabalhoPessoa
+            CreateMap<LocalTrabalhoDTO, LocalTrabalhoCriarCommand>();
 
         }
     }

@@ -1,11 +1,6 @@
 ﻿using App.ContaCorrente.Application.DTOs;
 using App.ContaCorrente.Domain.Entidades;
 using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace App.ContaCorrente.Application.Mapeamentos
 {
@@ -16,6 +11,8 @@ namespace App.ContaCorrente.Application.Mapeamentos
             CreateMap<Banco, BancoDTO>().ReverseMap();
             CreateMap<Endereco, EnderecoDTO>().ReverseMap();
             CreateMap<Historico, HistoricoDTO>().ReverseMap();
+            CreateMap<Correntista, CorrentistaDTO>().ReverseMap();
+            CreateMap<LocalTrabalho, LocalTrabalhoDTO>().ReverseMap();
 
         }
     }

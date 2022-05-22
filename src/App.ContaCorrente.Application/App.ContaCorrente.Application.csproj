@@ -15,4 +15,11 @@
     <ProjectReference Include="..\App.ContaCorrente.Domain\App.ContaCorrente.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="CQRS\Correntistas\Commands\" />
+    <Folder Include="CQRS\Correntistas\Handlers\" />
+    <Folder Include="CQRS\Correntistas\Queries\" />
+    <Folder Include="CQRS\LocalTrabalhos\Queries\" />
+  </ItemGroup>
+
 </Project>

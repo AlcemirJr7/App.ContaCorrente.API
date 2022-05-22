@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.ContaCorrente.Infra.Data.Migrations
 {
     [DbContext(typeof(AppDbContexto))]
-    [Migration("20220521234430_Inicial")]
+    [Migration("20220522162646_Inicial")]
     partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -73,6 +73,9 @@ namespace App.ContaCorrente.Infra.Data.Migrations
                     b.Property<int>("FlagConta")
                         .HasColumnType("int");
 
+                    b.Property<int?>("LocalTrabalhoId")
+                        .HasColumnType("int");
+
                     b.Property<int>("PessoaId")
                         .HasColumnType("int");
 
@@ -87,6 +90,8 @@ namespace App.ContaCorrente.Infra.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("BancoId");
+
+                    b.HasIndex("LocalTrabalhoId");
 
                     b.HasIndex("PessoaId");
 
@@ -290,7 +295,7 @@ namespace App.ContaCorrente.Infra.Data.Migrations
                     b.ToTable("LancamentosFuturos");
                 });
 
-            modelBuilder.Entity("App.ContaCorrente.Domain.Entidades.LocalTrabalhoPessoa", b =>
+            modelBuilder.Entity("App.ContaCorrente.Domain.Entidades.LocalTrabalho", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -334,7 +339,7 @@ namespace App.ContaCorrente.Infra.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("LocalTrabalhoPessoas");
+                    b.ToTable("LocalTrabalhos");
                 });
 
             modelBuilder.Entity("App.ContaCorrente.Domain.Entidades.Logs.LogContaCorrente", b =>
@@ -476,9 +481,6 @@ namespace App.ContaCorrente.Infra.Data.Migrations
                     b.Property<int>("EnderecoId")
                         .HasColumnType("int");
 
-                    b.Property<int>("LocalTrabalhoPessoaId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(200)
@@ -503,8 +505,6 @@ namespace App.ContaCorrente.Infra.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("EnderecoId");
-
-                    b.HasIndex("LocalTrabalhoPessoaId");
 
                     b.ToTable("Pessoas");
                 });
@@ -587,6 +587,10 @@ namespace App.ContaCorrente.Infra.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("App.ContaCorrente.Domain.Entidades.LocalTrabalho", "LocalTrabalho")
+                        .WithMany()
+                        .HasForeignKey("LocalTrabalhoId");
+
                     b.HasOne("App.ContaCorrente.Domain.Entidades.Pessoa", "Pessoa")
                         .WithMany()
                         .HasForeignKey("PessoaId")
@@ -594,6 +598,8 @@ namespace App.ContaCorrente.Infra.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Banco");
+
+                    b.Navigation("LocalTrabalho");
 
                     b.Navigation("Pessoa");
                 });
@@ -688,15 +694,7 @@ namespace App.ContaCorrente.Infra.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("App.ContaCorrente.Domain.Entidades.LocalTrabalhoPessoa", "LocalTrabalhoPessoa")
-                        .WithMany()
-                        .HasForeignKey("LocalTrabalhoPessoaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Endereco");
-
-                    b.Navigation("LocalTrabalhoPessoa");
                 });
 
             modelBuilder.Entity("App.ContaCorrente.Domain.Entidades.SaldoContaCorrente", b =>

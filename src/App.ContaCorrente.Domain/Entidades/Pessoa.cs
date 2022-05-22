@@ -36,9 +36,6 @@ namespace App.ContaCorrente.Domain.Entidades
 
         public Endereco Endereco { get; private set; }
 
-        public int LocalTrabalhoPessoaId { get; set; }
-
-        public LocalTrabalhoPessoa LocalTrabalhoPessoa { get; set; }
 
         public Pessoa(string nome, string? nomeEmpresa, long numeroDocumento, EnumPessoa tipoPessoa, long numeroTelefone1, long? numeroTelefone2, string email1, string? email2, 
                       DateTime dataNascimento)
@@ -58,16 +55,14 @@ namespace App.ContaCorrente.Domain.Entidades
                       DateTime dataNascimento, int enderecoId, int localTrabalhoPessoaId)
         {
             ValidarEntidade(nome, nomeEmpresa, numeroDocumento, tipoPessoa, numeroTelefone1, numeroTelefone2, email1, email2, dataNascimento);
-            EnderecoId = enderecoId;
-            LocalTrabalhoPessoaId = localTrabalhoPessoaId;
+            EnderecoId = enderecoId;             
         }
 
         public void Atualizar(string nome, string? nomeEmpresa, long numeroDocumento, EnumPessoa tipoPessoa, long numeroTelefone1, long? numeroTelefone2, string email1, string? email2,
-                              DateTime dataNascimento, int enderecoId, int localTrabalhoPessoaId)
+                              DateTime dataNascimento, int enderecoId)
         {
             ValidarEntidade(nome, nomeEmpresa, numeroDocumento, tipoPessoa, numeroTelefone1, numeroTelefone2, email1, email2, dataNascimento);
-            EnderecoId = enderecoId;
-            LocalTrabalhoPessoaId = localTrabalhoPessoaId;
+            EnderecoId = enderecoId;            
         }
 
         private void ValidarEntidade(string nome, string? nomeEmpresa, long numeroDocumento, EnumPessoa tipoPessoa, long numeroTelefone1, long? numeroTelefone2, string email1, string? email2,

@@ -28,14 +28,16 @@ namespace App.ContaCorrente.Infra.IoC
             services.AddScoped<IBancoRepositorio, BancoRepositorio>();
             services.AddScoped<IEnderecoRepositorio, EnderecoRepositorio>();
             services.AddScoped<IHistoricoRepositorio, HistoricoRepositorio>();
+            services.AddScoped<ILocalTrabalhoRepositorio, LocalTrabalhoRepositorio>();
 
 
             // serviços
             services.AddScoped<IBancoServico, BancoServico>();
             services.AddScoped<IEnderecoServico, EnderecoServico>();
             services.AddScoped<IHistoricoServico, HistoricoServico>();
+            services.AddScoped<ILocalTrabalhoServico, LocalTrabalhoServico>();
 
-            
+
             var myHandlers = AppDomain.CurrentDomain.Load("App.ContaCorrente.Application");
             services.AddMediatR(myHandlers);
 

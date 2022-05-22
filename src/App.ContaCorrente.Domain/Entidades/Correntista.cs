@@ -31,6 +31,10 @@ namespace App.ContaCorrente.Domain.Entidades
 
         public Banco Banco { get; set; }
 
+        public int? LocalTrabalhoId { get; set; }
+
+        public LocalTrabalho LocalTrabalho { get; set; }
+
 
         public Correntista(int agencia, long conta, DateTime dataInicio, DateTime? dataEncerramento, EnumContaCorrente flagConta, string senha, string senhaConfirmacao )
         {
@@ -43,11 +47,13 @@ namespace App.ContaCorrente.Domain.Entidades
             Id = id;
             ValidarEntidade(agencia, conta, dataInicio, dataEncerramento, flagConta, senha, senhaConfirmacao);
         }
-        public Correntista(int agencia, long conta, DateTime dataInicio, DateTime? dataEncerramento, EnumContaCorrente flagConta, string senha, string senhaConfirmacao , int pessoaId, int bancoId)
+        public Correntista(int agencia, long conta, DateTime dataInicio, DateTime? dataEncerramento, EnumContaCorrente flagConta, string senha, string senhaConfirmacao , 
+                           int pessoaId, int bancoId, int? localTrabalhoId)
         {
             ValidarEntidade(agencia, conta, dataInicio, dataEncerramento, flagConta, senha, senhaConfirmacao);
             PessoaId = pessoaId;
             BancoId = bancoId;
+            LocalTrabalhoId = localTrabalhoId;
         }
 
         public void Atualizar(int agencia, long conta, DateTime dataInicio, DateTime? dataEncerramento, EnumContaCorrente flagConta, string senha, string senhaConfirmacao, int pessoaId, int bancoId)

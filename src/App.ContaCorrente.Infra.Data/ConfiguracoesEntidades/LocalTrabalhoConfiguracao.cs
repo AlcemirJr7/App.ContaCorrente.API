@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace App.ContaCorrente.Infra.Data.ConfiguracoesEntidades
 {
-    public class LocalTrabalhoPessoaConfiguracao : IEntityTypeConfiguration<LocalTrabalhoPessoa>
+    public class LocalTrabalhoPessoaConfiguracao : IEntityTypeConfiguration<LocalTrabalho>
     {
-        public void Configure(EntityTypeBuilder<LocalTrabalhoPessoa> builder)
+        public void Configure(EntityTypeBuilder<LocalTrabalho> builder)
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Email1).HasMaxLength(100).IsRequired();

@@ -58,7 +58,7 @@ namespace App.ContaCorrente.Infra.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "LocalTrabalhoPessoas",
+                name: "LocalTrabalhos",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -75,7 +75,7 @@ namespace App.ContaCorrente.Infra.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_LocalTrabalhoPessoas", x => x.Id);
+                    table.PrimaryKey("PK_LocalTrabalhos", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -108,8 +108,7 @@ namespace App.ContaCorrente.Infra.Data.Migrations
                     Email2 = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     DataNascimento = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DataCadastro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EnderecoId = table.Column<int>(type: "int", nullable: false),
-                    LocalTrabalhoPessoaId = table.Column<int>(type: "int", nullable: false)
+                    EnderecoId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -118,12 +117,6 @@ namespace App.ContaCorrente.Infra.Data.Migrations
                         name: "FK_Pessoas_Enderecos_EnderecoId",
                         column: x => x.EnderecoId,
                         principalTable: "Enderecos",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Pessoas_LocalTrabalhoPessoas_LocalTrabalhoPessoaId",
-                        column: x => x.LocalTrabalhoPessoaId,
-                        principalTable: "LocalTrabalhoPessoas",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -141,6 +134,7 @@ namespace App.ContaCorrente.Infra.Data.Migrations
                     FlagConta = table.Column<int>(type: "int", nullable: false),
                     PessoaId = table.Column<int>(type: "int", nullable: false),
                     BancoId = table.Column<int>(type: "int", nullable: false),
+                    LocalTrabalhoId = table.Column<int>(type: "int", nullable: true),
                     Senha = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SenhaConfirmacao = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -153,6 +147,11 @@ namespace App.ContaCorrente.Infra.Data.Migrations
                         principalTable: "Bancos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Correntistas_LocalTrabalhos_LocalTrabalhoId",
+                        column: x => x.LocalTrabalhoId,
+                        principalTable: "LocalTrabalhos",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Correntistas_Pessoas_PessoaId",
                         column: x => x.PessoaId,
@@ -381,6 +380,11 @@ namespace App.ContaCorrente.Infra.Data.Migrations
                 column: "BancoId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Correntistas_LocalTrabalhoId",
+                table: "Correntistas",
+                column: "LocalTrabalhoId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Correntistas_PessoaId",
                 table: "Correntistas",
                 column: "PessoaId");
@@ -429,11 +433,6 @@ namespace App.ContaCorrente.Infra.Data.Migrations
                 name: "IX_Pessoas_EnderecoId",
                 table: "Pessoas",
                 column: "EnderecoId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Pessoas_LocalTrabalhoPessoaId",
-                table: "Pessoas",
-                column: "LocalTrabalhoPessoaId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SaldoContaCorrente_CorrentistaId",
@@ -495,13 +494,13 @@ namespace App.ContaCorrente.Infra.Data.Migrations
                 name: "Bancos");
 
             migrationBuilder.DropTable(
+                name: "LocalTrabalhos");
+
+            migrationBuilder.DropTable(
                 name: "Pessoas");
 
             migrationBuilder.DropTable(
                 name: "Enderecos");
-
-            migrationBuilder.DropTable(
-                name: "LocalTrabalhoPessoas");
         }
     }
 }

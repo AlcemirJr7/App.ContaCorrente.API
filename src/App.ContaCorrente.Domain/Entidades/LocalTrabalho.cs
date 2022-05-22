@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace App.ContaCorrente.Domain.Entidades
 {
-    public class LocalTrabalhoPessoa
+    public class LocalTrabalho
     {
         public int Id { get; protected set; }
 
@@ -27,14 +27,14 @@ namespace App.ContaCorrente.Domain.Entidades
 
         public decimal? Salario2 { get; private set; }
 
-        public DateTime DataCadastro { get; private set; }
+        public DateTime DataCadastro { get; set; }
 
-        public LocalTrabalhoPessoa(string nomeEmpresa, long numeroDocumento, long numeroTelefone1, long? numeroTelefone2, string email1, string? email2, decimal salario1, decimal? salario2)
+        public LocalTrabalho(string nomeEmpresa, long numeroDocumento, long numeroTelefone1, long? numeroTelefone2, string email1, string? email2, decimal salario1, decimal? salario2)
         {
             ValidarEntidade(nomeEmpresa, numeroDocumento, numeroTelefone1, numeroTelefone2, email1, email2, salario1, salario2);
         }
 
-        public LocalTrabalhoPessoa(int id,string nomeEmpresa, long numeroDocumento, long numeroTelefone1, long? numeroTelefone2, string email1, string? email2, decimal salario1, decimal? salario2)
+        public LocalTrabalho(int id,string nomeEmpresa, long numeroDocumento, long numeroTelefone1, long? numeroTelefone2, string email1, string? email2, decimal salario1, decimal? salario2)
         {
             DomainExcepitonValidacao.When(id < 0, "Id invalido.");
             Id = id;
@@ -49,10 +49,10 @@ namespace App.ContaCorrente.Domain.Entidades
         private void ValidarEntidade(string nomeEmpresa, long numeroDocumento, long numeroTelefone1, long? numeroTelefone2, string email1, string? email2, decimal salario1, decimal? salario2)
         {
             DomainExcepitonValidacao.When(string.IsNullOrEmpty(nomeEmpresa), "Nome empresa deve ser informado.");
-            DomainExcepitonValidacao.When(numeroDocumento < 0 , "Numero do documento deve ser informado.");
-            DomainExcepitonValidacao.When(numeroTelefone1 < 0, "Numero do telefone 1 deve ser informado.");
+            DomainExcepitonValidacao.When(numeroDocumento <= 0 , "Numero do documento deve ser informado.");
+            DomainExcepitonValidacao.When(numeroTelefone1 <= 0, "Numero do telefone 1 deve ser informado.");
             DomainExcepitonValidacao.When(string.IsNullOrEmpty(email1), "Email 1 deve ser informado.");
-            DomainExcepitonValidacao.When(salario1 < 0, "Salario deve ser informado.");            
+            DomainExcepitonValidacao.When(salario1 <= 0, "Salario deve ser informado.");            
 
             NomeEmpresa = nomeEmpresa;  
             NumeroDocumento = numeroDocumento;
@@ -61,8 +61,7 @@ namespace App.ContaCorrente.Domain.Entidades
             Email1 = email1;
             Email2 = email2;
             Salario1 = salario1;
-            Salario2 = salario2;
-            DataCadastro = DateTime.UtcNow;    
+            Salario2 = salario2;               
 
 
         }

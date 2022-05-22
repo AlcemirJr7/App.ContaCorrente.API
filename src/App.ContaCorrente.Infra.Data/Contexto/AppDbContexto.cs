@@ -20,7 +20,7 @@ namespace App.ContaCorrente.Infra.Data.Contexto
         public DbSet<Endereco> Enderecos { get; set; }
         public DbSet<Lancamento> Lancamentos { get; set; }
         public DbSet<LancamentoFuturo> LancamentosFuturos { get; set; }
-        public DbSet<LocalTrabalhoPessoa> LocalTrabalhoPessoas { get; set; }
+        public DbSet<LocalTrabalho> LocalTrabalhos { get; set; }
         public DbSet<Pagamento> Pagamentos { get; set; }
         public DbSet<ParcelasEmprestimo> ParcelasEmprestimos { get; set; }
         public DbSet<Pessoa> Pessoas { get; set; }
