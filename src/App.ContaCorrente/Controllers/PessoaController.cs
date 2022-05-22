@@ -26,13 +26,14 @@ namespace App.ContaCorrente.API.Controllers
         /// </remarks>
         /// <param name="pessoaDto">Dados da Pessoa </param>        
         [HttpPost]
-        public async Task<ActionResult<PessoaDTO>> PostPessoa([FromBody] PessoaDTO pessoaDto)
+        public async Task<ActionResult> PostPessoa([FromBody] PessoaDTO pessoaDto)
         {
             if (pessoaDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
 
+            var pessoa = new object();
             try
             {
-                await _pessoaServico.CriarAsync(pessoaDto);
+                pessoa = await _pessoaServico.CriarAsync(pessoaDto);
             }
             catch (DomainException e)
             {
@@ -43,7 +44,7 @@ namespace App.ContaCorrente.API.Controllers
                 return BadRequest(new { mensagem = e.Message });
             }
 
-            return Ok(pessoaDto);  //new CreatedAtRouteResult("GetBanco", new { codigo = bancoDto.Id }, bancoDto);
+            return Ok(pessoa); 
         }
     }
 }

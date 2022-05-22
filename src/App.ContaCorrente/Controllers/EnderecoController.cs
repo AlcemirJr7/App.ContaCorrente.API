@@ -2,9 +2,7 @@
 using App.ContaCorrente.Application.Servicos.Interfaces;
 using App.ContaCorrente.Domain.Mensagem;
 using App.ContaCorrente.Domain.Validacoes;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Runtime.Serialization.Json;
 
 namespace App.ContaCorrente.API.Controllers
 {
@@ -22,7 +20,7 @@ namespace App.ContaCorrente.API.Controllers
         /// <summary>
         /// Busca o endereço pelo Id
         /// </summary>
-        [HttpGet("{id:int}", Name = "GetEndereco")]        
+        [HttpGet("{id:int}")]        
         public async Task<ActionResult<EnderecoDTO>> GetEndereco(int? id)
         {
             var endereco = new object();
@@ -53,10 +51,12 @@ namespace App.ContaCorrente.API.Controllers
         public async Task<ActionResult> PostEndereco([FromBody] EnderecoDTO enderecoDto)
         {
             if (enderecoDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
-
+            
+            var endereco = new object();
+            
             try
             {
-                await _enderecoServico.CriarAsync(enderecoDto);
+                endereco = await _enderecoServico.CriarAsync(enderecoDto);
             }
             catch (DomainException e)
             {
@@ -67,7 +67,7 @@ namespace App.ContaCorrente.API.Controllers
                 return BadRequest(new { mensagem = e.Message });
             }
 
-            return new CreatedAtRouteResult("GetEndereco", new { id = enderecoDto.Id }, enderecoDto);
+            return Ok(endereco);
 
         }
 
@@ -75,16 +75,18 @@ namespace App.ContaCorrente.API.Controllers
         /// Atualiza um endereço pelo Id
         /// </summary>       
         [HttpPut("{id:int}")]        
-        public async Task<ActionResult<EnderecoDTO>> PutEndereco(int? id,[FromBody] EnderecoDTO enderecoDto)
+        public async Task<ActionResult> PutEndereco(int? id,[FromBody] EnderecoDTO enderecoDto)
         {
             if (enderecoDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
 
             if (id == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
 
+            var endereco = new object();
+            
             try
             {
                 enderecoDto.Id = id.Value;
-                await _enderecoServico.AlterarAsync(enderecoDto);
+                endereco = await _enderecoServico.AlterarAsync(enderecoDto);
             }
             catch (DomainException e)
             {
@@ -94,7 +96,7 @@ namespace App.ContaCorrente.API.Controllers
             {
                 return BadRequest(new { mensagem = e.Message });
             }
-            return Ok(enderecoDto);
+            return Ok(endereco);
         }
 
         /// <summary>
@@ -102,21 +104,23 @@ namespace App.ContaCorrente.API.Controllers
         /// </summary> 
         /// 
         [HttpDelete("{id:int}")]        
-        public async Task<ActionResult<EnderecoDTO>> DeleteEndereco(int? id)
+        public async Task<ActionResult> DeleteEndereco(int? id)
         {            
          
             if (id == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
 
             var enderecoDto = await _enderecoServico.GetPeloIdAsync(id);
 
-            if(enderecoDto == null)
+            var endereco = new object();
+
+            if (enderecoDto == null)
             {
                 return BadRequest(new { mensagem = Mensagens.EntidadeNaoEncontrada });
             }
 
             try
             {                
-                await _enderecoServico.DeletarAsync(id);
+                endereco = await _enderecoServico.DeletarAsync(id);
             }
             catch (DomainException e)
             {
@@ -127,7 +131,7 @@ namespace App.ContaCorrente.API.Controllers
                 return BadRequest(new { mensagem = e.Message });
             }
 
-            return Ok(enderecoDto);
+            return Ok(endereco);
         }
     }
 }

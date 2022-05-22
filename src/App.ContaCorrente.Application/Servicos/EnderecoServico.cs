@@ -2,15 +2,12 @@
 using App.ContaCorrente.Application.CQRS.Enderecos.Queries;
 using App.ContaCorrente.Application.DTOs;
 using App.ContaCorrente.Application.Servicos.Interfaces;
+using App.ContaCorrente.Domain.Entidades;
 using App.ContaCorrente.Domain.Mensagem;
 using App.ContaCorrente.Domain.Validacoes;
 using AutoMapper;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace App.ContaCorrente.Application.Servicos
 {
@@ -24,19 +21,19 @@ namespace App.ContaCorrente.Application.Servicos
             _mapper = mapper;            
         }
 
-        public async Task AlterarAsync(EnderecoDTO enderecoDto)
+        public async Task<Endereco> AlterarAsync(EnderecoDTO enderecoDto)
         {
             var enderecoAlterarCommand = _mapper.Map<EnderecoAlterarCommand>(enderecoDto);            
-            await _mediator.Send(enderecoAlterarCommand);
+            return await _mediator.Send(enderecoAlterarCommand);
         }
 
-        public async Task CriarAsync(EnderecoDTO enderecoDto)
+        public async Task<Endereco> CriarAsync(EnderecoDTO enderecoDto)
         {
             var enderecoCriarCommand = _mapper.Map<EnderecoCriarCommand>(enderecoDto);
-            await _mediator.Send(enderecoCriarCommand);
+            return await _mediator.Send(enderecoCriarCommand);
         }
 
-        public async Task DeletarAsync(int? id)
+        public async Task<Endereco> DeletarAsync(int? id)
         {
             var enderecoDeletarCommand = new EnderecoDeletarCommand(id.Value);
 
@@ -45,7 +42,7 @@ namespace App.ContaCorrente.Application.Servicos
                 throw new DomainException(Mensagens.EntidadeNaoCarregada);
             }
 
-            await _mediator.Send(enderecoDeletarCommand);  
+            return await _mediator.Send(enderecoDeletarCommand);  
 
         }
 

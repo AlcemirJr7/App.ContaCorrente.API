@@ -79,8 +79,8 @@ namespace App.ContaCorrente.Domain.Entidades
             
             Senha = CriaHash(senha);
             SenhaConfirmacao = CriaHash(senhaConfirmacao);
-            Agencia = agencia;
-            Conta = conta;
+            Agencia = StringFormata.ApenasNumeros(agencia);
+            Conta = StringFormata.ApenasNumeros(conta);
             DataInicio = dataInicio;
             DataEncerramento = dataEncerramento;
             FlagConta = flagConta;

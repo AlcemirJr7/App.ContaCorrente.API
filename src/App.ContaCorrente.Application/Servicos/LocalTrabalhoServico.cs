@@ -2,6 +2,7 @@
 using App.ContaCorrente.Application.CQRS.LocalTrabalhos.Queries;
 using App.ContaCorrente.Application.DTOs;
 using App.ContaCorrente.Application.Servicos.Interfaces;
+using App.ContaCorrente.Domain.Entidades;
 using App.ContaCorrente.Domain.Mensagem;
 using App.ContaCorrente.Domain.Validacoes;
 using AutoMapper;
@@ -19,16 +20,16 @@ namespace App.ContaCorrente.Application.Servicos
             _mapper = mapper;   
         }
 
-        public async Task AlterarAsync(LocalTrabalhoDTO localTrabalhoDto)
+        public async Task<LocalTrabalho> AlterarAsync(LocalTrabalhoDTO localTrabalhoDto)
         {
             var localTrabalhoAlterarCommand = _mapper.Map<LocalTrabalhoAlterarCommand>(localTrabalhoDto);
-            await _mediator.Send(localTrabalhoAlterarCommand);
+            return await _mediator.Send(localTrabalhoAlterarCommand);
         }
 
-        public async Task CriarAsync(LocalTrabalhoDTO localTrabalhoDto)
+        public async Task<LocalTrabalho> CriarAsync(LocalTrabalhoDTO localTrabalhoDto)
         {
             var localTrabalhoCriarCommand = _mapper.Map<LocalTrabalhoCriarCommand>(localTrabalhoDto);
-            await _mediator.Send(localTrabalhoCriarCommand);
+            return await _mediator.Send(localTrabalhoCriarCommand);
         }
         
         public async Task<LocalTrabalhoDTO> GetPeloIdAsync(int? id)

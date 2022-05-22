@@ -25,16 +25,16 @@ namespace App.ContaCorrente.Application.Servicos
             _mapper = mapper;
         }
 
-        public async Task AlterarAsync(HistoricoDTO historicoDto)
+        public async Task<Historico> AlterarAsync(HistoricoDTO historicoDto)
         {
             var historicoAlterarCommand = _mapper.Map<HistoricoAlterarCommand>(historicoDto);
-            await _mediator.Send(historicoAlterarCommand);
+            return await _mediator.Send(historicoAlterarCommand);
         }        
 
-        public async Task CriarAsync(HistoricoDTO historicoDto)
+        public async Task<Historico> CriarAsync(HistoricoDTO historicoDto)
         {
             var historicoCriarCommand = _mapper.Map<HistoricoCriarCommand>(historicoDto);
-            await _mediator.Send(historicoCriarCommand);
+            return await _mediator.Send(historicoCriarCommand);
         }        
 
         public async Task<IEnumerable<HistoricoDTO>> GetHistoricosAsync()

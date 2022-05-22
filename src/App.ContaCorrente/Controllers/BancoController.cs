@@ -2,9 +2,8 @@
 using App.ContaCorrente.Application.Servicos.Interfaces;
 using App.ContaCorrente.Domain.Mensagem;
 using App.ContaCorrente.Domain.Validacoes;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel;
+
 
 namespace App.ContaCorrente.API.Controllers
 {
@@ -47,14 +46,13 @@ namespace App.ContaCorrente.API.Controllers
         /// <summary>
         /// busca um banco pelo Id
         /// </summary>
-        [HttpGet("{codigo:int}",Name = "GetBanco")]
-        public async Task<ActionResult<BancoDTO>> GetBanco(int? codigo)
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<BancoDTO>> GetBanco(int? id)
         {
             var banco = new object();   
-
             try
             {
-                banco = await _bancoServico.GetBancoPeloIdAsync(codigo.Value);
+                banco = await _bancoServico.GetBancoPeloIdAsync(id.Value);
 
                 if (banco == null) return NotFound(new { mensagem = "Banco não encontrados." });
 
@@ -79,9 +77,10 @@ namespace App.ContaCorrente.API.Controllers
         {
             if (bancoDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
 
+            var banco = new object();
             try
             {
-                await _bancoServico.CriarAsync(bancoDto);
+                banco = await _bancoServico.CriarAsync(bancoDto);
             }
             catch (DomainException e)
             {
@@ -91,24 +90,24 @@ namespace App.ContaCorrente.API.Controllers
             {
                 return BadRequest(new { mensagem = e.Message });
             }
-
             
-
-            return new CreatedAtRouteResult("GetBanco", new { codigo = bancoDto.Id }, bancoDto);
+            return Ok(banco);
         }
 
         /// <summary>
         /// Atualiza um banco pelo Id
         /// </summary>
         [HttpPut]        
-        public async Task<ActionResult<BancoDTO>> PutBanco(int? id,[FromBody] BancoDTO bancoDto)
+        public async Task<ActionResult> PutBanco(int? id,[FromBody] BancoDTO bancoDto)
         {
             if(id != bancoDto.Id) return BadRequest(new { mensagem = Mensagens.DataInvalida });
-
+            
+            var banco = new object();
+            
             if (bancoDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
             try
             {
-                await _bancoServico.AlterarAsync(bancoDto);
+                banco = await _bancoServico.AlterarAsync(bancoDto);
             }
             catch (DomainException e)
             {
@@ -119,7 +118,7 @@ namespace App.ContaCorrente.API.Controllers
                 return BadRequest(new { mensagem = e.Message });
             }
 
-            return Ok(bancoDto);
+            return Ok(banco);
         }
 
     }

@@ -60,7 +60,7 @@ namespace App.ContaCorrente.Domain.Entidades
             DomainExcepitonValidacao.When(string.IsNullOrEmpty(estado), "Estado deve ser informado.");
             DomainExcepitonValidacao.When(string.IsNullOrEmpty(sigla), "Sigla do estado deve ser informado.");
 
-            Cep = cep;
+            Cep = StringFormata.ApenasNumeros(cep);
             NomeRua = nomeRua;
             NumeroRua = numeroRua;
             Complemento = complemento;
