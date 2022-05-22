@@ -1,4 +1,5 @@
-﻿using App.ContaCorrente.Domain.Validacoes;
+﻿using App.ContaCorrente.Domain.Utils;
+using App.ContaCorrente.Domain.Validacoes;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,7 +13,7 @@ namespace App.ContaCorrente.Domain.Entidades
     {
         public int Id { get; protected set; }
 
-        public int Cep { get; private set; }
+        public string Cep { get; private set; }
 
         public string NomeRua { get; private set; }
 
@@ -29,12 +30,12 @@ namespace App.ContaCorrente.Domain.Entidades
         public string Sigla { get; private set; }     
                 
 
-        public Endereco(int cep, string nomeRua, int numeroRua, string complemento, string bairro, string cidade, string estado, string sigla)
+        public Endereco(string cep, string nomeRua, int numeroRua, string complemento, string bairro, string cidade, string estado, string sigla)
         {            
             ValidarEntidade(cep, nomeRua,numeroRua, complemento, bairro, cidade, estado, sigla);
         }
 
-        public Endereco(int id,int cep, string nomeRua, int numeroRua, string complemento, string bairro, string cidade, string estado, string sigla)
+        public Endereco(int id, string cep, string nomeRua, int numeroRua, string complemento, string bairro, string cidade, string estado, string sigla)
         {
             DomainExcepitonValidacao.When(id < 0, "Id invalido.");  
                                     
@@ -44,15 +45,15 @@ namespace App.ContaCorrente.Domain.Entidades
             
         }
 
-        public void Atualizar(int cep, string nomeRua, int numeroRua, string complemento, string bairro, string cidade, string estado, string sigla)
+        public void Atualizar(string cep, string nomeRua, int numeroRua, string complemento, string bairro, string cidade, string estado, string sigla)
         {
             ValidarEntidade(cep, nomeRua, numeroRua, complemento, bairro, cidade, estado, sigla);
         }
         
-        private void ValidarEntidade(int cep, string nomeRua, int numeroRua, string complemento, string bairro, string cidade, string estado, string sigla)
+        private void ValidarEntidade(string cep, string nomeRua, int numeroRua, string complemento, string bairro, string cidade, string estado, string sigla)
         {
 
-            DomainExcepitonValidacao.When(cep <= 0, "Cep deve ser informado.");
+            DomainExcepitonValidacao.When(string.IsNullOrEmpty(StringFormata.ApenasNumeros(cep)), "Cep deve ser informado.");
             DomainExcepitonValidacao.When(string.IsNullOrEmpty(nomeRua), "Nome da Rua deve ser informado.");
             DomainExcepitonValidacao.When(string.IsNullOrEmpty(bairro), "Bairro deve ser informado.");
             DomainExcepitonValidacao.When(string.IsNullOrEmpty(cidade), "Cidade deve ser informado.");

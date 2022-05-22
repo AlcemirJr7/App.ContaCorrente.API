@@ -12,7 +12,7 @@ namespace App.ContaCorrente.Application.CQRS.Enderecos.Commands
     {
         public int Id { get; set; }
 
-        public int Cep { get;  set; }
+        public string Cep { get;  set; }
 
         public string NomeRua { get;  set; }
 

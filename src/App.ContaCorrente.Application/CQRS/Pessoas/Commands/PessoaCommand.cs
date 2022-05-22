@@ -17,13 +17,13 @@ namespace App.ContaCorrente.Application.CQRS.Pessoas.Commands
 
         public string? NomeEmpresa { get; set; }
 
-        public long NumeroDocumento { get; set; }
+        public string NumeroDocumento { get; set; }
 
         public EnumPessoa TipoPessoa { get; set; }
 
-        public long NumeroTelefone1 { get; set; }
+        public string NumeroTelefone1 { get; set; }
 
-        public long? NumeroTelefone2 { get; set; }
+        public string? NumeroTelefone2 { get; set; }
 
         public string Email1 { get; set; }
 

@@ -19,7 +19,8 @@ namespace App.ContaCorrente.Infra.Data.ConfiguracoesEntidades
             builder.Property(x => x.NomeEmpresa).HasMaxLength(300).IsRequired();
             builder.Property(x => x.Salario1).HasPrecision(25,2).IsRequired();
             builder.Property(x => x.Salario2).HasPrecision(25, 2);
-            builder.Property(x => x.NumeroTelefone1).IsRequired();
+            builder.Property(x => x.NumeroTelefone1).HasMaxLength(15).IsRequired();
+            builder.Property(x => x.NumeroTelefone2).HasMaxLength(15);
         }
     }
 }

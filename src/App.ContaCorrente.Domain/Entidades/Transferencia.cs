@@ -11,9 +11,9 @@ namespace App.ContaCorrente.Domain.Entidades
     {
         public int Id { get; protected set; }
         
-        public long? NumeroConta { get; private set; }
+        public string? NumeroConta { get; private set; }
 
-        public int? Agencia { get; private set; }
+        public string? Agencia { get; private set; }
         
         public DateTime DataTransferencia { get; private set; }
 
@@ -31,19 +31,19 @@ namespace App.ContaCorrente.Domain.Entidades
 
         public Correntista? CorrentistaEnvia { get; set; }
 
-        public Transferencia(long? numeroConta, int? agencia, DateTime dataTransferencia, decimal valor)
+        public Transferencia(string? numeroConta, string? agencia, DateTime dataTransferencia, decimal valor)
         {
             ValidarEntidade(numeroConta, agencia, dataTransferencia, valor);
         }
 
-        public Transferencia(int id,long? numeroConta, int? agencia, DateTime dataTransferencia, decimal valor)
+        public Transferencia(int id, string? numeroConta, string? agencia, DateTime dataTransferencia, decimal valor)
         {
             DomainExcepitonValidacao.When(id < 0, "Id invalido.");
             ValidarEntidade(numeroConta, agencia, dataTransferencia, valor);
         }
 
 
-        public Transferencia(long? numeroConta, int? agencia, DateTime dataTransferencia, decimal valor, int? bancoId, int? correntistaRecebeId, int? correntistaEnviaId)
+        public Transferencia(string? numeroConta, string? agencia, DateTime dataTransferencia, decimal valor, int? bancoId, int? correntistaRecebeId, int? correntistaEnviaId)
         {
             ValidarEntidade(numeroConta, agencia, dataTransferencia, valor);
             BancoId = bancoId;
@@ -51,7 +51,7 @@ namespace App.ContaCorrente.Domain.Entidades
             CorrentistaEnviaId = correntistaEnviaId;    
         }
         
-        private void ValidarEntidade(long? numeroConta, int? agencia, DateTime dataTransferencia, decimal valor)
+        private void ValidarEntidade(string? numeroConta, string? agencia, DateTime dataTransferencia, decimal valor)
         {
             DomainExcepitonValidacao.When(valor <= 0, "Valor de transferencia invalido.");
             DomainExcepitonValidacao.When(string.IsNullOrEmpty(Convert.ToString(dataTransferencia)), "Data de transferencia invalida.");

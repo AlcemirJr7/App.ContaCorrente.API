@@ -8,9 +8,9 @@ namespace App.ContaCorrente.Application.DTOs
         [JsonIgnore]
         public int Id { get; set; }
 
-        public int Agencia { get; set; }
+        public string Agencia { get; set; }
 
-        public long Conta { get; set; }
+        public string Conta { get; set; }
 
         public DateTime DataInicio { get; set; }
 
