@@ -62,7 +62,7 @@ namespace App.ContaCorrente.Domain.Entidades
             DomainExcepitonValidacao.When(valor < 0, "Valor invalido.");
 
             CodigoBarra = codigoBarra;  
-            NumeroDocumento = numeroDocumento;
+            NumeroDocumento = StringFormata.ApenasNumeros(numeroDocumento);
             DataGeracao = dataGeracao;
             Valor = valor;
             DataVencimento = dataVencimento;

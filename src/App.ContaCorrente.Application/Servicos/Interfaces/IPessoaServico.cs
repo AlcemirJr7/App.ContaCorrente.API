@@ -1,9 +1,5 @@
 ﻿using App.ContaCorrente.Application.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using App.ContaCorrente.Domain.Entidades;
 
 namespace App.ContaCorrente.Application.Servicos.Interfaces
 {
@@ -11,9 +7,9 @@ namespace App.ContaCorrente.Application.Servicos.Interfaces
     {
         Task<PessoaDTO> GetPeloIdAsync(int? id);
 
-        Task AlterarAsync(PessoaDTO pessoaDto);
+        Task<Pessoa> AlterarAsync(PessoaDTO pessoaDto);
 
 
-        Task CriarAsync(PessoaDTO pessoaDto);
+        Task<Pessoa> CriarAsync(PessoaDTO pessoaDto);
     }
 }

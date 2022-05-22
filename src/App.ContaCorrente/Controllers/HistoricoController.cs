@@ -27,13 +27,15 @@ namespace App.ContaCorrente.API.Controllers
         /// </remarks>
         /// <param name="historicoDto"> Dados para cadastro do histórico </param>
         [HttpPost]        
-        public async Task<ActionResult<HistoricoDTO>> PostHistorico([FromBody] HistoricoDTO historicoDto)
+        public async Task<ActionResult> PostHistorico([FromBody] HistoricoDTO historicoDto)
         {
             if (historicoDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
 
+            var historico = new object();
+
             try
             {
-                await _historicoServico.CriarAsync(historicoDto);
+                historico = await _historicoServico.CriarAsync(historicoDto);
             }
             catch (DomainException e)
             {                
@@ -44,22 +46,24 @@ namespace App.ContaCorrente.API.Controllers
                 return BadRequest(new { mensagem = e.Message });                
             }
             
-            return Ok(historicoDto);  //new CreatedAtRouteResult("GetBanco", new { codigo = bancoDto.Id }, bancoDto);
+            return Ok(historico);
         }
 
         /// <summary>
         /// Atualiza um histórico pelo id      
         /// </summary>     
         [HttpPut("{id:int}")]       
-        public async Task<ActionResult<HistoricoDTO>> PutHistorico(int? id,[FromBody] HistoricoDTO historicoDto)
+        public async Task<ActionResult> PutHistorico(int? id,[FromBody] HistoricoDTO historicoDto)
         {
             if (historicoDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
             if (id == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
-
+            
+            var historico = new object();
+            
             try
             {
                 historicoDto.Id = id.Value;
-                await _historicoServico.AlterarAsync(historicoDto);
+                historico = await _historicoServico.AlterarAsync(historicoDto);
             }
             catch (DomainException e)
             {
@@ -70,7 +74,7 @@ namespace App.ContaCorrente.API.Controllers
                 return BadRequest(new { mensagem = e.Message });
             }
 
-            return Ok(historicoDto);
+            return Ok(historico);
         }
 
         /// <summary>

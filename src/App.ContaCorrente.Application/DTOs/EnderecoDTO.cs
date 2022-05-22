@@ -1,14 +1,16 @@
-﻿using System.Text.Json.Serialization;
+﻿using App.ContaCorrente.Domain.Utils;
+using System.Text.Json.Serialization;
 
 namespace App.ContaCorrente.Application.DTOs
 {
     public class EnderecoDTO 
-    {
+    {        
+
         [JsonIgnore]
-        public int Id { get; set; }
-           
-        public string Cep { get;  set; }
-        
+        public int Id { get; set; }                                        
+
+        public string Cep { get; set; }
+
         public string NomeRua { get;  set; }
         
         public int NumeroRua { get;  set; }
@@ -22,5 +24,6 @@ namespace App.ContaCorrente.Application.DTOs
         public string Estado { get;  set; }
 
         public string Sigla { get;  set; }
+        
     }
 }

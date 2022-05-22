@@ -1,4 +1,5 @@
-﻿using App.ContaCorrente.Domain.Validacoes;
+﻿using App.ContaCorrente.Domain.Utils;
+using App.ContaCorrente.Domain.Validacoes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -56,8 +57,8 @@ namespace App.ContaCorrente.Domain.Entidades
             DomainExcepitonValidacao.When(valor <= 0, "Valor de transferencia invalido.");
             DomainExcepitonValidacao.When(string.IsNullOrEmpty(Convert.ToString(dataTransferencia)), "Data de transferencia invalida.");
 
-            NumeroConta = numeroConta;
-            Agencia = agencia;
+            NumeroConta = StringFormata.ApenasNumeros(numeroConta);
+            Agencia = StringFormata.ApenasNumeros(agencia);
             DataTransferencia = dataTransferencia;  
             Valor = valor;
 

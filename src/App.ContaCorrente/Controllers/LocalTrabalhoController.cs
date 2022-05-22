@@ -23,13 +23,15 @@ namespace App.ContaCorrente.API.Controllers
         /// </summary>      
         /// <param name="localTrabalhoDto">Dados Local de Trabalho</param>
         [HttpPost]
-        public async Task<ActionResult<LocalTrabalhoDTO>> PostLocalTrabalho([FromBody] LocalTrabalhoDTO localTrabalhoDto)
+        public async Task<ActionResult> PostLocalTrabalho([FromBody] LocalTrabalhoDTO localTrabalhoDto)
         {
             if (localTrabalhoDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
-
+            
+            var localTrabalho = new object();
+            
             try
             {
-                await _localTrabalhoServico.CriarAsync(localTrabalhoDto);
+                localTrabalho = await _localTrabalhoServico.CriarAsync(localTrabalhoDto);
             }
             catch (DomainException e)
             {
@@ -40,22 +42,24 @@ namespace App.ContaCorrente.API.Controllers
                 return BadRequest(new { mensagem = e.Message });
             }
 
-            return Ok(localTrabalhoDto);  //new CreatedAtRouteResult("GetBanco", new { codigo = bancoDto.Id }, bancoDto);
+            return Ok(localTrabalho); 
         }
 
         /// <summary>
         /// Atualiza um Local de Trabalho    
         /// </summary>     
         [HttpPut("{id:int}")]
-        public async Task<ActionResult<LocalTrabalhoDTO>> PutLocalTrabalho(int? id, [FromBody] LocalTrabalhoDTO localTrabalhoDto)
+        public async Task<ActionResult> PutLocalTrabalho(int? id, [FromBody] LocalTrabalhoDTO localTrabalhoDto)
         {
             if (localTrabalhoDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
             if (id == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
 
+            var localTrabalho = new object();
+
             try
             {
                 localTrabalhoDto.Id = id.Value;
-                await _localTrabalhoServico.AlterarAsync(localTrabalhoDto);
+                localTrabalho = await _localTrabalhoServico.AlterarAsync(localTrabalhoDto);
             }
             catch (DomainException e)
             {
@@ -66,7 +70,7 @@ namespace App.ContaCorrente.API.Controllers
                 return BadRequest(new { mensagem = e.Message });
             }
 
-            return Ok(localTrabalhoDto);
+            return Ok(localTrabalho);
         }
 
         /// <summary>

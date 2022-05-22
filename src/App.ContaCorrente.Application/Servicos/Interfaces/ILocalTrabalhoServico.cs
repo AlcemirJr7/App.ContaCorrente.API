@@ -1,4 +1,5 @@
 ﻿using App.ContaCorrente.Application.DTOs;
+using App.ContaCorrente.Domain.Entidades;
 
 namespace App.ContaCorrente.Application.Servicos.Interfaces
 {
@@ -6,9 +7,9 @@ namespace App.ContaCorrente.Application.Servicos.Interfaces
     {
         Task<LocalTrabalhoDTO> GetPeloIdAsync(int? id);
 
-        Task AlterarAsync(LocalTrabalhoDTO localTrabalhoPessoaDto);
+        Task<LocalTrabalho> AlterarAsync(LocalTrabalhoDTO localTrabalhoPessoaDto);
 
-        Task CriarAsync(LocalTrabalhoDTO localTrabalhoPessoaDto);
+        Task<LocalTrabalho> CriarAsync(LocalTrabalhoDTO localTrabalhoPessoaDto);
         
     }
 }

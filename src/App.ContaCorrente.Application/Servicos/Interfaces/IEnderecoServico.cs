@@ -1,9 +1,6 @@
 ﻿using App.ContaCorrente.Application.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using App.ContaCorrente.Domain.Entidades;
+
 
 namespace App.ContaCorrente.Application.Servicos.Interfaces
 {
@@ -11,10 +8,10 @@ namespace App.ContaCorrente.Application.Servicos.Interfaces
     {
         Task<EnderecoDTO> GetPeloIdAsync(int? id);
 
-        Task AlterarAsync(EnderecoDTO enderecoDto);
+        Task<Endereco> AlterarAsync(EnderecoDTO enderecoDto);
 
-        Task CriarAsync(EnderecoDTO enderecoDto);
+        Task<Endereco> CriarAsync(EnderecoDTO enderecoDto);
 
-        Task DeletarAsync(int? id);
+        Task<Endereco> DeletarAsync(int? id);
     }
 }

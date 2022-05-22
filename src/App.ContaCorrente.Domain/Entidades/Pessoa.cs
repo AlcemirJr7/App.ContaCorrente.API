@@ -83,10 +83,10 @@ namespace App.ContaCorrente.Domain.Entidades
 
             Nome = nome;
             NomeEmpresa = nomeEmpresa;
-            NumeroDocumento = numeroDocumento;
+            NumeroDocumento = StringFormata.ApenasNumeros(numeroDocumento);
             TipoPessoa = tipoPessoa;
-            NumeroTelefone1 = numeroTelefone1;
-            NumeroTelefone2 = numeroTelefone2;
+            NumeroTelefone1 = StringFormata.ApenasNumeros(numeroTelefone1);
+            NumeroTelefone2 = StringFormata.ApenasNumeros(numeroTelefone2);
             Email1 = email1;
             Email2 = email2;
             DataNascimento = dataNascimento;            

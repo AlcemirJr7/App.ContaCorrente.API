@@ -1,6 +1,7 @@
 ﻿using App.ContaCorrente.Application.CQRS.Pessoas.Commands;
 using App.ContaCorrente.Application.DTOs;
 using App.ContaCorrente.Application.Servicos.Interfaces;
+using App.ContaCorrente.Domain.Entidades;
 using AutoMapper;
 using MediatR;
 using System;
@@ -22,15 +23,15 @@ namespace App.ContaCorrente.Application.Servicos
             _mapper = mapper;   
         }
 
-        public async Task AlterarAsync(PessoaDTO pessoaDto)
+        public async Task<Pessoa> AlterarAsync(PessoaDTO pessoaDto)
         {
             throw new NotImplementedException();
         }
 
-        public async Task CriarAsync(PessoaDTO pessoaDto)
+        public async Task<Pessoa> CriarAsync(PessoaDTO pessoaDto)
         {
             var pessoaCriarCommand = _mapper.Map<PessoaCriarCommand>(pessoaDto);
-            await _mediator.Send(pessoaCriarCommand);   
+            return await _mediator.Send(pessoaCriarCommand);   
         }
 
         public async Task<PessoaDTO> GetPeloIdAsync(int? id)

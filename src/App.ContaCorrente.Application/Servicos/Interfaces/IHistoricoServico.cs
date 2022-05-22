@@ -1,10 +1,5 @@
 ﻿using App.ContaCorrente.Application.DTOs;
 using App.ContaCorrente.Domain.Entidades;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace App.ContaCorrente.Application.Servicos.Interfaces
 {
@@ -14,8 +9,8 @@ namespace App.ContaCorrente.Application.Servicos.Interfaces
 
         Task<HistoricoDTO> GetPeloIdAsync(int? id);
 
-        Task AlterarAsync(HistoricoDTO historico);
+        Task<Historico> AlterarAsync(HistoricoDTO historico);
 
-        Task CriarAsync(HistoricoDTO historico);
+        Task<Historico> CriarAsync(HistoricoDTO historico);
     }
 }

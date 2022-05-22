@@ -56,9 +56,9 @@ namespace App.ContaCorrente.Domain.Entidades
             DomainExcepitonValidacao.When(salario1 <= 0, "Salario deve ser informado.");            
 
             NomeEmpresa = nomeEmpresa;  
-            NumeroDocumento = numeroDocumento;
-            NumeroTelefone1 = numeroTelefone1;
-            NumeroTelefone2 = numeroTelefone2;
+            NumeroDocumento = StringFormata.ApenasNumeros(numeroDocumento);
+            NumeroTelefone1 = StringFormata.ApenasNumeros(numeroTelefone1);
+            NumeroTelefone2 = StringFormata.ApenasNumeros(numeroTelefone2);
             Email1 = email1;
             Email2 = email2;
             Salario1 = salario1;
