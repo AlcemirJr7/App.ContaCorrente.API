@@ -47,7 +47,7 @@ namespace App.ContaCorrente.API.Controllers
         /// Atualiza um Local de Trabalho    
         /// </summary>     
         [HttpPut("{id:int}")]
-        public async Task<ActionResult<LocalTrabalhoDTO>> PutHistorico(int? id, [FromBody] LocalTrabalhoDTO localTrabalhoDto)
+        public async Task<ActionResult<LocalTrabalhoDTO>> PutLocalTrabalho(int? id, [FromBody] LocalTrabalhoDTO localTrabalhoDto)
         {
             if (localTrabalhoDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
             if (id == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
@@ -68,6 +68,36 @@ namespace App.ContaCorrente.API.Controllers
 
             return Ok(localTrabalhoDto);
         }
+
+        /// <summary>
+        /// Busca um Local de Trabalho
+        /// </summary> 
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<LocalTrabalhoDTO>> GetLocalTrabalho(int? id)
+        {
+            if (id == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
+
+            var localTrabalho = new object();
+
+            try
+            {
+                localTrabalho = await _localTrabalhoServico.GetPeloIdAsync(id);
+
+                if (localTrabalho == null) return NotFound(new { mensagem = Mensagens.EntidadeNaoEncontrada });
+
+            }
+            catch (DomainException e)
+            {
+                return BadRequest(new { mensagem = e.Message });
+            }
+            catch (DomainExcepitonValidacao e)
+            {
+                return BadRequest(new { mensagem = e.Message });
+            }
+
+            return Ok(localTrabalho);
+        }
+
 
     }
 }

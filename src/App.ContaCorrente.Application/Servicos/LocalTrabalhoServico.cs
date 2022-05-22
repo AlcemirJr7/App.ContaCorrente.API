@@ -1,6 +1,9 @@
 ﻿using App.ContaCorrente.Application.CQRS.LocalTrabalhos.Commands;
+using App.ContaCorrente.Application.CQRS.LocalTrabalhos.Queries;
 using App.ContaCorrente.Application.DTOs;
 using App.ContaCorrente.Application.Servicos.Interfaces;
+using App.ContaCorrente.Domain.Mensagem;
+using App.ContaCorrente.Domain.Validacoes;
 using AutoMapper;
 using MediatR;
 
@@ -30,7 +33,17 @@ namespace App.ContaCorrente.Application.Servicos
         
         public async Task<LocalTrabalhoDTO> GetPeloIdAsync(int? id)
         {
-            throw new NotImplementedException();
+            var localTrabalhoQuery = new GetLocalTrabalhoPeloIdQuery(id.Value);
+
+            if(localTrabalhoQuery == null)
+            {
+                throw new DomainException(Mensagens.ErroAoCriarEntidade);
+            }
+
+            var result = await _mediator.Send(localTrabalhoQuery);
+
+            return _mapper.Map<LocalTrabalhoDTO>(result);
+
         }
     }
 }

@@ -45,14 +45,10 @@ namespace App.ContaCorrente.Infra.Data.Repositorios
             return localTrabalho;
         }
 
-        public async Task<LocalTrabalho> DeletarAsync(int? id)
-        {
-            throw new NotImplementedException();
-        }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            GC.SuppressFinalize(this);
         }
 
         public async Task<LocalTrabalho> GetPeloIdAsync(int? id)

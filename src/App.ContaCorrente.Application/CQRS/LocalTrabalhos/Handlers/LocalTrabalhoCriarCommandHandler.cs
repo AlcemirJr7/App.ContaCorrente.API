@@ -10,7 +10,7 @@ namespace App.ContaCorrente.Application.CQRS.LocalTrabalhoPessoas.Handlers
 {
     public class LocalTrabalhoCriarCommandHandler : IRequestHandler<LocalTrabalhoCriarCommand, LocalTrabalho>
     {
-        private readonly ILocalTrabalhoRepositorio _localTrabalhoRepositorio;
+        private readonly ILocalTrabalhoRepositorio _localTrabalhoRepositorio;       
         public LocalTrabalhoCriarCommandHandler(ILocalTrabalhoRepositorio localTrabalhoRepositorio)
         {
             _localTrabalhoRepositorio = localTrabalhoRepositorio;
@@ -19,7 +19,7 @@ namespace App.ContaCorrente.Application.CQRS.LocalTrabalhoPessoas.Handlers
         public async Task<LocalTrabalho> Handle(LocalTrabalhoCriarCommand request, CancellationToken cancellationToken)
         {
             var localTrabalhoPessoa = new LocalTrabalho(request.NomeEmpresa,request.NumeroDocumento,request.NumeroTelefone1,request.NumeroTelefone2,
-                                                              request.Email1,request.Email2,request.Salario1,request.Salario2);
+                                                        request.Email1,request.Email2,request.Salario1,request.Salario2);
             
             if(localTrabalhoPessoa == null)
             {
