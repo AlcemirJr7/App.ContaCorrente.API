@@ -10,6 +10,7 @@ namespace App.ContaCorrente.API.Controllers
 {
     [Route("api/[controller]")]    
     [ApiController]
+    [Produces("application/json")]
     public class BancoController : ControllerBase
     {
         private readonly IBancoServico _bancoServico;
@@ -18,8 +19,7 @@ namespace App.ContaCorrente.API.Controllers
             _bancoServico = bancoServico;
         }
 
-        [HttpGet]
-        [Produces("application/json")]
+        [HttpGet]        
         public async Task<ActionResult<IEnumerable<BancoDTO>>> GetBancos()
         {
             var bancos = new object();
@@ -44,7 +44,6 @@ namespace App.ContaCorrente.API.Controllers
         }
 
         [HttpGet("{codigo:int}",Name = "GetBanco")]
-        [Produces("application/json")]
         public async Task<ActionResult<BancoDTO>> GetBanco(int? codigo)
         {
             var banco = new object();   
@@ -69,8 +68,7 @@ namespace App.ContaCorrente.API.Controllers
 
         }
 
-        [HttpPost]
-        [Produces("application/json")]
+        [HttpPost]        
         public async Task<ActionResult> PostBanco([FromBody] BancoDTO bancoDto)
         {
             if (bancoDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
@@ -93,8 +91,7 @@ namespace App.ContaCorrente.API.Controllers
             return new CreatedAtRouteResult("GetBanco", new { codigo = bancoDto.Id }, bancoDto);
         }
         
-        [HttpPut]
-        [Produces("application/json")]
+        [HttpPut]        
         public async Task<ActionResult<BancoDTO>> PutBanco(int? id,[FromBody] BancoDTO bancoDto)
         {
             if(id != bancoDto.Id) return BadRequest(new { mensagem = Mensagens.DataInvalida });

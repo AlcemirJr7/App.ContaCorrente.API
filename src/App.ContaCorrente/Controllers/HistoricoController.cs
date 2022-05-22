@@ -10,6 +10,7 @@ namespace App.ContaCorrente.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Produces("application/json")]
     public class HistoricoController : ControllerBase
     {
         private readonly IHistoricoServico _historicoServico;
@@ -18,8 +19,7 @@ namespace App.ContaCorrente.API.Controllers
             _historicoServico = historicoServico;
         }
         
-        [HttpPost]
-        [Produces("application/json")]
+        [HttpPost]        
         public async Task<ActionResult<HistoricoDTO>> PostHistorico([FromBody] HistoricoDTO historicoDto)
         {
             if (historicoDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
@@ -40,8 +40,7 @@ namespace App.ContaCorrente.API.Controllers
             return Ok(historicoDto);  //new CreatedAtRouteResult("GetBanco", new { codigo = bancoDto.Id }, bancoDto);
         }
 
-        [HttpPut("{id:int}")]
-        [Produces("application/json")]
+        [HttpPut("{id:int}")]       
         public async Task<ActionResult<HistoricoDTO>> PutHistorico(int? id,[FromBody] HistoricoDTO historicoDto)
         {
             if (historicoDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
@@ -64,8 +63,7 @@ namespace App.ContaCorrente.API.Controllers
             return Ok(historicoDto);
         }
 
-        [HttpGet("{id:int}")]
-        [Produces("application/json")]
+        [HttpGet("{id:int}")]        
         public async Task<ActionResult<HistoricoDTO>> GetHistorico(int? id)
         {
             if(id == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
@@ -90,8 +88,7 @@ namespace App.ContaCorrente.API.Controllers
             return Ok(hisrotico);
         }
 
-        [HttpGet]
-        [Produces("application/json")]
+        [HttpGet]        
         public async Task<ActionResult<IEnumerable<HistoricoDTO>>> GetHistoricos()
         {            
             var hisrotico = new object();
