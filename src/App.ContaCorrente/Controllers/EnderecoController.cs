@@ -10,6 +10,7 @@ namespace App.ContaCorrente.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Produces("application/json")]
     public class EnderecoController : ControllerBase
     {
         private readonly IEnderecoServico _enderecoServico;
@@ -18,9 +19,10 @@ namespace App.ContaCorrente.API.Controllers
             _enderecoServico = enderecoServico;
         }
 
-
-        [HttpGet("{id:int}", Name = "GetEndereco")]
-        [Produces("application/json")]
+        /// <summary>
+        /// Busca o endereço pelo Id
+        /// </summary>
+        [HttpGet("{id:int}", Name = "GetEndereco")]        
         public async Task<ActionResult<EnderecoDTO>> GetEndereco(int? id)
         {
             var endereco = new object();
@@ -44,8 +46,10 @@ namespace App.ContaCorrente.API.Controllers
 
         }
 
-        [HttpPost]
-        [Produces("application/json")]
+        /// <summary>
+        /// Criar um novo endereço
+        /// </summary>
+        [HttpPost]        
         public async Task<ActionResult> PostEndereco([FromBody] EnderecoDTO enderecoDto)
         {
             if (enderecoDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
@@ -67,8 +71,10 @@ namespace App.ContaCorrente.API.Controllers
 
         }
 
-        [HttpPut("{id:int}")]
-        [Produces("application/json")]
+        /// <summary>
+        /// Atualiza um endereço pelo Id
+        /// </summary>       
+        [HttpPut("{id:int}")]        
         public async Task<ActionResult<EnderecoDTO>> PutEndereco(int? id,[FromBody] EnderecoDTO enderecoDto)
         {
             if (enderecoDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
@@ -91,8 +97,11 @@ namespace App.ContaCorrente.API.Controllers
             return Ok(enderecoDto);
         }
 
-        [HttpDelete("{id:int}")]
-        [Produces("application/json")]
+        /// <summary>
+        /// Deleta um endereço pelo Id
+        /// </summary> 
+        /// 
+        [HttpDelete("{id:int}")]        
         public async Task<ActionResult<EnderecoDTO>> DeleteEndereco(int? id)
         {            
          
