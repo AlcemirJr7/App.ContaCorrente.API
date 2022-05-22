@@ -22,7 +22,10 @@ namespace App.ContaCorrente.API.Controllers
         /// <summary>
         /// Cria um novo histótico
         /// </summary>      
-        /// <param name="historicoDto"> TipoDebidoCredito:  1 - Debito 2 - Credito  </param>
+        /// <remarks>
+        ///  TipoDebidoCredito:  1 - Debito | 2 - Credito
+        /// </remarks>
+        /// <param name="historicoDto"> Dados para cadastro do histórico </param>
         [HttpPost]        
         public async Task<ActionResult<HistoricoDTO>> PostHistorico([FromBody] HistoricoDTO historicoDto)
         {

@@ -28,7 +28,7 @@ namespace App.ContaCorrente.Infra.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Cep = table.Column<int>(type: "int", nullable: false),
+                    Cep = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
                     NomeRua = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     NumeroRua = table.Column<int>(type: "int", nullable: false),
                     Complemento = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
@@ -64,9 +64,9 @@ namespace App.ContaCorrente.Infra.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     NomeEmpresa = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
-                    NumeroDocumento = table.Column<long>(type: "bigint", nullable: false),
-                    NumeroTelefone1 = table.Column<long>(type: "bigint", nullable: false),
-                    NumeroTelefone2 = table.Column<long>(type: "bigint", nullable: true),
+                    NumeroDocumento = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NumeroTelefone1 = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
+                    NumeroTelefone2 = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: true),
                     Email1 = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Email2 = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     Salario1 = table.Column<decimal>(type: "decimal(25,2)", precision: 25, scale: 2, nullable: false),
@@ -100,10 +100,10 @@ namespace App.ContaCorrente.Infra.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     NomeEmpresa = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
-                    NumeroDocumento = table.Column<long>(type: "bigint", nullable: false),
+                    NumeroDocumento = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     TipoPessoa = table.Column<int>(type: "int", nullable: false),
-                    NumeroTelefone1 = table.Column<long>(type: "bigint", nullable: false),
-                    NumeroTelefone2 = table.Column<long>(type: "bigint", nullable: true),
+                    NumeroTelefone1 = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
+                    NumeroTelefone2 = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: true),
                     Email1 = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Email2 = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     DataNascimento = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -127,8 +127,8 @@ namespace App.ContaCorrente.Infra.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Agencia = table.Column<int>(type: "int", nullable: false),
-                    Conta = table.Column<long>(type: "bigint", nullable: false),
+                    Agencia = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    Conta = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
                     DataInicio = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DataEncerramento = table.Column<DateTime>(type: "datetime2", nullable: true),
                     FlagConta = table.Column<int>(type: "int", nullable: false),
@@ -277,7 +277,7 @@ namespace App.ContaCorrente.Infra.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CodigoBarra = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NumeroDocumento = table.Column<int>(type: "int", nullable: false),
+                    NumeroDocumento = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     DataGeracao = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Valor = table.Column<decimal>(type: "decimal(25,2)", precision: 25, scale: 2, nullable: false),
                     DataVencimento = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -323,8 +323,8 @@ namespace App.ContaCorrente.Infra.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NumeroConta = table.Column<long>(type: "bigint", nullable: true),
-                    Agencia = table.Column<int>(type: "int", nullable: true),
+                    NumeroConta = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: true),
+                    Agencia = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
                     DataTransferencia = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Valor = table.Column<decimal>(type: "decimal(25,2)", precision: 25, scale: 2, nullable: false),
                     BancoId = table.Column<int>(type: "int", nullable: true),

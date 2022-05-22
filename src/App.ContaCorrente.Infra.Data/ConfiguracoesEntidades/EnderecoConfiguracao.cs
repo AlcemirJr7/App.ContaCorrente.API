@@ -20,6 +20,7 @@ namespace App.ContaCorrente.Infra.Data.ConfiguracoesEntidades
             builder.Property(e => e.NomeRua).HasMaxLength(200).IsRequired();
             builder.Property(e => e.Complemento).HasMaxLength(100);
             builder.Property(e => e.Sigla).HasMaxLength(2).IsRequired();
+            builder.Property(e => e.Cep).HasMaxLength(15).IsRequired();
         }
     }
 }

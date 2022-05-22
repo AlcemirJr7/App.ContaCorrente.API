@@ -50,14 +50,18 @@ namespace App.ContaCorrente.Infra.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("Agencia")
-                        .HasColumnType("int");
+                    b.Property<string>("Agencia")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<int>("BancoId")
                         .HasColumnType("int");
 
-                    b.Property<long>("Conta")
-                        .HasColumnType("bigint");
+                    b.Property<string>("Conta")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
 
                     b.Property<DateTime?>("DataEncerramento")
                         .HasColumnType("datetime2");
@@ -157,8 +161,10 @@ namespace App.ContaCorrente.Infra.Data.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<int>("Cep")
-                        .HasColumnType("int");
+                    b.Property<string>("Cep")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
 
                     b.Property<string>("Cidade")
                         .IsRequired()
@@ -315,14 +321,18 @@ namespace App.ContaCorrente.Infra.Data.Migrations
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");
 
-                    b.Property<long>("NumeroDocumento")
-                        .HasColumnType("bigint");
+                    b.Property<string>("NumeroDocumento")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("NumeroTelefone1")
-                        .HasColumnType("bigint");
+                    b.Property<string>("NumeroTelefone1")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
 
-                    b.Property<long?>("NumeroTelefone2")
-                        .HasColumnType("bigint");
+                    b.Property<string>("NumeroTelefone2")
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
 
                     b.Property<decimal>("Salario1")
                         .HasPrecision(25, 2)
@@ -405,8 +415,10 @@ namespace App.ContaCorrente.Infra.Data.Migrations
                     b.Property<DateTime>("DataVencimento")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("NumeroDocumento")
-                        .HasColumnType("int");
+                    b.Property<string>("NumeroDocumento")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<decimal>("Valor")
                         .HasPrecision(25, 2)
@@ -485,14 +497,19 @@ namespace App.ContaCorrente.Infra.Data.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<long>("NumeroDocumento")
-                        .HasColumnType("bigint");
+                    b.Property<string>("NumeroDocumento")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<long>("NumeroTelefone1")
-                        .HasColumnType("bigint");
+                    b.Property<string>("NumeroTelefone1")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
 
-                    b.Property<long?>("NumeroTelefone2")
-                        .HasColumnType("bigint");
+                    b.Property<string>("NumeroTelefone2")
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
 
                     b.Property<int>("TipoPessoa")
                         .HasColumnType("int");
@@ -541,8 +558,9 @@ namespace App.ContaCorrente.Infra.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("Agencia")
-                        .HasColumnType("int");
+                    b.Property<string>("Agencia")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<int?>("BancoId")
                         .HasColumnType("int");
@@ -556,8 +574,9 @@ namespace App.ContaCorrente.Infra.Data.Migrations
                     b.Property<DateTime>("DataTransferencia")
                         .HasColumnType("datetime2");
 
-                    b.Property<long?>("NumeroConta")
-                        .HasColumnType("bigint");
+                    b.Property<string>("NumeroConta")
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
 
                     b.Property<decimal>("Valor")
                         .HasPrecision(25, 2)

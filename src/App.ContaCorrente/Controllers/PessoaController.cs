@@ -20,9 +20,11 @@ namespace App.ContaCorrente.API.Controllers
 
         /// <summary>
         /// Cria um nova Pessoa
-        /// </summary>      
-        /// <param name="pessoaDto">Dados da Pessoa</param>
-        /// <param name=""> TipoPessoa:  1 - Pessoa Física 2 - Pessoa Jurídica </param>
+        /// </summary>    
+        /// <remarks>
+        ///  TipoPessoa:  1 - Pessoa Física | 2 - Pessoa Jurídica               
+        /// </remarks>
+        /// <param name="pessoaDto">Dados da Pessoa </param>        
         [HttpPost]
         public async Task<ActionResult<PessoaDTO>> PostPessoa([FromBody] PessoaDTO pessoaDto)
         {

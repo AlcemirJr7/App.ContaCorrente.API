@@ -13,7 +13,9 @@ namespace App.ContaCorrente.Infra.Data.ConfiguracoesEntidades
     {
         public void Configure(EntityTypeBuilder<Correntista> builder)
         {
-            builder.HasKey(t => t.Id);            
+            builder.HasKey(t => t.Id);
+            builder.Property(t => t.Agencia).HasMaxLength(10);
+            builder.Property(t => t.Conta).HasMaxLength(15);
         }
     }
 }

@@ -15,6 +15,8 @@ namespace App.ContaCorrente.Infra.Data.ConfiguracoesEntidades
         {
             builder.HasKey(t => t.Id);
             builder.Property(t => t.Valor).HasPrecision(25,2).IsRequired();
+            builder.Property(t => t.NumeroConta).HasMaxLength(15);
+            builder.Property(t => t.Agencia).HasMaxLength(10);
         }
     }
 }
