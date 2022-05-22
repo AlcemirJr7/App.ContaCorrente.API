@@ -18,7 +18,9 @@ namespace App.ContaCorrente.API.Controllers
         {
             _bancoServico = bancoServico;
         }
-
+        /// <summary>
+        /// busca um lista de bacos
+        /// </summary>
         [HttpGet]        
         public async Task<ActionResult<IEnumerable<BancoDTO>>> GetBancos()
         {
@@ -42,7 +44,9 @@ namespace App.ContaCorrente.API.Controllers
             return Ok(bancos);
 
         }
-
+        /// <summary>
+        /// busca um banco pelo Id
+        /// </summary>
         [HttpGet("{codigo:int}",Name = "GetBanco")]
         public async Task<ActionResult<BancoDTO>> GetBanco(int? codigo)
         {
@@ -67,7 +71,9 @@ namespace App.ContaCorrente.API.Controllers
             return Ok(banco);
 
         }
-
+        /// <summary>
+        /// Cria um novo banco
+        /// </summary>
         [HttpPost]        
         public async Task<ActionResult> PostBanco([FromBody] BancoDTO bancoDto)
         {
@@ -90,7 +96,10 @@ namespace App.ContaCorrente.API.Controllers
 
             return new CreatedAtRouteResult("GetBanco", new { codigo = bancoDto.Id }, bancoDto);
         }
-        
+
+        /// <summary>
+        /// Atualiza um banco pelo Id
+        /// </summary>
         [HttpPut]        
         public async Task<ActionResult<BancoDTO>> PutBanco(int? id,[FromBody] BancoDTO bancoDto)
         {

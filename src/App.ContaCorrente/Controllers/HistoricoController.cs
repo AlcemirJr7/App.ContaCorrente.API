@@ -18,7 +18,11 @@ namespace App.ContaCorrente.API.Controllers
         {
             _historicoServico = historicoServico;
         }
-        
+
+        /// <summary>
+        /// Cria um novo histótico
+        /// </summary>      
+        /// <param name="historicoDto"> TipoDebidoCredito:  1 - Debito 2 - Credito  </param>
         [HttpPost]        
         public async Task<ActionResult<HistoricoDTO>> PostHistorico([FromBody] HistoricoDTO historicoDto)
         {
@@ -40,6 +44,9 @@ namespace App.ContaCorrente.API.Controllers
             return Ok(historicoDto);  //new CreatedAtRouteResult("GetBanco", new { codigo = bancoDto.Id }, bancoDto);
         }
 
+        /// <summary>
+        /// Atualiza um histórico pelo id      
+        /// </summary>     
         [HttpPut("{id:int}")]       
         public async Task<ActionResult<HistoricoDTO>> PutHistorico(int? id,[FromBody] HistoricoDTO historicoDto)
         {
@@ -63,6 +70,9 @@ namespace App.ContaCorrente.API.Controllers
             return Ok(historicoDto);
         }
 
+        /// <summary>
+        /// Busca um histórico pelo Id    
+        /// </summary> 
         [HttpGet("{id:int}")]        
         public async Task<ActionResult<HistoricoDTO>> GetHistorico(int? id)
         {
@@ -88,6 +98,10 @@ namespace App.ContaCorrente.API.Controllers
             return Ok(hisrotico);
         }
 
+        /// <summary>
+        /// Busca uma lista de históricos
+        /// </summary> 
+   
         [HttpGet]        
         public async Task<ActionResult<IEnumerable<HistoricoDTO>>> GetHistoricos()
         {            

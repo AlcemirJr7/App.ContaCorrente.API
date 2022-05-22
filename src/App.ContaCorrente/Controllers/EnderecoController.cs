@@ -47,7 +47,7 @@ namespace App.ContaCorrente.API.Controllers
         }
 
         /// <summary>
-        /// Criar um endereço
+        /// Criar um novo endereço
         /// </summary>
         [HttpPost]        
         public async Task<ActionResult> PostEndereco([FromBody] EnderecoDTO enderecoDto)
