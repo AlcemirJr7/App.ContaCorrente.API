@@ -14,7 +14,8 @@ namespace App.ContaCorrente.Infra.Data.ConfiguracoesEntidades
         public void Configure(EntityTypeBuilder<Historico> builder)
         {
             builder.HasKey(h => h.Id);
-            builder.Property(h => h.Descricao).HasMaxLength(200).IsRequired();            
+            builder.Property(h => h.Descricao).HasMaxLength(200).IsRequired();
+            builder.Property(h => h.TipoDebitoCredito).HasPrecision(1);
         }
     }
 }

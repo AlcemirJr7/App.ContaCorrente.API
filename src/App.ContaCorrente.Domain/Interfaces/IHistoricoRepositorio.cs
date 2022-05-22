@@ -9,11 +9,13 @@ namespace App.ContaCorrente.Domain.Interfaces
 {
     public interface IHistoricoRepositorio : IDisposable
     {
+        Task<IEnumerable<Historico>> GetHistoricosAsync();
+
         Task<Historico> GetPeloIdAsync(int? id);
 
-        Task<Historico> AlterarAsync(Endereco endereco);
+        Task<Historico> AlterarAsync(Historico historico);
 
-        Task<Historico> CriarAsync(Endereco endereco);
+        Task<Historico> CriarAsync(Historico historico);
 
 
     }

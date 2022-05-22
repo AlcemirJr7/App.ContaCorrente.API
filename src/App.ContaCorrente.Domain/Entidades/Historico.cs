@@ -1,4 +1,5 @@
-﻿using App.ContaCorrente.Domain.Validacoes;
+﻿using App.ContaCorrente.Domain.Enumerador;
+using App.ContaCorrente.Domain.Validacoes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,30 +14,35 @@ namespace App.ContaCorrente.Domain.Entidades
 
         public string Descricao { get; private set; }
 
-        public DateTime DataCriacao { get; private set; }
+        public EnumHistoricoDebitoCredito TipoDebitoCredito { get; private set; }
 
-        public Historico(string descricao)
+        public DateTime DataCriacao { get; set; }
+
+
+        public Historico(string descricao, EnumHistoricoDebitoCredito tipoDebitoCredito)
         {
-            ValidarEntidade(descricao);
+            ValidarEntidade(descricao,tipoDebitoCredito);
         }
 
-        public Historico(int id,string descricao)
+        public Historico(int id,string descricao, EnumHistoricoDebitoCredito tipoDebitoCredito)
         {
             DomainExcepitonValidacao.When(id < 0, "Id invalido.");
             Id = id;            
-            ValidarEntidade(descricao);
+            ValidarEntidade(descricao,tipoDebitoCredito);
         }
 
-        public void Atualizar(string descricao)
+        public void Atualizar(string descricao, EnumHistoricoDebitoCredito tipoDebitoCredito)
         {
-            ValidarEntidade(descricao);
+            ValidarEntidade(descricao,tipoDebitoCredito);
         }
 
-        private void ValidarEntidade(string descricao)
+        private void ValidarEntidade(string descricao, EnumHistoricoDebitoCredito tipoDebitoCredito)
         {
             DomainExcepitonValidacao.When(string.IsNullOrEmpty(descricao), "Descrição do histórico deve ser informado.");
-            Descricao = descricao;
-            DataCriacao = DateTime.UtcNow;
+            DomainExcepitonValidacao.When(!Enum.IsDefined(typeof(EnumHistoricoDebitoCredito), tipoDebitoCredito), "Tipo debito credito invalido.");
+
+            Descricao = descricao;            
+            TipoDebitoCredito = tipoDebitoCredito;
         }
     }
 }

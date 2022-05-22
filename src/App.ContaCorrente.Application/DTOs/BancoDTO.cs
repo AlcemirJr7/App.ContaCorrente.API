@@ -13,11 +13,9 @@ namespace App.ContaCorrente.Application.DTOs
     {
         [JsonPropertyName("codigo")]
         public int Id { get; set; }
-
-        [Required(ErrorMessage = "Nome é obrigatorio.")]                
+        
         public string Nome { get; set; }
-
-        [Required(ErrorMessage = "Nome Completo é obrigatorio.")]        
+        
         public string NomeCompleto { get; set; }
     }
 }

@@ -63,7 +63,7 @@ namespace App.ContaCorrente.Domain.Entidades
 
             DomainExcepitonValidacao.When(agencia < 0, "Agencia deve ser informada.");
             DomainExcepitonValidacao.When(conta < 0, "Conta deve ser informada.");
-            DomainExcepitonValidacao.When(Enum.IsDefined(typeof(EnumContaCorrente), flagConta), "Flag Conta corrente invalido.");
+            DomainExcepitonValidacao.When(!Enum.IsDefined(typeof(EnumContaCorrente), flagConta), "Flag Conta corrente invalido.");
             DomainExcepitonValidacao.When(string.IsNullOrEmpty(Convert.ToString(dataInicio)), "Data de Inicio deve ser informado.");
             DomainExcepitonValidacao.When(senha != senhaConfirmacao, "Senha e Senha Confimarção são diferentes.");
             DomainExcepitonValidacao.When(string.IsNullOrEmpty(senha), "Senha não pode ser vazio.");

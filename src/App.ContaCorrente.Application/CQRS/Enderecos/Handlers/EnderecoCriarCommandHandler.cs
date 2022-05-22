@@ -29,10 +29,8 @@ namespace App.ContaCorrente.Application.CQRS.Enderecos.Handlers
                 throw new DomainException(Mensagens.ErroAoCriarEntidade);
             }
             else
-            {                            
-                var result = await _enderecoRepositorio.CriarAsync(endereco);
-
-                return result;
+            {                                            
+                return await _enderecoRepositorio.CriarAsync(endereco); 
             }
         }
     }

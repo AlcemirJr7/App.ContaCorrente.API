@@ -21,13 +21,25 @@ namespace App.ContaCorrente.API.Controllers
 
         [HttpGet("{id:int}", Name = "GetEndereco")]
         [Produces("application/json")]
-        public async Task<ActionResult<EnderecoDTO>> GetEndereco(int? id)             
+        public async Task<ActionResult<EnderecoDTO>> GetEndereco(int? id)
         {
+            var endereco = new object();
+
+            try
+            {
+                endereco = await _enderecoServico.GetPeloIdAsync(id.Value);
+
+                if (endereco == null) return NotFound(new { mensagem = "Endereço não encontrado."});
+            }
+            catch (DomainException e)
+            {
+                return BadRequest(new { mensagem = e.Message });
+            }
+            catch (DomainExcepitonValidacao e)
+            {
+                return BadRequest(new { mensagem = e.Message });
+            }
                         
-            var endereco = await _enderecoServico.GetPeloIdAsync(id.Value);
-
-            if (endereco == null) return NotFound($"Endereço não encontrado.");
-
             return Ok(endereco);
 
         }
@@ -36,17 +48,21 @@ namespace App.ContaCorrente.API.Controllers
         [Produces("application/json")]
         public async Task<ActionResult> PostEndereco([FromBody] EnderecoDTO enderecoDto)
         {
-            if (enderecoDto == null) return BadRequest(Mensagens.DataInvalida);
+            if (enderecoDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
 
             try
             {
                 await _enderecoServico.CriarAsync(enderecoDto);
             }
-            catch (DomainExcepitonValidacao e)
-            {                
-                return BadRequest(e.Message);                                
+            catch (DomainException e)
+            {
+                return BadRequest(new { mensagem = e.Message });
             }
-                                                                                                
+            catch (DomainExcepitonValidacao e)
+            {
+                return BadRequest(new { mensagem = e.Message });
+            }
+
             return new CreatedAtRouteResult("GetEndereco", new { id = enderecoDto.Id }, enderecoDto);
 
         }
@@ -55,9 +71,9 @@ namespace App.ContaCorrente.API.Controllers
         [Produces("application/json")]
         public async Task<ActionResult<EnderecoDTO>> PutEndereco(int? id,[FromBody] EnderecoDTO enderecoDto)
         {
-            if (enderecoDto == null) return BadRequest(Mensagens.DataInvalida);
+            if (enderecoDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
 
-            if (id == null) return BadRequest(Mensagens.DataInvalida);
+            if (id == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
 
             try
             {
@@ -66,24 +82,27 @@ namespace App.ContaCorrente.API.Controllers
             }
             catch (DomainException e)
             {
-                BadRequest(e.Message);
+                return BadRequest(new { mensagem = e.Message });
             }
-
+            catch (DomainExcepitonValidacao e)
+            {
+                return BadRequest(new { mensagem = e.Message });
+            }
             return Ok(enderecoDto);
         }
 
         [HttpDelete("{id:int}")]
         [Produces("application/json")]
-        public async Task<ActionResult<EnderecoDTO>> PutEndereco(int? id)
+        public async Task<ActionResult<EnderecoDTO>> DeleteEndereco(int? id)
         {            
          
-            if (id == null) return BadRequest(Mensagens.DataInvalida);
+            if (id == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
 
             var enderecoDto = await _enderecoServico.GetPeloIdAsync(id);
 
             if(enderecoDto == null)
             {
-                return BadRequest(Mensagens.EntidadeNaoEncontrada);
+                return BadRequest(new { mensagem = Mensagens.EntidadeNaoEncontrada });
             }
 
             try
@@ -92,7 +111,11 @@ namespace App.ContaCorrente.API.Controllers
             }
             catch (DomainException e)
             {
-                BadRequest(e.Message);
+                return BadRequest(new { mensagem = e.Message });
+            }
+            catch (DomainExcepitonValidacao e)
+            {
+                return BadRequest(new { mensagem = e.Message });
             }
 
             return Ok(enderecoDto);

@@ -1,6 +1,8 @@
 ﻿using App.ContaCorrente.Application.CQRS.Bancos.Queries;
 using App.ContaCorrente.Domain.Entidades;
 using App.ContaCorrente.Domain.Interfaces;
+using App.ContaCorrente.Domain.Mensagem;
+using App.ContaCorrente.Domain.Validacoes;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -19,7 +21,15 @@ namespace App.ContaCorrente.Application.CQRS.Bancos.Handlers
         }
         public async Task<Banco> Handle(GetBancosPeloIdQuery request, CancellationToken cancellationToken)
         {
-            return await _bancoRepositorio.GetBancosPeloIdAsync(request.Id);
+            try
+            {
+                return await _bancoRepositorio.GetBancosPeloIdAsync(request.Id);
+            }
+            catch 
+            {
+                throw new DomainException(Mensagens.ErroAoEfetuarConsulta);
+            }
+            
         }
     }
 }

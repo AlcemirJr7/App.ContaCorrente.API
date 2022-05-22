@@ -12,73 +12,73 @@ using System.Threading.Tasks;
 
 namespace App.ContaCorrente.Infra.Data.Repositorios
 {
-    public class BancoRepositorio : IBancoRepositorio
+    public class HistoricoRepositorio : IHistoricoRepositorio
     {
         private AppDbContexto _appDbContexto;
-        public BancoRepositorio(AppDbContexto appDbContexto)
+        public HistoricoRepositorio(AppDbContexto appDbContexto)
         {
             _appDbContexto = appDbContexto;
         }
-        public async Task<Banco> AlterarAsync(Banco banco)
+
+        public async Task<Historico> AlterarAsync(Historico historico)
         {
             try
             {
-                _appDbContexto.Bancos.Update(banco);
+                _appDbContexto.Update(historico);
                 await _appDbContexto.SaveChangesAsync();
             }
             catch 
             {
-                throw new DomainException(Mensagens.ErroAoAtualizarEntidade); 
+                throw new DomainException(Mensagens.ErroAoAlterarEntidade);
             }
 
-            return banco;
+            return historico;
         }
 
-        public async Task<Banco> CriarAsync(Banco banco)
+        public async Task<Historico> CriarAsync(Historico historico)
         {
             try
             {
-                _appDbContexto.Bancos.Add(banco);
+                _appDbContexto.Add(historico);
                 await _appDbContexto.SaveChangesAsync();
             }
             catch 
-            {                
+            {
                 throw new DomainException(Mensagens.ErroAoCriarEntidade);
             }
-            
-            return banco;
+
+            return historico;
         }
-        
+
         public void Dispose()
-        {            
+        {
             GC.SuppressFinalize(this);
         }
 
-        public async Task<IEnumerable<Banco>> GetBancosAsync()
+        public async Task<IEnumerable<Historico>> GetHistoricosAsync()
         {
             try
             {
-                var bancos = await _appDbContexto.Bancos.ToListAsync();
-                return bancos;
+                var historicos = await _appDbContexto.Historicos.ToListAsync();
+                return historicos;
             }
             catch 
             {
                 throw new DomainException(Mensagens.ErroAoEfetuarConsulta);
             }
-            
         }
 
-        public async Task<Banco> GetBancosPeloIdAsync(int id)
+        public async Task<Historico> GetPeloIdAsync(int? id)
         {
             try
             {
-                var banco = await _appDbContexto.Bancos.FirstOrDefaultAsync(b => b.Id == id);
+                var historico = await _appDbContexto.Historicos.FirstOrDefaultAsync(h => h.Id == id);
+                return historico;
 
-                return banco;
             }
             catch 
             {
-                throw new DomainException(Mensagens.ErroAoEfetuarConsulta); 
+                throw new DomainException(Mensagens.ErroAoEfetuarConsulta);
             }
 
         }

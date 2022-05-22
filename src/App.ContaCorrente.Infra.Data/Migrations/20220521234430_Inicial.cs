@@ -13,7 +13,7 @@ namespace App.ContaCorrente.Infra.Data.Migrations
                 name: "Bancos",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false),                        
                     Nome = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     NomeCompleto = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false)
                 },
@@ -43,17 +43,18 @@ namespace App.ContaCorrente.Infra.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Historico",
+                name: "Historicos",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Descricao = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    TipoDebitoCredito = table.Column<int>(type: "int", precision: 1, nullable: false),
                     DataCriacao = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Historico", x => x.Id);
+                    table.PrimaryKey("PK_Historicos", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -211,9 +212,9 @@ namespace App.ContaCorrente.Infra.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Lancamentos_Historico_HistoricoId",
+                        name: "FK_Lancamentos_Historicos_HistoricoId",
                         column: x => x.HistoricoId,
-                        principalTable: "Historico",
+                        principalTable: "Historicos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -242,9 +243,9 @@ namespace App.ContaCorrente.Infra.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_LancamentosFuturos_Historico_HistoricoId",
+                        name: "FK_LancamentosFuturos_Historicos_HistoricoId",
                         column: x => x.HistoricoId,
-                        principalTable: "Historico",
+                        principalTable: "Historicos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -482,7 +483,7 @@ namespace App.ContaCorrente.Infra.Data.Migrations
                 name: "Transferencias");
 
             migrationBuilder.DropTable(
-                name: "Historico");
+                name: "Historicos");
 
             migrationBuilder.DropTable(
                 name: "Emprestimos");

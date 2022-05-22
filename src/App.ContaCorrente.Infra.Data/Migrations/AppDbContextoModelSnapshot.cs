@@ -25,9 +25,7 @@ namespace App.ContaCorrente.Infra.Data.Migrations
             modelBuilder.Entity("App.ContaCorrente.Domain.Entidades.Banco", b =>
                 {
                     b.Property<int>("Id")                        
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                        .HasColumnType("int");                    
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -205,12 +203,16 @@ namespace App.ContaCorrente.Infra.Data.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
+                    b.Property<int>("TipoDebitoCredito")
+                        .HasPrecision(1)
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Historico");
+                    b.ToTable("Historicos");
                 });
 
-            modelBuilder.Entity("App.ContaCorrente.Domain.Entidades.Lancamentos", b =>
+            modelBuilder.Entity("App.ContaCorrente.Domain.Entidades.Lancamento", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -244,7 +246,7 @@ namespace App.ContaCorrente.Infra.Data.Migrations
                     b.ToTable("Lancamentos");
                 });
 
-            modelBuilder.Entity("App.ContaCorrente.Domain.Entidades.LancamentosFuturos", b =>
+            modelBuilder.Entity("App.ContaCorrente.Domain.Entidades.LancamentoFuturo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -602,7 +604,7 @@ namespace App.ContaCorrente.Infra.Data.Migrations
                     b.Navigation("Correntista");
                 });
 
-            modelBuilder.Entity("App.ContaCorrente.Domain.Entidades.Lancamentos", b =>
+            modelBuilder.Entity("App.ContaCorrente.Domain.Entidades.Lancamento", b =>
                 {
                     b.HasOne("App.ContaCorrente.Domain.Entidades.Correntista", "Correntista")
                         .WithMany()
@@ -621,7 +623,7 @@ namespace App.ContaCorrente.Infra.Data.Migrations
                     b.Navigation("Historico");
                 });
 
-            modelBuilder.Entity("App.ContaCorrente.Domain.Entidades.LancamentosFuturos", b =>
+            modelBuilder.Entity("App.ContaCorrente.Domain.Entidades.LancamentoFuturo", b =>
                 {
                     b.HasOne("App.ContaCorrente.Domain.Entidades.Correntista", "Correntista")
                         .WithMany()

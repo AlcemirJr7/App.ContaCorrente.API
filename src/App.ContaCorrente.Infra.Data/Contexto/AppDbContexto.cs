@@ -14,6 +14,7 @@ namespace App.ContaCorrente.Infra.Data.Contexto
 
 
         public DbSet<Banco> Bancos{ get; set; }
+        public DbSet<Historico> Historicos { get; set; }
         public DbSet<Correntista> Correntistas { get; set; }
         public DbSet<Emprestimo> Emprestimos { get; set; }
         public DbSet<Endereco> Enderecos { get; set; }
