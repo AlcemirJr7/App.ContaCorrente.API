@@ -79,6 +79,15 @@ namespace App.ContaCorrente.Domain.Mensagem {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a 0010| Endereço informado não existe..
+        /// </summary>
+        public static string EnderecoInvalido {
+            get {
+                return ResourceManager.GetString("EnderecoInvalido", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a 0005| Entidade não pode ser carregada..
         /// </summary>
         public static string EntidadeNaoCarregada {

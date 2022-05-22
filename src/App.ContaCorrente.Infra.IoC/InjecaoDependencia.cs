@@ -20,6 +20,7 @@ namespace App.ContaCorrente.Infra.IoC
     {
         public static IServiceCollection AddInfraestrutura(this IServiceCollection services, IConfiguration configuration)
         {
+
             services.AddDbContext<AppDbContexto>(options =>
             options.UseSqlServer(configuration.GetConnectionString("DataBase"
             ), b => b.MigrationsAssembly(typeof(AppDbContexto).Assembly.FullName)));
@@ -29,6 +30,7 @@ namespace App.ContaCorrente.Infra.IoC
             services.AddScoped<IEnderecoRepositorio, EnderecoRepositorio>();
             services.AddScoped<IHistoricoRepositorio, HistoricoRepositorio>();
             services.AddScoped<ILocalTrabalhoRepositorio, LocalTrabalhoRepositorio>();
+            services.AddScoped<IPessoaRepositorio, PessoaRepositorio>();
 
 
             // serviços
@@ -36,6 +38,7 @@ namespace App.ContaCorrente.Infra.IoC
             services.AddScoped<IEnderecoServico, EnderecoServico>();
             services.AddScoped<IHistoricoServico, HistoricoServico>();
             services.AddScoped<ILocalTrabalhoServico, LocalTrabalhoServico>();
+            services.AddScoped<IPessoaServico, PessoaServico>();
 
 
             var myHandlers = AppDomain.CurrentDomain.Load("App.ContaCorrente.Application");

@@ -12,34 +12,34 @@ using System.Threading.Tasks;
 
 namespace App.ContaCorrente.Infra.Data.Repositorios
 {
-    public class HistoricoRepositorio : IHistoricoRepositorio
+    public class PessoaRepositorio : IPessoaRepositorio
     {
         private AppDbContexto _appDbContexto;
-        public HistoricoRepositorio(AppDbContexto appDbContexto)
+        public PessoaRepositorio(AppDbContexto appDbContexto)
         {
             _appDbContexto = appDbContexto;
         }
 
-        public async Task<Historico> AlterarAsync(Historico historico)
+        public async Task<Pessoa> AlterarAsync(Pessoa pessoa)
         {
             try
             {
-                _appDbContexto.Update(historico);
+                _appDbContexto.Update(pessoa);
                 await _appDbContexto.SaveChangesAsync();
             }
-            catch 
+            catch
             {
                 throw new DomainException(Mensagens.ErroAoAlterarEntidade);
             }
 
-            return historico;
+            return pessoa;
         }
 
-        public async Task<Historico> CriarAsync(Historico historico)
+        public async Task<Pessoa> CriarAsync(Pessoa pessoa)
         {
             try
             {
-                _appDbContexto.Add(historico);
+                _appDbContexto.Add(pessoa);
                 await _appDbContexto.SaveChangesAsync();
             }
             catch 
@@ -47,7 +47,7 @@ namespace App.ContaCorrente.Infra.Data.Repositorios
                 throw new DomainException(Mensagens.ErroAoCriarEntidade);
             }
 
-            return historico;
+            return pessoa;
         }
 
         public void Dispose()
@@ -55,30 +55,16 @@ namespace App.ContaCorrente.Infra.Data.Repositorios
             GC.SuppressFinalize(this);
         }
 
-        public async Task<IEnumerable<Historico>> GetHistoricosAsync()
+        public async Task<Pessoa> GetPeloIdAsync(int? id)
         {
             try
             {
-                return await _appDbContexto.Historicos.ToListAsync();
-                
+                return await _appDbContexto.Pessoas.FirstOrDefaultAsync(p => p.Id == id);
             }
             catch 
             {
                 throw new DomainException(Mensagens.ErroAoEfetuarConsulta);
             }
-        }
-
-        public async Task<Historico> GetPeloIdAsync(int? id)
-        {
-            try
-            {
-                return await _appDbContexto.Historicos.FirstOrDefaultAsync(h => h.Id == id);                
-            }
-            catch 
-            {
-                throw new DomainException(Mensagens.ErroAoEfetuarConsulta);
-            }
-
         }
     }
 }

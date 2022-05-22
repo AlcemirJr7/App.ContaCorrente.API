@@ -19,6 +19,7 @@
     <Folder Include="CQRS\Correntistas\Commands\" />
     <Folder Include="CQRS\Correntistas\Handlers\" />
     <Folder Include="CQRS\Correntistas\Queries\" />
+    <Folder Include="CQRS\Pessoas\Queries\" />
   </ItemGroup>
 
 </Project>
