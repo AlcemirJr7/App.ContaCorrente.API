@@ -60,10 +60,10 @@ namespace App.ContaCorrente.Domain.Entidades
                                      decimal juros, DateTime? dataEfetivacao, EnumFlagEstadoEmprestimo flagEstado, EnumProcessoEmprestimo flagProcesso)
         {
             DomainExcepitonValidacao.When(valor <= 0, "Valor Emprestimo invalido.");
-            DomainExcepitonValidacao.When(Enum.IsDefined(typeof(EnumEmprestimoTipoFinalidade), tipoFinalidade), "Tipo finalidade Emprestimo invalido.");
-            DomainExcepitonValidacao.When(Enum.IsDefined(typeof(EnumEmprestimoTipoEmprestimo), tipoEmprestimo), "Tipo Emprestimo invalido.");
-            DomainExcepitonValidacao.When(Enum.IsDefined(typeof(EnumFlagEstadoEmprestimo), flagEstado), "Flag estado Emprestimo invalido.");
-            DomainExcepitonValidacao.When(Enum.IsDefined(typeof(EnumProcessoEmprestimo), flagProcesso), "Flag processo Emprestimo invalido.");
+            DomainExcepitonValidacao.When(!Enum.IsDefined(typeof(EnumEmprestimoTipoFinalidade), tipoFinalidade), "Tipo finalidade Emprestimo invalido.");
+            DomainExcepitonValidacao.When(!Enum.IsDefined(typeof(EnumEmprestimoTipoEmprestimo), tipoEmprestimo), "Tipo Emprestimo invalido.");
+            DomainExcepitonValidacao.When(!Enum.IsDefined(typeof(EnumFlagEstadoEmprestimo), flagEstado), "Flag estado Emprestimo invalido.");
+            DomainExcepitonValidacao.When(!Enum.IsDefined(typeof(EnumProcessoEmprestimo), flagProcesso), "Flag processo Emprestimo invalido.");
             DomainExcepitonValidacao.When(juros <= 0, "Juros Emprestimo invalido.");
             DomainExcepitonValidacao.When(qtdParcelas <= 0, "Quantidade de parcelas Emprestimo invalido.");
             DomainExcepitonValidacao.When(valorParcela <= 0, "Valor parcela Emprestimo invalido.");

@@ -1,6 +1,8 @@
 ﻿using App.ContaCorrente.Application.CQRS.Bancos.Queries;
 using App.ContaCorrente.Domain.Entidades;
 using App.ContaCorrente.Domain.Interfaces;
+using App.ContaCorrente.Domain.Mensagem;
+using App.ContaCorrente.Domain.Validacoes;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -20,7 +22,15 @@ namespace App.ContaCorrente.Application.CQRS.Bancos.Handlers
 
         public async Task<IEnumerable<Banco>> Handle(GetBancosQuery request, CancellationToken cancellationToken)
         {
-            return await _bancoRepositorio.GetBancosAsync();
+            try
+            {
+                return await _bancoRepositorio.GetBancosAsync();
+            }
+            catch 
+            {
+                throw new DomainException(Mensagens.ErroAoEfetuarConsulta);                
+            }
+            
         }
     }
 }

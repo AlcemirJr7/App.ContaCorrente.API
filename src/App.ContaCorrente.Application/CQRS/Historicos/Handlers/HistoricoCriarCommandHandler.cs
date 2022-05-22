@@ -30,6 +30,7 @@ namespace App.ContaCorrente.Application.CQRS.Historicos.Handlers
             }
             else
             {
+                historico.DataCriacao = DateTime.Now;
                 return await _historicoRepositorio.CriarAsync(historico);
             }
 

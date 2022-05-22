@@ -15,8 +15,4 @@
     <ProjectReference Include="..\App.ContaCorrente.Domain\App.ContaCorrente.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="CQRS\Historicos\Queries\" />
-  </ItemGroup>
-
 </Project>

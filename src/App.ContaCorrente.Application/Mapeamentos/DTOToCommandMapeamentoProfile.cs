@@ -26,7 +26,8 @@ namespace App.ContaCorrente.Application.Mapeamentos
 
             //Historico
             CreateMap<HistoricoDTO, HistoricoCriarCommand>();
-            
+            CreateMap<HistoricoDTO, HistoricoAlterarCommand>();
+
         }
     }
 }

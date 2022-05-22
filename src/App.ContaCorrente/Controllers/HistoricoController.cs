@@ -22,7 +22,7 @@ namespace App.ContaCorrente.API.Controllers
         [Produces("application/json")]
         public async Task<ActionResult<HistoricoDTO>> PostHistorico([FromBody] HistoricoDTO historicoDto)
         {
-            if (historicoDto == null) return BadRequest(new { erro = Mensagens.DataInvalida });
+            if (historicoDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
 
             try
             {
@@ -30,15 +30,92 @@ namespace App.ContaCorrente.API.Controllers
             }
             catch (DomainException e)
             {                
-                return BadRequest(new { erro = e.Message });
+                return BadRequest(new { mensagem = e.Message });
             }
             catch (DomainExcepitonValidacao e)
             {                
-                return BadRequest(new { erro = e.Message });                
+                return BadRequest(new { mensagem = e.Message });                
             }
             
             return Ok(historicoDto);  //new CreatedAtRouteResult("GetBanco", new { codigo = bancoDto.Id }, bancoDto);
         }
+
+        [HttpPut("{id:int}")]
+        [Produces("application/json")]
+        public async Task<ActionResult<HistoricoDTO>> PutHistorico(int? id,[FromBody] HistoricoDTO historicoDto)
+        {
+            if (historicoDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
+            if (id == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
+
+            try
+            {
+                historicoDto.Id = id.Value;
+                await _historicoServico.AlterarAsync(historicoDto);
+            }
+            catch (DomainException e)
+            {
+                return BadRequest(new { mensagem = e.Message });
+            }
+            catch (DomainExcepitonValidacao e)
+            {
+                return BadRequest(new { mensagem = e.Message });
+            }
+
+            return Ok(historicoDto);
+        }
+
+        [HttpGet("{id:int}")]
+        [Produces("application/json")]
+        public async Task<ActionResult<HistoricoDTO>> GetHistorico(int? id)
+        {
+            if(id == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
+
+            var hisrotico = new object();
+            try
+            {
+                hisrotico = await _historicoServico.GetPeloIdAsync(id);
+
+                if (hisrotico == null) return NotFound(new { mensagem = Mensagens.EntidadeNaoEncontrada });
+            
+            }
+            catch (DomainException e)
+            {
+                return BadRequest(new { mensagem = e.Message });
+            }
+            catch (DomainExcepitonValidacao e)
+            {
+                return BadRequest(new { mensagem = e.Message });
+            }
+
+            return Ok(hisrotico);
+        }
+
+        [HttpGet]
+        [Produces("application/json")]
+        public async Task<ActionResult<IEnumerable<HistoricoDTO>>> GetHistoricos()
+        {            
+            var hisrotico = new object();
+            try
+            {
+                hisrotico = await _historicoServico.GetHistoricosAsync();
+
+                if (hisrotico == null) return NotFound(new { mensagem = Mensagens.EntidadeNaoEncontrada });
+
+            }
+            catch (DomainException e)
+            {
+                return BadRequest(new { mensagem = e.Message });
+            }
+            catch (DomainExcepitonValidacao e)
+            {
+                return BadRequest(new { mensagem = e.Message });
+            }
+
+            return Ok(hisrotico);
+        }
+
+
+
 
     }
 }

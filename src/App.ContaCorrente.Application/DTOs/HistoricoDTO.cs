@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace App.ContaCorrente.Application.DTOs
 {
     public class HistoricoDTO
-    {
+    { 
         [JsonIgnore]
         public int Id { get; set; }
         

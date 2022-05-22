@@ -22,9 +22,22 @@ namespace App.ContaCorrente.API.Controllers
         [Produces("application/json")]
         public async Task<ActionResult<IEnumerable<BancoDTO>>> GetBancos()
         {
-            var bancos = await _bancoServico.GetBancosAsync();
+            var bancos = new object();
+            try
+            {
+                bancos = await _bancoServico.GetBancosAsync();
 
-            if (bancos == null) return NotFound("Bancos não encontrados.");
+                if (bancos == null) return NotFound(new { mensagem = "Bancos não encontrados."});
+            }
+            catch (DomainException e)
+            {
+                return BadRequest(new { mensagem = e.Message });
+            }
+            catch (DomainExcepitonValidacao e)
+            {
+                return BadRequest(new { mensagem = e.Message });
+            }
+         
 
             return Ok(bancos);
 
@@ -34,10 +47,24 @@ namespace App.ContaCorrente.API.Controllers
         [Produces("application/json")]
         public async Task<ActionResult<BancoDTO>> GetBanco(int? codigo)
         {
-            var banco = await _bancoServico.GetBancoPeloIdAsync(codigo.Value);
+            var banco = new object();   
 
-            if (banco == null) return NotFound("Banco não encontrado.");
+            try
+            {
+                banco = await _bancoServico.GetBancoPeloIdAsync(codigo.Value);
 
+                if (banco == null) return NotFound(new { mensagem = "Banco não encontrados." });
+
+            }
+            catch (DomainException e)
+            {
+                return BadRequest(new { mensagem = e.Message });
+            }
+            catch (DomainExcepitonValidacao e)
+            {
+                return BadRequest(new { mensagem = e.Message });
+            }
+            
             return Ok(banco);
 
         }
@@ -46,9 +73,22 @@ namespace App.ContaCorrente.API.Controllers
         [Produces("application/json")]
         public async Task<ActionResult> PostBanco([FromBody] BancoDTO bancoDto)
         {
-            if (bancoDto == null) return BadRequest(Mensagens.DataInvalida);
+            if (bancoDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
+
+            try
+            {
+                await _bancoServico.CriarAsync(bancoDto);
+            }
+            catch (DomainException e)
+            {
+                return BadRequest(new { mensagem = e.Message });
+            }
+            catch (DomainExcepitonValidacao e)
+            {
+                return BadRequest(new { mensagem = e.Message });
+            }
+
             
-            await _bancoServico.CriarAsync(bancoDto);
 
             return new CreatedAtRouteResult("GetBanco", new { codigo = bancoDto.Id }, bancoDto);
         }
@@ -57,18 +97,21 @@ namespace App.ContaCorrente.API.Controllers
         [Produces("application/json")]
         public async Task<ActionResult<BancoDTO>> PutBanco(int? id,[FromBody] BancoDTO bancoDto)
         {
-            if(id != bancoDto.Id) return BadRequest(Mensagens.DataInvalida);
+            if(id != bancoDto.Id) return BadRequest(new { mensagem = Mensagens.DataInvalida });
 
-            if (bancoDto == null) return BadRequest(Mensagens.DataInvalida);
+            if (bancoDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
             try
             {
                 await _bancoServico.AlterarAsync(bancoDto);
             }
             catch (DomainException e)
             {
-                BadRequest(e.Message);                
+                return BadRequest(new { mensagem = e.Message });
             }
-            
+            catch (DomainExcepitonValidacao e)
+            {
+                return BadRequest(new { mensagem = e.Message });
+            }
 
             return Ok(bancoDto);
         }

@@ -1,7 +1,10 @@
 ﻿using App.ContaCorrente.Application.CQRS.Historicos.Commands;
+using App.ContaCorrente.Application.CQRS.Historicos.Queries;
 using App.ContaCorrente.Application.DTOs;
 using App.ContaCorrente.Application.Servicos.Interfaces;
 using App.ContaCorrente.Domain.Entidades;
+using App.ContaCorrente.Domain.Mensagem;
+using App.ContaCorrente.Domain.Validacoes;
 using AutoMapper;
 using MediatR;
 using System;
@@ -22,9 +25,10 @@ namespace App.ContaCorrente.Application.Servicos
             _mapper = mapper;
         }
 
-        public Task AlterarAsync(HistoricoDTO historicoDto)
+        public async Task AlterarAsync(HistoricoDTO historicoDto)
         {
-            throw new NotImplementedException();
+            var historicoAlterarCommand = _mapper.Map<HistoricoAlterarCommand>(historicoDto);
+            await _mediator.Send(historicoAlterarCommand);
         }        
 
         public async Task CriarAsync(HistoricoDTO historicoDto)
@@ -33,14 +37,32 @@ namespace App.ContaCorrente.Application.Servicos
             await _mediator.Send(historicoCriarCommand);
         }        
 
-        public Task<IEnumerable<HistoricoDTO>> GetHistoricosAsync()
+        public async Task<IEnumerable<HistoricoDTO>> GetHistoricosAsync()
         {
-            throw new NotImplementedException();
+            var historicosQuery = new GetHistoricosQuery();
+
+            if (historicosQuery == null)
+            {
+                throw new DomainException(Mensagens.ErroAoCriarEntidade);
+            }
+
+            var result = await _mediator.Send(historicosQuery);
+
+            return _mapper.Map<IEnumerable<HistoricoDTO>>(result);
         }
 
-        public Task<HistoricoDTO> GetPeloIdAsync(int? id)
+        public async Task<HistoricoDTO> GetPeloIdAsync(int? id)
         {
-            throw new NotImplementedException();
+            var historicoQuery = new GetHistoricoPeloIdQuery(id.Value);
+
+            if (historicoQuery == null)
+            {
+                throw new DomainException(Mensagens.ErroAoCriarEntidade);
+            }
+            
+            var result = await _mediator.Send(historicoQuery);
+
+            return _mapper.Map<HistoricoDTO>(result);   
         }
     }
 }

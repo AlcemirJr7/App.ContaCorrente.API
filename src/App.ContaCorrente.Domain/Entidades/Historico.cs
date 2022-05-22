@@ -16,7 +16,7 @@ namespace App.ContaCorrente.Domain.Entidades
 
         public EnumHistoricoDebitoCredito TipoDebitoCredito { get; private set; }
 
-        public DateTime DataCriacao { get; private set; }
+        public DateTime DataCriacao { get; set; }
 
 
         public Historico(string descricao, EnumHistoricoDebitoCredito tipoDebitoCredito)
@@ -41,8 +41,7 @@ namespace App.ContaCorrente.Domain.Entidades
             DomainExcepitonValidacao.When(string.IsNullOrEmpty(descricao), "Descrição do histórico deve ser informado.");
             DomainExcepitonValidacao.When(!Enum.IsDefined(typeof(EnumHistoricoDebitoCredito), tipoDebitoCredito), "Tipo debito credito invalido.");
 
-            Descricao = descricao;
-            DataCriacao = DateTime.Now;
+            Descricao = descricao;            
             TipoDebitoCredito = tipoDebitoCredito;
         }
     }

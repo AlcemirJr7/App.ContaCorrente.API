@@ -20,8 +20,16 @@ namespace App.ContaCorrente.Application.CQRS.Enderecos.Handlers
             _enderecoRepositorio = enderecoRepositorio;                
         }
         public async Task<Endereco> Handle(GetEnderecoPeloIdQuery request, CancellationToken cancellationToken)
-        {            
-            return await _enderecoRepositorio.GetPeloIdAsync(request.Id); ;
+        {
+            try
+            {
+                return await _enderecoRepositorio.GetPeloIdAsync(request.Id); ;
+            }
+            catch 
+            {
+                throw new DomainException(Mensagens.ErroAoEfetuarConsulta);
+            }
+            
 
         }
     }
