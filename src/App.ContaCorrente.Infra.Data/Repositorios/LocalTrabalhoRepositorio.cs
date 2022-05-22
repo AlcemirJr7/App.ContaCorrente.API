@@ -56,8 +56,8 @@ namespace App.ContaCorrente.Infra.Data.Repositorios
             
             try
             {
-                var localTrabalho = await _appDbContexto.LocalTrabalhos.FirstOrDefaultAsync(l => l.Id == id);
-                return localTrabalho;
+                return await _appDbContexto.LocalTrabalhos.FirstOrDefaultAsync(l => l.Id == id);
+                
             }
             catch 
             {

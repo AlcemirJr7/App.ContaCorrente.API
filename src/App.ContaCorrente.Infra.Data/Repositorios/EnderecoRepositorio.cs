@@ -73,9 +73,15 @@ namespace App.ContaCorrente.Infra.Data.Repositorios
 
         public async Task<Endereco> GetPeloIdAsync(int? id)
         {
-            var endereco = await _appDbContexto.Enderecos.FirstOrDefaultAsync(e => e.Id == id);
-
-            return endereco;
+            try
+            {
+                return await _appDbContexto.Enderecos.FirstOrDefaultAsync(e => e.Id == id);
+            }
+            catch 
+            {
+                throw new DomainException(Mensagens.ErroAoEfetuarConsulta);
+            }
+                        
         }
     }
 }

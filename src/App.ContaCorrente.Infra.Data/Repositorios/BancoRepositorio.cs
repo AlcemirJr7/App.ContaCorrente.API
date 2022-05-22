@@ -58,8 +58,7 @@ namespace App.ContaCorrente.Infra.Data.Repositorios
         {
             try
             {
-                var bancos = await _appDbContexto.Bancos.ToListAsync();
-                return bancos;
+                return await _appDbContexto.Bancos.ToListAsync();                
             }
             catch 
             {
@@ -72,9 +71,8 @@ namespace App.ContaCorrente.Infra.Data.Repositorios
         {
             try
             {
-                var banco = await _appDbContexto.Bancos.FirstOrDefaultAsync(b => b.Id == id);
-
-                return banco;
+                return await _appDbContexto.Bancos.FirstOrDefaultAsync(b => b.Id == id);
+                
             }
             catch 
             {

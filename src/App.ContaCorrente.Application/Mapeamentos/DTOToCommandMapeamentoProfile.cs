@@ -28,6 +28,8 @@ namespace App.ContaCorrente.Application.Mapeamentos
             CreateMap<LocalTrabalhoDTO, LocalTrabalhoCriarCommand>();
             CreateMap<LocalTrabalhoDTO, LocalTrabalhoAlterarCommand>();
 
+            //Pessoa
+
         }
     }
 }

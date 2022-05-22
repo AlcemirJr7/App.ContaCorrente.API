@@ -13,6 +13,7 @@ namespace App.ContaCorrente.Application.Mapeamentos
             CreateMap<Historico, HistoricoDTO>().ReverseMap();
             CreateMap<Correntista, CorrentistaDTO>().ReverseMap();
             CreateMap<LocalTrabalho, LocalTrabalhoDTO>().ReverseMap();
+            CreateMap<Pessoa, PessoaDTO>().ReverseMap();
 
         }
     }

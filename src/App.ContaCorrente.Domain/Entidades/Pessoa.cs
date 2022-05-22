@@ -30,7 +30,7 @@ namespace App.ContaCorrente.Domain.Entidades
 
         public DateTime DataNascimento { get; private set; }  
 
-        public DateTime DataCadastro { get; private set; }
+        public DateTime DataCadastro { get; set; }
 
         public int EnderecoId { get; private set; }
 
@@ -75,6 +75,11 @@ namespace App.ContaCorrente.Domain.Entidades
             DomainExcepitonValidacao.When(string.IsNullOrEmpty(email1), "Email 1 deve ser informado.");
             DomainExcepitonValidacao.When(string.IsNullOrEmpty(Convert.ToString(dataNascimento)), "Data Nascimento deve ser informado.");
 
+            if(tipoPessoa == EnumPessoa.PessoaJuridica && nomeEmpresa == null)
+            {
+                DomainExcepitonValidacao.When(string.IsNullOrEmpty(nomeEmpresa), "Nome Empresa deve ser informado para tipo pessoa juridica.");
+            }
+
             Nome = nome;
             NomeEmpresa = nomeEmpresa;
             NumeroDocumento = numeroDocumento;
@@ -83,8 +88,7 @@ namespace App.ContaCorrente.Domain.Entidades
             NumeroTelefone2 = numeroTelefone2;
             Email1 = email1;
             Email2 = email2;
-            DataNascimento = dataNascimento;
-            DataCadastro = DateTime.UtcNow;
+            DataNascimento = dataNascimento;            
         }
 
     }
