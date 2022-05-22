@@ -1,23 +1,19 @@
-﻿using App.ContaCorrente.Application.CQRS.LocalTrabalhoPessoas.Commands;
+﻿using App.ContaCorrente.Application.CQRS.LocalTrabalhos.Commands;
 using App.ContaCorrente.Domain.Entidades;
 using App.ContaCorrente.Domain.Interfaces;
 using App.ContaCorrente.Domain.Mensagem;
 using App.ContaCorrente.Domain.Validacoes;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace App.ContaCorrente.Application.CQRS.LocalTrabalhoPessoas.Handlers
 {
-    public class LocalTrabalhoPessoaCriarCommandHandler : IRequestHandler<LocalTrabalhoCriarCommand, LocalTrabalho>
+    public class LocalTrabalhoCriarCommandHandler : IRequestHandler<LocalTrabalhoCriarCommand, LocalTrabalho>
     {
-        private readonly ILocalTrabalhoRepositorio _localTrabalhoPessoaRepositorio;
-        public LocalTrabalhoPessoaCriarCommandHandler(ILocalTrabalhoRepositorio localTrabalhoPessoaRepositorio)
+        private readonly ILocalTrabalhoRepositorio _localTrabalhoRepositorio;
+        public LocalTrabalhoCriarCommandHandler(ILocalTrabalhoRepositorio localTrabalhoRepositorio)
         {
-            _localTrabalhoPessoaRepositorio = localTrabalhoPessoaRepositorio;
+            _localTrabalhoRepositorio = localTrabalhoRepositorio;
         }
 
         public async Task<LocalTrabalho> Handle(LocalTrabalhoCriarCommand request, CancellationToken cancellationToken)
@@ -32,7 +28,7 @@ namespace App.ContaCorrente.Application.CQRS.LocalTrabalhoPessoas.Handlers
             else
             {
                 localTrabalhoPessoa.DataCadastro = DateTime.Now;
-                return await _localTrabalhoPessoaRepositorio.CriarAsync(localTrabalhoPessoa);
+                return await _localTrabalhoRepositorio.CriarAsync(localTrabalhoPessoa);
                 
             }
         }

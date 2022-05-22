@@ -2,7 +2,7 @@
 using MediatR;
 
 
-namespace App.ContaCorrente.Application.CQRS.LocalTrabalhoPessoas.Commands
+namespace App.ContaCorrente.Application.CQRS.LocalTrabalhos.Commands
 {
     public abstract class LocalTrabalhoCommand : IRequest<LocalTrabalho>
     {

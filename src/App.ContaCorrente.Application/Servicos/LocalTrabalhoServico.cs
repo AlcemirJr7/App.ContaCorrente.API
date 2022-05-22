@@ -1,4 +1,4 @@
-﻿using App.ContaCorrente.Application.CQRS.LocalTrabalhoPessoas.Commands;
+﻿using App.ContaCorrente.Application.CQRS.LocalTrabalhos.Commands;
 using App.ContaCorrente.Application.DTOs;
 using App.ContaCorrente.Application.Servicos.Interfaces;
 using AutoMapper;
@@ -16,9 +16,10 @@ namespace App.ContaCorrente.Application.Servicos
             _mapper = mapper;   
         }
 
-        public async Task AlterarAsync(LocalTrabalhoDTO localTrabalhoPessoaDto)
+        public async Task AlterarAsync(LocalTrabalhoDTO localTrabalhoDto)
         {
-            throw new NotImplementedException();
+            var localTrabalhoAlterarCommand = _mapper.Map<LocalTrabalhoAlterarCommand>(localTrabalhoDto);
+            await _mediator.Send(localTrabalhoAlterarCommand);
         }
 
         public async Task CriarAsync(LocalTrabalhoDTO localTrabalhoDto)

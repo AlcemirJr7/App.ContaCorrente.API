@@ -42,5 +42,32 @@ namespace App.ContaCorrente.API.Controllers
 
             return Ok(localTrabalhoDto);  //new CreatedAtRouteResult("GetBanco", new { codigo = bancoDto.Id }, bancoDto);
         }
+
+        /// <summary>
+        /// Atualiza um Local de Trabalho    
+        /// </summary>     
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult<LocalTrabalhoDTO>> PutHistorico(int? id, [FromBody] LocalTrabalhoDTO localTrabalhoDto)
+        {
+            if (localTrabalhoDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
+            if (id == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
+
+            try
+            {
+                localTrabalhoDto.Id = id.Value;
+                await _localTrabalhoServico.AlterarAsync(localTrabalhoDto);
+            }
+            catch (DomainException e)
+            {
+                return BadRequest(new { mensagem = e.Message });
+            }
+            catch (DomainExcepitonValidacao e)
+            {
+                return BadRequest(new { mensagem = e.Message });
+            }
+
+            return Ok(localTrabalhoDto);
+        }
+
     }
 }

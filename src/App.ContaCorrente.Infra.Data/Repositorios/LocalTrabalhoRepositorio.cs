@@ -3,6 +3,7 @@ using App.ContaCorrente.Domain.Interfaces;
 using App.ContaCorrente.Domain.Mensagem;
 using App.ContaCorrente.Domain.Validacoes;
 using App.ContaCorrente.Infra.Data.Contexto;
+using Microsoft.EntityFrameworkCore;
 
 namespace App.ContaCorrente.Infra.Data.Repositorios
 {
@@ -16,7 +17,17 @@ namespace App.ContaCorrente.Infra.Data.Repositorios
 
         public async Task<LocalTrabalho> AlterarAsync(LocalTrabalho localTrabalho)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _appDbContexto.Update(localTrabalho);
+                await _appDbContexto.SaveChangesAsync();
+            }
+            catch 
+            {
+                throw new DomainException(Mensagens.ErroAoAlterarEntidade);
+            }
+
+            return localTrabalho;
         }
 
         public async Task<LocalTrabalho> CriarAsync(LocalTrabalho localTrabalho)
@@ -46,7 +57,16 @@ namespace App.ContaCorrente.Infra.Data.Repositorios
 
         public async Task<LocalTrabalho> GetPeloIdAsync(int? id)
         {
-            throw new NotImplementedException();
+            
+            try
+            {
+                var localTrabalho = await _appDbContexto.LocalTrabalhos.FirstOrDefaultAsync(l => l.Id == id);
+                return localTrabalho;
+            }
+            catch 
+            {
+                throw new DomainException(Mensagens.ErroAoEfetuarConsulta);
+            }
         }
     }
 }
