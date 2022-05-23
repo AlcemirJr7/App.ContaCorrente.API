@@ -15,7 +15,7 @@ namespace App.ContaCorrente.Application.CQRS.Correntistas.Handlers
         private readonly IBancoRepositorio _bancoRepositorio;
         private readonly ILocalTrabalhoRepositorio _localTrabalhoRepositorio;
         private readonly IPessoaRepositorio _pessoaRepositorio;
-        private readonly IEnderecoRepositorio _enderecoRepositorio;
+        private readonly IEnderecoRepositorio _enderecoRepositorio;        
         public CorrentistaCriarCommandHandler(ICorrentistaRepositorio correntistaRepositorio, IBancoRepositorio bancoRepositorio, 
                                               ILocalTrabalhoRepositorio localTrabalhoRepositorio, IPessoaRepositorio pessoaRepositorio,
                                               IEnderecoRepositorio enderecoRepositorio)
@@ -25,6 +25,7 @@ namespace App.ContaCorrente.Application.CQRS.Correntistas.Handlers
             _localTrabalhoRepositorio = localTrabalhoRepositorio;
             _pessoaRepositorio = pessoaRepositorio;
             _enderecoRepositorio = enderecoRepositorio;
+
         }
 
         public async Task<Correntista> Handle(CorrentistaCriarCommand request, CancellationToken cancellationToken)
@@ -75,8 +76,10 @@ namespace App.ContaCorrente.Application.CQRS.Correntistas.Handlers
                 throw new DomainException(String.Format(Mensagens.EntidadeNaoCarregada,nameof(Correntista)));
             }
             else
-            {
-                return await _correntistaRepositorio.CriarAsync(correntista);
+            {                                 
+                var result = await _correntistaRepositorio.CriarAsync(correntista);                                
+
+                return result;
             }
         }
     }

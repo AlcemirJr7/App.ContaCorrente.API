@@ -142,6 +142,15 @@ namespace App.ContaCorrente.Domain.Mensagem {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a 0014| Não foi possível criar saldo da conta corrente..
+        /// </summary>
+        public static string ErroAoCriarSaldoContaCorrente {
+            get {
+                return ResourceManager.GetString("ErroAoCriarSaldoContaCorrente", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a 0009| Erro ao deletar entidade..
         /// </summary>
         public static string ErroAoDeletarEntidade {
