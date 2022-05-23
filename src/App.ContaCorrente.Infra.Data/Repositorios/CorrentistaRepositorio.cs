@@ -73,11 +73,6 @@ namespace App.ContaCorrente.Infra.Data.Repositorios
                 throw new DomainException(Mensagens.ErroAoEfetuarConsulta);
             }
             
-        }
-
-        public Task<Correntista> GetPeloPessoaIdAsync(int? id)
-        {
-            throw new NotImplementedException();
-        }
+        }       
     }
 }
