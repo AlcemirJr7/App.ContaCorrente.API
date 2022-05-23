@@ -3,6 +3,7 @@ using App.ContaCorrente.Domain.Interfaces;
 using App.ContaCorrente.Domain.Mensagem;
 using App.ContaCorrente.Domain.Validacoes;
 using App.ContaCorrente.Infra.Data.Contexto;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,9 +21,19 @@ namespace App.ContaCorrente.Infra.Data.Repositorios
             _appDbContexto = appDbContexto;
         }
 
-        public Task<Correntista> AlterarAsync(Correntista correntista)
+        public async Task<Correntista> AlterarAsync(Correntista correntista)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _appDbContexto.Update(correntista);
+                await _appDbContexto.SaveChangesAsync();
+            }
+            catch
+            {
+                throw new DomainException(Mensagens.ErroAoAtualizarEntidade);
+            }
+
+            return correntista;
         }
 
         public async Task<Correntista> CriarAsync(Correntista correntista)
@@ -46,9 +57,22 @@ namespace App.ContaCorrente.Infra.Data.Repositorios
             GC.SuppressFinalize(this);
         }
 
-        public Task<Correntista> GetPeloIdAsync(int? id)
+        public async Task<Correntista> GetPeloIdAsync(int? id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Correntista correntista = new Correntista();
+
+                correntista = await _appDbContexto.Correntistas.FirstOrDefaultAsync(c => c.Id == id);
+
+                return correntista;
+                
+            }
+            catch
+            {
+                throw new DomainException(Mensagens.ErroAoEfetuarConsulta);
+            }
+            
         }
 
         public Task<Correntista> GetPeloPessoaIdAsync(int? id)

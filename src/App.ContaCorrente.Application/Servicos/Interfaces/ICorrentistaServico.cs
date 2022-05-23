@@ -16,6 +16,6 @@ namespace App.ContaCorrente.Application.Servicos.Interfaces
 
         Task<Correntista> CriarAsync(CorrentistaDTO correntistaDto);
 
-        Task<Correntista> AlterarAsync(CorrentistaDTO correntistaDto);
+        Task<Correntista> AlterarAsync(CorrentistaAlteraDTO correntistaDto);
     }
 }
