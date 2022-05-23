@@ -46,5 +46,34 @@ namespace App.ContaCorrente.API.Controllers
 
             return Ok(correntista);
         }
+
+        /// <summary>
+        /// Atualiza um Correntista
+        /// </summary>       
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult> PutCorrentista(int? id, [FromBody] CorrentistaAlteraDTO correntistaAlteraDto)
+        {
+            if (correntistaAlteraDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
+
+            if (id == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
+
+            var correntista = new object();
+
+            try
+            {
+                correntistaAlteraDto.Id = id.Value;
+                correntista = await _correntistaServico.AlterarAsync(correntistaAlteraDto);
+            }
+            catch (DomainException e)
+            {
+                return BadRequest(new { mensagem = e.Message });
+            }
+            catch (DomainExcepitonValidacao e)
+            {
+                return BadRequest(new { mensagem = e.Message });
+            }
+            return Ok(correntista);
+        }
+
     }
 }

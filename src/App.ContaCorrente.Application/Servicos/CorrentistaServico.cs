@@ -22,9 +22,10 @@ namespace App.ContaCorrente.Application.Servicos
             _mapper = mapper;   
         }
 
-        public Task<Correntista> AlterarAsync(CorrentistaDTO correntistaDto)
+        public async Task<Correntista> AlterarAsync(CorrentistaAlteraDTO correntistaDto)
         {
-            throw new NotImplementedException();
+            var correntistaAlterarCommand = _mapper.Map<CorrentistaAlterarCommand>(correntistaDto);
+            return await _mediator.Send(correntistaAlterarCommand);
         }
 
         public async Task<Correntista> CriarAsync(CorrentistaDTO correntistaDto)

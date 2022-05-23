@@ -2,7 +2,6 @@
 using App.ContaCorrente.Application.Servicos.Interfaces;
 using App.ContaCorrente.Domain.Mensagem;
 using App.ContaCorrente.Domain.Validacoes;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace App.ContaCorrente.API.Controllers
@@ -79,7 +78,7 @@ namespace App.ContaCorrente.API.Controllers
         }
 
         /// <summary>
-        /// Busca uma Pessoa
+        /// Busca uma Pessoa pelo Id
         /// </summary> 
         [HttpGet("{id:int}")]
         public async Task<ActionResult<PessoaDTO>> GetPessoa(int? id)

@@ -127,16 +127,15 @@ namespace App.ContaCorrente.Infra.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Agencia = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
-                    Conta = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
-                    DataInicio = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Agencia = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
+                    Conta = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: true),
+                    DataInicio = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DataEncerramento = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DataCadastro = table.Column<DateTime>(type: "datetime2", nullable: false),
                     FlagConta = table.Column<int>(type: "int", nullable: false),
                     PessoaId = table.Column<int>(type: "int", nullable: false),
                     BancoId = table.Column<int>(type: "int", nullable: false),
-                    LocalTrabalhoId = table.Column<int>(type: "int", nullable: true),
-                    Senha = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SenhaConfirmacao = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    LocalTrabalhoId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {

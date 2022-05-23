@@ -36,6 +36,7 @@ namespace App.ContaCorrente.Application.Mapeamentos
 
             //Correntista
             CreateMap<CorrentistaDTO, CorrentistaCriarCommand>();
+            CreateMap<CorrentistaAlteraDTO, CorrentistaAlterarCommand>();
         }
     }
 }
