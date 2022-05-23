@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BancoInvalido" xml:space="preserve">
+    <value>0011| Banco informado não existe.</value>
+  </data>
   <data name="BancoJaExistente" xml:space="preserve">
     <value>0007| Banco {0} já existe na base.</value>
   </data>
@@ -127,7 +130,7 @@
     <value>0010| Endereço informado não existe.</value>
   </data>
   <data name="EntidadeNaoCarregada" xml:space="preserve">
-    <value>0005| Entidade não pode ser carregada.</value>
+    <value>0005| Entidade {0} não pode ser carregada.</value>
   </data>
   <data name="EntidadeNaoEncontrada" xml:space="preserve">
     <value>0008| Entidade não encontrada.</value>
@@ -146,5 +149,11 @@
   </data>
   <data name="ErroAoEfetuarConsulta" xml:space="preserve">
     <value>0004| Erro ao efetuar consulta dos dados.</value>
+  </data>
+  <data name="LocalTrabalhoInvalido" xml:space="preserve">
+    <value>0013| Local de trabalho não existe, deve ser informado para pessoa física.</value>
+  </data>
+  <data name="PessoaInvalida" xml:space="preserve">
+    <value>0012| Pessoa informada não existe.</value>
   </data>
 </root>

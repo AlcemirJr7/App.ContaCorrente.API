@@ -1,4 +1,5 @@
 ﻿using App.ContaCorrente.Application.CQRS.Bancos.Commands;
+using App.ContaCorrente.Application.CQRS.Correntistas.Commands;
 using App.ContaCorrente.Application.CQRS.Enderecos.Commands;
 using App.ContaCorrente.Application.CQRS.Historicos.Commands;
 using App.ContaCorrente.Application.CQRS.LocalTrabalhos.Commands;
@@ -31,6 +32,9 @@ namespace App.ContaCorrente.Application.Mapeamentos
 
             //Pessoa
             CreateMap<PessoaDTO, PessoaCriarCommand>();
+
+            //Correntista
+            CreateMap<CorrentistaDTO, CorrentistaCriarCommand>();
         }
     }
 }

@@ -1,16 +1,11 @@
 ﻿using App.ContaCorrente.Domain.Enumerador;
 using App.ContaCorrente.Domain.Utils;
 using App.ContaCorrente.Domain.Validacoes;
-using Microsoft.AspNetCore.Cryptography.KeyDerivation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace App.ContaCorrente.Domain.Entidades
 {
-    public class Correntista : LoginCorrentista
+    public class Correntista 
     {
         public int Id { get; protected set; }
 
@@ -37,48 +32,42 @@ namespace App.ContaCorrente.Domain.Entidades
         public LocalTrabalho LocalTrabalho { get; set; }
 
 
-        public Correntista(string agencia, string conta, DateTime dataInicio, DateTime? dataEncerramento, EnumContaCorrente flagConta, string senha, string senhaConfirmacao )
+        public Correntista(string agencia, string conta, DateTime dataInicio, DateTime? dataEncerramento, EnumContaCorrente flagConta)
         {
-            ValidarEntidade(agencia, conta, dataInicio, dataEncerramento, flagConta, senha, senhaConfirmacao);
+            ValidarEntidade(agencia, conta, dataInicio, dataEncerramento, flagConta);
         }
 
-        public Correntista(int id, string agencia, string conta, DateTime dataInicio, DateTime? dataEncerramento, EnumContaCorrente flagConta, string senha, string senhaConfirmacao)
+        public Correntista(int id, string agencia, string conta, DateTime dataInicio, DateTime? dataEncerramento, EnumContaCorrente flagConta)
         {
             DomainExcepitonValidacao.When(id < 0, "Id invalido.");
             Id = id;
-            ValidarEntidade(agencia, conta, dataInicio, dataEncerramento, flagConta, senha, senhaConfirmacao);
+            ValidarEntidade(agencia, conta, dataInicio, dataEncerramento, flagConta);
         }
-        public Correntista(string agencia, string conta, DateTime dataInicio, DateTime? dataEncerramento, EnumContaCorrente flagConta, string senha, string senhaConfirmacao , 
+        public Correntista(string agencia, string conta, DateTime dataInicio, DateTime? dataEncerramento, EnumContaCorrente flagConta, 
                            int pessoaId, int bancoId, int? localTrabalhoId)
         {
-            ValidarEntidade(agencia, conta, dataInicio, dataEncerramento, flagConta, senha, senhaConfirmacao);
+            ValidarEntidade(agencia, conta, dataInicio, dataEncerramento, flagConta);
             PessoaId = pessoaId;
             BancoId = bancoId;
             LocalTrabalhoId = localTrabalhoId;
         }
 
-        public void Atualizar(string agencia, string conta, DateTime dataInicio, DateTime? dataEncerramento, EnumContaCorrente flagConta, string senha, string senhaConfirmacao, int pessoaId, int bancoId)
+        public void Atualizar(string agencia, string conta, DateTime dataInicio, DateTime? dataEncerramento, EnumContaCorrente flagConta, int pessoaId, int bancoId)
         {
-            ValidarEntidade(agencia, conta, dataInicio, dataEncerramento, flagConta, senha, senhaConfirmacao);
+            ValidarEntidade(agencia, conta, dataInicio, dataEncerramento, flagConta);
             PessoaId = pessoaId;
             BancoId = bancoId;
         }
 
-        private void ValidarEntidade(string agencia, string conta, DateTime dataInicio, DateTime? dataEncerramento, EnumContaCorrente flagConta, string senha, string senhaConfirmacao)
+        private void ValidarEntidade(string agencia, string conta, DateTime dataInicio, DateTime? dataEncerramento, EnumContaCorrente flagConta)
         {
 
 
             DomainExcepitonValidacao.When(string.IsNullOrEmpty(StringFormata.ApenasNumeros(agencia)), "Agencia deve ser informada.");
             DomainExcepitonValidacao.When(string.IsNullOrEmpty(StringFormata.ApenasNumeros(conta)), "Conta deve ser informada.");
             DomainExcepitonValidacao.When(!Enum.IsDefined(typeof(EnumContaCorrente), flagConta), "Flag Conta corrente invalido.");
-            DomainExcepitonValidacao.When(string.IsNullOrEmpty(Convert.ToString(dataInicio)), "Data de Inicio deve ser informado.");
-            DomainExcepitonValidacao.When(senha != senhaConfirmacao, "Senha e Senha Confimarção são diferentes.");
-            DomainExcepitonValidacao.When(string.IsNullOrEmpty(senha), "Senha não pode ser vazio.");
-            DomainExcepitonValidacao.When(string.IsNullOrEmpty(senhaConfirmacao), "Senha confirmação não pode ser vazio.");
-
-            
-            Senha = CriaHash(senha);
-            SenhaConfirmacao = CriaHash(senhaConfirmacao);
+            DomainExcepitonValidacao.When(string.IsNullOrEmpty(Convert.ToString(dataInicio)), "Data de Inicio deve ser informado.");            
+                        
             Agencia = StringFormata.ApenasNumeros(agencia);
             Conta = StringFormata.ApenasNumeros(conta);
             DataInicio = dataInicio;

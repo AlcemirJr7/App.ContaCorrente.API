@@ -23,7 +23,7 @@ namespace App.ContaCorrente.Application.CQRS.LocalTrabalhoPessoas.Handlers
             
             if(localTrabalhoPessoa == null)
             {
-                throw new DomainException(Mensagens.ErroAoCriarEntidade);
+                throw new DomainException(String.Format(Mensagens.EntidadeNaoCarregada,nameof(LocalTrabalho)));
             }
             else
             {

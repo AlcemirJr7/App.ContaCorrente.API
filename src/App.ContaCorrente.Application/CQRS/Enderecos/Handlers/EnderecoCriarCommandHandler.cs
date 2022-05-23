@@ -26,7 +26,7 @@ namespace App.ContaCorrente.Application.CQRS.Enderecos.Handlers
 
             if(endereco == null)
             {
-                throw new DomainException(Mensagens.ErroAoCriarEntidade);
+                throw new DomainException(String.Format(Mensagens.EntidadeNaoCarregada,nameof(Endereco)));
             }
             else
             {                                            

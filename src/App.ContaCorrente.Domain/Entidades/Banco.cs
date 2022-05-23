@@ -22,7 +22,7 @@ namespace App.ContaCorrente.Domain.Entidades
 
         public Banco(int id,string nome, string nomeCompleto)
         {                        
-            DomainExcepitonValidacao.When(id < 0, "Id Invalido.");
+            DomainExcepitonValidacao.When(id <= 0, "Id Invalido.");
             Id = id;
             ValidarEntidade(nome, nomeCompleto);
         }

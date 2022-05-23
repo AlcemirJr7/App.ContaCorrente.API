@@ -37,7 +37,7 @@ namespace App.ContaCorrente.Application.CQRS.Pessoas.Handlers
 
             if(pessoa == null)
             {
-                throw new DomainException(Mensagens.ErroAoCriarEntidade);
+                throw new DomainException(String.Format(Mensagens.EntidadeNaoCarregada,nameof(Pessoa)));
             }
             else
             {
