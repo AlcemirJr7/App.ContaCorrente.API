@@ -32,34 +32,34 @@ namespace App.ContaCorrente.Domain.Entidades
         public LocalTrabalho LocalTrabalho { get; set; }
 
 
-        public Correntista(string agencia, string conta, DateTime dataInicio, DateTime? dataEncerramento, EnumContaCorrente flagConta, string senha, string senhaConfirmacao )
+        public Correntista(string agencia, string conta, DateTime dataInicio, DateTime? dataEncerramento, EnumContaCorrente flagConta)
         {
-            ValidarEntidade(agencia, conta, dataInicio, dataEncerramento, flagConta, senha, senhaConfirmacao);
+            ValidarEntidade(agencia, conta, dataInicio, dataEncerramento, flagConta);
         }
 
-        public Correntista(int id, string agencia, string conta, DateTime dataInicio, DateTime? dataEncerramento, EnumContaCorrente flagConta, string senha, string senhaConfirmacao)
+        public Correntista(int id, string agencia, string conta, DateTime dataInicio, DateTime? dataEncerramento, EnumContaCorrente flagConta)
         {
             DomainExcepitonValidacao.When(id < 0, "Id invalido.");
             Id = id;
-            ValidarEntidade(agencia, conta, dataInicio, dataEncerramento, flagConta, senha, senhaConfirmacao);
+            ValidarEntidade(agencia, conta, dataInicio, dataEncerramento, flagConta);
         }
-        public Correntista(string agencia, string conta, DateTime dataInicio, DateTime? dataEncerramento, EnumContaCorrente flagConta, string senha, string senhaConfirmacao , 
+        public Correntista(string agencia, string conta, DateTime dataInicio, DateTime? dataEncerramento, EnumContaCorrente flagConta, 
                            int pessoaId, int bancoId, int? localTrabalhoId)
         {
-            ValidarEntidade(agencia, conta, dataInicio, dataEncerramento, flagConta, senha, senhaConfirmacao);
+            ValidarEntidade(agencia, conta, dataInicio, dataEncerramento, flagConta);
             PessoaId = pessoaId;
             BancoId = bancoId;
             LocalTrabalhoId = localTrabalhoId;
         }
 
-        public void Atualizar(string agencia, string conta, DateTime dataInicio, DateTime? dataEncerramento, EnumContaCorrente flagConta, string senha, string senhaConfirmacao, int pessoaId, int bancoId)
+        public void Atualizar(string agencia, string conta, DateTime dataInicio, DateTime? dataEncerramento, EnumContaCorrente flagConta, int pessoaId, int bancoId)
         {
-            ValidarEntidade(agencia, conta, dataInicio, dataEncerramento, flagConta, senha, senhaConfirmacao);
+            ValidarEntidade(agencia, conta, dataInicio, dataEncerramento, flagConta);
             PessoaId = pessoaId;
             BancoId = bancoId;
         }
 
-        private void ValidarEntidade(string agencia, string conta, DateTime dataInicio, DateTime? dataEncerramento, EnumContaCorrente flagConta, string senha, string senhaConfirmacao)
+        private void ValidarEntidade(string agencia, string conta, DateTime dataInicio, DateTime? dataEncerramento, EnumContaCorrente flagConta)
         {
 
 

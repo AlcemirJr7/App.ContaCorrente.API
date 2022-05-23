@@ -8,7 +8,8 @@ namespace App.ContaCorrente.Domain.Enumerador
 {
     public enum EnumContaCorrente
     {
-        Aberta = 1,
-        Fechada = 2
+        EmAnalise = 1,
+        Aberta = 2,
+        Fechada = 3
     }
 }

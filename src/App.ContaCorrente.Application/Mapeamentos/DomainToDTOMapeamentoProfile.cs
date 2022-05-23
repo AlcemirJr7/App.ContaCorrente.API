@@ -14,6 +14,7 @@ namespace App.ContaCorrente.Application.Mapeamentos
             CreateMap<Correntista, CorrentistaDTO>().ReverseMap();
             CreateMap<LocalTrabalho, LocalTrabalhoDTO>().ReverseMap();
             CreateMap<Pessoa, PessoaDTO>().ReverseMap();
+            CreateMap<Correntista, CorrentistaDTO>().ReverseMap();
 
         }
     }

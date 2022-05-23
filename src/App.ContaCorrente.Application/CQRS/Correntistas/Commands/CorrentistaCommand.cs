@@ -1,12 +1,16 @@
 ﻿using App.ContaCorrente.Domain.Entidades;
 using App.ContaCorrente.Domain.Enumerador;
-using System.Text.Json.Serialization;
+using MediatR;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace App.ContaCorrente.Application.DTOs
+namespace App.ContaCorrente.Application.CQRS.Correntistas.Commands
 {
-    public class CorrentistaDTO
-    {
-        [JsonIgnore]
+    public abstract class CorrentistaCommand : IRequest<Correntista>
+    {        
         public int Id { get; set; }
 
         public string Agencia { get; set; }
@@ -15,15 +19,14 @@ namespace App.ContaCorrente.Application.DTOs
 
         public DateTime DataInicio { get; set; }
 
-        [JsonIgnore]
         public DateTime? DataEncerramento { get; set; }
 
         public EnumContaCorrente FlagConta { get; set; }
 
-        public int PessoaId { get; set; }        
+        public int PessoaId { get; set; }
 
         public int BancoId { get; set; }
-        
+
         public int? LocalTrabalhoId { get; set; }
 
     }
