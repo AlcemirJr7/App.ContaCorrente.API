@@ -1,16 +1,11 @@
 ﻿using App.ContaCorrente.Domain.Enumerador;
 using App.ContaCorrente.Domain.Utils;
 using App.ContaCorrente.Domain.Validacoes;
-using Microsoft.AspNetCore.Cryptography.KeyDerivation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace App.ContaCorrente.Domain.Entidades
 {
-    public class Correntista : LoginCorrentista
+    public class Correntista 
     {
         public int Id { get; protected set; }
 
@@ -71,14 +66,9 @@ namespace App.ContaCorrente.Domain.Entidades
             DomainExcepitonValidacao.When(string.IsNullOrEmpty(StringFormata.ApenasNumeros(agencia)), "Agencia deve ser informada.");
             DomainExcepitonValidacao.When(string.IsNullOrEmpty(StringFormata.ApenasNumeros(conta)), "Conta deve ser informada.");
             DomainExcepitonValidacao.When(!Enum.IsDefined(typeof(EnumContaCorrente), flagConta), "Flag Conta corrente invalido.");
-            DomainExcepitonValidacao.When(string.IsNullOrEmpty(Convert.ToString(dataInicio)), "Data de Inicio deve ser informado.");
-            DomainExcepitonValidacao.When(senha != senhaConfirmacao, "Senha e Senha Confimarção são diferentes.");
-            DomainExcepitonValidacao.When(string.IsNullOrEmpty(senha), "Senha não pode ser vazio.");
-            DomainExcepitonValidacao.When(string.IsNullOrEmpty(senhaConfirmacao), "Senha confirmação não pode ser vazio.");
+            DomainExcepitonValidacao.When(string.IsNullOrEmpty(Convert.ToString(dataInicio)), "Data de Inicio deve ser informado.");            
 
-            
-            Senha = CriaHash(senha);
-            SenhaConfirmacao = CriaHash(senhaConfirmacao);
+                        
             Agencia = StringFormata.ApenasNumeros(agencia);
             Conta = StringFormata.ApenasNumeros(conta);
             DataInicio = dataInicio;
