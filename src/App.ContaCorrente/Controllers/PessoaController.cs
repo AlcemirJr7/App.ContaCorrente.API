@@ -46,5 +46,65 @@ namespace App.ContaCorrente.API.Controllers
 
             return Ok(pessoa); 
         }
+
+        /// <summary>
+        /// Altera o cadastr da Pessoa
+        /// </summary>    
+        /// <remarks>
+        ///  TipoPessoa:  1 - Pessoa Física | 2 - Pessoa Jurídica               
+        /// </remarks>
+        /// <param name="pessoaDto">Dados da Pessoa </param>        
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult> PutPessoa(int? id,[FromBody] PessoaDTO pessoaDto)
+        {
+            if (id == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
+            if (pessoaDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
+
+            var pessoa = new object();
+            try
+            {
+                pessoaDto.Id = id.Value;
+                pessoa = await _pessoaServico.AlterarAsync(pessoaDto);
+            }
+            catch (DomainException e)
+            {
+                return BadRequest(new { mensagem = e.Message });
+            }
+            catch (DomainExcepitonValidacao e)
+            {
+                return BadRequest(new { mensagem = e.Message });
+            }
+
+            return Ok(pessoa);
+        }
+
+        /// <summary>
+        /// Busca uma Pessoa
+        /// </summary> 
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<PessoaDTO>> GetPessoa(int? id)
+        {
+            if (id == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
+
+            var pessoa = new object();
+
+            try
+            {
+                pessoa = await _pessoaServico.GetPeloIdAsync(id);
+
+                if (pessoa == null) return NotFound(new { mensagem = Mensagens.EntidadeNaoEncontrada});
+
+            }
+            catch (DomainException e)
+            {
+                return BadRequest(new { mensagem = e.Message });
+            }
+            catch (DomainExcepitonValidacao e)
+            {
+                return BadRequest(new { mensagem = e.Message });
+            }
+
+            return Ok(pessoa);
+        }
     }
 }

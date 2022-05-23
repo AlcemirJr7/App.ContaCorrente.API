@@ -32,6 +32,7 @@ namespace App.ContaCorrente.Application.Mapeamentos
 
             //Pessoa
             CreateMap<PessoaDTO, PessoaCriarCommand>();
+            CreateMap<PessoaDTO, PessoaAlterarCommand>();
 
             //Correntista
             CreateMap<CorrentistaDTO, CorrentistaCriarCommand>();

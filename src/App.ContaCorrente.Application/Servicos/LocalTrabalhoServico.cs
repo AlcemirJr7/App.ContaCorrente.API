@@ -38,7 +38,7 @@ namespace App.ContaCorrente.Application.Servicos
 
             if(localTrabalhoQuery == null)
             {
-                throw new DomainException(Mensagens.ErroAoCriarEntidade);
+                throw new DomainException(String.Format(Mensagens.EntidadeNaoCarregada,nameof(LocalTrabalho)));
             }
 
             var result = await _mediator.Send(localTrabalhoQuery);
