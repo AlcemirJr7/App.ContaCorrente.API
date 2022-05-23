@@ -25,7 +25,7 @@ namespace App.ContaCorrente.Application.CQRS.LocalTrabalhos.Handlers
 
             if (localTrabalho == null)
             {
-                throw new DomainException(Mensagens.EntidadeNaoCarregada);
+                throw new DomainException(String.Format(Mensagens.EntidadeNaoCarregada,nameof(LocalTrabalho)));
             }
             else
             {

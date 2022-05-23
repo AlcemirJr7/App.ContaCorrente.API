@@ -26,7 +26,7 @@ namespace App.ContaCorrente.Application.CQRS.Historicos.Handlers
 
             if (historico == null)
             {                
-                throw new DomainException(Mensagens.ErroAoCriarEntidade);
+                throw new DomainException(String.Format(Mensagens.EntidadeNaoCarregada,nameof(Historico)));
             }
             else
             {

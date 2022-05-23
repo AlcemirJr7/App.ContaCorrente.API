@@ -61,6 +61,15 @@ namespace App.ContaCorrente.Domain.Mensagem {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a 0011| Banco informado não existe..
+        /// </summary>
+        public static string BancoInvalido {
+            get {
+                return ResourceManager.GetString("BancoInvalido", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a 0007| Banco {0} já existe na base..
         /// </summary>
         public static string BancoJaExistente {
@@ -88,7 +97,7 @@ namespace App.ContaCorrente.Domain.Mensagem {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a 0005| Entidade não pode ser carregada..
+        ///   Consulta uma cadeia de caracteres localizada semelhante a 0005| Entidade {0} não pode ser carregada..
         /// </summary>
         public static string EntidadeNaoCarregada {
             get {
@@ -147,6 +156,24 @@ namespace App.ContaCorrente.Domain.Mensagem {
         public static string ErroAoEfetuarConsulta {
             get {
                 return ResourceManager.GetString("ErroAoEfetuarConsulta", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a 0013| Local de trabalho não existe, deve ser informado para pessoa física..
+        /// </summary>
+        public static string LocalTrabalhoInvalido {
+            get {
+                return ResourceManager.GetString("LocalTrabalhoInvalido", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a 0012| Pessoa informada não existe..
+        /// </summary>
+        public static string PessoaInvalida {
+            get {
+                return ResourceManager.GetString("PessoaInvalida", resourceCulture);
             }
         }
     }
