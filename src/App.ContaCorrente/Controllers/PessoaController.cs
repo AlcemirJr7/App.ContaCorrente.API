@@ -79,7 +79,7 @@ namespace App.ContaCorrente.API.Controllers
         }
 
         /// <summary>
-        /// Busca uma Pessoa
+        /// Busca uma Pessoa pelo Id
         /// </summary> 
         [HttpGet("{id:int}")]
         public async Task<ActionResult<PessoaDTO>> GetPessoa(int? id)
