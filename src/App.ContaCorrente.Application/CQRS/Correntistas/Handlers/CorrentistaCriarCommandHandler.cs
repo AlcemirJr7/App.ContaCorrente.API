@@ -5,11 +5,6 @@ using App.ContaCorrente.Domain.Interfaces;
 using App.ContaCorrente.Domain.Mensagem;
 using App.ContaCorrente.Domain.Validacoes;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace App.ContaCorrente.Application.CQRS.Correntistas.Handlers
 {
@@ -33,6 +28,9 @@ namespace App.ContaCorrente.Application.CQRS.Correntistas.Handlers
 
         public async Task<Correntista> Handle(CorrentistaCriarCommand request, CancellationToken cancellationToken)
         {
+
+            request.BancoId = 999; // Banco do Sistema
+
             var banco = await _bancoRepositorio.GetBancosPeloIdAsync(request.BancoId);
             
             if (banco == null)
@@ -67,7 +65,7 @@ namespace App.ContaCorrente.Application.CQRS.Correntistas.Handlers
 
             if (request.LocalTrabalhoId == 0) request.LocalTrabalhoId = null;
 
-            var correntista = new Correntista(request.Agencia,request.Conta,request.DataInicio,request.DataEncerramento,request.FlagConta,request.PessoaId,request.BancoId,request.LocalTrabalhoId);
+            var correntista = new Correntista(request.Agencia,request.Conta,DateTime.Now,request.DataInicio,request.DataEncerramento,EnumContaCorrente.EmAnalise,request.PessoaId,request.LocalTrabalhoId);            
 
             if(correntista == null)
             {

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace App.ContaCorrente.Application.CQRS.Correntistas.Commands
@@ -25,6 +26,7 @@ namespace App.ContaCorrente.Application.CQRS.Correntistas.Commands
 
         public int PessoaId { get; set; }
 
+        [JsonIgnore]
         public int BancoId { get; set; }
 
         public int? LocalTrabalhoId { get; set; }

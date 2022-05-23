@@ -51,7 +51,6 @@ namespace App.ContaCorrente.Infra.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Agencia")
-                        .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
@@ -59,14 +58,16 @@ namespace App.ContaCorrente.Infra.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Conta")
-                        .IsRequired()
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
+
+                    b.Property<DateTime>("DataCadastro")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DataEncerramento")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DataInicio")
+                    b.Property<DateTime?>("DataInicio")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("FlagConta")
@@ -77,14 +78,6 @@ namespace App.ContaCorrente.Infra.Data.Migrations
 
                     b.Property<int>("PessoaId")
                         .HasColumnType("int");
-
-                    b.Property<string>("Senha")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SenhaConfirmacao")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
