@@ -1,7 +1,10 @@
 ﻿using App.ContaCorrente.Application.CQRS.Pessoas.Commands;
+using App.ContaCorrente.Application.CQRS.Pessoas.Queries;
 using App.ContaCorrente.Application.DTOs;
 using App.ContaCorrente.Application.Servicos.Interfaces;
 using App.ContaCorrente.Domain.Entidades;
+using App.ContaCorrente.Domain.Mensagem;
+using App.ContaCorrente.Domain.Validacoes;
 using AutoMapper;
 using MediatR;
 using System;
@@ -25,7 +28,8 @@ namespace App.ContaCorrente.Application.Servicos
 
         public async Task<Pessoa> AlterarAsync(PessoaDTO pessoaDto)
         {
-            throw new NotImplementedException();
+            var pessoaAlterarCommand = _mapper.Map<PessoaAlterarCommand>(pessoaDto);
+            return await _mediator.Send(pessoaAlterarCommand);
         }
 
         public async Task<Pessoa> CriarAsync(PessoaDTO pessoaDto)
@@ -36,7 +40,17 @@ namespace App.ContaCorrente.Application.Servicos
 
         public async Task<PessoaDTO> GetPeloIdAsync(int? id)
         {
-            throw new NotImplementedException();
+            var pessoaQuery = new GetPessoaPeloIdQuery(id.Value);
+
+            if(pessoaQuery == null)
+            {
+                throw new DomainException(String.Format(Mensagens.EntidadeNaoCarregada, nameof(Pessoa)));
+            }
+
+            var result = await _mediator.Send(pessoaQuery);
+
+            return _mapper.Map<PessoaDTO>(result);
+
         }
     }
 }
