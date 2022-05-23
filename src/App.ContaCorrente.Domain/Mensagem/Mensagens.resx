@@ -144,6 +144,9 @@
   <data name="ErroAoCriarEntidade" xml:space="preserve">
     <value>0001| Erro ao criar entidade.</value>
   </data>
+  <data name="ErroAoCriarSaldoContaCorrente" xml:space="preserve">
+    <value>0014| Não foi possível criar saldo da conta corrente.</value>
+  </data>
   <data name="ErroAoDeletarEntidade" xml:space="preserve">
     <value>0009| Erro ao deletar entidade.</value>
   </data>
