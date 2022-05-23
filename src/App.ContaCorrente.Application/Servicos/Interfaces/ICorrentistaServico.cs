@@ -10,9 +10,7 @@ namespace App.ContaCorrente.Application.Servicos.Interfaces
 {
     public interface ICorrentistaServico
     {
-        Task<CorrentistaDTO> GetPeloIdAsync(int? id);
-
-        Task<CorrentistaDTO> GetPeloPessoaIdAsync(int? id);
+        Task<Correntista> GetPeloIdAsync(int? id);        
 
         Task<Correntista> CriarAsync(CorrentistaDTO correntistaDto);
 

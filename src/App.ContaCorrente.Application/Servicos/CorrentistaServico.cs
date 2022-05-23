@@ -1,14 +1,12 @@
 ﻿using App.ContaCorrente.Application.CQRS.Correntistas.Commands;
+using App.ContaCorrente.Application.CQRS.Correntistas.Queries;
 using App.ContaCorrente.Application.DTOs;
 using App.ContaCorrente.Application.Servicos.Interfaces;
 using App.ContaCorrente.Domain.Entidades;
+using App.ContaCorrente.Domain.Mensagem;
+using App.ContaCorrente.Domain.Validacoes;
 using AutoMapper;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace App.ContaCorrente.Application.Servicos
 {
@@ -34,14 +32,20 @@ namespace App.ContaCorrente.Application.Servicos
             return await _mediator.Send(correntistaCriarCommand);
         }
 
-        public Task<CorrentistaDTO> GetPeloIdAsync(int? id)
+        public Task<Correntista> GetPeloIdAsync(int? id)
         {
-            throw new NotImplementedException();
-        }
+            var correntistaQuery = new GetCorrentistaPeloIdQuery(id.Value);
 
-        public Task<CorrentistaDTO> GetPeloPessoaIdAsync(int? id)
-        {
-            throw new NotImplementedException();
+            if(correntistaQuery == null)
+            {
+                throw new DomainException(String.Format(Mensagens.EntidadeNaoCarregada, nameof(Correntista)));
+            }
+
+            var result = _mediator.Send(correntistaQuery);
+
+            return result;
+
         }
+        
     }
 }
