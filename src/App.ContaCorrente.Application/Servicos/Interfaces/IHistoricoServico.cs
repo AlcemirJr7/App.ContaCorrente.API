@@ -9,8 +9,8 @@ namespace App.ContaCorrente.Application.Servicos.Interfaces
 
         Task<HistoricoDTO> GetPeloIdAsync(int? id);
 
-        Task<Historico> AlterarAsync(HistoricoDTO historico);
+        Task<HistoricoDTO> AlterarAsync(HistoricoDTO historico);
 
-        Task<Historico> CriarAsync(HistoricoDTO historico);
+        Task<HistoricoDTO> CriarAsync(HistoricoDTO historico);
     }
 }

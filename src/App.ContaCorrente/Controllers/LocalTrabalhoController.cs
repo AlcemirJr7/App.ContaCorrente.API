@@ -23,11 +23,11 @@ namespace App.ContaCorrente.API.Controllers
         /// </summary>      
         /// <param name="localTrabalhoDto">Dados Local de Trabalho</param>
         [HttpPost]
-        public async Task<ActionResult> PostLocalTrabalho([FromBody] LocalTrabalhoDTO localTrabalhoDto)
+        public async Task<ActionResult<LocalTrabalhoDTO>> PostLocalTrabalho([FromBody] LocalTrabalhoDTO localTrabalhoDto)
         {
             if (localTrabalhoDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
-            
-            var localTrabalho = new object();
+
+            LocalTrabalhoDTO? localTrabalho = null;
             
             try
             {
@@ -49,12 +49,12 @@ namespace App.ContaCorrente.API.Controllers
         /// Atualiza um Local de Trabalho    
         /// </summary>     
         [HttpPut("{id:int}")]
-        public async Task<ActionResult> PutLocalTrabalho(int? id, [FromBody] LocalTrabalhoDTO localTrabalhoDto)
+        public async Task<ActionResult<LocalTrabalhoDTO>> PutLocalTrabalho(int? id, [FromBody] LocalTrabalhoDTO localTrabalhoDto)
         {
             if (localTrabalhoDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
             if (id == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
 
-            var localTrabalho = new object();
+            LocalTrabalhoDTO? localTrabalho = null;
 
             try
             {
@@ -81,7 +81,7 @@ namespace App.ContaCorrente.API.Controllers
         {
             if (id == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
 
-            var localTrabalho = new object();
+            LocalTrabalhoDTO? localTrabalho = null;
 
             try
             {

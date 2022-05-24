@@ -4,9 +4,7 @@ using System.Text.Json.Serialization;
 namespace App.ContaCorrente.Application.DTOs
 {
     public class EnderecoDTO 
-    {        
-
-        [JsonIgnore]
+    {                
         public int Id { get; set; }                                        
 
         public string Cep { get; set; }

@@ -27,11 +27,11 @@ namespace App.ContaCorrente.API.Controllers
         /// </remarks>
         /// <param name="historicoDto"> Dados para cadastro do histórico </param>
         [HttpPost]        
-        public async Task<ActionResult> PostHistorico([FromBody] HistoricoDTO historicoDto)
+        public async Task<ActionResult<HistoricoDTO>> PostHistorico([FromBody] HistoricoDTO historicoDto)
         {
             if (historicoDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
 
-            var historico = new object();
+            HistoricoDTO? historico = null;
 
             try
             {

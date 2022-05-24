@@ -73,14 +73,15 @@ namespace App.ContaCorrente.API.Controllers
         /// Cria um novo banco
         /// </summary>
         [HttpPost]        
-        public async Task<ActionResult> PostBanco([FromBody] BancoDTO bancoDto)
+        public async Task<ActionResult<BancoDTO>> PostBanco([FromBody] BancoDTO bancoDto)
         {
             if (bancoDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
 
-            var banco = new object();
+            BancoDTO? banco = null;
             try
             {
                 banco = await _bancoServico.CriarAsync(bancoDto);
+                bancoDto.Id = banco.Id;
             }
             catch (DomainException e)
             {
@@ -98,16 +99,17 @@ namespace App.ContaCorrente.API.Controllers
         /// Atualiza um banco pelo Id
         /// </summary>
         [HttpPut]        
-        public async Task<ActionResult> PutBanco(int? id,[FromBody] BancoDTO bancoDto)
+        public async Task<ActionResult<BancoDTO>> PutBanco(int? id,[FromBody] BancoDTO bancoDto)
         {
             if(id != bancoDto.Id) return BadRequest(new { mensagem = Mensagens.DataInvalida });
-            
-            var banco = new object();
-            
+
+            BancoDTO? banco = null;
+
             if (bancoDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
             try
             {
                 banco = await _bancoServico.AlterarAsync(bancoDto);
+                bancoDto.Id = banco.Id;
             }
             catch (DomainException e)
             {

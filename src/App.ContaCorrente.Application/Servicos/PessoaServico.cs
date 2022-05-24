@@ -26,16 +26,22 @@ namespace App.ContaCorrente.Application.Servicos
             _mapper = mapper;   
         }
 
-        public async Task<Pessoa> AlterarAsync(PessoaDTO pessoaDto)
+        public async Task<PessoaDTO> AlterarAsync(PessoaDTO pessoaDto)
         {
             var pessoaAlterarCommand = _mapper.Map<PessoaAlterarCommand>(pessoaDto);
-            return await _mediator.Send(pessoaAlterarCommand);
+            var result = await _mediator.Send(pessoaAlterarCommand);
+            var pessoa = _mapper.Map<PessoaDTO>(result);
+
+            return pessoa;
         }
 
-        public async Task<Pessoa> CriarAsync(PessoaDTO pessoaDto)
+        public async Task<PessoaDTO> CriarAsync(PessoaDTO pessoaDto)
         {
             var pessoaCriarCommand = _mapper.Map<PessoaCriarCommand>(pessoaDto);
-            return await _mediator.Send(pessoaCriarCommand);   
+            var result =  await _mediator.Send(pessoaCriarCommand);
+            var pessoa = _mapper.Map<PessoaDTO>(result);
+
+            return pessoa;
         }
 
         public async Task<PessoaDTO> GetPeloIdAsync(int? id)
