@@ -4,8 +4,7 @@ using System.Text.Json.Serialization;
 namespace App.ContaCorrente.Application.DTOs
 {
     public class LocalTrabalhoDTO
-    {
-        [JsonIgnore]
+    {      
         public int Id { get; set; }
 
         public string NomeEmpresa { get; set; }

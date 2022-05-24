@@ -20,16 +20,22 @@ namespace App.ContaCorrente.Application.Servicos
             _mapper = mapper;   
         }
 
-        public async Task<LocalTrabalho> AlterarAsync(LocalTrabalhoDTO localTrabalhoDto)
+        public async Task<LocalTrabalhoDTO> AlterarAsync(LocalTrabalhoDTO localTrabalhoDto)
         {
             var localTrabalhoAlterarCommand = _mapper.Map<LocalTrabalhoAlterarCommand>(localTrabalhoDto);
-            return await _mediator.Send(localTrabalhoAlterarCommand);
+            var result =  await _mediator.Send(localTrabalhoAlterarCommand);
+            var localTrabalho = _mapper.Map<LocalTrabalhoDTO>(result);
+
+            return localTrabalho;
         }
 
-        public async Task<LocalTrabalho> CriarAsync(LocalTrabalhoDTO localTrabalhoDto)
+        public async Task<LocalTrabalhoDTO> CriarAsync(LocalTrabalhoDTO localTrabalhoDto)
         {
             var localTrabalhoCriarCommand = _mapper.Map<LocalTrabalhoCriarCommand>(localTrabalhoDto);
-            return await _mediator.Send(localTrabalhoCriarCommand);
+            var result =  await _mediator.Send(localTrabalhoCriarCommand);
+            var localTrabalho = _mapper.Map<LocalTrabalhoDTO>(result);
+
+            return localTrabalho;
         }
         
         public async Task<LocalTrabalhoDTO> GetPeloIdAsync(int? id)

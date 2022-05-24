@@ -7,9 +7,9 @@ namespace App.ContaCorrente.Application.Servicos.Interfaces
     {
         Task<LocalTrabalhoDTO> GetPeloIdAsync(int? id);
 
-        Task<LocalTrabalho> AlterarAsync(LocalTrabalhoDTO localTrabalhoPessoaDto);
+        Task<LocalTrabalhoDTO> AlterarAsync(LocalTrabalhoDTO localTrabalhoPessoaDto);
 
-        Task<LocalTrabalho> CriarAsync(LocalTrabalhoDTO localTrabalhoPessoaDto);
+        Task<LocalTrabalhoDTO> CriarAsync(LocalTrabalhoDTO localTrabalhoPessoaDto);
         
     }
 }

@@ -1,5 +1,6 @@
 ﻿using App.ContaCorrente.Application.DTOs;
 using App.ContaCorrente.Application.Servicos.Interfaces;
+using App.ContaCorrente.Domain.Entidades;
 using App.ContaCorrente.Domain.Mensagem;
 using App.ContaCorrente.Domain.Validacoes;
 using Microsoft.AspNetCore.Http;
@@ -20,20 +21,18 @@ namespace App.ContaCorrente.API.Controllers
 
         /// <summary>
         /// Cria um novo Correntista
-        /// </summary>    
-        /// <remarks>
-        ///  FlagConta:  1 - EmAnalise | 2 - Aberta | 3 - Fechada              
-        /// </remarks>
-        /// <param name="correntistaDto">Dados do Correntista </param>        
+        /// </summary>            
+        /// <param name="correntistaDto">Dados do Correntista</param>        
         [HttpPost]
-        public async Task<ActionResult> PostCorrentista([FromBody] CorrentistaDTO correntistaDto)
+        public async Task<ActionResult<Correntista>> PostCorrentista([FromBody] CorrentistaDTO correntistaDto)
         {
             if (correntistaDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
 
-            var correntista = new object();
+            Correntista? correntista = null;
             try
             {
                 correntista = await _correntistaServico.CriarAsync(correntistaDto);
+                
             }
             catch (DomainException e)
             {
@@ -51,18 +50,18 @@ namespace App.ContaCorrente.API.Controllers
         /// Atualiza um Correntista
         /// </summary>       
         [HttpPut("{id:int}")]
-        public async Task<ActionResult> PutCorrentista(int? id, [FromBody] CorrentistaAlteraDTO correntistaAlteraDto)
+        public async Task<ActionResult<CorrentistaAlteraDTO>> PutCorrentista(int? id, [FromBody] CorrentistaAlteraDTO correntistaAlteraDto)
         {
             if (correntistaAlteraDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
 
             if (id == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
 
-            var correntista = new object();
+            CorrentistaAlteraDTO?  correntista = null;
 
             try
-            {
-                correntistaAlteraDto.Id = id.Value;
+            {                
                 correntista = await _correntistaServico.AlterarAsync(correntistaAlteraDto);
+                correntistaAlteraDto.Id = correntista.Id;
             }
             catch (DomainException e)
             {
@@ -79,15 +78,15 @@ namespace App.ContaCorrente.API.Controllers
         /// Busca um Correntista pelo Id
         /// </summary> 
         [HttpGet("{id:int}")]
-        public async Task<ActionResult> GetCorrentista(int? id)
+        public async Task<ActionResult<Correntista>> GetCorrentista(int? id)
         {
             if (id == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
 
-            var correntista = new object();
+            Correntista? correntista = null;
 
             try
             {
-                correntista = await _correntistaServico.GetPeloIdAsync(id);
+                correntista = await _correntistaServico.GetPeloIdAsync(id);                
 
                 if (correntista == null) return NotFound(new { mensagem = Mensagens.EntidadeNaoEncontrada });
 

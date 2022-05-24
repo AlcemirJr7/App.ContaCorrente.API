@@ -21,19 +21,25 @@ namespace App.ContaCorrente.Application.Servicos
             _mapper = mapper;            
         }
 
-        public async Task<Endereco> AlterarAsync(EnderecoDTO enderecoDto)
+        public async Task<EnderecoDTO> AlterarAsync(EnderecoDTO enderecoDto)
         {
             var enderecoAlterarCommand = _mapper.Map<EnderecoAlterarCommand>(enderecoDto);            
-            return await _mediator.Send(enderecoAlterarCommand);
+            var result = await _mediator.Send(enderecoAlterarCommand);
+            var endereco = _mapper.Map<EnderecoDTO>(result);
+
+            return endereco;
         }
 
-        public async Task<Endereco> CriarAsync(EnderecoDTO enderecoDto)
+        public async Task<EnderecoDTO> CriarAsync(EnderecoDTO enderecoDto)
         {
             var enderecoCriarCommand = _mapper.Map<EnderecoCriarCommand>(enderecoDto);
-            return await _mediator.Send(enderecoCriarCommand);
+            var result = await _mediator.Send(enderecoCriarCommand);
+            var endereco = _mapper.Map<EnderecoDTO>(result);
+
+            return endereco;
         }
 
-        public async Task<Endereco> DeletarAsync(int? id)
+        public async Task<EnderecoDTO> DeletarAsync(int? id)
         {
             var enderecoDeletarCommand = new EnderecoDeletarCommand(id.Value);
 
@@ -42,7 +48,10 @@ namespace App.ContaCorrente.Application.Servicos
                 throw new DomainException(Mensagens.EntidadeNaoCarregada);
             }
 
-            return await _mediator.Send(enderecoDeletarCommand);  
+            var resutl = await _mediator.Send(enderecoDeletarCommand);
+            var endereco = _mapper.Map<EnderecoDTO>(resutl);
+
+            return endereco;
 
         }
 

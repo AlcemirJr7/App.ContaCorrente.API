@@ -23,26 +23,29 @@ namespace App.ContaCorrente.Application.Servicos
             _saldoContaCorrenteRepositorio = saldoContaCorrenteRepositorio;
         }
 
-        public async Task<Correntista> AlterarAsync(CorrentistaAlteraDTO correntistaDto)
+        public async Task<CorrentistaAlteraDTO> AlterarAsync(CorrentistaAlteraDTO correntistaDto)
         {
             var correntistaAlterarCommand = _mapper.Map<CorrentistaAlterarCommand>(correntistaDto);
-            return await _mediator.Send(correntistaAlterarCommand);
+            var result = await _mediator.Send(correntistaAlterarCommand);
+            var correntista = _mapper.Map<CorrentistaAlteraDTO>(result);
+
+            return correntista;
         }
 
         public async Task<Correntista> CriarAsync(CorrentistaDTO correntistaDto)
         {
             var correntistaCriarCommand = _mapper.Map<CorrentistaCriarCommand>(correntistaDto);
-            var correntista = await _mediator.Send(correntistaCriarCommand);
-
+            var result = await _mediator.Send(correntistaCriarCommand);
+            
             // Criar Saldo do correntista
-            var saldo = new SaldoContaCorrente(0,null,0,correntista.Id);
+            var saldo = new SaldoContaCorrente(0,null,0, result.Id);
             await _saldoContaCorrenteRepositorio.CriarAsync(saldo);
             
-            return correntista;
+            return result;
 
         }
 
-        public Task<Correntista> GetPeloIdAsync(int? id)
+        public async Task<Correntista> GetPeloIdAsync(int? id)
         {
             var correntistaQuery = new GetCorrentistaPeloIdQuery(id.Value);
 
@@ -51,7 +54,7 @@ namespace App.ContaCorrente.Application.Servicos
                 throw new DomainException(String.Format(Mensagens.EntidadeNaoCarregada, nameof(Correntista)));
             }
 
-            var result = _mediator.Send(correntistaQuery);
+            var result = await _mediator.Send(correntistaQuery);            
 
             return result;
 

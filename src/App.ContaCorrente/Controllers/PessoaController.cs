@@ -25,11 +25,11 @@ namespace App.ContaCorrente.API.Controllers
         /// </remarks>
         /// <param name="pessoaDto">Dados da Pessoa </param>        
         [HttpPost]
-        public async Task<ActionResult> PostPessoa([FromBody] PessoaDTO pessoaDto)
+        public async Task<ActionResult<PessoaDTO>> PostPessoa([FromBody] PessoaDTO pessoaDto)
         {
             if (pessoaDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
 
-            var pessoa = new object();
+            PessoaDTO? pessoa = null;
             try
             {
                 pessoa = await _pessoaServico.CriarAsync(pessoaDto);
@@ -54,15 +54,14 @@ namespace App.ContaCorrente.API.Controllers
         /// </remarks>
         /// <param name="pessoaDto">Dados da Pessoa </param>        
         [HttpPut("{id:int}")]
-        public async Task<ActionResult> PutPessoa(int? id,[FromBody] PessoaDTO pessoaDto)
+        public async Task<ActionResult<PessoaDTO>> PutPessoa(int? id,[FromBody] PessoaDTO pessoaDto)
         {
             if (id == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
             if (pessoaDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
 
-            var pessoa = new object();
+            PessoaDTO? pessoa = null;
             try
-            {
-                pessoaDto.Id = id.Value;
+            {                
                 pessoa = await _pessoaServico.AlterarAsync(pessoaDto);
             }
             catch (DomainException e)
