@@ -1,4 +1,5 @@
 ﻿using App.ContaCorrente.Application.CQRS.Pagamentos.Commands;
+using App.ContaCorrente.Application.CQRS.Pagamentos.Queries;
 using App.ContaCorrente.Application.DTOs;
 using App.ContaCorrente.Application.Servicos.Interfaces;
 using App.ContaCorrente.Domain.Entidades;
@@ -32,14 +33,36 @@ namespace App.ContaCorrente.Application.Servicos
                                                             
         }
 
-        public Task<IEnumerable<PagamentoDTO>> GetPeloCorrentistaIdAsync(int? id)
+        public async Task<IEnumerable<PagamentoDTO>> GetPeloCorrentistaIdAsync(int? id)
         {
-            throw new NotImplementedException();
+            var pagamentoQuery = new GetPagamentoPeloCorrentistaIdQuery(id.Value);
+
+            if (pagamentoQuery == null)
+            {
+                throw new DomainException(String.Format(Mensagens.EntidadeNaoCarregada, nameof(Pagamento)));
+            }
+
+            var result = await _mediator.Send(pagamentoQuery);
+
+            var pagamentos = _mapper.Map<IEnumerable<PagamentoDTO>>(result);
+
+            return pagamentos;
         }
 
-        public Task<PagamentoDTO> GetPeloIdAsync(int? id)
+        public async Task<PagamentoDTO> GetPeloIdAsync(int? id)
         {
-            throw new NotImplementedException();
+            var pagamentoQuery = new GetPagamentoPeloIdQuery(id.Value);
+
+            if (pagamentoQuery == null)
+            {
+                throw new DomainException(String.Format(Mensagens.EntidadeNaoCarregada, nameof(Pagamento)));
+            }
+
+            var result = await _mediator.Send(pagamentoQuery);
+
+            var pagamento = _mapper.Map<PagamentoDTO>(result);  
+
+            return pagamento;
         }
     }
 }

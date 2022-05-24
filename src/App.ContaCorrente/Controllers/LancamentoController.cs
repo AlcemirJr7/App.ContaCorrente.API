@@ -74,7 +74,7 @@ namespace App.ContaCorrente.API.Controllers
         {
             if (id == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
 
-            LancamentoDTO lancamento = new LancamentoDTO(); ;
+            LancamentoDTO lancamento = new LancamentoDTO();
 
             try
             {
