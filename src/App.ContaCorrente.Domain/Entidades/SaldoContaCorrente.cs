@@ -33,6 +33,14 @@ namespace App.ContaCorrente.Domain.Entidades
             ValidarEntidade(saldoConta, dataUltimaTransacao, limiteChequeEspecial);
         }
 
+        public SaldoContaCorrente(int id, decimal saldoConta, DateTime? dataUltimaTransacao, decimal? limiteChequeEspecial, int correntistaId )
+        {
+            DomainExcepitonValidacao.When(id < 0, "Id invalido.");
+            Id = id;
+            CorrentistaId = correntistaId;
+            ValidarEntidade(saldoConta, dataUltimaTransacao, limiteChequeEspecial);
+        }
+
         public SaldoContaCorrente(decimal saldoConta, DateTime? dataUltimaTransacao, decimal? limiteChequeEspecial, int correntistaId)
         {
             ValidarEntidade(saldoConta, dataUltimaTransacao, limiteChequeEspecial);

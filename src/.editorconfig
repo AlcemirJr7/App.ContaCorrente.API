@@ -2,3 +2,6 @@
 
 # CA1708: Identificadores devem ter alguma diferença além da distribuição de maiúsculas e minúsculas
 dotnet_diagnostic.CA1708.severity = suggestion
+
+# CS8629: O tipo de valor de nulidade pode ser nulo.
+dotnet_diagnostic.CS8629.severity = silent

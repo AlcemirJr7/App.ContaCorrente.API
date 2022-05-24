@@ -7,15 +7,13 @@ using System.Threading.Tasks;
 
 namespace App.ContaCorrente.Domain.Interfaces
 {
-    public interface ILancamentosRepositorio : IDisposable
+    public interface ILancamentoRepositorio : IDisposable
     {
         Task<Lancamento> GetPeloIdAsync(int? id);
 
-        Task<IEnumerable<Lancamento>> GetPeloCorrentistaIdAsync(int? id);
+        Task<IEnumerable<Lancamento>> GetPeloCorrentistaIdAsync(int? id);        
 
-        Task<Lancamento> AlterarAsync(Lancamento lancamentos);
-
-        Task<Lancamento> CriarAsync(Lancamento lancamentos);
+        Task<Lancamento> CriarAsync(Lancamento lancamento);
 
     }
 }

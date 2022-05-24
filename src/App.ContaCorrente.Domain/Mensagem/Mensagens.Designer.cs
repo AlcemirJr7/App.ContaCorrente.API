@@ -133,6 +133,15 @@ namespace App.ContaCorrente.Domain.Mensagem {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a 0016| Não foi possível atualizar o saldo..
+        /// </summary>
+        public static string ErroAoAtualizarSaldo {
+            get {
+                return ResourceManager.GetString("ErroAoAtualizarSaldo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a 0001| Erro ao criar entidade..
         /// </summary>
         public static string ErroAoCriarEntidade {
@@ -183,6 +192,15 @@ namespace App.ContaCorrente.Domain.Mensagem {
         public static string PessoaInvalida {
             get {
                 return ResourceManager.GetString("PessoaInvalida", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a 0015| Saldo insuficiente para fazer o lançamento..
+        /// </summary>
+        public static string SaldoInsuficiente {
+            get {
+                return ResourceManager.GetString("SaldoInsuficiente", resourceCulture);
             }
         }
     }

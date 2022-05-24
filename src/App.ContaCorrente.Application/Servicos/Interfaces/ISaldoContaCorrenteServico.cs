@@ -7,6 +7,11 @@ namespace App.ContaCorrente.Application.Servicos.Interfaces
         Task<SaldoContaCorrenteDTO> GetPeloIdAsync(int? id);
 
         Task<SaldoContaCorrenteDTO> GetPeloCorrentistaIdAsync(int? id);
-        
+
+        Task<bool> ValidaSaldo(LancamentoDTO lancamento);
+
+        Task AtulizaSaldo(LancamentoDTO lancamento);
+
+
     }
 }

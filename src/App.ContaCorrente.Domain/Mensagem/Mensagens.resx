@@ -141,6 +141,9 @@
   <data name="ErroAoAtualizarEntidade" xml:space="preserve">
     <value>0003| Erro ao atualizar entidade.</value>
   </data>
+  <data name="ErroAoAtualizarSaldo" xml:space="preserve">
+    <value>0016| Não foi possível atualizar o saldo.</value>
+  </data>
   <data name="ErroAoCriarEntidade" xml:space="preserve">
     <value>0001| Erro ao criar entidade.</value>
   </data>
@@ -158,5 +161,8 @@
   </data>
   <data name="PessoaInvalida" xml:space="preserve">
     <value>0012| Pessoa informada não existe.</value>
+  </data>
+  <data name="SaldoInsuficiente" xml:space="preserve">
+    <value>0015| Saldo insuficiente para fazer o lançamento.</value>
   </data>
 </root>
