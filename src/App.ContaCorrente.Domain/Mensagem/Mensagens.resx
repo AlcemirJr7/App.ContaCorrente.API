@@ -159,10 +159,13 @@
   <data name="LocalTrabalhoInvalido" xml:space="preserve">
     <value>0013| Local de trabalho não existe, deve ser informado para pessoa física.</value>
   </data>
+  <data name="NaoFoiPossivelCompletarOperacao" xml:space="preserve">
+    <value> Não foi possível completar a operação.</value>
+  </data>
   <data name="PessoaInvalida" xml:space="preserve">
     <value>0012| Pessoa informada não existe.</value>
   </data>
   <data name="SaldoInsuficiente" xml:space="preserve">
-    <value>0015| Saldo insuficiente para fazer o lançamento.</value>
+    <value>0015| Saldo insuficiente para fazer a operação.</value>
   </data>
 </root>

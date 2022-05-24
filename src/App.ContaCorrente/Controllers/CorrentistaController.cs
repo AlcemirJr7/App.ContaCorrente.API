@@ -60,8 +60,7 @@ namespace App.ContaCorrente.API.Controllers
 
             try
             {                
-                correntista = await _correntistaServico.AlterarAsync(correntistaAlteraDto);
-                correntistaAlteraDto.Id = correntista.Id;
+                correntista = await _correntistaServico.AlterarAsync(correntistaAlteraDto);                
             }
             catch (DomainException e)
             {

@@ -80,8 +80,7 @@ namespace App.ContaCorrente.API.Controllers
             BancoDTO? banco = null;
             try
             {
-                banco = await _bancoServico.CriarAsync(bancoDto);
-                bancoDto.Id = banco.Id;
+                banco = await _bancoServico.CriarAsync(bancoDto);                
             }
             catch (DomainException e)
             {
@@ -108,8 +107,7 @@ namespace App.ContaCorrente.API.Controllers
             if (bancoDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
             try
             {
-                banco = await _bancoServico.AlterarAsync(bancoDto);
-                bancoDto.Id = banco.Id;
+                banco = await _bancoServico.AlterarAsync(bancoDto);                
             }
             catch (DomainException e)
             {

@@ -30,6 +30,28 @@ namespace App.ContaCorrente.Infra.Data.Repositorios
             return lancamento;
         }
 
+        public async Task<Lancamento> DeletarAsync(int? id)
+        {
+            var lancamento = await GetPeloIdAsync(id);
+
+            if(lancamento == null)
+            {
+                throw new DomainException(Mensagens.ErroAoEfetuarConsulta);
+            }
+
+            try
+            {                
+                _appDbContexto.Remove(lancamento);
+                await _appDbContexto.SaveChangesAsync();
+            }
+            catch
+            {
+                throw new DomainException(Mensagens.ErroAoDeletarEntidade);
+            }
+
+            return lancamento;
+        }
+
         public void Dispose()
         {
             GC.SuppressFinalize(this);

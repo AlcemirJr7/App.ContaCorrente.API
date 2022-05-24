@@ -1,5 +1,6 @@
 ﻿using App.ContaCorrente.Application.DTOs;
 using App.ContaCorrente.Application.Servicos.Interfaces;
+using App.ContaCorrente.Domain.Interfaces;
 using App.ContaCorrente.Domain.Mensagem;
 using App.ContaCorrente.Domain.Validacoes;
 using Microsoft.AspNetCore.Http;
@@ -13,9 +14,13 @@ namespace App.ContaCorrente.API.Controllers
     public class LancamentoController : ControllerBase
     {
         private readonly ILancamentoServico _lancamentoServico;
-        public LancamentoController(ILancamentoServico lancamentoServico)
+        private readonly ISaldoContaCorrenteServico _saldoContaCorrenteServico;
+        private readonly ILancamentoRepositorio _lancamentoRepositorio;
+        public LancamentoController(ILancamentoServico lancamentoServico, ISaldoContaCorrenteServico saldoContaCorrenteServico, ILancamentoRepositorio lancamentoRepositorio)
         {
             _lancamentoServico = lancamentoServico;
+            _saldoContaCorrenteServico = saldoContaCorrenteServico;
+            _lancamentoRepositorio = lancamentoRepositorio;
         }
 
         /// <summary>
@@ -23,14 +28,31 @@ namespace App.ContaCorrente.API.Controllers
         /// </summary>      
         /// <param name="lancamentoDto">Dados do Lançamento</param>
         [HttpPost]
-        public async Task<ActionResult<LancamentoDTO>> PostHistorico([FromBody] LancamentoDTO lancamentoDto)
+        public async Task<ActionResult<LancamentoDTO>> PostLancamento([FromBody] LancamentoDTO lancamentoDto)
         {
             if (lancamentoDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
                         
             try
             {
-                var lancamento = await _lancamentoServico.CriarAsync(lancamentoDto);
-                lancamentoDto.Id = lancamento.Id;
+                // valida o saldo 
+                await _saldoContaCorrenteServico.ValidaSaldoAsync(lancamentoDto.CorrentistaId,lancamentoDto.HistoricoId,lancamentoDto.Valor);
+                
+                // cria o lancamento 
+                lancamentoDto = await _lancamentoServico.CriarAsync(lancamentoDto);
+
+                try
+                {
+                    //atualiza o saldo 
+                    await _saldoContaCorrenteServico.AtulizaSaldoAsync(lancamentoDto.CorrentistaId, lancamentoDto.HistoricoId, lancamentoDto.Valor);
+                }
+                catch (DomainException e)
+                {
+                    //Desfazer lançamento caso não consiga atualizar o saldo
+                    await _lancamentoRepositorio.DeletarAsync(lancamentoDto.Id);
+
+                    return BadRequest(new { mensagem = e.Message + Mensagens.NaoFoiPossivelCompletarOperacao });
+                }
+                                
             }
             catch (DomainException e)
             {
@@ -52,7 +74,7 @@ namespace App.ContaCorrente.API.Controllers
         {
             if (id == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
 
-            LancamentoDTO? lancamento = null;
+            LancamentoDTO lancamento = new LancamentoDTO(); ;
 
             try
             {
@@ -81,7 +103,7 @@ namespace App.ContaCorrente.API.Controllers
         {
             if (id == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
 
-            IEnumerable<LancamentoDTO>? lancamento = null;
+            IEnumerable<LancamentoDTO> lancamento = new List<LancamentoDTO>();
 
             try
             {

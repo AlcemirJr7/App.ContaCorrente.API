@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="CQRS\Pagamentos\Queries\" />
     <Folder Include="CQRS\SaldoContaCorrentes\Commands\" />
   </ItemGroup>
 

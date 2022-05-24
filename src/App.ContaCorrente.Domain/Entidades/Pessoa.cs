@@ -80,7 +80,25 @@ namespace App.ContaCorrente.Domain.Entidades
             {
                 DomainExcepitonValidacao.When(string.IsNullOrEmpty(nomeEmpresa), "Nome Empresa deve ser informado para tipo pessoa juridica.");
             }
+            
+            DomainExcepitonValidacao.When(!ValidadorDeCampos.ValidaEmail(email1), "Formarmato do email invalido.");
 
+            if(tipoPessoa == EnumPessoa.PessoaFisica)
+            {
+                DomainExcepitonValidacao.When(!ValidadorDeCampos.ValidaCpf(StringFormata.ApenasNumeros(numeroDocumento)), "Cpf invalido.");
+            }
+            else
+            {
+                DomainExcepitonValidacao.When(!ValidadorDeCampos.ValidaCnpj(StringFormata.ApenasNumeros(numeroDocumento)), "Cnpj invalido.");
+            }
+
+
+            if (!string.IsNullOrEmpty(email2))
+            {
+                DomainExcepitonValidacao.When(!ValidadorDeCampos.ValidaEmail(email2), "Formarmato do email invalido.");
+            }
+
+                        
             Nome = nome;
             NomeEmpresa = nomeEmpresa;
             NumeroDocumento = StringFormata.ApenasNumeros(numeroDocumento);

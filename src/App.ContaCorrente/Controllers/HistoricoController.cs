@@ -61,8 +61,7 @@ namespace App.ContaCorrente.API.Controllers
             var historico = new object();
             
             try
-            {
-                historicoDto.Id = id.Value;
+            {                
                 historico = await _historicoServico.AlterarAsync(historicoDto);
             }
             catch (DomainException e)

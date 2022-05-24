@@ -17,7 +17,7 @@ namespace App.ContaCorrente.Application.Servicos
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
         private readonly ISaldoContaCorrenteRepositorio _saldoContaCorrenteRepositorio;
-        private readonly IHistoricoRepositorio _historicoRepositorio;
+        private readonly IHistoricoRepositorio _historicoRepositorio;      
 
         public SaldoContaCorrenteServico(IMediator mediator, IMapper mapper, ISaldoContaCorrenteRepositorio saldoContaCorrenteRepositorio,
                                          IHistoricoRepositorio historicoRepositorio)
@@ -56,16 +56,18 @@ namespace App.ContaCorrente.Application.Servicos
             return _mapper.Map<SaldoContaCorrenteDTO>(result);
         }
 
-        public async Task<bool> ValidaSaldo(LancamentoDTO lancamento)
+        public async Task ValidaSaldoAsync(int correntistaId, int historicoId, decimal valor)
         {
-            var saldo = await _saldoContaCorrenteRepositorio.GetPeloCorrentistaIdAsync(lancamento.CorrentistaId);
+            var temSaldo = false;
 
+            var saldo = await _saldoContaCorrenteRepositorio.GetPeloCorrentistaIdAsync(correntistaId);
+            
             if (saldo == null)
             {
-                throw new DomainException(String.Format(Mensagens.EntidadeNaoCarregada, nameof(SaldoContaCorrente)));
-            }
+                throw new DomainException(String.Format(Mensagens.EntidadeNaoCarregada, nameof(Correntista)));
+            }            
 
-            var historico = await _historicoRepositorio.GetPeloIdAsync(lancamento.HistoricoId);
+            var historico = await _historicoRepositorio.GetPeloIdAsync(historicoId);
 
             if(historico == null)
             {
@@ -74,54 +76,57 @@ namespace App.ContaCorrente.Application.Servicos
                         
             if(historico.TipoDebitoCredito == EnumHistoricoDebitoCredito.Credito)
             {
-                return true;
+                temSaldo = true;
             }
                 
             var saldoTotal = saldo.SaldoConta + saldo.LimiteChequeEspecial;
 
-            if(lancamento.Valor > saldoTotal)
+            if(valor > saldoTotal)
             {
-                return false;
+                temSaldo = false;
             }
             else
             {
-                return true;
+                temSaldo = true;
             }
-            
+
+            if (!temSaldo)
+            {
+                throw new DomainException(Mensagens.SaldoInsuficiente);
+            }
+
         }
 
-        public async Task AtulizaSaldo(LancamentoDTO lancamento)
+        public async Task AtulizaSaldoAsync(int correntistaId, int historicoId, decimal valor)
         {
-            var saldo = await _saldoContaCorrenteRepositorio.GetPeloCorrentistaIdAsync(lancamento.CorrentistaId);
+            var saldo = await _saldoContaCorrenteRepositorio.GetPeloCorrentistaIdAsync(correntistaId);
 
             if (saldo == null)
             {
                 throw new DomainException(String.Format(Mensagens.EntidadeNaoCarregada, nameof(SaldoContaCorrente)));
             }
 
-            var historico = await _historicoRepositorio.GetPeloIdAsync(lancamento.HistoricoId);
+            var historico = await _historicoRepositorio.GetPeloIdAsync(historicoId);
 
             if (historico == null)
             {
                 throw new DomainException(String.Format(Mensagens.EntidadeNaoCarregada, nameof(Historico)));
             }
-
-            var saldoTotal = saldo.SaldoConta + saldo.LimiteChequeEspecial.Value;
-
+            
             decimal saltoAtualizado = 0;
 
             try
             {
                 if(historico.TipoDebitoCredito == EnumHistoricoDebitoCredito.Credito)
                 {
-                    saltoAtualizado = (saldoTotal + lancamento.Valor);
+                    saltoAtualizado = (saldo.SaldoConta + valor);
                 }
                 else
                 {
-                    saltoAtualizado = (saldoTotal - lancamento.Valor);
+                    saltoAtualizado = (saldo.SaldoConta - valor);
                 }
 
-                saldo.Atualizar(saltoAtualizado,DateTime.Now,saldo.LimiteChequeEspecial,lancamento.CorrentistaId);
+                saldo.Atualizar(saltoAtualizado,DateTime.Now,saldo.LimiteChequeEspecial,correntistaId);
 
                 await _saldoContaCorrenteRepositorio.AlterarAsync(saldo);
                 

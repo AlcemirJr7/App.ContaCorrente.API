@@ -13,31 +13,23 @@ namespace App.ContaCorrente.Application.Servicos
     public class LancamentoServico : ILancamentoServico
     {
         private readonly IMediator _mediator;
-        private readonly IMapper _mapper;
-        private readonly ISaldoContaCorrenteServico _saldoContaCorrenteServico; 
-        public LancamentoServico(IMediator mediator, IMapper mapper, ISaldoContaCorrenteServico saldoContaCorrenteServico)
+        private readonly IMapper _mapper;        
+        public LancamentoServico(IMediator mediator, IMapper mapper)
         {
             _mediator = mediator;
-            _mapper = mapper;
-            _saldoContaCorrenteServico = saldoContaCorrenteServico;
+            _mapper = mapper;            
         }
 
-        public async Task<Lancamento> CriarAsync(LancamentoDTO lancamentoDto)
+        public async Task<LancamentoDTO> CriarAsync(LancamentoDTO lancamentoDto)
         {
+            
             var lancamentoCriarCommand = _mapper.Map<LancamentoCriarCommand>(lancamentoDto);
-
-            var temSaldo = await _saldoContaCorrenteServico.ValidaSaldo(lancamentoDto);
-
-            if (!temSaldo)
-            {
-                throw new DomainException(Mensagens.SaldoInsuficiente);
-            }         
-            
+                                
             var result = await _mediator.Send(lancamentoCriarCommand);
-            
-            await _saldoContaCorrenteServico.AtulizaSaldo(lancamentoDto);
 
-            return result;
+            var lancamento = _mapper.Map<LancamentoDTO>(result);
+
+            return lancamento;
         }
 
         public async Task<IEnumerable<LancamentoDTO>> GetPeloCorrentistaIdAsync(int? id)
@@ -67,5 +59,6 @@ namespace App.ContaCorrente.Application.Servicos
 
             return _mapper.Map<LancamentoDTO>(result);
         }
+        
     }
 }

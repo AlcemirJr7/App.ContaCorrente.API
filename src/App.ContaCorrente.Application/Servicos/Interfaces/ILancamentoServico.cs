@@ -1,5 +1,4 @@
 ﻿using App.ContaCorrente.Application.DTOs;
-using App.ContaCorrente.Domain.Entidades;
 
 namespace App.ContaCorrente.Application.Servicos.Interfaces
 {
@@ -9,6 +8,8 @@ namespace App.ContaCorrente.Application.Servicos.Interfaces
 
         Task<IEnumerable<LancamentoDTO>> GetPeloCorrentistaIdAsync(int? id);
 
-        Task<Lancamento> CriarAsync(LancamentoDTO lancamentoDto);
+        Task<LancamentoDTO> CriarAsync(LancamentoDTO lancamentoDto);
+
+        
     }
 }

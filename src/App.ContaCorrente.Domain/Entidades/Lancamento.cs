@@ -53,7 +53,7 @@ namespace App.ContaCorrente.Domain.Entidades
         private void ValidarEntidade(DateTime dataLancamento, decimal valor, string? observacao)
         {
             DomainExcepitonValidacao.When(string.IsNullOrEmpty(Convert.ToString(dataLancamento)), "Data de lançamento invalido.");
-            DomainExcepitonValidacao.When(valor < 0, "Valor de lançamento invalido.");
+            DomainExcepitonValidacao.When(valor <= 0, "Valor de lançamento invalido.");
 
             DataLancamento = dataLancamento;
             Valor = valor;
