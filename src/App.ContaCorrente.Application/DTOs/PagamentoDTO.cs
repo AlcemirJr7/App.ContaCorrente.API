@@ -8,6 +8,10 @@ namespace App.ContaCorrente.Application.DTOs
 {
     public class PagamentoDTO
     {
+        public PagamentoDTO()
+        {
+
+        }
         public int Id { get; set; }
 
         public string CodigoBarra { get; set; }

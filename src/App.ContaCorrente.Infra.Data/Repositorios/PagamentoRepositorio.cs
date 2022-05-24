@@ -3,6 +3,7 @@ using App.ContaCorrente.Domain.Interfaces;
 using App.ContaCorrente.Domain.Mensagem;
 using App.ContaCorrente.Domain.Validacoes;
 using App.ContaCorrente.Infra.Data.Contexto;
+using Microsoft.EntityFrameworkCore;
 
 namespace App.ContaCorrente.Infra.Data.Repositorios
 {
@@ -57,14 +58,29 @@ namespace App.ContaCorrente.Infra.Data.Repositorios
             GC.SuppressFinalize(this);
         }
 
-        public Task<IEnumerable<Pagamento>> GetPeloCorrentistaIdAsync(int? id)
+        public async Task<IEnumerable<Pagamento>> GetPeloCorrentistaIdAsync(int? id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return await _appDbContexto.Pagamentos.Where(p => p.CorrentistaId == id).ToListAsync();
+            }
+            catch
+            {
+                throw new DomainException(Mensagens.ErroAoEfetuarConsulta);
+            }
         }
 
-        public Task<Pagamento> GetPeloIdAsync(int? id)
+        public async Task<Pagamento> GetPeloIdAsync(int? id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return await _appDbContexto.Pagamentos.FirstOrDefaultAsync(p => p.Id == id);
+            }
+            catch
+            {
+                throw new DomainException(Mensagens.ErroAoEfetuarConsulta);
+            }
+
         }
     }
 }
