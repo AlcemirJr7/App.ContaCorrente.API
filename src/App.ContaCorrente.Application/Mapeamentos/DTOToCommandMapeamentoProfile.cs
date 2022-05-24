@@ -2,6 +2,7 @@
 using App.ContaCorrente.Application.CQRS.Correntistas.Commands;
 using App.ContaCorrente.Application.CQRS.Enderecos.Commands;
 using App.ContaCorrente.Application.CQRS.Historicos.Commands;
+using App.ContaCorrente.Application.CQRS.Lancamentos.Commands;
 using App.ContaCorrente.Application.CQRS.LocalTrabalhos.Commands;
 using App.ContaCorrente.Application.CQRS.Pessoas.Commands;
 using App.ContaCorrente.Application.DTOs;
@@ -37,6 +38,10 @@ namespace App.ContaCorrente.Application.Mapeamentos
             //Correntista
             CreateMap<CorrentistaDTO, CorrentistaCriarCommand>();
             CreateMap<CorrentistaAlteraDTO, CorrentistaAlterarCommand>();
+
+            //Lancamento
+            CreateMap<LancamentoDTO, LancamentoCriarCommand>();
+            
         }
     }
 }
