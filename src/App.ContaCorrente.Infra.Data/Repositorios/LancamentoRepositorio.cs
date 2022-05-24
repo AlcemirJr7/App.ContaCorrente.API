@@ -3,11 +3,7 @@ using App.ContaCorrente.Domain.Interfaces;
 using App.ContaCorrente.Domain.Mensagem;
 using App.ContaCorrente.Domain.Validacoes;
 using App.ContaCorrente.Infra.Data.Contexto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace App.ContaCorrente.Infra.Data.Repositorios
 {
@@ -39,14 +35,28 @@ namespace App.ContaCorrente.Infra.Data.Repositorios
             GC.SuppressFinalize(this);
         }
 
-        public Task<IEnumerable<Lancamento>> GetPeloCorrentistaIdAsync(int? id)
+        public async Task<IEnumerable<Lancamento>> GetPeloCorrentistaIdAsync(int? id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return await _appDbContexto.Lancamentos.Where(l => l.CorrentistaId == id).ToListAsync();
+            }
+            catch
+            {
+                throw new DomainException(Mensagens.ErroAoEfetuarConsulta);
+            }
         }
 
-        public Task<Lancamento> GetPeloIdAsync(int? id)
+        public async Task<Lancamento> GetPeloIdAsync(int? id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return await _appDbContexto.Lancamentos.FirstOrDefaultAsync(p => p.Id == id);
+            }
+            catch
+            {
+                throw new DomainException(Mensagens.ErroAoEfetuarConsulta);
+            }
         }
     }
 }
