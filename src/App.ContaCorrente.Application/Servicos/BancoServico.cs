@@ -21,18 +21,22 @@ namespace App.ContaCorrente.Application.Servicos
             _mediator = mediator;
         }
 
-        public async Task<Banco> AlterarAsync(BancoDTO bancoDto)
+        public async Task<BancoDTO> AlterarAsync(BancoDTO bancoDto)
         {
             var bancoAlterarCommand = _mapper.Map<BancoAlterarCommnad>(bancoDto);
-            return await _mediator.Send(bancoAlterarCommand);
+            var result = await _mediator.Send(bancoAlterarCommand);
+            var banco = _mapper.Map<BancoDTO>(result);
+            return banco;
+            
         }
 
-        public async Task<Banco> CriarAsync(BancoDTO bancoDto)
+        public async Task<BancoDTO> CriarAsync(BancoDTO bancoDto)
         {
 
             var bancoCriarCommand = _mapper.Map<BancoCriarCommnad>(bancoDto);
-            return await _mediator.Send(bancoCriarCommand);
-            
+            var result =  await _mediator.Send(bancoCriarCommand);
+            var banco = _mapper.Map<BancoDTO>(result);
+            return banco;
         }
 
         public async Task<BancoDTO> GetBancoPeloIdAsync(int? id)
