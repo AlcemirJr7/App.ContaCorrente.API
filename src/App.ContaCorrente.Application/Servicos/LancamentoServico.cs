@@ -1,4 +1,5 @@
 ﻿using App.ContaCorrente.Application.CQRS.Lancamentos.Commands;
+using App.ContaCorrente.Application.CQRS.Lancamentos.Queries;
 using App.ContaCorrente.Application.DTOs;
 using App.ContaCorrente.Application.Servicos.Interfaces;
 using App.ContaCorrente.Domain.Entidades;
@@ -39,14 +40,32 @@ namespace App.ContaCorrente.Application.Servicos
             return result;
         }
 
-        public Task<IEnumerable<LancamentoDTO>> GetPeloCorrentistaIdAsync(int? id)
+        public async Task<IEnumerable<LancamentoDTO>> GetPeloCorrentistaIdAsync(int? id)
         {
-            throw new NotImplementedException();
+            var lancamentosQuery = new GetLancamentosPeloCorrentistaIdQuery(id.Value);
+
+            if (lancamentosQuery == null)
+            {
+                throw new DomainException(String.Format(Mensagens.EntidadeNaoCarregada, nameof(Lancamento)));
+            }
+
+            var result = await _mediator.Send(lancamentosQuery);
+
+            return _mapper.Map<IEnumerable<LancamentoDTO>>(result);
         }
 
-        public Task<LancamentoDTO> GetPeloIdAsync(int? id)
+        public async Task<LancamentoDTO> GetPeloIdAsync(int? id)
         {
-            throw new NotImplementedException();
+            var lancamentoQuery = new GetLancamentoPeloIdQuery(id.Value);
+
+            if (lancamentoQuery == null)
+            {
+                throw new DomainException(String.Format(Mensagens.EntidadeNaoCarregada, nameof(Pessoa)));
+            }
+
+            var result = await _mediator.Send(lancamentoQuery);
+
+            return _mapper.Map<LancamentoDTO>(result);
         }
     }
 }
