@@ -6,7 +6,7 @@ namespace App.ContaCorrente.Application.DTOs
 {
     public class HistoricoDTO
     { 
-        [JsonIgnore]
+        
         public int Id { get; set; }
         
         public string Descricao { get; set; }

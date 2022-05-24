@@ -54,14 +54,14 @@ namespace App.ContaCorrente.Domain.Entidades
 
         private void ValidarEntidade(string codigoBarra, string numeroDocumento, DateTime dataGeracao, decimal valor, DateTime dataVencimento, DateTime dataPagamento)
         {
-            DomainExcepitonValidacao.When(string.IsNullOrEmpty(codigoBarra),"Codigo de Barra invalido.");
+            DomainExcepitonValidacao.When(string.IsNullOrEmpty(StringFormata.ApenasNumeros(codigoBarra)),"Codigo de Barra invalido.");
             DomainExcepitonValidacao.When(string.IsNullOrEmpty(StringFormata.ApenasNumeros(numeroDocumento)), "Numero do documento invalido.");
             DomainExcepitonValidacao.When(string.IsNullOrEmpty(Convert.ToString(dataGeracao)), "Data geração invalido.");
             DomainExcepitonValidacao.When(string.IsNullOrEmpty(Convert.ToString(dataVencimento)), "Data vencimento invalido.");
             DomainExcepitonValidacao.When(string.IsNullOrEmpty(Convert.ToString(dataPagamento)), "Data pagamento invalido.");
             DomainExcepitonValidacao.When(valor < 0, "Valor invalido.");
 
-            CodigoBarra = codigoBarra;  
+            CodigoBarra = StringFormata.ApenasNumeros(codigoBarra);  
             NumeroDocumento = StringFormata.ApenasNumeros(numeroDocumento);
             DataGeracao = dataGeracao;
             Valor = valor;

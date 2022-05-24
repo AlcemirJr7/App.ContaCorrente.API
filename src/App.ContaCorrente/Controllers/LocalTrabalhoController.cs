@@ -57,8 +57,7 @@ namespace App.ContaCorrente.API.Controllers
             LocalTrabalhoDTO? localTrabalho = null;
 
             try
-            {
-                localTrabalhoDto.Id = id.Value;
+            {                
                 localTrabalho = await _localTrabalhoServico.AlterarAsync(localTrabalhoDto);
             }
             catch (DomainException e)

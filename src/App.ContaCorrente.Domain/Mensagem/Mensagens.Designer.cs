@@ -187,6 +187,15 @@ namespace App.ContaCorrente.Domain.Mensagem {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a  Não foi possível completar a operação..
+        /// </summary>
+        public static string NaoFoiPossivelCompletarOperacao {
+            get {
+                return ResourceManager.GetString("NaoFoiPossivelCompletarOperacao", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a 0012| Pessoa informada não existe..
         /// </summary>
         public static string PessoaInvalida {
@@ -196,7 +205,7 @@ namespace App.ContaCorrente.Domain.Mensagem {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a 0015| Saldo insuficiente para fazer o lançamento..
+        ///   Consulta uma cadeia de caracteres localizada semelhante a 0015| Saldo insuficiente para fazer a operação..
         /// </summary>
         public static string SaldoInsuficiente {
             get {

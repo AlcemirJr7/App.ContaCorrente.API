@@ -26,7 +26,7 @@ namespace App.ContaCorrente.API.Controllers
         {
             if (id == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
 
-            var saldo = new object();
+            SaldoContaCorrenteDTO? saldo = null;
 
             try
             {
@@ -55,7 +55,7 @@ namespace App.ContaCorrente.API.Controllers
         {
             if (id == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
 
-            var saldo = new object();
+            SaldoContaCorrenteDTO? saldo = null;
 
             try
             {

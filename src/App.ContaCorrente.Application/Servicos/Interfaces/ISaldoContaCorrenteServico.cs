@@ -8,9 +8,9 @@ namespace App.ContaCorrente.Application.Servicos.Interfaces
 
         Task<SaldoContaCorrenteDTO> GetPeloCorrentistaIdAsync(int? id);
 
-        Task<bool> ValidaSaldo(LancamentoDTO lancamento);
-
-        Task AtulizaSaldo(LancamentoDTO lancamento);
+        Task ValidaSaldoAsync(int correntistaId, int historicoId, decimal valor);
+        
+        Task AtulizaSaldoAsync(int correntistaId, int historicoId, decimal valor);
 
 
     }
