@@ -38,7 +38,7 @@ namespace App.ContaCorrente.Domain.Entidades
         }
 
         public Lancamento(DateTime dataLancamento, decimal valor, string? observacao,int correntistaId, int historicoId)
-        {
+        {           
             ValidarEntidade(dataLancamento, valor, observacao);
             CorrentistaId = correntistaId;
             HistoricoId = historicoId;

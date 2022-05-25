@@ -4,27 +4,22 @@ using App.ContaCorrente.Domain.Mensagem;
 using App.ContaCorrente.Domain.Validacoes;
 using App.ContaCorrente.Infra.Data.Contexto;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace App.ContaCorrente.Infra.Data.Repositorios
 {
-    public class LancamentoFuturoRepositorio : ILancamentoFuturoRepositorio
+    public class EmprestimoRepositorio : IEmprestimoRepositorio
     {
         private AppDbContexto _appDbContexto;
-        public LancamentoFuturoRepositorio(AppDbContexto appDbContexto)
+        public EmprestimoRepositorio(AppDbContexto appDbContexto)
         {
             _appDbContexto = appDbContexto;
-        }
 
-        public async Task<LancamentoFuturo> AlterarAsync(LancamentoFuturo lancamentoFuturo)
+        }
+        public async Task<Emprestimo> AlterarAsync(Emprestimo emprestimo)
         {
             try
             {
-                _appDbContexto.Update(lancamentoFuturo);
+                _appDbContexto.Update(emprestimo);
                 await _appDbContexto.SaveChangesAsync();
             }
             catch
@@ -32,14 +27,14 @@ namespace App.ContaCorrente.Infra.Data.Repositorios
                 throw new DomainException(Mensagens.ErroAoAlterarEntidade);
             }
 
-            return lancamentoFuturo;
+            return emprestimo;
         }
 
-        public async Task<LancamentoFuturo> CriarAsync(LancamentoFuturo lancamentoFuturo)
+        public async Task<Emprestimo> CriarAsync(Emprestimo emprestimo)
         {
             try
             {
-                _appDbContexto.Add(lancamentoFuturo);
+                _appDbContexto.Add(emprestimo);
                 await _appDbContexto.SaveChangesAsync();
             }
             catch
@@ -47,7 +42,7 @@ namespace App.ContaCorrente.Infra.Data.Repositorios
                 throw new DomainException(Mensagens.ErroAoCriarEntidade);
             }
 
-            return lancamentoFuturo;
+            return emprestimo;
         }
 
         public void Dispose()
@@ -55,25 +50,25 @@ namespace App.ContaCorrente.Infra.Data.Repositorios
             GC.SuppressFinalize(this);
         }
 
-        public async Task<IEnumerable<LancamentoFuturo>> GetPeloCorrentistaIdAsync(int? id)
+        public async Task<IEnumerable<Emprestimo>> GetPeloCorrentistaIdAsync(int? id)
         {
             try
             {
-                return await _appDbContexto.LancamentosFuturos.Where(l => l.CorrentistaId == id).ToListAsync();
+                return await _appDbContexto.Emprestimos.Where(e => e.CorrentistaId == id).ToListAsync();
             }
-            catch
+            catch 
             {
                 throw new DomainException(Mensagens.ErroAoEfetuarConsulta);
             }
         }
 
-        public async Task<LancamentoFuturo> GetPeloIdAsync(int? id)
+        public async Task<Emprestimo> GetPeloIdAsync(int? id)
         {
             try
             {
-                return await _appDbContexto.LancamentosFuturos.FirstOrDefaultAsync(h => h.Id == id);
+                return await _appDbContexto.Emprestimos.FirstOrDefaultAsync(e => e.Id == id);
             }
-            catch 
+            catch
             {
                 throw new DomainException(Mensagens.ErroAoEfetuarConsulta);
             }

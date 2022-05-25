@@ -1,9 +1,4 @@
 ﻿using App.ContaCorrente.Application.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace App.ContaCorrente.Application.Servicos.Interfaces
 {
@@ -11,9 +6,7 @@ namespace App.ContaCorrente.Application.Servicos.Interfaces
     {
         Task<LancamentoFuturoDTO> GetPeloIdAsync(int? id);
 
-        Task<IEnumerable<LancamentoFuturoDTO>> GetPeloCorrentistaIdAsync(int? id);
-
-        Task<LancamentoFuturoDTO> AlterarAsync(LancamentoFuturoDTO lancamentoFuturoDto);
+        Task<IEnumerable<LancamentoFuturoDTO>> GetPeloCorrentistaIdAsync(int? id);        
 
         Task<LancamentoFuturoDTO> CriarAsync(LancamentoFuturoDTO lancamentoFuturoDto);
     }

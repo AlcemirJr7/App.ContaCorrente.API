@@ -20,6 +20,7 @@ namespace App.ContaCorrente.Application.Mapeamentos
             CreateMap<Lancamento, LancamentoDTO>().ReverseMap();
             CreateMap<Pagamento, PagamentoDTO>().ReverseMap();
             CreateMap<LancamentoFuturo, LancamentoFuturoDTO>().ReverseMap();
+            CreateMap<Emprestimo, EmprestimoDTO>().ReverseMap();
 
         }
     }
