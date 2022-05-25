@@ -79,6 +79,15 @@ namespace App.ContaCorrente.Domain.Mensagem {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a 0017| Correntista informado não existe..
+        /// </summary>
+        public static string CorrentistaInvalido {
+            get {
+                return ResourceManager.GetString("CorrentistaInvalido", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a 0006| Data invalida..
         /// </summary>
         public static string DataInvalida {
@@ -174,6 +183,15 @@ namespace App.ContaCorrente.Domain.Mensagem {
         public static string ErroAoEfetuarConsulta {
             get {
                 return ResourceManager.GetString("ErroAoEfetuarConsulta", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a 0018| Historico informado não existe..
+        /// </summary>
+        public static string HistoricoInvalido {
+            get {
+                return ResourceManager.GetString("HistoricoInvalido", resourceCulture);
             }
         }
         

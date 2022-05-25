@@ -3,6 +3,7 @@ using App.ContaCorrente.Application.CQRS.Correntistas.Commands;
 using App.ContaCorrente.Application.CQRS.Enderecos.Commands;
 using App.ContaCorrente.Application.CQRS.Historicos.Commands;
 using App.ContaCorrente.Application.CQRS.Lancamentos.Commands;
+using App.ContaCorrente.Application.CQRS.LancamentosFuturos.Commands;
 using App.ContaCorrente.Application.CQRS.LocalTrabalhos.Commands;
 using App.ContaCorrente.Application.CQRS.Pagamentos.Commands;
 using App.ContaCorrente.Application.CQRS.Pessoas.Commands;
@@ -45,7 +46,10 @@ namespace App.ContaCorrente.Application.Mapeamentos
 
             //Pagamento
             CreateMap<PagamentoDTO, PagamentoCriarCommand>();
-            
+
+            //LancamentoFuturo
+            CreateMap<LancamentoFuturoDTO, LancamentoFuturoCriarCommand>();
+
 
 
         }

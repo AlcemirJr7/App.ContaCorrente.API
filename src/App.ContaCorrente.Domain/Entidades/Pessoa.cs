@@ -76,6 +76,7 @@ namespace App.ContaCorrente.Domain.Entidades
             DomainExcepitonValidacao.When(string.IsNullOrEmpty(email1), "Email 1 deve ser informado.");
             DomainExcepitonValidacao.When(string.IsNullOrEmpty(Convert.ToString(dataNascimento)), "Data Nascimento deve ser informado.");
 
+
             if(tipoPessoa == EnumPessoa.PessoaJuridica && nomeEmpresa == null)
             {
                 DomainExcepitonValidacao.When(string.IsNullOrEmpty(nomeEmpresa), "Nome Empresa deve ser informado para tipo pessoa juridica.");
