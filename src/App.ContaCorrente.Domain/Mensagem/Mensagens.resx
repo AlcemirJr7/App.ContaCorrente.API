@@ -123,6 +123,9 @@
   <data name="BancoJaExistente" xml:space="preserve">
     <value>0007| Banco {0} já existe na base.</value>
   </data>
+  <data name="CorrentistaInvalido" xml:space="preserve">
+    <value>0017| Correntista informado não existe.</value>
+  </data>
   <data name="DataInvalida" xml:space="preserve">
     <value>0006| Data invalida.</value>
   </data>
@@ -155,6 +158,9 @@
   </data>
   <data name="ErroAoEfetuarConsulta" xml:space="preserve">
     <value>0004| Erro ao efetuar consulta dos dados.</value>
+  </data>
+  <data name="HistoricoInvalido" xml:space="preserve">
+    <value>0018| Historico informado não existe.</value>
   </data>
   <data name="LocalTrabalhoInvalido" xml:space="preserve">
     <value>0013| Local de trabalho não existe, deve ser informado para pessoa física.</value>

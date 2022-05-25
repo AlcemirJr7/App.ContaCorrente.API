@@ -58,7 +58,7 @@ namespace App.ContaCorrente.Domain.Entidades
 
         private void ValidarEntidade(decimal valor, DateTime dataCadastro, DateTime dataParaLancamento, EnumLancamentoFuturo flagLancamento, DateTime? dataLancamento)
         {
-            DomainExcepitonValidacao.When(valor < 0, "Valor invalido.");
+            DomainExcepitonValidacao.When(valor <= 0, "Valor invalido.");
             DomainExcepitonValidacao.When(string.IsNullOrEmpty(Convert.ToString(dataCadastro)), "Data Cadastro invalido.");
             DomainExcepitonValidacao.When(string.IsNullOrEmpty(Convert.ToString(dataParaLancamento)), "Data para lançamento invalido.");
             DomainExcepitonValidacao.When(!Enum.IsDefined(typeof(EnumLancamentoFuturo),flagLancamento), "Flag lançamento invalido.");
