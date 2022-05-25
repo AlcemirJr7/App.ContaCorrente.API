@@ -48,6 +48,67 @@ namespace App.ContaCorrente.API.Controllers
             return Ok(emprestimoDto);
         }
 
+        /// <summary>
+        /// Busca um emprestimo pelo Id
+        /// </summary>
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<EmprestimoDTO>> GetEmprestimo(int? id)
+        {
+
+            if (id == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
+
+            EmprestimoDTO emprestimoDto = new EmprestimoDTO();
+
+            try
+            {
+                emprestimoDto = await _emprestimoServico.GetPeloIdAsync(id.Value);
+
+                if (emprestimoDto == null) return NotFound(new { mensagem = "Emprestimo não encontrado." });
+
+            }
+            catch (DomainException e)
+            {
+                return BadRequest(new { mensagem = e.Message });
+            }
+            catch (DomainExcepitonValidacao e)
+            {
+                return BadRequest(new { mensagem = e.Message });
+            }
+
+            return Ok(emprestimoDto);
+
+        }
+
+        /// <summary>
+        /// Busca um emprestimo pelo Id do correntista
+        /// </summary>
+        [HttpGet("Correntista/{id:int}")]
+        public async Task<ActionResult<IEnumerable<EmprestimoDTO>>> GetEmprestimos(int? id)
+        {
+            if(id == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
+
+            IEnumerable<EmprestimoDTO> emprestimoDto = new List<EmprestimoDTO>();
+
+            try
+            {
+                emprestimoDto = await _emprestimoServico.GetPeloCorrentistaIdAsync(id.Value);
+
+                if (emprestimoDto.Count() == 0) return NotFound(new { mensagem = "Emprestimos não encontrado." });
+
+            }
+            catch (DomainException e)
+            {
+                return BadRequest(new { mensagem = e.Message });
+            }
+            catch (DomainExcepitonValidacao e)
+            {
+                return BadRequest(new { mensagem = e.Message });
+            }
+
+            return Ok(emprestimoDto);
+
+        }
+
 
     }
 }

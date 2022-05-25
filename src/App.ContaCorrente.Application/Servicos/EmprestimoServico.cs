@@ -1,6 +1,9 @@
 ﻿using App.ContaCorrente.Application.CQRS.Emprestimos.Commands;
+using App.ContaCorrente.Application.CQRS.Emprestimos.Queries;
 using App.ContaCorrente.Application.DTOs;
 using App.ContaCorrente.Application.Servicos.Interfaces;
+using App.ContaCorrente.Domain.Mensagem;
+using App.ContaCorrente.Domain.Validacoes;
 using AutoMapper;
 using MediatR;
 using System;
@@ -35,14 +38,36 @@ namespace App.ContaCorrente.Application.Servicos
             return emprestimo;
         }
 
-        public Task<IEnumerable<EmprestimoDTO>> GetPeloCorrentistaIdAsync(int? id)
+        public async Task<IEnumerable<EmprestimoDTO>> GetPeloCorrentistaIdAsync(int? id)
         {
-            throw new NotImplementedException();
+            var enderecoQuery = new GetEmprestimosPeloCorrentistaIdQuery(id.Value);
+
+            if (enderecoQuery == null)
+            {
+                throw new DomainException(Mensagens.ErroAoCriarEntidade);
+            }
+            else
+            {
+                var result = await _mediator.Send(enderecoQuery);
+
+                return _mapper.Map<IEnumerable<EmprestimoDTO>>(result);
+            }
         }
 
-        public Task<EmprestimoDTO> GetPeloIdAsync(int? id)
+        public async Task<EmprestimoDTO> GetPeloIdAsync(int? id)
         {
-            throw new NotImplementedException();
+            var enderecoQuery = new GetEmprestimoPeloIdQuery(id.Value);
+
+            if (enderecoQuery == null)
+            {
+                throw new DomainException(Mensagens.ErroAoCriarEntidade);
+            }
+            else
+            {
+                var result = await _mediator.Send(enderecoQuery);
+
+                return _mapper.Map<EmprestimoDTO>(result);
+            }
         }
     }
 }
