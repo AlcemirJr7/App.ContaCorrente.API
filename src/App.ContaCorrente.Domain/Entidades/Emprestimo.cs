@@ -57,6 +57,18 @@ namespace App.ContaCorrente.Domain.Entidades
             CorrentistaId = correntistaId;
         }
 
+        public void Atualizar(decimal valor, EnumEmprestimoTipoFinalidade tipoFinalidade, EnumEmprestimoTipoEmprestimo tipoEmprestimo, int qtdParcelas, decimal valorParcela,
+                              decimal juros, DateTime? dataEfetivacao, EnumFlagEstadoEmprestimo flagEstado, 
+                              EnumProcessoEmprestimo flagProcesso, int correntistaId)
+        {
+            
+            DomainExcepitonValidacao.When(flagEstado == EnumFlagEstadoEmprestimo.Efetivado, "Emrepstimo efetivado não pode ser alterado.");
+            
+            ValidarEntidade(valor, tipoFinalidade, tipoEmprestimo, qtdParcelas, valorParcela, juros, dataEfetivacao, flagEstado, flagProcesso);
+            CorrentistaId = correntistaId;
+
+        }
+
         private void ValidarEntidade(decimal valor, EnumEmprestimoTipoFinalidade tipoFinalidade, EnumEmprestimoTipoEmprestimo tipoEmprestimo, int qtdParcelas, decimal valorParcela,
                                      decimal juros, DateTime? dataEfetivacao, EnumFlagEstadoEmprestimo flagEstado, EnumProcessoEmprestimo flagProcesso)
         {

@@ -109,6 +109,32 @@ namespace App.ContaCorrente.API.Controllers
 
         }
 
+        /// <summary>
+        /// Atualiza um emprestimo pelo Id
+        /// </summary>       
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult<EmprestimoDTO>> PutEmprestimo(int? id, [FromBody] EmprestimoDTO enderecoDto)
+        {
+            if (enderecoDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
+
+            if (id == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
+            
+            try
+            {
+                enderecoDto = await _emprestimoServico.AlterarAsync(enderecoDto);
+
+            }
+            catch (DomainException e)
+            {
+                return BadRequest(new { mensagem = e.Message });
+            }
+            catch (DomainExcepitonValidacao e)
+            {
+                return BadRequest(new { mensagem = e.Message });
+            }
+            return Ok(enderecoDto);
+        }
+
 
     }
 }
