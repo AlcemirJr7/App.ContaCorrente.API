@@ -39,7 +39,7 @@ namespace App.ContaCorrente.Domain.Entidades
         public Emprestimo(decimal valor, EnumEmprestimoTipoFinalidade tipoFinalidade, EnumEmprestimoTipoEmprestimo tipoEmprestimo, int qtdParcelas, decimal valorParcela, 
                           decimal juros,DateTime? dataEfetivacao, EnumFlagEstadoEmprestimo flagEstado, EnumProcessoEmprestimo flagProcesso)
         {
-            ValidarEntidade(valor, tipoFinalidade, tipoEmprestimo, qtdParcelas, valorParcela, juros, dataEfetivacao, flagEstado, flagProcesso);
+            ValidarEntidade(valor, tipoFinalidade, tipoEmprestimo, qtdParcelas, valorParcela, juros, dataEfetivacao, flagEstado, flagProcesso);            
         }
 
         public Emprestimo(int id,decimal valor, EnumEmprestimoTipoFinalidade tipoFinalidade, EnumEmprestimoTipoEmprestimo tipoEmprestimo, int qtdParcelas, decimal valorParcela,
@@ -50,9 +50,10 @@ namespace App.ContaCorrente.Domain.Entidades
             ValidarEntidade(valor, tipoFinalidade, tipoEmprestimo, qtdParcelas, valorParcela, juros, dataEfetivacao, flagEstado, flagProcesso);
         }
         public Emprestimo(decimal valor, EnumEmprestimoTipoFinalidade tipoFinalidade, EnumEmprestimoTipoEmprestimo tipoEmprestimo, int qtdParcelas, decimal valorParcela,
-                          decimal juros, DateTime? dataEfetivacao, EnumFlagEstadoEmprestimo flagEstado, EnumProcessoEmprestimo flagProcesso, int correntistaId)
+                          decimal juros, DateTime? dataEfetivacao, DateTime dataCadastro, EnumFlagEstadoEmprestimo flagEstado, EnumProcessoEmprestimo flagProcesso, int correntistaId)
         {
-            ValidarEntidade(valor, tipoFinalidade, tipoEmprestimo, qtdParcelas, valorParcela, juros, dataEfetivacao, flagEstado, flagProcesso);
+            ValidarEntidade(valor, tipoFinalidade, tipoEmprestimo, qtdParcelas, valorParcela, juros, dataEfetivacao,  flagEstado, flagProcesso);
+            DataCadastro = dataCadastro;
             CorrentistaId = correntistaId;
         }
 
@@ -66,7 +67,7 @@ namespace App.ContaCorrente.Domain.Entidades
             DomainExcepitonValidacao.When(!Enum.IsDefined(typeof(EnumProcessoEmprestimo), flagProcesso), "Flag processo Emprestimo invalido.");
             DomainExcepitonValidacao.When(juros <= 0, "Juros Emprestimo invalido.");
             DomainExcepitonValidacao.When(qtdParcelas <= 0, "Quantidade de parcelas Emprestimo invalido.");
-            DomainExcepitonValidacao.When(valorParcela <= 0, "Valor parcela Emprestimo invalido.");
+            DomainExcepitonValidacao.When(valorParcela < 0, "Valor parcela Emprestimo invalido.");
 
             Valor = valor;
             TipoFinalidade = tipoFinalidade;    
@@ -76,8 +77,7 @@ namespace App.ContaCorrente.Domain.Entidades
             Juros = juros;
             DataEfetivacao = dataEfetivacao;
             FlagEstado = flagEstado;
-            FlagProcesso = flagProcesso;
-            DataCadastro = DateTime.UtcNow;
+            FlagProcesso = flagProcesso;            
         }
     }
 }

@@ -1,6 +1,10 @@
 ﻿using App.ContaCorrente.Application.CQRS.LancamentosFuturos.Commands;
+using App.ContaCorrente.Application.CQRS.LancamentosFuturos.Queries;
 using App.ContaCorrente.Application.DTOs;
 using App.ContaCorrente.Application.Servicos.Interfaces;
+using App.ContaCorrente.Domain.Entidades;
+using App.ContaCorrente.Domain.Mensagem;
+using App.ContaCorrente.Domain.Validacoes;
 using AutoMapper;
 using MediatR;
 
@@ -16,12 +20,7 @@ namespace App.ContaCorrente.Application.Servicos
         {
             _mediator = mediator;
             _mapper = mapper;
-        }
-
-        public Task<LancamentoFuturoDTO> AlterarAsync(LancamentoFuturoDTO lancamentoFuturoDto)
-        {
-            throw new NotImplementedException();
-        }
+        }        
 
         public async Task<LancamentoFuturoDTO> CriarAsync(LancamentoFuturoDTO lancamentoFuturoDto)
         {
@@ -35,14 +34,33 @@ namespace App.ContaCorrente.Application.Servicos
 
         }
 
-        public Task<IEnumerable<LancamentoFuturoDTO>> GetPeloCorrentistaIdAsync(int? id)
+        public async Task<IEnumerable<LancamentoFuturoDTO>> GetPeloCorrentistaIdAsync(int? id)
         {
-            throw new NotImplementedException();
+            var lancamentoQuery = new GetLancamentoFuturoPeloCorrentistaIdQuery(id.Value);
+
+            if (lancamentoQuery == null)
+            {
+
+                throw new DomainException(String.Format(Mensagens.EntidadeNaoCarregada, nameof(Lancamento)));
+            }
+
+            var result = await _mediator.Send(lancamentoQuery);
+
+            return _mapper.Map<IEnumerable<LancamentoFuturoDTO>>(result);
         }
 
-        public Task<LancamentoFuturoDTO> GetPeloIdAsync(int? id)
+        public async Task<LancamentoFuturoDTO> GetPeloIdAsync(int? id)
         {
-            throw new NotImplementedException();
+            var lancamentoQuery = new GetLancamentoFuturoPeloIdQuery(id.Value);
+
+            if (lancamentoQuery == null){
+
+                throw new DomainException(String.Format(Mensagens.EntidadeNaoCarregada, nameof(Lancamento)));
+            }
+
+            var result = await _mediator.Send(lancamentoQuery);
+
+            return _mapper.Map<LancamentoFuturoDTO>(result);
         }
     }
 }

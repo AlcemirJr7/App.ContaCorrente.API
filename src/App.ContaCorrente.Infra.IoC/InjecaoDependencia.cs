@@ -36,6 +36,7 @@ namespace App.ContaCorrente.Infra.IoC
             services.AddScoped<ILancamentoRepositorio, LancamentoRepositorio>();
             services.AddScoped<IPagamentoRepositorio, PagamentoRepositorio>();
             services.AddScoped<ILancamentoFuturoRepositorio, LancamentoFuturoRepositorio>();
+            services.AddScoped<IEmprestimoRepositorio, EmprestimoRepositorio>();
 
 
             // serviços
@@ -49,6 +50,7 @@ namespace App.ContaCorrente.Infra.IoC
             services.AddScoped<ILancamentoServico, LancamentoServico>();
             services.AddScoped<IPagamentoServico, PagamentoServico>();
             services.AddScoped<ILancamentoFuturoServico, LancamentoFuturoServico>();
+            services.AddScoped<IEmprestimoServico, EmprestimoServico>();
 
 
             var myHandlers = AppDomain.CurrentDomain.Load("App.ContaCorrente.Application");

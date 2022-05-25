@@ -1,5 +1,6 @@
 ﻿using App.ContaCorrente.Application.CQRS.Bancos.Commands;
 using App.ContaCorrente.Application.CQRS.Correntistas.Commands;
+using App.ContaCorrente.Application.CQRS.Emprestimos.Commands;
 using App.ContaCorrente.Application.CQRS.Enderecos.Commands;
 using App.ContaCorrente.Application.CQRS.Historicos.Commands;
 using App.ContaCorrente.Application.CQRS.Lancamentos.Commands;
@@ -49,6 +50,9 @@ namespace App.ContaCorrente.Application.Mapeamentos
 
             //LancamentoFuturo
             CreateMap<LancamentoFuturoDTO, LancamentoFuturoCriarCommand>();
+
+            //Emprestimo
+            CreateMap<EmprestimoDTO, EmprestimoCriarCommand>();
 
 
 
