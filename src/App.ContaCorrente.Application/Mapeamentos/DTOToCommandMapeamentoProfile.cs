@@ -53,6 +53,7 @@ namespace App.ContaCorrente.Application.Mapeamentos
 
             //Emprestimo
             CreateMap<EmprestimoDTO, EmprestimoCriarCommand>();
+            CreateMap<EmprestimoDTO, EmprestimoAlterarCommand>();
 
 
 

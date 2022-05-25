@@ -24,9 +24,13 @@ namespace App.ContaCorrente.Application.Servicos
             _mapper = mapper;
         }
 
-        public Task<EmprestimoDTO> AlterarAsync(EmprestimoDTO emprestimoDto)
+        public async Task<EmprestimoDTO> AlterarAsync(EmprestimoDTO emprestimoDto)
         {
-            throw new NotImplementedException();
+            var emprestimoAlterarCommand = _mapper.Map<EmprestimoAlterarCommand>(emprestimoDto);
+            var result = await _mediator.Send(emprestimoAlterarCommand);
+            var emprestimo = _mapper.Map<EmprestimoDTO>(result);
+
+            return emprestimo;
         }
 
         public async Task<EmprestimoDTO> CriarAsync(EmprestimoDTO emprestimoDto)
