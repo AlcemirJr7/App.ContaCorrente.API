@@ -6,6 +6,11 @@ namespace App.ContaCorrente.Application.DTOs
 {
     public class CorrentistaAlteraDTO
     {
+        public CorrentistaAlteraDTO()
+        {
+                
+        }
+
         [JsonIgnore]
         public int Id { get; set; }
 

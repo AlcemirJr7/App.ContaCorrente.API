@@ -2,6 +2,7 @@
 using App.ContaCorrente.Application.Servicos.Interfaces;
 using App.ContaCorrente.Domain.Mensagem;
 using App.ContaCorrente.Domain.Validacoes;
+using App.ContaCorrente.Infra.Data.Contexto;
 using Microsoft.AspNetCore.Mvc;
 
 namespace App.ContaCorrente.API.Controllers
@@ -13,9 +14,11 @@ namespace App.ContaCorrente.API.Controllers
     public class LancamentoFuturoController : ControllerBase
     {
         private readonly ILancamentoFuturoServico _lancamentoFuturoServico;
-        public LancamentoFuturoController(ILancamentoFuturoServico lancamentoFuturoServico)
+        private readonly AppDbContexto _appDbContexto;
+        public LancamentoFuturoController(ILancamentoFuturoServico lancamentoFuturoServico, AppDbContexto appDbContexto)
         {
             _lancamentoFuturoServico = lancamentoFuturoServico;
+            _appDbContexto = appDbContexto; 
         }
 
         /// <summary>
@@ -27,18 +30,23 @@ namespace App.ContaCorrente.API.Controllers
         {
             if (lancamentoFuturoDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });            
 
+            using var tr = await _appDbContexto.Database.BeginTransactionAsync();
             try
             {
                 lancamentoFuturoDto = await _lancamentoFuturoServico.CriarAsync(lancamentoFuturoDto);
             }
             catch (DomainException e)
             {
+                await tr.RollbackAsync();
                 return BadRequest(new { mensagem = e.Message });
             }
             catch (DomainExcepitonValidacao e)
             {
+                await tr.RollbackAsync();
                 return BadRequest(new { mensagem = e.Message });
             }
+
+            await tr.CommitAsync();
 
             return Ok(lancamentoFuturoDto);
         }

@@ -2,6 +2,7 @@
 using App.ContaCorrente.Application.Servicos.Interfaces;
 using App.ContaCorrente.Domain.Mensagem;
 using App.ContaCorrente.Domain.Validacoes;
+using App.ContaCorrente.Infra.Data.Contexto;
 using Microsoft.AspNetCore.Mvc;
 
 namespace App.ContaCorrente.API.Controllers
@@ -12,9 +13,11 @@ namespace App.ContaCorrente.API.Controllers
     public class HistoricoController : ControllerBase
     {
         private readonly IHistoricoServico _historicoServico;
-        public HistoricoController(IHistoricoServico historicoServico)
+        private readonly AppDbContexto _appDbContexto;
+        public HistoricoController(IHistoricoServico historicoServico, AppDbContexto appDbContexto)
         {
             _historicoServico = historicoServico;
+            _appDbContexto = appDbContexto; 
         }
 
         /// <summary>
@@ -31,19 +34,25 @@ namespace App.ContaCorrente.API.Controllers
 
             HistoricoDTO? historico = null;
 
+            using var tr = await _appDbContexto.Database.BeginTransactionAsync();
+
             try
             {
                 historico = await _historicoServico.CriarAsync(historicoDto);
             }
             catch (DomainException e)
-            {                
+            {     
+                await tr.RollbackAsync();
                 return BadRequest(new { mensagem = e.Message });
             }
             catch (DomainExcepitonValidacao e)
-            {                
+            {
+                await tr.RollbackAsync();
                 return BadRequest(new { mensagem = e.Message });                
             }
             
+            await tr.CommitAsync();
+
             return Ok(historico);
         }
 
@@ -57,19 +66,25 @@ namespace App.ContaCorrente.API.Controllers
             if (id == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
             
             var historico = new object();
-            
+
+            using var tr = await _appDbContexto.Database.BeginTransactionAsync();
+
             try
             {                
                 historico = await _historicoServico.AlterarAsync(historicoDto);
             }
             catch (DomainException e)
             {
+                await tr.RollbackAsync();
                 return BadRequest(new { mensagem = e.Message });
             }
             catch (DomainExcepitonValidacao e)
             {
+                await tr.RollbackAsync();
                 return BadRequest(new { mensagem = e.Message });
             }
+
+            await tr.CommitAsync();
 
             return Ok(historico);
         }

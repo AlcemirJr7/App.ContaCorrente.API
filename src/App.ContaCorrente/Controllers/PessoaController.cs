@@ -2,6 +2,7 @@
 using App.ContaCorrente.Application.Servicos.Interfaces;
 using App.ContaCorrente.Domain.Mensagem;
 using App.ContaCorrente.Domain.Validacoes;
+using App.ContaCorrente.Infra.Data.Contexto;
 using Microsoft.AspNetCore.Mvc;
 
 namespace App.ContaCorrente.API.Controllers
@@ -12,9 +13,11 @@ namespace App.ContaCorrente.API.Controllers
     public class PessoaController : ControllerBase
     {
         private readonly IPessoaServico _pessoaServico;
-        public PessoaController(IPessoaServico pessoaServico)
+        private readonly AppDbContexto _appDbContexto;
+        public PessoaController(IPessoaServico pessoaServico, AppDbContexto appDbContexto)
         {
             _pessoaServico = pessoaServico;
+            _appDbContexto = appDbContexto;
         }
 
         /// <summary>
@@ -30,18 +33,25 @@ namespace App.ContaCorrente.API.Controllers
             if (pessoaDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
 
             PessoaDTO? pessoa = null;
+
+            using var tr = await _appDbContexto.Database.BeginTransactionAsync();
+
             try
             {
                 pessoa = await _pessoaServico.CriarAsync(pessoaDto);
             }
             catch (DomainException e)
             {
+                await tr.RollbackAsync();
                 return BadRequest(new { mensagem = e.Message });
             }
             catch (DomainExcepitonValidacao e)
             {
+                await tr.RollbackAsync();
                 return BadRequest(new { mensagem = e.Message });
             }
+
+            await tr.CommitAsync();
 
             return Ok(pessoa); 
         }
@@ -60,18 +70,25 @@ namespace App.ContaCorrente.API.Controllers
             if (pessoaDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
 
             PessoaDTO? pessoa = null;
+
+            using var tr = await _appDbContexto.Database.BeginTransactionAsync();
+
             try
             {                
                 pessoa = await _pessoaServico.AlterarAsync(pessoaDto);
             }
             catch (DomainException e)
             {
+                await tr.RollbackAsync();
                 return BadRequest(new { mensagem = e.Message });
             }
             catch (DomainExcepitonValidacao e)
             {
+                await tr.RollbackAsync();
                 return BadRequest(new { mensagem = e.Message });
             }
+
+            await tr.CommitAsync();
 
             return Ok(pessoa);
         }

@@ -3,6 +3,7 @@ using App.ContaCorrente.Application.Servicos.Interfaces;
 using App.ContaCorrente.Domain.Entidades;
 using App.ContaCorrente.Domain.Mensagem;
 using App.ContaCorrente.Domain.Validacoes;
+using App.ContaCorrente.Infra.Data.Contexto;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,9 +15,11 @@ namespace App.ContaCorrente.API.Controllers
     public class CorrentistaController : ControllerBase
     {
         private readonly ICorrentistaServico _correntistaServico;
-        public CorrentistaController(ICorrentistaServico correntistaServico)
+        private readonly AppDbContexto _appDbContexto;
+        public CorrentistaController(ICorrentistaServico correntistaServico, AppDbContexto appDbContexto)
         {
-            _correntistaServico = correntistaServico;   
+            _correntistaServico = correntistaServico;
+            _appDbContexto = appDbContexto; 
         }
 
         /// <summary>
@@ -29,6 +32,8 @@ namespace App.ContaCorrente.API.Controllers
             if (correntistaDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
 
             Correntista? correntista = null;
+
+            using var tr = await _appDbContexto.Database.BeginTransactionAsync();   
             try
             {
                 correntista = await _correntistaServico.CriarAsync(correntistaDto);
@@ -36,12 +41,16 @@ namespace App.ContaCorrente.API.Controllers
             }
             catch (DomainException e)
             {
+                await tr.RollbackAsync();   
                 return BadRequest(new { mensagem = e.Message });
             }
             catch (DomainExcepitonValidacao e)
             {
+                await tr.RollbackAsync();
                 return BadRequest(new { mensagem = e.Message });
             }
+
+            await tr.CommitAsync();
 
             return Ok(correntista);
         }
@@ -56,20 +65,28 @@ namespace App.ContaCorrente.API.Controllers
 
             if (id == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
 
-            CorrentistaAlteraDTO?  correntista = null;
+            CorrentistaAlteraDTO correntista = new CorrentistaAlteraDTO();
+
+            using var tr = await _appDbContexto.Database.BeginTransactionAsync();
 
             try
-            {                
+            {
+                correntistaAlteraDto.Id = id.Value;
                 correntista = await _correntistaServico.AlterarAsync(correntistaAlteraDto);                
             }
             catch (DomainException e)
             {
+                await tr.RollbackAsync();
                 return BadRequest(new { mensagem = e.Message });
             }
             catch (DomainExcepitonValidacao e)
             {
+                await tr.RollbackAsync();
                 return BadRequest(new { mensagem = e.Message });
             }
+
+            await tr.CommitAsync(); 
+
             return Ok(correntista);
         }
 
