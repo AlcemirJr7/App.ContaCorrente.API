@@ -2,6 +2,7 @@
 using App.ContaCorrente.Application.Servicos.Interfaces;
 using App.ContaCorrente.Domain.Mensagem;
 using App.ContaCorrente.Domain.Validacoes;
+using App.ContaCorrente.Infra.Data.Contexto;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -13,9 +14,11 @@ namespace App.ContaCorrente.API.Controllers
     public class BancoController : ControllerBase
     {
         private readonly IBancoServico _bancoServico;
-        public BancoController(IBancoServico bancoServico)
+        private readonly AppDbContexto _appDbContexto;
+        public BancoController(IBancoServico bancoServico, AppDbContexto appDbContexto)
         {
             _bancoServico = bancoServico;
+            _appDbContexto = appDbContexto; 
         }
         /// <summary>
         /// busca um lista de bacos
@@ -79,19 +82,25 @@ namespace App.ContaCorrente.API.Controllers
             if (bancoDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
 
             BancoDTO? banco = null;
+
+            using var tr = await _appDbContexto.Database.BeginTransactionAsync();
+
             try
             {
                 banco = await _bancoServico.CriarAsync(bancoDto);                
             }
             catch (DomainException e)
             {
+                await tr.RollbackAsync();
                 return BadRequest(new { mensagem = e.Message });
             }
             catch (DomainExcepitonValidacao e)
             {
+                await tr.RollbackAsync();
                 return BadRequest(new { mensagem = e.Message });
             }
-            
+            await tr.CommitAsync();
+
             return Ok(banco);
         }
 
@@ -105,6 +114,8 @@ namespace App.ContaCorrente.API.Controllers
 
             BancoDTO? banco = null;
 
+            using var tr = await _appDbContexto.Database.BeginTransactionAsync();
+
             if (bancoDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
             try
             {
@@ -112,12 +123,15 @@ namespace App.ContaCorrente.API.Controllers
             }
             catch (DomainException e)
             {
+                await tr.RollbackAsync();
                 return BadRequest(new { mensagem = e.Message });
             }
             catch (DomainExcepitonValidacao e)
             {
+                await tr.RollbackAsync();
                 return BadRequest(new { mensagem = e.Message });
             }
+            await tr.CommitAsync();
 
             return Ok(banco);
         }

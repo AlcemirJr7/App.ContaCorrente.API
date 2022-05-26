@@ -2,6 +2,7 @@
 using App.ContaCorrente.Application.Servicos.Interfaces;
 using App.ContaCorrente.Domain.Mensagem;
 using App.ContaCorrente.Domain.Validacoes;
+using App.ContaCorrente.Infra.Data.Contexto;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,9 +14,11 @@ namespace App.ContaCorrente.API.Controllers
     public class LocalTrabalhoController : ControllerBase
     {
         private readonly ILocalTrabalhoServico _localTrabalhoServico;
-        public LocalTrabalhoController(ILocalTrabalhoServico localTrabalhoServico)
+        private readonly AppDbContexto _appDbContexto;
+        public LocalTrabalhoController(ILocalTrabalhoServico localTrabalhoServico, AppDbContexto appDbContexto)
         {
             _localTrabalhoServico = localTrabalhoServico;
+            _appDbContexto = appDbContexto; 
         }
 
         /// <summary>
@@ -28,19 +31,25 @@ namespace App.ContaCorrente.API.Controllers
             if (localTrabalhoDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
 
             LocalTrabalhoDTO? localTrabalho = null;
-            
+
+            using var tr = await _appDbContexto.Database.BeginTransactionAsync();
+
             try
             {
                 localTrabalho = await _localTrabalhoServico.CriarAsync(localTrabalhoDto);
             }
             catch (DomainException e)
             {
+                await tr.RollbackAsync();
                 return BadRequest(new { mensagem = e.Message });
             }
             catch (DomainExcepitonValidacao e)
             {
+                await tr.RollbackAsync();
                 return BadRequest(new { mensagem = e.Message });
             }
+
+            await tr.CommitAsync();
 
             return Ok(localTrabalho); 
         }
@@ -56,18 +65,24 @@ namespace App.ContaCorrente.API.Controllers
 
             LocalTrabalhoDTO? localTrabalho = null;
 
+            using var tr = await _appDbContexto.Database.BeginTransactionAsync();
+
             try
             {                
                 localTrabalho = await _localTrabalhoServico.AlterarAsync(localTrabalhoDto);
             }
             catch (DomainException e)
             {
+                await tr.RollbackAsync();
                 return BadRequest(new { mensagem = e.Message });
             }
             catch (DomainExcepitonValidacao e)
             {
+                await tr.RollbackAsync();
                 return BadRequest(new { mensagem = e.Message });
             }
+
+            await tr.CommitAsync();
 
             return Ok(localTrabalho);
         }

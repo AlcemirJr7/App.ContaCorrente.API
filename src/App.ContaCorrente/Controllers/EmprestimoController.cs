@@ -33,19 +33,24 @@ namespace App.ContaCorrente.API.Controllers
         public async Task<ActionResult<EmprestimoDTO>> PostEmprestimo([FromBody] EmprestimoDTO emprestimoDto)
         {
             if (emprestimoDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
-            
+
+            using var tr = await _appDbContexto.Database.BeginTransactionAsync();
+
             try
             {
                 emprestimoDto = await _emprestimoServico.CriarAsync(emprestimoDto);
             }
             catch (DomainException e)
             {
+                await tr.RollbackAsync();
                 return BadRequest(new { mensagem = e.Message });
             }
             catch (DomainExcepitonValidacao e)
             {
+                await tr.RollbackAsync();
                 return BadRequest(new { mensagem = e.Message });
             }
+            await tr.CommitAsync();
 
             return Ok(emprestimoDto);
         }
@@ -181,6 +186,8 @@ namespace App.ContaCorrente.API.Controllers
 
             if (id == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
             
+            using var tr = await _appDbContexto.Database.BeginTransactionAsync();   
+
             try
             {
                 enderecoDto = await _emprestimoServico.AlterarAsync(enderecoDto);
@@ -188,12 +195,17 @@ namespace App.ContaCorrente.API.Controllers
             }
             catch (DomainException e)
             {
+                await tr.RollbackAsync();
                 return BadRequest(new { mensagem = e.Message });
             }
             catch (DomainExcepitonValidacao e)
             {
+                await tr.RollbackAsync();
                 return BadRequest(new { mensagem = e.Message });
             }
+
+            await tr.CommitAsync();
+
             return Ok(enderecoDto);
         }
 

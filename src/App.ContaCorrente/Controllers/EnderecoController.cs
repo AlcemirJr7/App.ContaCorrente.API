@@ -2,6 +2,7 @@
 using App.ContaCorrente.Application.Servicos.Interfaces;
 using App.ContaCorrente.Domain.Mensagem;
 using App.ContaCorrente.Domain.Validacoes;
+using App.ContaCorrente.Infra.Data.Contexto;
 using Microsoft.AspNetCore.Mvc;
 
 namespace App.ContaCorrente.API.Controllers
@@ -12,9 +13,11 @@ namespace App.ContaCorrente.API.Controllers
     public class EnderecoController : ControllerBase
     {
         private readonly IEnderecoServico _enderecoServico;
-        public EnderecoController(IEnderecoServico enderecoServico)
+        private readonly AppDbContexto _appDbContexto;
+        public EnderecoController(IEnderecoServico enderecoServico, AppDbContexto appDbContexto)
         {
             _enderecoServico = enderecoServico;
+            _appDbContexto = appDbContexto; 
         }
 
         /// <summary>
@@ -53,19 +56,25 @@ namespace App.ContaCorrente.API.Controllers
             if (enderecoDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
 
             EnderecoDTO? endereco = null;
-            
+
+            using var tr = await _appDbContexto.Database.BeginTransactionAsync();
+
             try
             {
                 endereco = await _enderecoServico.CriarAsync(enderecoDto);
             }
             catch (DomainException e)
             {
+                await tr.RollbackAsync();
                 return BadRequest(new { mensagem = e.Message });
             }
             catch (DomainExcepitonValidacao e)
             {
+                await tr.RollbackAsync();
                 return BadRequest(new { mensagem = e.Message });
             }
+
+            await tr.CommitAsync();
 
             return Ok(endereco);
 
@@ -82,7 +91,9 @@ namespace App.ContaCorrente.API.Controllers
             if (id == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
 
             EnderecoDTO? endereco = null;
-            
+
+            using var tr = await _appDbContexto.Database.BeginTransactionAsync();
+
             try
             {                
                 endereco = await _enderecoServico.AlterarAsync(enderecoDto);
@@ -90,12 +101,17 @@ namespace App.ContaCorrente.API.Controllers
             }
             catch (DomainException e)
             {
+                await tr.RollbackAsync();
                 return BadRequest(new { mensagem = e.Message });
             }
             catch (DomainExcepitonValidacao e)
             {
+                await tr.RollbackAsync();
                 return BadRequest(new { mensagem = e.Message });
             }
+
+            await tr.CommitAsync();
+
             return Ok(endereco);
         }
 
@@ -117,6 +133,8 @@ namespace App.ContaCorrente.API.Controllers
             }
 
             EnderecoDTO? endereco = null;
+            
+            using var tr = await _appDbContexto.Database.BeginTransactionAsync();
 
             try
             {                
@@ -124,12 +142,16 @@ namespace App.ContaCorrente.API.Controllers
             }
             catch (DomainException e)
             {
+                await tr.RollbackAsync();
                 return BadRequest(new { mensagem = e.Message });
             }
             catch (DomainExcepitonValidacao e)
             {
+                await tr.RollbackAsync();
                 return BadRequest(new { mensagem = e.Message });
             }
+
+            await tr.CommitAsync();
 
             return Ok(endereco);
         }
