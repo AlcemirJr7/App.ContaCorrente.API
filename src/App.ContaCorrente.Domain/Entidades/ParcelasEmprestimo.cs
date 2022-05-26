@@ -50,9 +50,9 @@ namespace App.ContaCorrente.Domain.Entidades
 
         private void ValidarEntidade(decimal valor, int seqParcelas, DateTime dataVencimento, DateTime? dataPagamento)
         {
-            DomainExcepitonValidacao.When(valor < 0, "Valor da parcela do emprestimo invalido.");
+            DomainExcepitonValidacao.When(valor <= 0, "Valor da parcela do emprestimo invalido.");
             DomainExcepitonValidacao.When(string.IsNullOrEmpty(Convert.ToString(dataVencimento)), "Data de vencimento do emprestimo deve ser informado.");
-            DomainExcepitonValidacao.When(seqParcelas < 0, "Sequencia da parcela do emprestimo invalido.");
+            DomainExcepitonValidacao.When(seqParcelas <= 0, "Sequencia da parcela do emprestimo invalido.");
 
 
             Valor = valor;

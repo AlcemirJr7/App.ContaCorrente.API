@@ -1,10 +1,5 @@
 ﻿using App.ContaCorrente.Domain.Enumerador;
 using App.ContaCorrente.Domain.Validacoes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace App.ContaCorrente.Domain.Entidades
 {
@@ -64,6 +59,16 @@ namespace App.ContaCorrente.Domain.Entidades
             
             DomainExcepitonValidacao.When(flagEstado == EnumFlagEstadoEmprestimo.Efetivado, "Emrepstimo efetivado não pode ser alterado.");
             
+            ValidarEntidade(valor, tipoFinalidade, tipoEmprestimo, qtdParcelas, valorParcela, juros, dataEfetivacao, flagEstado, flagProcesso);
+            CorrentistaId = correntistaId;
+
+        }
+
+        public void AtualizarEfetivacao(decimal valor, EnumEmprestimoTipoFinalidade tipoFinalidade, EnumEmprestimoTipoEmprestimo tipoEmprestimo, int qtdParcelas, decimal valorParcela,
+                                        decimal juros, DateTime? dataEfetivacao, EnumFlagEstadoEmprestimo flagEstado, EnumProcessoEmprestimo flagProcesso, int correntistaId)
+        {
+            DomainExcepitonValidacao.When(flagEstado == EnumFlagEstadoEmprestimo.Efetivado, "Emrepstimo já efetivado.");
+
             ValidarEntidade(valor, tipoFinalidade, tipoEmprestimo, qtdParcelas, valorParcela, juros, dataEfetivacao, flagEstado, flagProcesso);
             CorrentistaId = correntistaId;
 

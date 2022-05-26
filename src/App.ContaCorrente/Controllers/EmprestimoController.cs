@@ -48,6 +48,58 @@ namespace App.ContaCorrente.API.Controllers
             return Ok(emprestimoDto);
         }
 
+        public enum EnumFlagEstadoEmprestimo
+        {
+            Proposta = 1,
+            Efetivado = 2
+
+        }
+
+        public enum EnumProcessoEmprestimo
+        {
+            EmAnalise = 1,
+            Rejeitado = 2,
+            Aprovado = 3
+
+        }
+
+        /// <summary>
+        /// Efetiva um emprestimo pelo Id
+        /// </summary>
+        /// <remarks>
+        ///  
+        ///  TipoFinalidade:  1 - Pagar Dividas | 2 - Construir | 3 - Comprar Carro | 4 - Viajar | 5 - Despesas Medicas | 6 - Outros  
+        ///  
+        ///  TipoEmprestimo:  1 - Financiamento | 2 - Emprestimo Pessoal | 3 - Emprestimo Cheque Especial
+        ///  
+        ///  FlagEstado: 1 - Proposta | 2 Efetivado
+        ///  
+        ///  FlagProcesso: 1 - Em Analise | 2 - Rejeitado | 3 - Aprovado
+        ///  
+        /// </remarks>        
+        /// <param name="id"> Id do emprestimo </param>       
+        [HttpPost("Efetiva/{id:int}")]
+        public async Task<ActionResult<EmprestimoEfetivarDTO>> PostEfetivaEmprestimo(int? id)
+        {
+            if (id == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
+
+            EmprestimoEfetivarDTO emprestimoEfetivarDto = new EmprestimoEfetivarDTO();
+            try
+            {
+                emprestimoEfetivarDto = await _emprestimoServico.EfetivarEmprestimoAsync(id);
+            }
+            catch (DomainException e)
+            {
+                return BadRequest(new { mensagem = e.Message });
+            }
+            catch (DomainExcepitonValidacao e)
+            {
+                return BadRequest(new { mensagem = e.Message });
+            }
+
+            return Ok(emprestimoEfetivarDto);
+        }
+
         /// <summary>
         /// Busca um emprestimo pelo Id
         /// </summary>
