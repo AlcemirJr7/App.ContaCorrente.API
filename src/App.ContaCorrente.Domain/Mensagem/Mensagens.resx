@@ -150,6 +150,9 @@
   <data name="ErroAoCriarEntidade" xml:space="preserve">
     <value>0001| Erro ao criar entidade.</value>
   </data>
+  <data name="ErroAoCriarParcelasEmprestimo" xml:space="preserve">
+    <value>0020| Não foi possível gerar as parcelas do emprestimo.</value>
+  </data>
   <data name="ErroAoCriarSaldoContaCorrente" xml:space="preserve">
     <value>0014| Não foi possível criar saldo da conta corrente.</value>
   </data>

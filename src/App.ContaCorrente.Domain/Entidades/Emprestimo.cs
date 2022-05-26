@@ -67,7 +67,7 @@ namespace App.ContaCorrente.Domain.Entidades
         public void AtualizarEfetivacao(decimal valor, EnumEmprestimoTipoFinalidade tipoFinalidade, EnumEmprestimoTipoEmprestimo tipoEmprestimo, int qtdParcelas, decimal valorParcela,
                                         decimal juros, DateTime? dataEfetivacao, EnumFlagEstadoEmprestimo flagEstado, EnumProcessoEmprestimo flagProcesso, int correntistaId)
         {
-            DomainExcepitonValidacao.When(flagEstado == EnumFlagEstadoEmprestimo.Efetivado, "Emrepstimo já efetivado.");
+            DomainExcepitonValidacao.When(FlagEstado == EnumFlagEstadoEmprestimo.Efetivado, "Emrepstimo já efetivado.");
 
             ValidarEntidade(valor, tipoFinalidade, tipoEmprestimo, qtdParcelas, valorParcela, juros, dataEfetivacao, flagEstado, flagProcesso);
             CorrentistaId = correntistaId;
