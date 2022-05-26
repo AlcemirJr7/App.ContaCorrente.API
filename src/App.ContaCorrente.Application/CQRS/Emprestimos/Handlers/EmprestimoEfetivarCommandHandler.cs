@@ -19,7 +19,7 @@ namespace App.ContaCorrente.Application.CQRS.Emprestimos.Handlers
         private readonly IParcelasEmprestimoRepositorio _parcelasEmprestimoRepositorio;
         private readonly ILancamentoRepositorio _lancamentoRepositorio;
         private readonly ISaldoContaCorrenteServico _saldoContaCorrenteServico;
-        private readonly IMapper _mapper;
+        private readonly IMapper _mapper;        
         public EmprestimoEfetivarCommandHandler(IEmprestimoRepositorio emprestimoRepositorio, IEmprestimoServico emprestimoServico,
                                                 IParcelasEmprestimoServico parcelasEmprestimoServico, IParcelasEmprestimoRepositorio parcelasEmprestimoRepositorio,
                                                 IMapper mapper, ILancamentoRepositorio lancamentoRepositorio, ISaldoContaCorrenteServico saldoContaCorrenteServico)
@@ -56,33 +56,36 @@ namespace App.ContaCorrente.Application.CQRS.Emprestimos.Handlers
                     
                     emprestimo.AtualizarEfetivacao(emprestimo.Valor,emprestimo.TipoFinalidade,emprestimo.TipoEmprestimo,emprestimo.QtdParcelas,valorParcela,emprestimo.Juros,
                                                    DateTime.Now, EnumFlagEstadoEmprestimo.Efetivado,EnumProcessoEmprestimo.Aprovado,emprestimo.CorrentistaId);
-
+                    
+                    //efetivo eperstimo
                     var resultEmprestimo = await _emprestimoRepositorio.AlterarAsync(emprestimo);
 
-                    //criar parcelas depois
+                    //Gera parcelas 
                     var result = _parcelasEmprestimoServico.GerarParcelasEmprestimo(resultEmprestimo);
 
                     var parcelas = _mapper.Map<IEnumerable<ParcelasEmprestimo>>(result);
 
-                    //Grava as parcelas
+                    //Cria as parcelas
                     await _parcelasEmprestimoRepositorio.CriarAsync(parcelas);
 
                     
-                    var lancamento = new Lancamento(DateTime.Now,emprestimo.Valor,$"Crédito emprestimo: {emprestimo.Id}",emprestimo.CorrentistaId,(int)EnumEmprestimoHistorico.CreditoEmConta);
+                    var lancamento = new Lancamento(DateTime.Now,emprestimo.Valor,$"Crédito emprestimo: {emprestimo.Id}",emprestimo.CorrentistaId,
+                                                    (int)EnumEmprestimoHistorico.CreditoEmConta);
 
                     //criar lançamento
                     await _lancamentoRepositorio.CriarAsync(lancamento);
-
+                    
 
                     //atualiza o saldo                    
                     await _saldoContaCorrenteServico.AtulizaSaldoAsync(emprestimo.CorrentistaId,(int)EnumEmprestimoHistorico.CreditoEmConta,emprestimo.Valor);
+                    
 
                     return resultEmprestimo;
 
                 }
                 else
                 {
-                    
+                    // caso analise não ok rejeitar o emprestimo
                     emprestimo.AtualizarEfetivacao(emprestimo.Valor, emprestimo.TipoFinalidade, emprestimo.TipoEmprestimo, emprestimo.QtdParcelas, valorParcela, emprestimo.Juros,
                                                 DateTime.Now, EnumFlagEstadoEmprestimo.Proposta, EnumProcessoEmprestimo.Rejeitado, emprestimo.CorrentistaId);
                                                             

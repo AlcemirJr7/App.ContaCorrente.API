@@ -21,7 +21,7 @@ namespace App.ContaCorrente.Infra.IoC
         public static IServiceCollection AddInfraestrutura(this IServiceCollection services, IConfiguration configuration)
         {
 
-            services.AddDbContext<AppDbContexto>(options =>
+            services.AddDbContext<AppDbContexto>(options =>           
             options.UseSqlServer(configuration.GetConnectionString("DataBase"
             ), b => b.MigrationsAssembly(typeof(AppDbContexto).Assembly.FullName)));
 
@@ -60,9 +60,7 @@ namespace App.ContaCorrente.Infra.IoC
 
             services.AddAutoMapper(typeof(DomainToDTOMapeamentoProfile));
             services.AddAutoMapper(typeof(DTOToCommandMapeamentoProfile));
-
             
-
             return services;
         }
     }

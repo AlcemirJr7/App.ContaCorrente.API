@@ -2,6 +2,7 @@
 using App.ContaCorrente.Application.Servicos.Interfaces;
 using App.ContaCorrente.Domain.Mensagem;
 using App.ContaCorrente.Domain.Validacoes;
+using App.ContaCorrente.Infra.Data.Contexto;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,9 +14,11 @@ namespace App.ContaCorrente.API.Controllers
     public class EmprestimoController : ControllerBase
     {
         private readonly IEmprestimoServico _emprestimoServico;
-        public EmprestimoController(IEmprestimoServico emprestimoServico)
+        private readonly AppDbContexto _appDbContexto;
+        public EmprestimoController(IEmprestimoServico emprestimoServico, AppDbContexto appDbContexto)
         {
             _emprestimoServico = emprestimoServico;
+            _appDbContexto = appDbContexto; 
         }
 
         /// <summary>
@@ -84,18 +87,25 @@ namespace App.ContaCorrente.API.Controllers
             if (id == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
 
             EmprestimoEfetivarDTO emprestimoEfetivarDto = new EmprestimoEfetivarDTO();
+
+            using var tr = await _appDbContexto.Database.BeginTransactionAsync(); 
+
             try
             {
                 emprestimoEfetivarDto = await _emprestimoServico.EfetivarEmprestimoAsync(id);
             }
             catch (DomainException e)
             {
+                await tr.RollbackAsync();
                 return BadRequest(new { mensagem = e.Message });
             }
             catch (DomainExcepitonValidacao e)
             {
+                await tr.RollbackAsync();
                 return BadRequest(new { mensagem = e.Message });
             }
+            
+            await tr.CommitAsync();
 
             return Ok(emprestimoEfetivarDto);
         }
