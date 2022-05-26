@@ -4,6 +4,7 @@ using App.ContaCorrente.Domain.Entidades;
 using App.ContaCorrente.Domain.Enumerador;
 using App.ContaCorrente.Domain.Interfaces;
 using App.ContaCorrente.Domain.Mensagem;
+using App.ContaCorrente.Domain.Utils;
 using App.ContaCorrente.Domain.Validacoes;
 using MediatR;
 
@@ -30,7 +31,7 @@ namespace App.ContaCorrente.Application.CQRS.Pagamentos.Handlers
                 //validar saldo 
                 await _saldoContaCorrenteServico.ValidaSaldoAsync(request.CorrentistaId, (int)EnumPagamentoHistorico.historico, request.Valor);
                 
-                var lancamento = new Lancamento(DateTime.Now,request.Valor,request.CodigoBarra,request.CorrentistaId,(int)EnumPagamentoHistorico.historico);
+                var lancamento = new Lancamento(DateTime.Now,request.Valor, StringFormata.ApenasNumeros(request.CodigoBarra),request.CorrentistaId,(int)EnumPagamentoHistorico.historico);
                 
                 //Cria Lançamento
                 await _lancamentoRepositorio.CriarAsync(lancamento);                

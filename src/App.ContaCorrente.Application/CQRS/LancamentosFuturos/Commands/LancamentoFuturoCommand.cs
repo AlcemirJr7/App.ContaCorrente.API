@@ -13,9 +13,13 @@ namespace App.ContaCorrente.Application.CQRS.LancamentosFuturos.Commands
         public DateTime DataCadastro { get; set; }
 
         public DateTime DataParaLancamento { get; set; }
-        
+
+        public EnumTipoLancamentoFuturo TipoLancamento { get; set; }
+
         public EnumLancamentoFuturo FlagLancamento { get; set; }
-        
+
+        public string? Observacao { get; set; }
+
         public DateTime? DataLancamento { get; set; }
 
         public int HistoricoId { get; set; }

@@ -78,22 +78,26 @@ namespace App.ContaCorrente.Application.Servicos
             {
                 temSaldo = true;
             }
-                
-            var saldoTotal = saldo.SaldoConta + saldo.LimiteChequeEspecial;
-
-            if(valor > saldoTotal)
-            {
-                temSaldo = false;
-            }
             else
             {
-                temSaldo = true;
-            }
+                var saldoTotal = saldo.SaldoConta + saldo.LimiteChequeEspecial;
 
-            if (!temSaldo)
-            {
-                throw new DomainException(Mensagens.SaldoInsuficiente);
+                if (valor > saldoTotal)
+                {
+                    temSaldo = false;
+                }
+                else
+                {
+                    temSaldo = true;
+                }
+
+                if (!temSaldo)
+                {
+                    throw new DomainException(Mensagens.SaldoInsuficiente);
+                }
             }
+                
+            
 
         }
 

@@ -10,5 +10,7 @@ namespace App.ContaCorrente.Application.Servicos.Interfaces
 
         Task<PagamentoDTO> CriarAsync(PagamentoDTO pagamentoDto);
 
+        Task<PagamentoAgendaDTO> CriarAgendamentoAsync(PagamentoAgendaDTO pagamentoDto);
+
     }
 }

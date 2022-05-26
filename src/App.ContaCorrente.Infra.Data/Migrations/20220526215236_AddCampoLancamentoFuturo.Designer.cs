@@ -4,6 +4,7 @@ using App.ContaCorrente.Infra.Data.Contexto;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.ContaCorrente.Infra.Data.Migrations
 {
     [DbContext(typeof(AppDbContexto))]
-    partial class AppDbContextoModelSnapshot : ModelSnapshot
+    [Migration("20220526215236_AddCampoLancamentoFuturo")]
+    partial class AddCampoLancamentoFuturo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,11 +26,8 @@ namespace App.ContaCorrente.Infra.Data.Migrations
 
             modelBuilder.Entity("App.ContaCorrente.Domain.Entidades.Banco", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    b.Property<int>("Id")                        
+                        .HasColumnType("int");                    
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -284,9 +283,6 @@ namespace App.ContaCorrente.Infra.Data.Migrations
 
                     b.Property<int>("HistoricoId")
                         .HasColumnType("int");
-
-                    b.Property<string>("Observacao")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TipoLancamento")
                         .HasColumnType("int");

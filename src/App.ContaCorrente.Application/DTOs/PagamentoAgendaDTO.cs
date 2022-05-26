@@ -1,8 +1,10 @@
-﻿namespace App.ContaCorrente.Application.DTOs
+﻿using System.Text.Json.Serialization;
+
+namespace App.ContaCorrente.Application.DTOs
 {
-    public class PagamentoDTO
+    public class PagamentoAgendaDTO
     {
-        public PagamentoDTO()
+        public PagamentoAgendaDTO()
         {
 
         }
@@ -19,7 +21,10 @@
 
         public DateTime DataVencimento { get; set; }
         
-        public DateTime DataPagamento { get; set; }        
+        [JsonIgnore]
+        public DateTime? DataPagamento { get; set; }
+
+        public DateTime? DataAgendamento { get; set; }
 
         public int CorrentistaId { get; set; }
                 
