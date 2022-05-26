@@ -93,6 +93,7 @@ namespace App.ContaCorrente.API.Controllers
             try
             {
                 emprestimoEfetivarDto = await _emprestimoServico.EfetivarEmprestimoAsync(id);
+                emprestimoEfetivarDto.Mensagem = Mensagens.EmprestimoEfetivadoSucesso;
             }
             catch (DomainException e)
             {

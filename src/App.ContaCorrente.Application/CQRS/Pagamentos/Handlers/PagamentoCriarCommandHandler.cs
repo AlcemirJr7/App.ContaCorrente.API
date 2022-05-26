@@ -38,7 +38,6 @@ namespace App.ContaCorrente.Application.CQRS.Pagamentos.Handlers
                 //Atualiza o saldo
                 await _saldoContaCorrenteServico.AtulizaSaldoAsync(request.CorrentistaId, (int)EnumPagamentoHistorico.historico, request.Valor);
 
-
                 var pagamento = new Pagamento(request.CodigoBarra, request.NumeroDocumento, request.DataGeracao, request.Valor, request.DataVencimento,
                                               request.DataPagamento, request.CorrentistaId);
 

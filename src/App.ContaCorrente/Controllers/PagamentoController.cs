@@ -37,6 +37,7 @@ namespace App.ContaCorrente.API.Controllers
             {                
                 //Cria o pagamento
                 pagamentoDto = await _pagamentoServico.CriarAsync(pagamentoDto);
+                pagamentoDto.Mensagen = Mensagens.PagamentoRealizadoSucesso;
                                 
             }
             catch (DomainException e)

@@ -129,6 +129,9 @@
   <data name="DataInvalida" xml:space="preserve">
     <value>0006| Data invalida.</value>
   </data>
+  <data name="EmprestimoEfetivadoSucesso" xml:space="preserve">
+    <value>Emprestimo Efetivado e Aprovado com sucesso!</value>
+  </data>
   <data name="EnderecoInvalido" xml:space="preserve">
     <value>0010| Endereço informado não existe.</value>
   </data>
@@ -176,6 +179,9 @@
   </data>
   <data name="NaoFoiPossivelCompletarOperacao" xml:space="preserve">
     <value> Não foi possível completar a operação.</value>
+  </data>
+  <data name="PagamentoRealizadoSucesso" xml:space="preserve">
+    <value>Pagamento realizado com sucesso!</value>
   </data>
   <data name="PessoaInvalida" xml:space="preserve">
     <value>0012| Pessoa informada não existe.</value>

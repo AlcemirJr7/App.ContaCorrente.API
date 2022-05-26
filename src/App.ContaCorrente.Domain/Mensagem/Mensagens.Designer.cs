@@ -97,6 +97,15 @@ namespace App.ContaCorrente.Domain.Mensagem {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Emprestimo Efetivado e Aprovado com sucesso!.
+        /// </summary>
+        public static string EmprestimoEfetivadoSucesso {
+            get {
+                return ResourceManager.GetString("EmprestimoEfetivadoSucesso", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a 0010| Endereço informado não existe..
         /// </summary>
         public static string EnderecoInvalido {
@@ -237,6 +246,15 @@ namespace App.ContaCorrente.Domain.Mensagem {
         public static string NaoFoiPossivelCompletarOperacao {
             get {
                 return ResourceManager.GetString("NaoFoiPossivelCompletarOperacao", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Pagamento realizado com sucesso!.
+        /// </summary>
+        public static string PagamentoRealizadoSucesso {
+            get {
+                return ResourceManager.GetString("PagamentoRealizadoSucesso", resourceCulture);
             }
         }
         
