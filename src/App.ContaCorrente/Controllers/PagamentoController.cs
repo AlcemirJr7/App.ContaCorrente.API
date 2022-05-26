@@ -14,18 +14,12 @@ namespace App.ContaCorrente.API.Controllers
     [Produces("application/json")]
     public class PagamentoController : ControllerBase
     {
-        private readonly IPagamentoServico _pagamentoServico;
-        private readonly ISaldoContaCorrenteServico _saldoContaCorrenteServico;
-        private readonly ILancamentoServico _lancamentoServico;
-        private readonly ILancamentoRepositorio _lancamentoRepositorio;
-        private readonly IPagamentoRepositorio _pagamentoRepositorio;        
-        public PagamentoController(IPagamentoServico pagamentoServico, ISaldoContaCorrenteServico saldoContaCorrenteServico, ILancamentoServico lancamentoServico,
-                                   ILancamentoRepositorio lancamentoRepositorio, IPagamentoRepositorio pagamentoRepositorio)
+        private readonly IPagamentoServico _pagamentoServico;  
+        private readonly AppDbContexto _appDbContexto;
+        public PagamentoController(IPagamentoServico pagamentoServico, AppDbContexto appDbContexto)
         {
-            _pagamentoServico = pagamentoServico;
-            _saldoContaCorrenteServico = saldoContaCorrenteServico;
-            _lancamentoServico = lancamentoServico;
-            _lancamentoRepositorio = lancamentoRepositorio;           
+            _pagamentoServico = pagamentoServico;                      
+            _appDbContexto = appDbContexto;
         }
 
 
@@ -37,56 +31,26 @@ namespace App.ContaCorrente.API.Controllers
         public async Task<ActionResult<PagamentoDTO>> PostPagamento([FromBody] PagamentoDTO pagamentoDto)
         {
             if (pagamentoDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
-            
-            try
-            {
-                //validar saldo 
-                await _saldoContaCorrenteServico.ValidaSaldoAsync(pagamentoDto.CorrentistaId,(int)EnumPagamentoHistorico.historico,pagamentoDto.Valor);
 
+            using var tr = await _appDbContexto.Database.BeginTransactionAsync();
+            try
+            {                
                 //Cria o pagamento
                 pagamentoDto = await _pagamentoServico.CriarAsync(pagamentoDto);
-
-                LancamentoDTO lancamentoDto = new LancamentoDTO
-                {
-                    CorrentistaId = pagamentoDto.CorrentistaId,
-                    Valor = pagamentoDto.Valor,
-                    HistoricoId = (int)EnumPagamentoHistorico.historico,
-                    Observacao = pagamentoDto.CodigoBarra
-                    
-                };
-                
-                try
-                {
-                    lancamentoDto = await _lancamentoServico.CriarAsync(lancamentoDto);
-
-                    await _saldoContaCorrenteServico.AtulizaSaldoAsync(pagamentoDto.CorrentistaId, (int)EnumPagamentoHistorico.historico, pagamentoDto.Valor);
-                }
-                catch (DomainException e)
-                {
-                    
-                    try
-                    {
-                        //desfazer a operação
-                        await _lancamentoRepositorio.DeletarAsync(lancamentoDto.Id);
-                        await _pagamentoRepositorio.DeletarAsync(pagamentoDto.Id);
-                    }
-                    catch (DomainException ex)
-                    {
-                        return BadRequest(new { mensagem = ex.Message + Mensagens.NaoFoiPossivelCompletarOperacao });
-                    }
-                    
-                    return BadRequest(new { mensagem = e.Message + Mensagens.NaoFoiPossivelCompletarOperacao });                    
-                }
-                
+                                
             }
             catch (DomainException e)
             {
+                await tr.RollbackAsync();
                 return BadRequest(new { mensagem = e.Message });
             }
             catch (DomainExcepitonValidacao e)
             {
+                await tr.RollbackAsync();
                 return BadRequest(new { mensagem = e.Message });
             }
+
+            await tr.CommitAsync();
 
             return Ok(pagamentoDto);
         }

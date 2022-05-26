@@ -165,6 +165,9 @@
   <data name="ErroAoEfetuarConsulta" xml:space="preserve">
     <value>0004| Erro ao efetuar consulta dos dados.</value>
   </data>
+  <data name="ErroAoEfetuarPagamento" xml:space="preserve">
+    <value>0021| Erro ao efetuar pagamento.</value>
+  </data>
   <data name="HistoricoInvalido" xml:space="preserve">
     <value>0018| Historico informado não existe.</value>
   </data>

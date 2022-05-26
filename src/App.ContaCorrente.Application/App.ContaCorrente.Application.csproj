@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -16,6 +16,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="CQRS\ParcelasEmprestimos\Commands\" />
+    <Folder Include="CQRS\ParcelasEmprestimos\Handlers\" />
+    <Folder Include="CQRS\ParcelasEmprestimos\Queries\" />
     <Folder Include="CQRS\SaldoContaCorrentes\Commands\" />
   </ItemGroup>
 

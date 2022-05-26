@@ -205,6 +205,15 @@ namespace App.ContaCorrente.Domain.Mensagem {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a 0021| Erro ao efetuar pagamento..
+        /// </summary>
+        public static string ErroAoEfetuarPagamento {
+            get {
+                return ResourceManager.GetString("ErroAoEfetuarPagamento", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a 0018| Historico informado não existe..
         /// </summary>
         public static string HistoricoInvalido {
