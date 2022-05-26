@@ -34,7 +34,7 @@ namespace App.ContaCorrente.Application.CQRS.Emprestimos.Handlers
             }
             else
             {                
-                emprestimo.Atualizar(request.Valor,request.TipoFinalidade,request.TipoEmprestimo,request.QtdParcelas,decimal.Zero,request.Juros,request.DataEfetivacao,emprestimo.FlagEstado,emprestimo.FlagProcesso,request.CorrentistaId);
+                emprestimo.Atualizar(request.Valor,emprestimo.Status,emprestimo.SaldoDevedor,request.TipoFinalidade,request.TipoEmprestimo,request.QtdParcelas,decimal.Zero,request.Juros,request.DataEfetivacao,emprestimo.FlagEstado,emprestimo.FlagProcesso,request.CorrentistaId);
 
                 return await _emprestimoRepositorio.AlterarAsync(emprestimo);
             }

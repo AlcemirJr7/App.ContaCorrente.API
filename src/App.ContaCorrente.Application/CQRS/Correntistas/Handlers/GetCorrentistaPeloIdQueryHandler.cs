@@ -4,11 +4,6 @@ using App.ContaCorrente.Domain.Interfaces;
 using App.ContaCorrente.Domain.Mensagem;
 using App.ContaCorrente.Domain.Validacoes;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace App.ContaCorrente.Application.CQRS.Correntistas.Handlers
 {

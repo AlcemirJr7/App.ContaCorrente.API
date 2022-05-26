@@ -1,4 +1,5 @@
-﻿using App.ContaCorrente.Application.DTOs;
+﻿using App.ContaCorrente.Application.CQRS.ParcelasEmprestimos.Queries;
+using App.ContaCorrente.Application.DTOs;
 using App.ContaCorrente.Application.Servicos.Interfaces;
 using App.ContaCorrente.Domain.Entidades;
 using App.ContaCorrente.Domain.Mensagem;
@@ -23,9 +24,21 @@ namespace App.ContaCorrente.Application.Servicos
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<ParcelasEmprestimoDTO>> GetPeloEmprestimoIdAsync(int? id)
+        public async Task<IEnumerable<ParcelasEmprestimoDTO>> GetPeloEmprestimoIdAsync(int? id)
         {
-            throw new NotImplementedException();
+            var parcelasQuery = new GetParcelasEmprestimoPeloEmprestimoIdQuery(id.Value);
+
+            if(parcelasQuery == null)
+            {
+                throw new DomainException(Mensagens.ErroAoCriarEntidade);
+            }
+
+            var result = await _mediator.Send(parcelasQuery);
+
+            var parcelas = _mapper.Map<IEnumerable<ParcelasEmprestimoDTO>>(result);
+
+            return parcelas;
+
         }
 
         public Task<IEnumerable<ParcelasEmprestimoDTO>> GetPeloIdAsync(int? id)
@@ -39,7 +52,7 @@ namespace App.ContaCorrente.Application.Servicos
 
             try
             {
-                var dataVencimento = emprestimo.DataEfetivacao.Value.AddMonths(1);
+                var dataVencimento = Convert.ToDateTime(emprestimo.DataEfetivacao.Value.ToString("dd/MM/yyyy")).AddMonths(1);
 
                 for (int i = 0; i < emprestimo.QtdParcelas; i++)
                 {

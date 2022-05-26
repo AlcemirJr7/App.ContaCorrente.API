@@ -21,6 +21,8 @@
 
         public DateTime DataPagamento { get; set; }
 
+        public DateTime? DataAgendamento { get; set; }
+
         public int CorrentistaId { get; set; }
                 
         public string? Mensagen { get; set; }

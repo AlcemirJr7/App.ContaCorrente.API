@@ -1,5 +1,4 @@
-﻿
-using App.ContaCorrente.Domain.Entidades;
+﻿using App.ContaCorrente.Domain.Entidades;
 using MediatR;
 
 namespace App.ContaCorrente.Application.CQRS.Correntistas.Queries

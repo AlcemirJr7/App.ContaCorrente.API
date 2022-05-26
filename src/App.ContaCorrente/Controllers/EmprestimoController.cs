@@ -3,7 +3,6 @@ using App.ContaCorrente.Application.Servicos.Interfaces;
 using App.ContaCorrente.Domain.Mensagem;
 using App.ContaCorrente.Domain.Validacoes;
 using App.ContaCorrente.Infra.Data.Contexto;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace App.ContaCorrente.API.Controllers

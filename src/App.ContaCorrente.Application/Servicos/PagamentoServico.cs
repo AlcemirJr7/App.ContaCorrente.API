@@ -3,8 +3,6 @@ using App.ContaCorrente.Application.CQRS.Pagamentos.Queries;
 using App.ContaCorrente.Application.DTOs;
 using App.ContaCorrente.Application.Servicos.Interfaces;
 using App.ContaCorrente.Domain.Entidades;
-using App.ContaCorrente.Domain.Enumerador;
-using App.ContaCorrente.Domain.Interfaces;
 using App.ContaCorrente.Domain.Mensagem;
 using App.ContaCorrente.Domain.Validacoes;
 using AutoMapper;

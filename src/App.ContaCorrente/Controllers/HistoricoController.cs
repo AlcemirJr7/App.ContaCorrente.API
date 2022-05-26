@@ -2,9 +2,7 @@
 using App.ContaCorrente.Application.Servicos.Interfaces;
 using App.ContaCorrente.Domain.Mensagem;
 using App.ContaCorrente.Domain.Validacoes;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Linq;
 
 namespace App.ContaCorrente.API.Controllers
 {

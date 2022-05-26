@@ -1,5 +1,4 @@
-﻿
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace App.ContaCorrente.Application.DTOs
 {
@@ -10,6 +9,8 @@ namespace App.ContaCorrente.Application.DTOs
         public string NomeEmpresa { get; set; }
 
         public string NumeroDocumento { get; set; }
+
+        public string Cargo { get; set; }
 
         public string NumeroTelefone1 { get; set; }
 

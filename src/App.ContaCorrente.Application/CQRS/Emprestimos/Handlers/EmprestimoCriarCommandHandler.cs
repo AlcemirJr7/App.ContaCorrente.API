@@ -34,7 +34,7 @@ namespace App.ContaCorrente.Application.CQRS.Emprestimos.Handlers
             }
 
 
-            var emprestimo = new Emprestimo(request.Valor,request.TipoFinalidade,request.TipoEmprestimo,request.QtdParcelas,decimal.Zero,
+            var emprestimo = new Emprestimo(request.Valor,EnumEmprestimoStatus.EmAberto,decimal.Zero,request.TipoFinalidade,request.TipoEmprestimo,request.QtdParcelas,decimal.Zero,
                                             request.Juros,request.DataEfetivacao,DateTime.Now,EnumFlagEstadoEmprestimo.Proposta,
                                             EnumProcessoEmprestimo.EmAnalise,request.CorrentistaId);
 

@@ -14,6 +14,10 @@ namespace App.ContaCorrente.Application.CQRS.Emprestimos.Commands
 
         public EnumEmprestimoTipoEmprestimo TipoEmprestimo { get; set; }
 
+        public decimal SaldoDevedor { get; set; }
+
+        public EnumEmprestimoStatus Status { get; set; }
+
         public int QtdParcelas { get; set; }
         
         public decimal ValorParcela { get; set; }

@@ -5,7 +5,6 @@ using App.ContaCorrente.Domain.Interfaces;
 using App.ContaCorrente.Domain.Mensagem;
 using App.ContaCorrente.Domain.Validacoes;
 using MediatR;
-using System.ComponentModel;
 
 namespace App.ContaCorrente.Application.CQRS.Correntistas.Handlers
 {

@@ -1,5 +1,4 @@
 ﻿using App.ContaCorrente.Application.DTOs;
-using App.ContaCorrente.Domain.Entidades;
 
 
 namespace App.ContaCorrente.Application.Servicos.Interfaces

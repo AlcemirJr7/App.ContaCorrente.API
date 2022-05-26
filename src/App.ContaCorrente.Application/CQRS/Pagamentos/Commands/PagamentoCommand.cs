@@ -19,6 +19,8 @@ namespace App.ContaCorrente.Application.CQRS.Pagamentos.Commands
 
         public DateTime DataPagamento { get; set; }
 
+        public DateTime? DataAgendamento { get; set; }
+
         public int CorrentistaId { get; set; }
 
     }

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.ContaCorrente.Infra.Data.Migrations
 {
     [DbContext(typeof(AppDbContexto))]
-    [Migration("20220523131241_Inicial")]
+    [Migration("20220526151235_Inicial")]
     partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -123,6 +123,12 @@ namespace App.ContaCorrente.Infra.Data.Migrations
                         .HasColumnType("decimal(10,2)");
 
                     b.Property<int>("QtdParcelas")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("SaldoDevedor")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.Property<int>("TipoEmprestimo")
@@ -273,7 +279,7 @@ namespace App.ContaCorrente.Infra.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DataParaLancamento")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("Date");
 
                     b.Property<int>("FlagLancamento")
                         .HasColumnType("int");
@@ -301,6 +307,11 @@ namespace App.ContaCorrente.Infra.Data.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Cargo")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime>("DataCadastro")
                         .HasColumnType("datetime2");
@@ -404,14 +415,17 @@ namespace App.ContaCorrente.Infra.Data.Migrations
                     b.Property<int>("CorrentistaId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("DataGeracao")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTime?>("DataAgendamento")
+                        .HasColumnType("Date");
 
-                    b.Property<DateTime>("DataPagamento")
+                    b.Property<DateTime>("DataGeracao")
+                        .HasColumnType("Date");
+
+                    b.Property<DateTime?>("DataPagamento")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DataVencimento")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("Date");
 
                     b.Property<string>("NumeroDocumento")
                         .IsRequired()
@@ -441,7 +455,7 @@ namespace App.ContaCorrente.Infra.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DataVencimento")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("Date");
 
                     b.Property<int>("EmprestimoId")
                         .HasColumnType("int");
@@ -472,7 +486,7 @@ namespace App.ContaCorrente.Infra.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DataNascimento")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("Date");
 
                     b.Property<string>("Email1")
                         .IsRequired()

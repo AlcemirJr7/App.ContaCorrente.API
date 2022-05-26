@@ -1,10 +1,5 @@
 ﻿using App.ContaCorrente.Domain.Enumerador;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace App.ContaCorrente.Application.DTOs
 {
@@ -28,6 +23,10 @@ namespace App.ContaCorrente.Application.DTOs
         [JsonIgnore]
         public decimal ValorParcela { get; set; }
 
+        public decimal SaldoDevedor { get; set; }
+
+        public EnumEmprestimoStatus Status { get; set; }
+
         public decimal Juros { get; set; }
 
         [JsonIgnore]
@@ -35,6 +34,8 @@ namespace App.ContaCorrente.Application.DTOs
 
         [JsonIgnore]
         public DateTime? DataEfetivacao { get; set; }
+
+
 
         [JsonIgnore]
         public EnumFlagEstadoEmprestimo FlagEstado { get; set; }
