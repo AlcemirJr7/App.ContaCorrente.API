@@ -1,9 +1,4 @@
 ﻿using App.ContaCorrente.Application.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace App.ContaCorrente.Application.Servicos.Interfaces
 {
@@ -15,6 +10,12 @@ namespace App.ContaCorrente.Application.Servicos.Interfaces
 
         Task<EmprestimoDTO> AlterarAsync(EmprestimoDTO emprestimoDto);
 
-        Task<EmprestimoDTO> CriarAsync(EmprestimoDTO emprestimoDto);
+        Task<EmprestimoDTO> CriarAsync(EmprestimoDTO emprestimoDto);        
+
+        decimal CalculaParcelaEmprestimo(decimal valor, int qtdParcelas, decimal juros);
+
+        Task<EmprestimoEfetivarDTO> EfetivarEmprestimoAsync(int? id);
+
+        Task<bool> AnaliseCreditoCorrentistaAsync(int? correntistaId, decimal valorEmprestimo);
     }
 }

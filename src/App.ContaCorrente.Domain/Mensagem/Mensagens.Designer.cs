@@ -178,6 +178,15 @@ namespace App.ContaCorrente.Domain.Mensagem {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a 0019| Erro ao efetivar emprestimo..
+        /// </summary>
+        public static string ErroAoEfetivarEmprestimo {
+            get {
+                return ResourceManager.GetString("ErroAoEfetivarEmprestimo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a 0004| Erro ao efetuar consulta dos dados..
         /// </summary>
         public static string ErroAoEfetuarConsulta {

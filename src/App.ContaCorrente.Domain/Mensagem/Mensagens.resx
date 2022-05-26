@@ -156,6 +156,9 @@
   <data name="ErroAoDeletarEntidade" xml:space="preserve">
     <value>0009| Erro ao deletar entidade.</value>
   </data>
+  <data name="ErroAoEfetivarEmprestimo" xml:space="preserve">
+    <value>0019| Erro ao efetivar emprestimo.</value>
+  </data>
   <data name="ErroAoEfetuarConsulta" xml:space="preserve">
     <value>0004| Erro ao efetuar consulta dos dados.</value>
   </data>

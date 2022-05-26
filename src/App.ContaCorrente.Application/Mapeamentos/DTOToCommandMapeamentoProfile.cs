@@ -9,6 +9,7 @@ using App.ContaCorrente.Application.CQRS.LocalTrabalhos.Commands;
 using App.ContaCorrente.Application.CQRS.Pagamentos.Commands;
 using App.ContaCorrente.Application.CQRS.Pessoas.Commands;
 using App.ContaCorrente.Application.DTOs;
+using App.ContaCorrente.Domain.Entidades;
 using AutoMapper;
 
 namespace App.ContaCorrente.Application.Mapeamentos
@@ -54,6 +55,9 @@ namespace App.ContaCorrente.Application.Mapeamentos
             //Emprestimo
             CreateMap<EmprestimoDTO, EmprestimoCriarCommand>();
             CreateMap<EmprestimoDTO, EmprestimoAlterarCommand>();
+            CreateMap<EmprestimoDTO, EmprestimoEfetivarCommand>();
+            CreateMap<Emprestimo, EmprestimoEfetivarCommand>();
+
 
 
 

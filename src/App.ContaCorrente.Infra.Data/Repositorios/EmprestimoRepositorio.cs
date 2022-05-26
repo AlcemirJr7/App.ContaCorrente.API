@@ -1,4 +1,5 @@
 ﻿using App.ContaCorrente.Domain.Entidades;
+using App.ContaCorrente.Domain.Enumerador;
 using App.ContaCorrente.Domain.Interfaces;
 using App.ContaCorrente.Domain.Mensagem;
 using App.ContaCorrente.Domain.Validacoes;
@@ -73,5 +74,18 @@ namespace App.ContaCorrente.Infra.Data.Repositorios
                 throw new DomainException(Mensagens.ErroAoEfetuarConsulta);
             }
         }
+
+        public async Task<IEnumerable<Emprestimo>> GetEmprestimosEfetivadosPeloCorrentistaIdAsync(int? id)
+        {
+            try
+            {
+                return await _appDbContexto.Emprestimos.Where(e => e.CorrentistaId == id && e.FlagEstado == EnumFlagEstadoEmprestimo.Efetivado).ToListAsync();
+            }
+            catch
+            {
+                throw new DomainException(Mensagens.ErroAoEfetuarConsulta);
+            }
+        }
+
     }
 }
