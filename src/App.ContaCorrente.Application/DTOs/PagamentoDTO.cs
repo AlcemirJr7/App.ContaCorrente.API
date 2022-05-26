@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace App.ContaCorrente.Application.DTOs
+﻿namespace App.ContaCorrente.Application.DTOs
 {
     public class PagamentoDTO
     {
@@ -12,6 +6,7 @@ namespace App.ContaCorrente.Application.DTOs
         {
 
         }
+
         public int Id { get; set; }
 
         public string CodigoBarra { get; set; }
@@ -27,5 +22,7 @@ namespace App.ContaCorrente.Application.DTOs
         public DateTime DataPagamento { get; set; }
 
         public int CorrentistaId { get; set; }
+                
+        public string? Mensagen { get; set; }
     }
 }
