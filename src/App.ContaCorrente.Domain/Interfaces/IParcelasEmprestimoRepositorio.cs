@@ -4,7 +4,7 @@ namespace App.ContaCorrente.Domain.Interfaces
 {
     public interface IParcelasEmprestimoRepositorio : IDisposable
     {
-        Task<IEnumerable<ParcelasEmprestimo>> GetPeloIdAsync(int? id);
+        Task<ParcelasEmprestimo> GetSeqParcelaAsync(int? parcela, int? emprestimoId);
 
         Task<IEnumerable<ParcelasEmprestimo>> GetPeloEmprestimoIdAsync(int? id);
 

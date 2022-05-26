@@ -1,11 +1,6 @@
 ﻿using App.ContaCorrente.Domain.Entidades;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace App.ContaCorrente.Infra.Data.ConfiguracoesEntidades
 {
@@ -21,6 +16,7 @@ namespace App.ContaCorrente.Infra.Data.ConfiguracoesEntidades
             builder.Property(x => x.Salario2).HasPrecision(25, 2);
             builder.Property(x => x.NumeroTelefone1).HasMaxLength(15).IsRequired();
             builder.Property(x => x.NumeroTelefone2).HasMaxLength(15);
+            builder.Property(x => x.Cargo).HasMaxLength(100);
         }
     }
 }

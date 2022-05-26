@@ -41,7 +41,12 @@ namespace App.ContaCorrente.Domain.Enumerador
         [Description("Credito Contratação Empréstimo")]
         CreditoEmConta = 3
 
+    }
 
+    public enum EnumEmprestimoStatus
+    {
+        EmAberto = 1,
+        PagoTotal = 2
     }
 
     public enum EnumEmprestimoPercentualSalario

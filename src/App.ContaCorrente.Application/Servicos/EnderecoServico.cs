@@ -2,7 +2,6 @@
 using App.ContaCorrente.Application.CQRS.Enderecos.Queries;
 using App.ContaCorrente.Application.DTOs;
 using App.ContaCorrente.Application.Servicos.Interfaces;
-using App.ContaCorrente.Domain.Entidades;
 using App.ContaCorrente.Domain.Mensagem;
 using App.ContaCorrente.Domain.Validacoes;
 using AutoMapper;

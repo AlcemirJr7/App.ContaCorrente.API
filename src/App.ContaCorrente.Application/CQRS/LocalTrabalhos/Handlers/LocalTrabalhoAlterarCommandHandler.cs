@@ -4,11 +4,6 @@ using App.ContaCorrente.Domain.Interfaces;
 using App.ContaCorrente.Domain.Mensagem;
 using App.ContaCorrente.Domain.Validacoes;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace App.ContaCorrente.Application.CQRS.LocalTrabalhos.Handlers
 {
@@ -29,7 +24,7 @@ namespace App.ContaCorrente.Application.CQRS.LocalTrabalhos.Handlers
             }
             else
             {
-                localTrabalho.Atualizar(request.NomeEmpresa, request.NumeroDocumento, request.NumeroTelefone1, request.NumeroTelefone2, request.Email1, request.Email2,
+                localTrabalho.Atualizar(request.NomeEmpresa, request.NumeroDocumento,request.Cargo ,request.NumeroTelefone1, request.NumeroTelefone2, request.Email1, request.Email2,
                                         request.Salario1, request.Salario2);
 
                 return await _localTrabalhoRepositorio.AlterarAsync(localTrabalho);

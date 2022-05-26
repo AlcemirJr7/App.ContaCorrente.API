@@ -19,7 +19,11 @@ namespace App.ContaCorrente.Application.DTOs
         public EnumEmprestimoTipoEmprestimo TipoEmprestimo { get; set; }
 
         public int QtdParcelas { get; set; }
-        
+
+        public decimal SaldoDevedor { get; set; }
+
+        public EnumEmprestimoStatus Status { get; set; }
+
         public decimal ValorParcela { get; set; }
 
         public decimal Juros { get; set; }

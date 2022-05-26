@@ -13,6 +13,8 @@ namespace App.ContaCorrente.Application.CQRS.LocalTrabalhos.Commands
 
         public string NumeroDocumento { get; set; }
 
+        public string Cargo { get; set; }
+
         public string NumeroTelefone1 { get; set; }
 
         public string? NumeroTelefone2 { get; set; }

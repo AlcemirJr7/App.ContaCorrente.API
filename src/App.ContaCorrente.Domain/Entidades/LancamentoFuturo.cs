@@ -1,10 +1,5 @@
 ﻿using App.ContaCorrente.Domain.Enumerador;
 using App.ContaCorrente.Domain.Validacoes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace App.ContaCorrente.Domain.Entidades
 {

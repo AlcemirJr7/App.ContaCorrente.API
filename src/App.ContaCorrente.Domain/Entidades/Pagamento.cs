@@ -1,10 +1,5 @@
 ﻿using App.ContaCorrente.Domain.Utils;
 using App.ContaCorrente.Domain.Validacoes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace App.ContaCorrente.Domain.Entidades
 {
@@ -22,37 +17,39 @@ namespace App.ContaCorrente.Domain.Entidades
 
         public DateTime DataVencimento { get; private set; }
 
-        public DateTime DataPagamento { get; private set; }
+        public DateTime? DataPagamento { get; private set; }
+
+        public DateTime? DataAgendamento { get; private set; }
 
         public int CorrentistaId { get; set; }
 
         public Correntista Correntista { get; set; }
 
-        public Pagamento(string codigoBarra, string numeroDocumento, DateTime dataGeracao, decimal valor, DateTime dataVencimento, DateTime dataPagamento)
+        public Pagamento(string codigoBarra, string numeroDocumento, DateTime dataGeracao, decimal valor, DateTime dataVencimento, DateTime? dataPagamento, DateTime? dataAgendamento)
         {
-            ValidarEntidade(codigoBarra, numeroDocumento, dataGeracao, valor, dataVencimento, dataPagamento);
+            ValidarEntidade(codigoBarra, numeroDocumento, dataGeracao, valor, dataVencimento, dataPagamento,dataAgendamento);
         }
 
-        public Pagamento(int id,string codigoBarra, string numeroDocumento, DateTime dataGeracao, decimal valor, DateTime dataVencimento, DateTime dataPagamento)
+        public Pagamento(int id,string codigoBarra, string numeroDocumento, DateTime dataGeracao, decimal valor, DateTime dataVencimento, DateTime? dataPagamento, DateTime? dataAgendamento)
         {
             DomainExcepitonValidacao.When(id < 0, "Id invalido.");
             Id = id;
-            ValidarEntidade(codigoBarra, numeroDocumento, dataGeracao, valor, dataVencimento, dataPagamento);
+            ValidarEntidade(codigoBarra, numeroDocumento, dataGeracao, valor, dataVencimento, dataPagamento,dataAgendamento);
         }
 
-        public Pagamento(string codigoBarra, string numeroDocumento, DateTime dataGeracao, decimal valor, DateTime dataVencimento, DateTime dataPagamento, int correntistaId)
+        public Pagamento(string codigoBarra, string numeroDocumento, DateTime dataGeracao, decimal valor, DateTime dataVencimento, DateTime? dataPagamento, DateTime? dataAgendamento, int correntistaId)
         {
-            ValidarEntidade(codigoBarra, numeroDocumento, dataGeracao, valor, dataVencimento, dataPagamento);
+            ValidarEntidade(codigoBarra, numeroDocumento, dataGeracao, valor, dataVencimento, dataPagamento,dataAgendamento);
             CorrentistaId = correntistaId;
         }
 
-        public void Atualizar(string codigoBarra, string numeroDocumento, DateTime dataGeracao, decimal valor, DateTime dataVencimento, DateTime dataPagamento, int correntistaId)
+        public void Atualizar(string codigoBarra, string numeroDocumento, DateTime dataGeracao, decimal valor, DateTime dataVencimento, DateTime? dataPagamento, DateTime? dataAgendamento, int correntistaId)
         {
-            ValidarEntidade(codigoBarra, numeroDocumento, dataGeracao, valor, dataVencimento, dataPagamento);
+            ValidarEntidade(codigoBarra, numeroDocumento, dataGeracao, valor, dataVencimento, dataPagamento, dataAgendamento);
             CorrentistaId = correntistaId;
         }
 
-        private void ValidarEntidade(string codigoBarra, string numeroDocumento, DateTime dataGeracao, decimal valor, DateTime dataVencimento, DateTime dataPagamento)
+        private void ValidarEntidade(string codigoBarra, string numeroDocumento, DateTime dataGeracao, decimal valor, DateTime dataVencimento, DateTime? dataPagamento, DateTime? dataAgendamento)
         {
             DomainExcepitonValidacao.When(string.IsNullOrEmpty(StringFormata.ApenasNumeros(codigoBarra)),"Codigo de Barra invalido.");
             DomainExcepitonValidacao.When(string.IsNullOrEmpty(StringFormata.ApenasNumeros(numeroDocumento)), "Numero do documento invalido.");
@@ -67,6 +64,7 @@ namespace App.ContaCorrente.Domain.Entidades
             Valor = valor;
             DataVencimento = dataVencimento;
             DataPagamento = dataPagamento;
+            DataAgendamento = dataAgendamento;
 
         }
     }
