@@ -160,6 +160,15 @@ namespace App.ContaCorrente.Domain.Mensagem {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a 0020| Não foi possível gerar as parcelas do emprestimo..
+        /// </summary>
+        public static string ErroAoCriarParcelasEmprestimo {
+            get {
+                return ResourceManager.GetString("ErroAoCriarParcelasEmprestimo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a 0014| Não foi possível criar saldo da conta corrente..
         /// </summary>
         public static string ErroAoCriarSaldoContaCorrente {

@@ -1,10 +1,12 @@
 ﻿using App.ContaCorrente.Application.CQRS.Emprestimos.Commands;
+using App.ContaCorrente.Application.DTOs;
 using App.ContaCorrente.Application.Servicos.Interfaces;
 using App.ContaCorrente.Domain.Entidades;
 using App.ContaCorrente.Domain.Enumerador;
 using App.ContaCorrente.Domain.Interfaces;
 using App.ContaCorrente.Domain.Mensagem;
 using App.ContaCorrente.Domain.Validacoes;
+using AutoMapper;
 using MediatR;
 
 namespace App.ContaCorrente.Application.CQRS.Emprestimos.Handlers
@@ -13,11 +15,23 @@ namespace App.ContaCorrente.Application.CQRS.Emprestimos.Handlers
     {
         private readonly IEmprestimoRepositorio _emprestimoRepositorio;
         private readonly IEmprestimoServico _emprestimoServico;
-        
-        public EmprestimoEfetivarCommandHandler(IEmprestimoRepositorio emprestimoRepositorio, IEmprestimoServico emprestimoServico)
+        private readonly IParcelasEmprestimoServico _parcelasEmprestimoServico;
+        private readonly IParcelasEmprestimoRepositorio _parcelasEmprestimoRepositorio;
+        private readonly ILancamentoRepositorio _lancamentoRepositorio;
+        private readonly ISaldoContaCorrenteServico _saldoContaCorrenteServico;
+        private readonly IMapper _mapper;
+        public EmprestimoEfetivarCommandHandler(IEmprestimoRepositorio emprestimoRepositorio, IEmprestimoServico emprestimoServico,
+                                                IParcelasEmprestimoServico parcelasEmprestimoServico, IParcelasEmprestimoRepositorio parcelasEmprestimoRepositorio,
+                                                IMapper mapper, ILancamentoRepositorio lancamentoRepositorio, ISaldoContaCorrenteServico saldoContaCorrenteServico)
         {
             _emprestimoRepositorio = emprestimoRepositorio;
             _emprestimoServico = emprestimoServico;
+            _parcelasEmprestimoServico = parcelasEmprestimoServico;
+            _parcelasEmprestimoRepositorio = parcelasEmprestimoRepositorio;
+            _lancamentoRepositorio = lancamentoRepositorio;
+            _saldoContaCorrenteServico = saldoContaCorrenteServico;
+            _mapper = mapper;
+            
         }
 
         public async Task<Emprestimo> Handle(EmprestimoEfetivarCommand request, CancellationToken cancellationToken)
@@ -40,15 +54,28 @@ namespace App.ContaCorrente.Application.CQRS.Emprestimos.Handlers
                 if (analiseOk)
                 {
                     
-
                     emprestimo.AtualizarEfetivacao(emprestimo.Valor,emprestimo.TipoFinalidade,emprestimo.TipoEmprestimo,emprestimo.QtdParcelas,valorParcela,emprestimo.Juros,
-                                         DateTime.Now, EnumFlagEstadoEmprestimo.Efetivado,EnumProcessoEmprestimo.Aprovado,emprestimo.CorrentistaId);
+                                                   DateTime.Now, EnumFlagEstadoEmprestimo.Efetivado,EnumProcessoEmprestimo.Aprovado,emprestimo.CorrentistaId);
 
                     var resultEmprestimo = await _emprestimoRepositorio.AlterarAsync(emprestimo);
 
                     //criar parcelas depois
+                    var result = _parcelasEmprestimoServico.GerarParcelasEmprestimo(resultEmprestimo);
+
+                    var parcelas = _mapper.Map<IEnumerable<ParcelasEmprestimo>>(result);
+
+                    //Grava as parcelas
+                    await _parcelasEmprestimoRepositorio.CriarAsync(parcelas);
+
+                    
+                    var lancamento = new Lancamento(DateTime.Now,emprestimo.Valor,$"Crédito emprestimo: {emprestimo.Id}",emprestimo.CorrentistaId,(int)EnumEmprestimoHistorico.CreditoEmConta);
 
                     //criar lançamento
+                    await _lancamentoRepositorio.CriarAsync(lancamento);
+
+
+                    //atualiza o saldo                    
+                    await _saldoContaCorrenteServico.AtulizaSaldoAsync(emprestimo.CorrentistaId,(int)EnumEmprestimoHistorico.CreditoEmConta,emprestimo.Valor);
 
                     return resultEmprestimo;
 
