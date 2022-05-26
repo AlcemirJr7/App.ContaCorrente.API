@@ -4,6 +4,7 @@ using App.ContaCorrente.Domain.Enumerador;
 using App.ContaCorrente.Domain.Interfaces;
 using App.ContaCorrente.Domain.Mensagem;
 using App.ContaCorrente.Domain.Validacoes;
+using App.ContaCorrente.Infra.Data.Contexto;
 using Microsoft.AspNetCore.Mvc;
 
 namespace App.ContaCorrente.API.Controllers
@@ -17,14 +18,14 @@ namespace App.ContaCorrente.API.Controllers
         private readonly ISaldoContaCorrenteServico _saldoContaCorrenteServico;
         private readonly ILancamentoServico _lancamentoServico;
         private readonly ILancamentoRepositorio _lancamentoRepositorio;
-        private readonly IPagamentoRepositorio _pagamentoRepositorio;
+        private readonly IPagamentoRepositorio _pagamentoRepositorio;        
         public PagamentoController(IPagamentoServico pagamentoServico, ISaldoContaCorrenteServico saldoContaCorrenteServico, ILancamentoServico lancamentoServico,
                                    ILancamentoRepositorio lancamentoRepositorio, IPagamentoRepositorio pagamentoRepositorio)
         {
             _pagamentoServico = pagamentoServico;
             _saldoContaCorrenteServico = saldoContaCorrenteServico;
             _lancamentoServico = lancamentoServico;
-            _lancamentoRepositorio = lancamentoRepositorio;
+            _lancamentoRepositorio = lancamentoRepositorio;           
         }
 
 

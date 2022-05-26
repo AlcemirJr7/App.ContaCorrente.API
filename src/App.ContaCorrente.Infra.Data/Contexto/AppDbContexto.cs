@@ -9,9 +9,8 @@ namespace App.ContaCorrente.Infra.Data.Contexto
     {
         public AppDbContexto(DbContextOptions<AppDbContexto> options) : base(options)
         {
-
+            
         }
-
 
         public DbSet<Banco> Bancos{ get; set; }
         public DbSet<Historico> Historicos { get; set; }
@@ -32,7 +31,7 @@ namespace App.ContaCorrente.Infra.Data.Contexto
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            base.OnModelCreating(builder);
+            base.OnModelCreating(builder);            
             builder.ApplyConfigurationsFromAssembly(typeof(AppDbContexto).Assembly);
 
         }
