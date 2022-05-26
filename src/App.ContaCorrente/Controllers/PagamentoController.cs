@@ -55,6 +55,39 @@ namespace App.ContaCorrente.API.Controllers
         }
 
         /// <summary>
+        /// Cria um pagamento agendado
+        /// </summary>      
+        /// <param name="pagamentoDto">Dados do Pagamento</param>
+        [HttpPost("Agendamento/")]
+        public async Task<ActionResult<PagamentoAgendaDTO>> PostAgendamentoPagamento([FromBody] PagamentoAgendaDTO pagamentoDto)
+        {
+            if (pagamentoDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
+
+            using var tr = await _appDbContexto.Database.BeginTransactionAsync();
+            try
+            {
+                //Cria o pagamento
+                pagamentoDto = await _pagamentoServico.CriarAgendamentoAsync(pagamentoDto);
+                pagamentoDto.Mensagen = Mensagens.AgendamentoPagamentoSucesso;
+
+            }
+            catch (DomainException e)
+            {
+                await tr.RollbackAsync();
+                return BadRequest(new { mensagem = e.Message });
+            }
+            catch (DomainExcepitonValidacao e)
+            {
+                await tr.RollbackAsync();
+                return BadRequest(new { mensagem = e.Message });
+            }
+
+            await tr.CommitAsync();
+
+            return Ok(pagamentoDto);
+        }
+
+        /// <summary>
         /// Busca um Pagamento pelo Id
         /// </summary> 
         [HttpGet("{id:int}")]

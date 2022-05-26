@@ -3,6 +3,7 @@ using App.ContaCorrente.Domain.Entidades;
 using App.ContaCorrente.Domain.Enumerador;
 using App.ContaCorrente.Domain.Interfaces;
 using App.ContaCorrente.Domain.Mensagem;
+using App.ContaCorrente.Domain.Utils;
 using App.ContaCorrente.Domain.Validacoes;
 using MediatR;
 
@@ -36,8 +37,8 @@ namespace App.ContaCorrente.Application.CQRS.LancamentosFuturos.Handlers
                 throw new DomainException(Mensagens.HistoricoInvalido);
             }
 
-            var lancamentoFuturo = new LancamentoFuturo(request.Valor,DateTime.Now,request.DataParaLancamento, EnumLancamentoFuturo.Pendente,
-                                                        request.DataLancamento,request.HistoricoId,request.CorrentistaId);
+            var lancamentoFuturo = new LancamentoFuturo(request.Valor,DateTime.Now,request.DataParaLancamento, EnumTipoLancamentoFuturo.Outros ,EnumLancamentoFuturo.Pendente,
+                                                        request.DataLancamento,null,request.HistoricoId,request.CorrentistaId);
 
             if(lancamentoFuturo == null)
             {

@@ -61,6 +61,15 @@ namespace App.ContaCorrente.Domain.Mensagem {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Agendamento realizado com sucesso!.
+        /// </summary>
+        public static string AgendamentoPagamentoSucesso {
+            get {
+                return ResourceManager.GetString("AgendamentoPagamentoSucesso", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a 0011| Banco informado não existe..
         /// </summary>
         public static string BancoInvalido {
@@ -129,6 +138,15 @@ namespace App.ContaCorrente.Domain.Mensagem {
         public static string EntidadeNaoEncontrada {
             get {
                 return ResourceManager.GetString("EntidadeNaoEncontrada", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a 0022| Não foi possível agendar o pagamento..
+        /// </summary>
+        public static string ErroAoAgendarPagamento {
+            get {
+                return ResourceManager.GetString("ErroAoAgendarPagamento", resourceCulture);
             }
         }
         

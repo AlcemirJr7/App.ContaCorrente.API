@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AgendamentoPagamentoSucesso" xml:space="preserve">
+    <value>Agendamento realizado com sucesso!</value>
+  </data>
   <data name="BancoInvalido" xml:space="preserve">
     <value>0011| Banco informado não existe.</value>
   </data>
@@ -140,6 +143,9 @@
   </data>
   <data name="EntidadeNaoEncontrada" xml:space="preserve">
     <value>0008| Entidade não encontrada.</value>
+  </data>
+  <data name="ErroAoAgendarPagamento" xml:space="preserve">
+    <value>0022| Não foi possível agendar o pagamento.</value>
   </data>
   <data name="ErroAoAlterarEntidade" xml:space="preserve">
     <value>0002| Erro ao alterar entidade.</value>

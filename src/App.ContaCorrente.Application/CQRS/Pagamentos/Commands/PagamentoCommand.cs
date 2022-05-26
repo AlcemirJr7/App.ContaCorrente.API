@@ -17,7 +17,7 @@ namespace App.ContaCorrente.Application.CQRS.Pagamentos.Commands
 
         public DateTime DataVencimento { get; set; }
 
-        public DateTime DataPagamento { get; set; }
+        public DateTime? DataPagamento { get; set; }
 
         public DateTime? DataAgendamento { get; set; }
 

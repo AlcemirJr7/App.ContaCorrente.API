@@ -11,6 +11,7 @@ namespace App.ContaCorrente.Infra.Data.ConfiguracoesEntidades
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Valor).HasPrecision(25, 2).IsRequired();
             builder.Property(x => x.DataParaLancamento).HasColumnType("Date");
+            builder.Property(x => x.Observacao).HasMaxLength(1000);
         }
     }
 }

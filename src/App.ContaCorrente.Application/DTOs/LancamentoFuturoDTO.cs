@@ -19,8 +19,12 @@ namespace App.ContaCorrente.Application.DTOs
 
         public DateTime DataParaLancamento { get; set; }
 
+        public EnumTipoLancamentoFuturo TipoLancamento { get; set; }
+
         [JsonIgnore]
         public EnumLancamentoFuturo FlagLancamento { get; set; }
+
+        public string? Observacao { get; set; }
 
         [JsonIgnore]
         public DateTime? DataLancamento { get; set; }

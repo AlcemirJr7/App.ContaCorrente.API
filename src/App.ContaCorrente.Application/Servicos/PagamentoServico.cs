@@ -31,6 +31,18 @@ namespace App.ContaCorrente.Application.Servicos
                                                             
         }
 
+        public async Task<PagamentoAgendaDTO> CriarAgendamentoAsync(PagamentoAgendaDTO pagamentoDto)
+        {
+            var pagamentoCriarCommand = _mapper.Map<PagamentoCriarAgendamentoCommand>(pagamentoDto);
+
+            var result = await _mediator.Send(pagamentoCriarCommand);
+            var pagamento = _mapper.Map<PagamentoAgendaDTO>(result);
+
+            return pagamento;
+
+        }
+
+
         public async Task<IEnumerable<PagamentoDTO>> GetPeloCorrentistaIdAsync(int? id)
         {
             var pagamentoQuery = new GetPagamentoPeloCorrentistaIdQuery(id.Value);

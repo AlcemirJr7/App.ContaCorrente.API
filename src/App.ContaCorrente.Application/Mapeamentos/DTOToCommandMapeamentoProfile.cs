@@ -48,6 +48,8 @@ namespace App.ContaCorrente.Application.Mapeamentos
 
             //Pagamento
             CreateMap<PagamentoDTO, PagamentoCriarCommand>();
+            CreateMap<PagamentoAgendaDTO, PagamentoCriarAgendamentoCommand>();
+            
 
             //LancamentoFuturo
             CreateMap<LancamentoFuturoDTO, LancamentoFuturoCriarCommand>();
