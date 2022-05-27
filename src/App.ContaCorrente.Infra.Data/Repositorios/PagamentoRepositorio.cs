@@ -31,6 +31,21 @@ namespace App.ContaCorrente.Infra.Data.Repositorios
             return pagamento;
         }
 
+        public async Task<Pagamento> AtualizarAsync(Pagamento pagamento)
+        {
+            try
+            {
+                _appDbContexto.Update(pagamento);
+                await _appDbContexto.SaveChangesAsync();
+            }
+            catch
+            {
+                throw new DomainException(Mensagens.ErroAoAtualizarEntidade);
+            }
+
+            return pagamento;
+        }
+
         public async Task<Pagamento> DeletarAsync(int? id)
         {
             var pagamento = await GetPeloIdAsync(id);

@@ -1,4 +1,5 @@
 ﻿using App.ContaCorrente.Domain.Entidades;
+using App.ContaCorrente.Domain.Enumerador;
 using App.ContaCorrente.Domain.Interfaces;
 using App.ContaCorrente.Domain.Mensagem;
 using App.ContaCorrente.Domain.Validacoes;
@@ -55,6 +56,21 @@ namespace App.ContaCorrente.Infra.Data.Repositorios
             try
             {
                 return await _appDbContexto.LancamentosFuturos.Where(l => l.CorrentistaId == id).ToListAsync();
+            }
+            catch
+            {
+                throw new DomainException(Mensagens.ErroAoEfetuarConsulta);
+            }
+        }
+
+        public async Task<IEnumerable<LancamentoFuturo>> GetLancamentosPendentesAsync()
+        {
+            try
+            {
+                var data = new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day);
+
+                return await _appDbContexto.LancamentosFuturos.Where(l => l.FlagLancamento == EnumLancamentoFuturo.Pendente && 
+                                                                     l.DataParaLancamento <= data).ToListAsync();
             }
             catch
             {

@@ -1,4 +1,6 @@
 ﻿using App.ContaCorrente.Application.DTOs;
+using App.ContaCorrente.Application.Servicos.Interfaces;
+using App.ContaCorrente.Worker.Models;
 using Microsoft.Data.SqlClient;
 using Quartz;
 using System.Data;
@@ -30,6 +32,7 @@ namespace App.ContaCorrente.Worker.Jobs
 
             LancamentoFuturoDTO lancamentos = new LancamentoFuturoDTO();
 
+            
             try
             {
                 using (con = new SqlConnection(_configuration.GetConnectionString("DataBase")))
@@ -54,7 +57,6 @@ namespace App.ContaCorrente.Worker.Jobs
             }
 
             return lancamentos.Valor;
-        }
-
+        }        
     }
 }

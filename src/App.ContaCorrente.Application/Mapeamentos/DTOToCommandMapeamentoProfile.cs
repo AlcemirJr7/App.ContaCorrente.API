@@ -53,6 +53,7 @@ namespace App.ContaCorrente.Application.Mapeamentos
 
             //LancamentoFuturo
             CreateMap<LancamentoFuturoDTO, LancamentoFuturoCriarCommand>();
+            CreateMap<LancamentoFuturoDTO, LancamentoFuturoEfetivarCommand>();            
 
             //Emprestimo
             CreateMap<EmprestimoDTO, EmprestimoCriarCommand>();

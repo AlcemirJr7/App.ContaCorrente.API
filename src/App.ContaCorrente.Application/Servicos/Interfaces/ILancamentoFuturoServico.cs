@@ -9,5 +9,9 @@ namespace App.ContaCorrente.Application.Servicos.Interfaces
         Task<IEnumerable<LancamentoFuturoDTO>> GetPeloCorrentistaIdAsync(int? id);        
 
         Task<LancamentoFuturoDTO> CriarAsync(LancamentoFuturoDTO lancamentoFuturoDto);
+
+        Task<IEnumerable<LancamentoFuturoDTO>> ProcessaLancamentosFuturos();
+
+        Task AtualizaLancamentoFuturoPagamento(int? id);
     }
 }
