@@ -171,6 +171,9 @@
   <data name="ErroAoEfetivarEmprestimo" xml:space="preserve">
     <value>0019| Erro ao efetivar emprestimo.</value>
   </data>
+  <data name="ErroAoEfetivarLancamentosFuturos" xml:space="preserve">
+    <value>0023| Erro ao efetivar lancamentos futuros.</value>
+  </data>
   <data name="ErroAoEfetuarConsulta" xml:space="preserve">
     <value>0004| Erro ao efetuar consulta dos dados.</value>
   </data>

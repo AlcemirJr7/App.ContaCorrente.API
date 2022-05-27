@@ -52,6 +52,38 @@ namespace App.ContaCorrente.API.Controllers
         }
 
         /// <summary>
+        /// Efetivar lançamentos futuros
+        /// </summary>                     
+        [HttpPost("Efetivar/")]
+        public async Task<ActionResult<IEnumerable<LancamentoFuturoDTO>>> PostEfetivarLancamentosFuturos()
+        {
+            
+            using var tr = await _appDbContexto.Database.BeginTransactionAsync();
+
+            IEnumerable<LancamentoFuturoDTO> lancamentosFuturos = new List<LancamentoFuturoDTO>();
+            try
+            {
+                lancamentosFuturos = await _lancamentoFuturoServico.ProcessaLancamentosFuturos();
+            }
+            catch (DomainException e)
+            {
+                await tr.RollbackAsync();
+                return BadRequest(new { mensagem = e.Message });
+            }
+            catch (DomainExcepitonValidacao e)
+            {
+                await tr.RollbackAsync();
+                return BadRequest(new { mensagem = e.Message });
+            }
+
+            await tr.CommitAsync();
+
+            return Ok(lancamentosFuturos);
+        }
+
+
+
+        /// <summary>
         /// Busca um Lançamento Futuro pelo Id
         /// </summary> 
         [HttpGet("{id:int}")]

@@ -223,6 +223,15 @@ namespace App.ContaCorrente.Domain.Mensagem {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a 0023| Erro ao efetivar lancamentos futuros..
+        /// </summary>
+        public static string ErroAoEfetivarLancamentosFuturos {
+            get {
+                return ResourceManager.GetString("ErroAoEfetivarLancamentosFuturos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a 0004| Erro ao efetuar consulta dos dados..
         /// </summary>
         public static string ErroAoEfetuarConsulta {

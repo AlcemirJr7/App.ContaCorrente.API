@@ -21,6 +21,8 @@ namespace App.ContaCorrente.Domain.Entidades
 
         public string? Observacao { get; private set; }
 
+        public int? IdDoLancamento { get; private set; }
+
         public int HistoricoId { get; set; }
 
         public Historico Historico { get; set; }
@@ -35,37 +37,37 @@ namespace App.ContaCorrente.Domain.Entidades
         }
 
         public LancamentoFuturo(decimal valor,DateTime dataCadastro,DateTime dataParaLancamento, EnumTipoLancamentoFuturo tipoLancamento, EnumLancamentoFuturo flagLancamento, 
-                                DateTime? dataLancamento, string? observacao)
+                                DateTime? dataLancamento, string? observacao, int? idDoLancamento)
         {
-            ValidarEntidade(valor, dataCadastro, dataParaLancamento, tipoLancamento ,flagLancamento, dataLancamento, observacao);
+            ValidarEntidade(valor, dataCadastro, dataParaLancamento, tipoLancamento ,flagLancamento, dataLancamento, observacao, idDoLancamento);
         }
 
         public LancamentoFuturo(int id,decimal valor, DateTime dataCadastro, DateTime dataParaLancamento, EnumTipoLancamentoFuturo tipoLancamento, EnumLancamentoFuturo flagLancamento, 
-                                DateTime? dataLancamento, string? observacao)
+                                DateTime? dataLancamento, string? observacao, int? idDoLancamento)
         {
             DomainExcepitonValidacao.When(id < 0, "Id invalido.");
             Id = id;
-            ValidarEntidade(valor, dataCadastro, dataParaLancamento, tipoLancamento ,flagLancamento, dataLancamento, observacao);
+            ValidarEntidade(valor, dataCadastro, dataParaLancamento, tipoLancamento ,flagLancamento, dataLancamento, observacao,idDoLancamento);
         }
 
         public LancamentoFuturo(decimal valor, DateTime dataCadastro, DateTime dataParaLancamento, EnumTipoLancamentoFuturo tipoLancamento, EnumLancamentoFuturo flagLancamento, DateTime? dataLancamento,
-                                string? observacao, int historicoId, int correntistaId)
+                                string? observacao, int? idDoLancamento, int historicoId, int correntistaId)
         {
-            ValidarEntidade(valor, dataCadastro, dataParaLancamento, tipoLancamento ,flagLancamento, dataLancamento, observacao);
+            ValidarEntidade(valor, dataCadastro, dataParaLancamento, tipoLancamento ,flagLancamento, dataLancamento, observacao, idDoLancamento);
             HistoricoId = historicoId;
             CorrentistaId = correntistaId;
         }
 
         public void Atualizar(decimal valor, DateTime dataCadastro, DateTime dataParaLancamento, EnumTipoLancamentoFuturo tipoLancamento, EnumLancamentoFuturo flagLancamento, DateTime? dataLancamento,
-                             string? observacao, int historicoId, int correntistaId)
+                             string? observacao, int? idDoLancamento, int historicoId, int correntistaId)
         {
-            ValidarEntidade(valor, dataCadastro, dataParaLancamento, tipoLancamento ,flagLancamento, dataLancamento, observacao);
+            ValidarEntidade(valor, dataCadastro, dataParaLancamento, tipoLancamento ,flagLancamento, dataLancamento, observacao, idDoLancamento);
             HistoricoId = historicoId;
             CorrentistaId = correntistaId;
         }
 
         private void ValidarEntidade(decimal valor, DateTime dataCadastro, DateTime dataParaLancamento, EnumTipoLancamentoFuturo tipoLancamento, EnumLancamentoFuturo flagLancamento, 
-                                     DateTime? dataLancamento, string? observacao)
+                                     DateTime? dataLancamento, string? observacao, int? idDoLancamento)
         {
             DomainExcepitonValidacao.When(valor <= 0, "Valor invalido.");
             DomainExcepitonValidacao.When(string.IsNullOrEmpty(Convert.ToString(dataCadastro)), "Data Cadastro invalido.");
@@ -80,6 +82,7 @@ namespace App.ContaCorrente.Domain.Entidades
             DataLancamento = dataLancamento;
             TipoLancamento = tipoLancamento;
             Observacao = observacao;
+            IdDoLancamento = idDoLancamento;
         }
     }
 }
