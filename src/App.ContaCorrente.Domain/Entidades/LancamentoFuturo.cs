@@ -29,6 +29,11 @@ namespace App.ContaCorrente.Domain.Entidades
 
         public Correntista Correntista { get; set; }
 
+        public LancamentoFuturo()
+        {
+
+        }
+
         public LancamentoFuturo(decimal valor,DateTime dataCadastro,DateTime dataParaLancamento, EnumTipoLancamentoFuturo tipoLancamento, EnumLancamentoFuturo flagLancamento, 
                                 DateTime? dataLancamento, string? observacao)
         {
