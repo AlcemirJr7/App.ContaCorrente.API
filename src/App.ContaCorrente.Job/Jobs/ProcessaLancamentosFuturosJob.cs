@@ -47,7 +47,7 @@ namespace App.ContaCorrente.Job
             }
             catch (DomainExcepitonValidacao e)
             {
-                await tr.RollbackAsync();
+                await tr.RollbackAsync();   
                 _logger.LogInformation("Erro ao processar job Lancamentos Futuros: " + e.Message);
             }
             catch (Exception e)
