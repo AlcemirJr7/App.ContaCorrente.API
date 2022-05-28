@@ -61,11 +61,6 @@ namespace App.ContaCorrente.Infra.Data.Repositorios
             return endereco;
         }
 
-        public void Dispose()
-        {
-            GC.SuppressFinalize(this);  
-        }
-
         public async Task<Endereco> GetPeloIdAsync(int? id)
         {
             try

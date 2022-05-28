@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace App.ContaCorrente.Domain.Interfaces
 {
-    public interface ISaldoContaCorrenteRepositorio : IDisposable
+    public interface ISaldoContaCorrenteRepositorio 
     {
         Task<SaldoContaCorrente> GetPeloIdAsync(int? id);
 

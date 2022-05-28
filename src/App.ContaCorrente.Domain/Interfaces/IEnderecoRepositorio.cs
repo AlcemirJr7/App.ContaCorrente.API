@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace App.ContaCorrente.Domain.Interfaces
 {
-    public interface IEnderecoRepositorio : IDisposable
+    public interface IEnderecoRepositorio 
     {
         Task<Endereco> GetPeloIdAsync(int? id);
 

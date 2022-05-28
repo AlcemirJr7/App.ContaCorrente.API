@@ -46,10 +46,6 @@ namespace App.ContaCorrente.Infra.Data.Repositorios
             return emprestimo;
         }
 
-        public void Dispose()
-        {
-            GC.SuppressFinalize(this);
-        }
 
         public async Task<IEnumerable<Emprestimo>> GetPeloCorrentistaIdAsync(int? id)
         {

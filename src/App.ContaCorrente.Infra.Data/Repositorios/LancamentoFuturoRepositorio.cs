@@ -46,11 +46,6 @@ namespace App.ContaCorrente.Infra.Data.Repositorios
             return lancamentoFuturo;
         }
 
-        public void Dispose()
-        {
-            GC.SuppressFinalize(this);
-        }
-
         public async Task<IEnumerable<LancamentoFuturo>> GetPeloCorrentistaIdAsync(int? id)
         {
             try

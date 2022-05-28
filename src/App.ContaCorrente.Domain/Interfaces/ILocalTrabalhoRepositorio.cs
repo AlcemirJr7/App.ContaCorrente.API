@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace App.ContaCorrente.Domain.Interfaces
 {
-    public interface ILocalTrabalhoRepositorio : IDisposable
+    public interface ILocalTrabalhoRepositorio 
     {
         Task<LocalTrabalho> GetPeloIdAsync(int? id);
         

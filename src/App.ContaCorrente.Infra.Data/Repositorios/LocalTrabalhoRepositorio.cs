@@ -45,12 +45,6 @@ namespace App.ContaCorrente.Infra.Data.Repositorios
             return localTrabalho;
         }
 
-
-        public void Dispose()
-        {
-            GC.SuppressFinalize(this);
-        }
-
         public async Task<LocalTrabalho> GetPeloIdAsync(int? id)
         {
             
