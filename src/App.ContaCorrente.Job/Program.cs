@@ -1,14 +1,5 @@
-using App.ContaCorrente.Application.Mapeamentos;
-using App.ContaCorrente.Application.Servicos;
-using App.ContaCorrente.Application.Servicos.Interfaces;
-using App.ContaCorrente.Domain.Interfaces;
-using App.ContaCorrente.Infra.Data.Contexto;
-using App.ContaCorrente.Infra.Data.Repositorios;
-using App.ContaCorrente.Infra.IoC;
 using App.ContaCorrente.Job;
 using App.ContaCorrente.Job.Jobs;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
 using Quartz;
 
 var builder = WebApplication.CreateBuilder(args);
