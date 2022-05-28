@@ -41,22 +41,20 @@ namespace App.ContaCorrente.Application.CQRS.Emprestimos.Handlers
             {
                 throw new DomainException(Mensagens.ErroAoCriarEntidade);
             }
-
-            var valorParcela = decimal.Zero;
-
+            
             try
             {
-                valorParcela = _emprestimoServico.CalculaParcelaEmprestimo(emprestimo.Valor, emprestimo.QtdParcelas, emprestimo.Juros);
+                
+                var saldoDevedor = emprestimo.ValorParcela * emprestimo.QtdParcelas;
 
-                var saldoDevedor = valorParcela * emprestimo.QtdParcelas;
-
-                var analiseOk = await _emprestimoServico.AnaliseCreditoCorrentistaAsync(emprestimo.CorrentistaId,valorParcela);
+                var analiseOk = await _emprestimoServico.AnaliseCreditoCorrentistaAsync(emprestimo.CorrentistaId, emprestimo.ValorParcela);
 
                 if (analiseOk)
                 {
                     
-                    emprestimo.AtualizarEfetivacao(emprestimo.Valor,EnumEmprestimoStatus.EmAberto, saldoDevedor, emprestimo.TipoFinalidade,emprestimo.TipoEmprestimo,emprestimo.QtdParcelas,valorParcela,emprestimo.Juros,
-                                                   DateTime.Now, EnumFlagEstadoEmprestimo.Efetivado,EnumProcessoEmprestimo.Aprovado,emprestimo.CorrentistaId);
+                    emprestimo.AtualizarEfetivacao(emprestimo.Valor,EnumEmprestimoStatus.EmAberto, saldoDevedor, emprestimo.TipoFinalidade,emprestimo.TipoEmprestimo,
+                                                   emprestimo.QtdParcelas,emprestimo.ValorParcela,emprestimo.Juros,DateTime.Now, EnumFlagEstadoEmprestimo.Efetivado,
+                                                   EnumProcessoEmprestimo.Aprovado,emprestimo.CorrentistaId);
                     
                     //efetivo eperstimo
                     var resultEmprestimo = await _emprestimoRepositorio.AlterarAsync(emprestimo);
@@ -87,8 +85,9 @@ namespace App.ContaCorrente.Application.CQRS.Emprestimos.Handlers
                 else
                 {
                     // caso analise não ok rejeitar o emprestimo
-                    emprestimo.AtualizarEfetivacao(emprestimo.Valor,EnumEmprestimoStatus.EmAberto,decimal.Zero,emprestimo.TipoFinalidade, emprestimo.TipoEmprestimo, emprestimo.QtdParcelas, valorParcela, emprestimo.Juros,
-                                                DateTime.Now, EnumFlagEstadoEmprestimo.Proposta, EnumProcessoEmprestimo.Rejeitado, emprestimo.CorrentistaId);
+                    emprestimo.AtualizarEfetivacao(emprestimo.Valor,EnumEmprestimoStatus.EmAberto,decimal.Zero,emprestimo.TipoFinalidade, emprestimo.TipoEmprestimo, 
+                                                   emprestimo.QtdParcelas, emprestimo.ValorParcela, emprestimo.Juros,DateTime.Now, EnumFlagEstadoEmprestimo.Proposta, 
+                                                   EnumProcessoEmprestimo.Rejeitado, emprestimo.CorrentistaId);
                                                             
                     return await _emprestimoRepositorio.AlterarAsync(emprestimo);
                 }

@@ -1,4 +1,5 @@
 ﻿using App.ContaCorrente.Application.CQRS.Emprestimos.Commands;
+using App.ContaCorrente.Application.Servicos.Interfaces;
 using App.ContaCorrente.Domain.Entidades;
 using App.ContaCorrente.Domain.Enumerador;
 using App.ContaCorrente.Domain.Interfaces;
@@ -17,10 +18,13 @@ namespace App.ContaCorrente.Application.CQRS.Emprestimos.Handlers
     {
         private readonly IEmprestimoRepositorio _emprestimoRepositorio;
         private readonly ICorrentistaRepositorio _correntistaRepositorio;
-        public EmprestimoCriarCommandHandler(IEmprestimoRepositorio emprestimoRepositorio, ICorrentistaRepositorio correntistaRepositorio)
+        private readonly IEmprestimoServico _emprestimoServico;
+        public EmprestimoCriarCommandHandler(IEmprestimoRepositorio emprestimoRepositorio, ICorrentistaRepositorio correntistaRepositorio,
+                                             IEmprestimoServico emprestimoServico)
         {
             _emprestimoRepositorio = emprestimoRepositorio;
             _correntistaRepositorio = correntistaRepositorio;   
+            _emprestimoServico = emprestimoServico;
         }
 
         public async Task<Emprestimo> Handle(EmprestimoCriarCommand request, CancellationToken cancellationToken)
@@ -33,9 +37,10 @@ namespace App.ContaCorrente.Application.CQRS.Emprestimos.Handlers
                 throw new DomainException(Mensagens.CorrentistaInvalido);
             }
 
+            var valorParcelas = _emprestimoServico.CalculaParcelaEmprestimo(request.Valor,request.QtdParcelas,request.Juros);
 
-            var emprestimo = new Emprestimo(request.Valor,EnumEmprestimoStatus.EmAberto,decimal.Zero,request.TipoFinalidade,request.TipoEmprestimo,request.QtdParcelas,decimal.Zero,
-                                            request.Juros,request.DataEfetivacao,DateTime.Now,EnumFlagEstadoEmprestimo.Proposta,
+            var emprestimo = new Emprestimo(request.Valor,EnumEmprestimoStatus.EmAberto,decimal.Zero,request.TipoFinalidade,request.TipoEmprestimo,request.QtdParcelas,
+                                            valorParcelas, request.Juros,request.DataEfetivacao,DateTime.Now,EnumFlagEstadoEmprestimo.Proposta,
                                             EnumProcessoEmprestimo.EmAnalise,request.CorrentistaId);
 
             if(emprestimo == null)
