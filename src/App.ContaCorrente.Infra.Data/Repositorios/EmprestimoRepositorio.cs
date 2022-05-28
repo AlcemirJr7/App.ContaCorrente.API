@@ -75,7 +75,9 @@ namespace App.ContaCorrente.Infra.Data.Repositorios
         {
             try
             {
-                return await _appDbContexto.Emprestimos.Where(e => e.CorrentistaId == id && e.FlagEstado == EnumFlagEstadoEmprestimo.Efetivado).ToListAsync();
+                return await _appDbContexto.Emprestimos.Where(e => e.CorrentistaId == id && 
+                                                              e.FlagEstado == EnumFlagEstadoEmprestimo.Efetivado &&
+                                                              e.Status == EnumEmprestimoStatus.EmAberto).ToListAsync();
             }
             catch
             {

@@ -72,7 +72,7 @@ namespace App.ContaCorrente.Domain.Entidades
                                         decimal juros, DateTime? dataEfetivacao, EnumFlagEstadoEmprestimo flagEstado, EnumProcessoEmprestimo flagProcesso, int correntistaId)
         {
             DomainExcepitonValidacao.When(FlagEstado == EnumFlagEstadoEmprestimo.Efetivado, "Emrepstimo já efetivado.");
-            DomainExcepitonValidacao.When(saldoDevedor <= 0, "Saldo devedor invalido.");
+            DomainExcepitonValidacao.When(saldoDevedor < 0, "Saldo devedor invalido.");
 
             ValidarEntidade(valor, status, saldoDevedor ,tipoFinalidade, tipoEmprestimo, qtdParcelas, valorParcela, juros, dataEfetivacao, flagEstado, flagProcesso);
             CorrentistaId = correntistaId;
