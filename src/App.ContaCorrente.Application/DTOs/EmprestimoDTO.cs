@@ -34,6 +34,8 @@ namespace App.ContaCorrente.Application.DTOs
         [JsonIgnore]
         public DateTime? DataEfetivacao { get; set; }
 
+        [JsonIgnore]
+        public DateTime? DataRejeicao { get; set; }
 
 
         [JsonIgnore]

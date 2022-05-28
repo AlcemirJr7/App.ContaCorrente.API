@@ -27,6 +27,8 @@ namespace App.ContaCorrente.Domain.Entidades
 
         public DateTime? DataEfetivacao { get; private set; }
 
+        public DateTime? DataRejeicao { get; private set; }
+
         public EnumFlagEstadoEmprestimo FlagEstado { get; private set; }
 
         public EnumProcessoEmprestimo FlagProcesso { get; private set; }
@@ -36,51 +38,51 @@ namespace App.ContaCorrente.Domain.Entidades
         public Correntista Correntista { get; set; }
 
         public Emprestimo(decimal valor, EnumEmprestimoStatus status, decimal saldoDevedor, EnumEmprestimoTipoFinalidade tipoFinalidade, EnumEmprestimoTipoEmprestimo tipoEmprestimo, int qtdParcelas, decimal valorParcela, 
-                          decimal juros,DateTime? dataEfetivacao, EnumFlagEstadoEmprestimo flagEstado, EnumProcessoEmprestimo flagProcesso)
+                          decimal juros,DateTime? dataEfetivacao, DateTime? dataRejeicao, EnumFlagEstadoEmprestimo flagEstado, EnumProcessoEmprestimo flagProcesso)
         {
-            ValidarEntidade(valor, status, saldoDevedor, tipoFinalidade, tipoEmprestimo, qtdParcelas, valorParcela, juros, dataEfetivacao, flagEstado, flagProcesso);            
+            ValidarEntidade(valor, status, saldoDevedor, tipoFinalidade, tipoEmprestimo, qtdParcelas, valorParcela, juros, dataEfetivacao, dataRejeicao, flagEstado, flagProcesso);            
         }
 
         public Emprestimo(int id,decimal valor, EnumEmprestimoStatus status, decimal saldoDevedor, EnumEmprestimoTipoFinalidade tipoFinalidade, EnumEmprestimoTipoEmprestimo tipoEmprestimo, int qtdParcelas, decimal valorParcela,
-                          decimal juros, DateTime? dataEfetivacao, EnumFlagEstadoEmprestimo flagEstado, EnumProcessoEmprestimo flagProcesso)
+                          decimal juros, DateTime? dataEfetivacao, DateTime? dataRejeicao, EnumFlagEstadoEmprestimo flagEstado, EnumProcessoEmprestimo flagProcesso)
         {
             DomainExcepitonValidacao.When(id < 0, "Id invalido.");
             Id = id;
-            ValidarEntidade(valor, status, saldoDevedor, tipoFinalidade, tipoEmprestimo, qtdParcelas, valorParcela, juros, dataEfetivacao, flagEstado, flagProcesso);
+            ValidarEntidade(valor, status, saldoDevedor, tipoFinalidade, tipoEmprestimo, qtdParcelas, valorParcela, juros, dataEfetivacao, dataRejeicao, flagEstado, flagProcesso);
         }
         public Emprestimo(decimal valor, EnumEmprestimoStatus status, decimal saldoDevedor, EnumEmprestimoTipoFinalidade tipoFinalidade, EnumEmprestimoTipoEmprestimo tipoEmprestimo, int qtdParcelas, decimal valorParcela,
-                          decimal juros, DateTime? dataEfetivacao, DateTime dataCadastro, EnumFlagEstadoEmprestimo flagEstado, EnumProcessoEmprestimo flagProcesso, int correntistaId)
+                          decimal juros, DateTime? dataEfetivacao, DateTime? dataRejeicao, DateTime dataCadastro,EnumFlagEstadoEmprestimo flagEstado, EnumProcessoEmprestimo flagProcesso, int correntistaId)
         {
-            ValidarEntidade(valor, status, saldoDevedor, tipoFinalidade, tipoEmprestimo, qtdParcelas, valorParcela, juros, dataEfetivacao,  flagEstado, flagProcesso);
+            ValidarEntidade(valor, status, saldoDevedor, tipoFinalidade, tipoEmprestimo, qtdParcelas, valorParcela, juros, dataEfetivacao, dataRejeicao, flagEstado, flagProcesso);
             DataCadastro = dataCadastro;
             CorrentistaId = correntistaId;
         }
 
         public void Atualizar(decimal valor, EnumEmprestimoStatus status, decimal saldoDevedor, EnumEmprestimoTipoFinalidade tipoFinalidade, EnumEmprestimoTipoEmprestimo tipoEmprestimo, int qtdParcelas, decimal valorParcela,
-                              decimal juros, DateTime? dataEfetivacao, EnumFlagEstadoEmprestimo flagEstado, 
+                              decimal juros, DateTime? dataEfetivacao, DateTime? dataRejeicao, EnumFlagEstadoEmprestimo flagEstado, 
                               EnumProcessoEmprestimo flagProcesso, int correntistaId)
         {
             
             DomainExcepitonValidacao.When(flagEstado == EnumFlagEstadoEmprestimo.Efetivado, "Emrepstimo efetivado não pode ser alterado.");
             
-            ValidarEntidade(valor, status, saldoDevedor, tipoFinalidade, tipoEmprestimo, qtdParcelas, valorParcela, juros, dataEfetivacao, flagEstado, flagProcesso);
+            ValidarEntidade(valor, status, saldoDevedor, tipoFinalidade, tipoEmprestimo, qtdParcelas, valorParcela, juros, dataEfetivacao, dataRejeicao, flagEstado, flagProcesso);
             CorrentistaId = correntistaId;
 
         }
 
         public void AtualizarEfetivacao(decimal valor,EnumEmprestimoStatus status, decimal saldoDevedor, EnumEmprestimoTipoFinalidade tipoFinalidade, EnumEmprestimoTipoEmprestimo tipoEmprestimo, int qtdParcelas, decimal valorParcela,
-                                        decimal juros, DateTime? dataEfetivacao, EnumFlagEstadoEmprestimo flagEstado, EnumProcessoEmprestimo flagProcesso, int correntistaId)
+                                        decimal juros, DateTime? dataEfetivacao, DateTime? dataRejeicao, EnumFlagEstadoEmprestimo flagEstado, EnumProcessoEmprestimo flagProcesso, int correntistaId)
         {
             DomainExcepitonValidacao.When(FlagEstado == EnumFlagEstadoEmprestimo.Efetivado, "Emrepstimo já efetivado.");
             DomainExcepitonValidacao.When(saldoDevedor < 0, "Saldo devedor invalido.");
 
-            ValidarEntidade(valor, status, saldoDevedor ,tipoFinalidade, tipoEmprestimo, qtdParcelas, valorParcela, juros, dataEfetivacao, flagEstado, flagProcesso);
+            ValidarEntidade(valor, status, saldoDevedor ,tipoFinalidade, tipoEmprestimo, qtdParcelas, valorParcela, juros, dataEfetivacao, dataRejeicao, flagEstado, flagProcesso);
             CorrentistaId = correntistaId;
 
         }
 
         private void ValidarEntidade(decimal valor, EnumEmprestimoStatus status, decimal saldoDevedor, EnumEmprestimoTipoFinalidade tipoFinalidade, EnumEmprestimoTipoEmprestimo tipoEmprestimo, int qtdParcelas, decimal valorParcela,
-                                     decimal juros, DateTime? dataEfetivacao, EnumFlagEstadoEmprestimo flagEstado, EnumProcessoEmprestimo flagProcesso)
+                                     decimal juros, DateTime? dataEfetivacao, DateTime? dataRejeicao, EnumFlagEstadoEmprestimo flagEstado, EnumProcessoEmprestimo flagProcesso)
         {
             DomainExcepitonValidacao.When(valor <= 0, "Valor Emprestimo invalido.");
             DomainExcepitonValidacao.When(!Enum.IsDefined(typeof(EnumEmprestimoTipoFinalidade), tipoFinalidade), "Tipo finalidade Emprestimo invalido.");
@@ -103,6 +105,7 @@ namespace App.ContaCorrente.Domain.Entidades
             FlagProcesso = flagProcesso;
             SaldoDevedor = saldoDevedor;
             Status = status;
+            DataRejeicao = dataRejeicao;
         }
     }
 }

@@ -32,7 +32,9 @@ namespace App.ContaCorrente.Application.DTOs
         public DateTime DataCadastro { get; set; }
         
         public DateTime? DataEfetivacao { get; set; }
-        
+
+        public DateTime? DataRejeicao { get; set; }
+
         public EnumFlagEstadoEmprestimo FlagEstado { get; set; }
         
         public EnumProcessoEmprestimo FlagProcesso { get; set; }
