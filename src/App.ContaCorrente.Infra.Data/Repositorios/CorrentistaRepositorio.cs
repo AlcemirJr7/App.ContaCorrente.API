@@ -52,11 +52,6 @@ namespace App.ContaCorrente.Infra.Data.Repositorios
 
         }
 
-        public void Dispose()
-        {
-            GC.SuppressFinalize(this);
-        }
-
         public async Task<Correntista> GetPeloIdAsync(int? id)
         {
             try

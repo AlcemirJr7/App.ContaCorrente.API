@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace App.ContaCorrente.Domain.Interfaces
 {
-    public interface IHistoricoRepositorio : IDisposable
+    public interface IHistoricoRepositorio 
     {
         Task<IEnumerable<Historico>> GetHistoricosAsync();
 

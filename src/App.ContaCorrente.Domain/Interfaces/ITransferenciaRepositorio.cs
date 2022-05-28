@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace App.ContaCorrente.Domain.Interfaces
 {
-    public interface ITransferenciaRepositorio : IDisposable
+    public interface ITransferenciaRepositorio 
     {
         Task<Transferencia> GetPeloIdAsync(int? id);
 

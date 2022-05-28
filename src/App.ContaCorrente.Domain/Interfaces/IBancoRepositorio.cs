@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace App.ContaCorrente.Domain.Interfaces
 {
-    public interface IBancoRepositorio : IDisposable
+    public interface IBancoRepositorio 
     {
         Task<IEnumerable<Banco>> GetBancosAsync();
 

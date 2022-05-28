@@ -50,11 +50,6 @@ namespace App.ContaCorrente.Infra.Data.Repositorios
             return pessoa;
         }
 
-        public void Dispose()
-        {
-            GC.SuppressFinalize(this);
-        }
-
         public async Task<Pessoa> GetPeloIdAsync(int? id)
         {
             try

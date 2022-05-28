@@ -44,12 +44,6 @@ namespace App.ContaCorrente.Infra.Data.Repositorios
 
             return historico;
         }
-
-        public void Dispose()
-        {
-            GC.SuppressFinalize(this);
-        }
-
         public async Task<IEnumerable<Historico>> GetHistoricosAsync()
         {
             try

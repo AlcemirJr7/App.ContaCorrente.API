@@ -68,10 +68,6 @@ namespace App.ContaCorrente.Infra.Data.Repositorios
             return pagamento;
         }
 
-        public void Dispose()
-        {
-            GC.SuppressFinalize(this);
-        }
 
         public async Task<IEnumerable<Pagamento>> GetPeloCorrentistaIdAsync(int? id)
         {

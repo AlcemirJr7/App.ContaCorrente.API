@@ -36,11 +36,6 @@ namespace App.ContaCorrente.Infra.Data.Repositorios
             
         }
 
-        public void Dispose()
-        {
-            GC.SuppressFinalize(this);
-        }
-
         public async Task<IEnumerable<ParcelasEmprestimo>> GetPeloEmprestimoIdAsync(int? id)
         {
             try

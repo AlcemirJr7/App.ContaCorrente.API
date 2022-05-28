@@ -45,11 +45,6 @@ namespace App.ContaCorrente.Infra.Data.Repositorios
             return saldoContaCorrente;
         }
 
-        public void Dispose()
-        {
-            GC.SuppressFinalize(this);
-        }
-
         public async Task<SaldoContaCorrente> GetPeloCorrentistaIdAsync(int? id)
         {
             try

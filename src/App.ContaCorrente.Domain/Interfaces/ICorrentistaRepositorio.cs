@@ -2,7 +2,7 @@
 
 namespace App.ContaCorrente.Domain.Interfaces
 {
-    public interface ICorrentistaRepositorio : IDisposable
+    public interface ICorrentistaRepositorio 
     {
         Task<Correntista> GetPeloIdAsync(int? id);        
 

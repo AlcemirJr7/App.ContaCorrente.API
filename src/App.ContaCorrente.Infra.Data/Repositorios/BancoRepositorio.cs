@@ -49,10 +49,6 @@ namespace App.ContaCorrente.Infra.Data.Repositorios
             return banco;
         }
         
-        public void Dispose()
-        {            
-            GC.SuppressFinalize(this);
-        }
 
         public async Task<IEnumerable<Banco>> GetBancosAsync()
         {
