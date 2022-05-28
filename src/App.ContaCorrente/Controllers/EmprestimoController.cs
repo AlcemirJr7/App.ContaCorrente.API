@@ -1,5 +1,6 @@
 ﻿using App.ContaCorrente.Application.DTOs;
 using App.ContaCorrente.Application.Servicos.Interfaces;
+using App.ContaCorrente.Domain.Enumerador;
 using App.ContaCorrente.Domain.Mensagem;
 using App.ContaCorrente.Domain.Validacoes;
 using App.ContaCorrente.Infra.Data.Contexto;
@@ -54,22 +55,7 @@ namespace App.ContaCorrente.API.Controllers
 
             return Ok(emprestimoDto);
         }
-
-        public enum EnumFlagEstadoEmprestimo
-        {
-            Proposta = 1,
-            Efetivado = 2
-
-        }
-
-        public enum EnumProcessoEmprestimo
-        {
-            EmAnalise = 1,
-            Rejeitado = 2,
-            Aprovado = 3
-
-        }
-
+        
         /// <summary>
         /// Efetiva um emprestimo pelo Id
         /// </summary>
@@ -97,7 +83,16 @@ namespace App.ContaCorrente.API.Controllers
             try
             {
                 emprestimoEfetivarDto = await _emprestimoServico.EfetivarEmprestimoAsync(id);
-                emprestimoEfetivarDto.Mensagem = Mensagens.EmprestimoEfetivadoSucesso;
+
+                if(emprestimoEfetivarDto.FlagEstado == EnumFlagEstadoEmprestimo.Efetivado)
+                {
+                    emprestimoEfetivarDto.Mensagem = Mensagens.EmprestimoEfetivadoSucesso;
+                }
+                else
+                {
+                    emprestimoEfetivarDto.Mensagem = Mensagens.EmprestimoRejeitado;
+                }
+                
             }
             catch (DomainException e)
             {

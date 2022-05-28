@@ -86,7 +86,7 @@ namespace App.ContaCorrente.Application.CQRS.Emprestimos.Handlers
                 {
                     // caso analise não ok rejeitar o emprestimo
                     emprestimo.AtualizarEfetivacao(emprestimo.Valor,EnumEmprestimoStatus.EmAberto,decimal.Zero,emprestimo.TipoFinalidade, emprestimo.TipoEmprestimo, 
-                                                   emprestimo.QtdParcelas, emprestimo.ValorParcela, emprestimo.Juros,DateTime.Now, EnumFlagEstadoEmprestimo.Proposta, 
+                                                   emprestimo.QtdParcelas, emprestimo.ValorParcela, emprestimo.Juros,null, EnumFlagEstadoEmprestimo.Proposta, 
                                                    EnumProcessoEmprestimo.Rejeitado, emprestimo.CorrentistaId);
                                                             
                     return await _emprestimoRepositorio.AlterarAsync(emprestimo);

@@ -135,6 +135,9 @@
   <data name="EmprestimoEfetivadoSucesso" xml:space="preserve">
     <value>Emprestimo Efetivado e Aprovado com sucesso!</value>
   </data>
+  <data name="EmprestimoRejeitado" xml:space="preserve">
+    <value>Emprestimo foi rejeitado.</value>
+  </data>
   <data name="EnderecoInvalido" xml:space="preserve">
     <value>0010| Endereço informado não existe.</value>
   </data>

@@ -115,6 +115,15 @@ namespace App.ContaCorrente.Domain.Mensagem {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Emprestimo foi rejeitado..
+        /// </summary>
+        public static string EmprestimoRejeitado {
+            get {
+                return ResourceManager.GetString("EmprestimoRejeitado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a 0010| Endereço informado não existe..
         /// </summary>
         public static string EnderecoInvalido {
