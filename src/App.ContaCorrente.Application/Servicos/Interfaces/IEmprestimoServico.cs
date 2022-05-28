@@ -1,4 +1,5 @@
 ﻿using App.ContaCorrente.Application.DTOs;
+using App.ContaCorrente.Domain.Entidades;
 
 namespace App.ContaCorrente.Application.Servicos.Interfaces
 {
@@ -17,5 +18,7 @@ namespace App.ContaCorrente.Application.Servicos.Interfaces
         Task<EmprestimoEfetivarDTO> EfetivarEmprestimoAsync(int? id);
 
         Task<bool> AnaliseCreditoCorrentistaAsync(int? correntistaId, decimal valorEmprestimo);
+
+        Task AtualizaSaldoDevedor(decimal valorParcela, Emprestimo emprestimo);
     }
 }

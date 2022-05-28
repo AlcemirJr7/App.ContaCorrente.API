@@ -12,6 +12,8 @@ namespace App.ContaCorrente.Domain.Interfaces
 
         Task<IEnumerable<ParcelasEmprestimo>> CriarAsync(IEnumerable<ParcelasEmprestimo> parcelasEmprestimo);
 
+        Task<IEnumerable<ParcelasEmprestimo>> GetParcelasAhVencerAsync(int? emprestimoId);
+
 
     }
 }

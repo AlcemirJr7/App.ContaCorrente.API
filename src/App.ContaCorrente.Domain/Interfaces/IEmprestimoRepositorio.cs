@@ -13,5 +13,7 @@ namespace App.ContaCorrente.Domain.Interfaces
         Task<Emprestimo> CriarAsync(Emprestimo emprestimo);
 
         Task<IEnumerable<Emprestimo>> GetEmprestimosEfetivadosPeloCorrentistaIdAsync(int? id);
+
+        Task<IEnumerable<Emprestimo>> GetEmprestimosEfetivadosEmAbertoAsync();
     }
 }

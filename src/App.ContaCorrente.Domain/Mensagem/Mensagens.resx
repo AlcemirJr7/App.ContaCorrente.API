@@ -159,6 +159,9 @@
   <data name="ErroAoAtualizarSaldo" xml:space="preserve">
     <value>0016| Não foi possível atualizar o saldo.</value>
   </data>
+  <data name="ErroAoAtualizarSaldoDevedorEmprestimo" xml:space="preserve">
+    <value>0025| Não foi possível atualizar o saldo devedor do emprestimo.</value>
+  </data>
   <data name="ErroAoCriarEntidade" xml:space="preserve">
     <value>0001| Erro ao criar entidade.</value>
   </data>
@@ -182,6 +185,9 @@
   </data>
   <data name="ErroAoEfetuarPagamento" xml:space="preserve">
     <value>0021| Erro ao efetuar pagamento.</value>
+  </data>
+  <data name="ErroAoProcessarPagamentoParcelasEmprestimo" xml:space="preserve">
+    <value>0024| Erro ao processar pagamento de parcelas emprestimo.</value>
   </data>
   <data name="HistoricoInvalido" xml:space="preserve">
     <value>0018| Historico informado não existe.</value>

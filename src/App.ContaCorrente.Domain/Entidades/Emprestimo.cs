@@ -69,6 +69,15 @@ namespace App.ContaCorrente.Domain.Entidades
             CorrentistaId = correntistaId;
 
         }
+        public void AtualizarSaldoDevedor(decimal valor, EnumEmprestimoStatus status, decimal saldoDevedor, EnumEmprestimoTipoFinalidade tipoFinalidade, EnumEmprestimoTipoEmprestimo tipoEmprestimo, int qtdParcelas, decimal valorParcela,
+                                          decimal juros, DateTime? dataEfetivacao, DateTime? dataRejeicao, EnumFlagEstadoEmprestimo flagEstado,
+                                          EnumProcessoEmprestimo flagProcesso, int correntistaId)
+        {
+            
+            ValidarEntidade(valor, status, saldoDevedor, tipoFinalidade, tipoEmprestimo, qtdParcelas, valorParcela, juros, dataEfetivacao, dataRejeicao, flagEstado, flagProcesso);
+            CorrentistaId = correntistaId;
+
+        }
 
         public void AtualizarEfetivacao(decimal valor,EnumEmprestimoStatus status, decimal saldoDevedor, EnumEmprestimoTipoFinalidade tipoFinalidade, EnumEmprestimoTipoEmprestimo tipoEmprestimo, int qtdParcelas, decimal valorParcela,
                                         decimal juros, DateTime? dataEfetivacao, DateTime? dataRejeicao, EnumFlagEstadoEmprestimo flagEstado, EnumProcessoEmprestimo flagProcesso, int correntistaId)

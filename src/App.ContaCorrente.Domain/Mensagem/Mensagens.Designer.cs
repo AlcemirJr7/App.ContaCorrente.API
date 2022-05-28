@@ -187,6 +187,15 @@ namespace App.ContaCorrente.Domain.Mensagem {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a 0025| Não foi possível atualizar o saldo devedor do emprestimo..
+        /// </summary>
+        public static string ErroAoAtualizarSaldoDevedorEmprestimo {
+            get {
+                return ResourceManager.GetString("ErroAoAtualizarSaldoDevedorEmprestimo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a 0001| Erro ao criar entidade..
         /// </summary>
         public static string ErroAoCriarEntidade {
@@ -255,6 +264,15 @@ namespace App.ContaCorrente.Domain.Mensagem {
         public static string ErroAoEfetuarPagamento {
             get {
                 return ResourceManager.GetString("ErroAoEfetuarPagamento", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a 0024| Erro ao processar pagamento de parcelas emprestimo..
+        /// </summary>
+        public static string ErroAoProcessarPagamentoParcelasEmprestimo {
+            get {
+                return ResourceManager.GetString("ErroAoProcessarPagamentoParcelasEmprestimo", resourceCulture);
             }
         }
         

@@ -85,5 +85,18 @@ namespace App.ContaCorrente.Infra.Data.Repositorios
             }
         }
 
+        public async Task<IEnumerable<Emprestimo>> GetEmprestimosEfetivadosEmAbertoAsync()
+        {
+            try
+            {
+                return await _appDbContexto.Emprestimos.Where(e => e.FlagEstado == EnumFlagEstadoEmprestimo.Efetivado &&
+                                                              e.Status == EnumEmprestimoStatus.EmAberto).ToListAsync();
+            }
+            catch
+            {
+                throw new DomainException(Mensagens.ErroAoEfetuarConsulta);
+            }
+        }
+
     }
 }

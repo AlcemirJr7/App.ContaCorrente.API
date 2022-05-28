@@ -15,9 +15,19 @@ namespace App.ContaCorrente.Infra.Data.Repositorios
             _appDbContexto = appDbContexto;
         }
 
-        public Task<ParcelasEmprestimo> AlterarAsync(ParcelasEmprestimo parcelasEmprestimo)
+        public async Task<ParcelasEmprestimo> AlterarAsync(ParcelasEmprestimo parcelasEmprestimo)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _appDbContexto.Update(parcelasEmprestimo);
+                await _appDbContexto.SaveChangesAsync();
+            }
+            catch
+            {
+                throw new DomainException(Mensagens.ErroAoAtualizarEntidade);
+            }
+
+            return parcelasEmprestimo;
         }
 
         public async Task<IEnumerable<ParcelasEmprestimo>> CriarAsync(IEnumerable<ParcelasEmprestimo> parcelasEmprestimo)
@@ -53,6 +63,22 @@ namespace App.ContaCorrente.Infra.Data.Repositorios
             try
             {
                 return await _appDbContexto.ParcelasEmprestimos.Where(p => p.SeqParcelas == parcela && p.EmprestimoId == emprestimoId).FirstOrDefaultAsync();
+            }
+            catch
+            {
+                throw new DomainException(Mensagens.ErroAoEfetuarConsulta);
+            }
+        }
+
+        public async Task<IEnumerable<ParcelasEmprestimo>> GetParcelasAhVencerAsync(int? emprestimoId)
+        {
+            try
+            {
+                var data = new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day);
+
+                return await _appDbContexto.ParcelasEmprestimos.Where(p => p.EmprestimoId == emprestimoId && 
+                                                                           p.DataVencimento <= data &&
+                                                                           p.DataPagamento == null).ToListAsync();
             }
             catch
             {
