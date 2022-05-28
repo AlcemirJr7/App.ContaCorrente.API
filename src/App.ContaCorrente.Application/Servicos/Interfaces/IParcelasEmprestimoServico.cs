@@ -13,6 +13,8 @@ namespace App.ContaCorrente.Application.Servicos.Interfaces
 
         IEnumerable<ParcelasEmprestimoDTO> GerarParcelasEmprestimo(Emprestimo emprestimo);
 
+        Task<IEnumerable<ParcelasEmprestimoDTO>> ProcessaPagamentoParcelaEmprestimo();
+
 
     }
 }

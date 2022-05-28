@@ -2,6 +2,7 @@
 using App.ContaCorrente.Application.Servicos.Interfaces;
 using App.ContaCorrente.Domain.Mensagem;
 using App.ContaCorrente.Domain.Validacoes;
+using App.ContaCorrente.Infra.Data.Contexto;
 using Microsoft.AspNetCore.Mvc;
 
 namespace App.ContaCorrente.API.Controllers
@@ -11,9 +12,11 @@ namespace App.ContaCorrente.API.Controllers
     public class ParcelasEmprestimoController : ControllerBase
     {
         private readonly IParcelasEmprestimoServico _parcelasEmprestimoServico;
-        public ParcelasEmprestimoController(IParcelasEmprestimoServico parcelasEmprestimoServico)
+        private readonly AppDbContexto _appDbContexto;
+        public ParcelasEmprestimoController(IParcelasEmprestimoServico parcelasEmprestimoServico, AppDbContexto appDbContexto)
         {
             _parcelasEmprestimoServico = parcelasEmprestimoServico;
+            _appDbContexto = appDbContexto; 
         }
 
         /// <summary>
@@ -40,6 +43,38 @@ namespace App.ContaCorrente.API.Controllers
             {
                 return BadRequest(new { mensagem = e.Message });
             }
+
+            return Ok(parcelas);
+        }
+
+        /// <summary>
+        /// Efetua pagamento de parcelas emprestimos a vencer
+        /// </summary> 
+        [HttpPost]
+        public async Task<ActionResult<IEnumerable<ParcelasEmprestimoDTO>>> PostPagarParcelasEmprestimo()
+        {
+            
+            IEnumerable<ParcelasEmprestimoDTO> parcelas = new List<ParcelasEmprestimoDTO>();
+
+            using var tr = await _appDbContexto.Database.BeginTransactionAsync();
+
+            try
+            {
+                parcelas = await _parcelasEmprestimoServico.ProcessaPagamentoParcelaEmprestimo();
+                
+            }
+            catch (DomainException e)
+            {
+                await tr.RollbackAsync();
+                return BadRequest(new { mensagem = e.Message });
+            }
+            catch (DomainExcepitonValidacao e)
+            {
+                await tr.RollbackAsync();
+                return BadRequest(new { mensagem = e.Message });
+            }
+
+            await tr.CommitAsync();
 
             return Ok(parcelas);
         }

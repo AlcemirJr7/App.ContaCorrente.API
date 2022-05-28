@@ -1,4 +1,5 @@
-﻿using App.ContaCorrente.Application.CQRS.ParcelasEmprestimos.Queries;
+﻿using App.ContaCorrente.Application.CQRS.ParcelasEmprestimos.Commands;
+using App.ContaCorrente.Application.CQRS.ParcelasEmprestimos.Queries;
 using App.ContaCorrente.Application.DTOs;
 using App.ContaCorrente.Application.Servicos.Interfaces;
 using App.ContaCorrente.Domain.Entidades;
@@ -39,6 +40,17 @@ namespace App.ContaCorrente.Application.Servicos
 
             return parcelas;
 
+        }
+
+        public async Task<IEnumerable<ParcelasEmprestimoDTO>> ProcessaPagamentoParcelaEmprestimo()
+        {
+            var parcelaEmprestimoCommand = new ParcelasEmprestimoPagarCommand();
+
+            var result = await _mediator.Send(parcelaEmprestimoCommand);
+
+            var parcelasEmprestimo = _mapper.Map<IEnumerable<ParcelasEmprestimoDTO>>(result);
+
+            return parcelasEmprestimo;
         }
 
         public Task<IEnumerable<ParcelasEmprestimoDTO>> GetPeloIdAsync(int? id)

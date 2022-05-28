@@ -2,6 +2,7 @@
 using App.ContaCorrente.Application.CQRS.Emprestimos.Queries;
 using App.ContaCorrente.Application.DTOs;
 using App.ContaCorrente.Application.Servicos.Interfaces;
+using App.ContaCorrente.Domain.Entidades;
 using App.ContaCorrente.Domain.Enumerador;
 using App.ContaCorrente.Domain.Interfaces;
 using App.ContaCorrente.Domain.Mensagem;
@@ -52,6 +53,40 @@ namespace App.ContaCorrente.Application.Servicos
             var emprestimo = _mapper.Map<EmprestimoEfetivarDTO>(result);
 
             return emprestimo;
+        }
+
+        public async Task AtualizaSaldoDevedor(decimal valorParcela, Emprestimo emprestimo)
+        {
+            var novoSaldoDevedor = emprestimo.SaldoDevedor - valorParcela;
+
+            try
+            {
+                if (novoSaldoDevedor <= 0)
+                {
+                    emprestimo.AtualizarSaldoDevedor(emprestimo.Valor,EnumEmprestimoStatus.PagoTotal,decimal.Zero,emprestimo.TipoFinalidade,
+                                         emprestimo.TipoEmprestimo,emprestimo.QtdParcelas,emprestimo.ValorParcela,emprestimo.Juros,
+                                         emprestimo.DataEfetivacao,emprestimo.DataRejeicao,emprestimo.FlagEstado,emprestimo.FlagProcesso,
+                                         emprestimo.CorrentistaId);
+
+                    await _emprestimoRepositorio.AlterarAsync(emprestimo);
+
+                }
+                else
+                {
+                    emprestimo.AtualizarSaldoDevedor(emprestimo.Valor, EnumEmprestimoStatus.EmAberto, novoSaldoDevedor, emprestimo.TipoFinalidade,
+                                                     emprestimo.TipoEmprestimo, emprestimo.QtdParcelas, emprestimo.ValorParcela, emprestimo.Juros,
+                                                     emprestimo.DataEfetivacao, emprestimo.DataRejeicao, emprestimo.FlagEstado, emprestimo.FlagProcesso,
+                                                     emprestimo.CorrentistaId);
+
+                    await _emprestimoRepositorio.AlterarAsync(emprestimo);
+                }
+            }
+            catch 
+            {
+                throw new DomainException(Mensagens.ErroAoAtualizarSaldoDevedorEmprestimo);
+            }
+            
+
         }
 
         public async Task<EmprestimoDTO> CriarAsync(EmprestimoDTO emprestimoDto)
