@@ -27,7 +27,9 @@ namespace App.ContaCorrente.Application.CQRS.Emprestimos.Commands
         public DateTime DataCadastro { get; set; }
         
         public DateTime? DataEfetivacao { get; set; }
-        
+
+        public DateTime? DataRejeicao { get; set; }
+
         public EnumFlagEstadoEmprestimo FlagEstado { get; set; }
 
         

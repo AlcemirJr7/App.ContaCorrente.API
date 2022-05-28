@@ -40,7 +40,7 @@ namespace App.ContaCorrente.Application.CQRS.Emprestimos.Handlers
             var valorParcelas = _emprestimoServico.CalculaParcelaEmprestimo(request.Valor,request.QtdParcelas,request.Juros);
 
             var emprestimo = new Emprestimo(request.Valor,EnumEmprestimoStatus.EmAberto,decimal.Zero,request.TipoFinalidade,request.TipoEmprestimo,request.QtdParcelas,
-                                            valorParcelas, request.Juros,request.DataEfetivacao,DateTime.Now,EnumFlagEstadoEmprestimo.Proposta,
+                                            valorParcelas, request.Juros,request.DataEfetivacao,request.DataRejeicao,DateTime.Now,EnumFlagEstadoEmprestimo.Proposta,
                                             EnumProcessoEmprestimo.EmAnalise,request.CorrentistaId);
 
             if(emprestimo == null)

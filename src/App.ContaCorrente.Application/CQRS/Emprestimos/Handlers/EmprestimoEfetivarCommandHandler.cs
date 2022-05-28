@@ -53,7 +53,7 @@ namespace App.ContaCorrente.Application.CQRS.Emprestimos.Handlers
                 {
                     
                     emprestimo.AtualizarEfetivacao(emprestimo.Valor,EnumEmprestimoStatus.EmAberto, saldoDevedor, emprestimo.TipoFinalidade,emprestimo.TipoEmprestimo,
-                                                   emprestimo.QtdParcelas,emprestimo.ValorParcela,emprestimo.Juros,DateTime.Now, EnumFlagEstadoEmprestimo.Efetivado,
+                                                   emprestimo.QtdParcelas,emprestimo.ValorParcela,emprestimo.Juros,DateTime.Now,null, EnumFlagEstadoEmprestimo.Efetivado,
                                                    EnumProcessoEmprestimo.Aprovado,emprestimo.CorrentistaId);
                     
                     //efetivo eperstimo
@@ -86,7 +86,7 @@ namespace App.ContaCorrente.Application.CQRS.Emprestimos.Handlers
                 {
                     // caso analise não ok rejeitar o emprestimo
                     emprestimo.AtualizarEfetivacao(emprestimo.Valor,EnumEmprestimoStatus.EmAberto,decimal.Zero,emprestimo.TipoFinalidade, emprestimo.TipoEmprestimo, 
-                                                   emprestimo.QtdParcelas, emprestimo.ValorParcela, emprestimo.Juros,null, EnumFlagEstadoEmprestimo.Proposta, 
+                                                   emprestimo.QtdParcelas, emprestimo.ValorParcela, emprestimo.Juros,null,DateTime.Now, EnumFlagEstadoEmprestimo.Proposta, 
                                                    EnumProcessoEmprestimo.Rejeitado, emprestimo.CorrentistaId);
                                                             
                     return await _emprestimoRepositorio.AlterarAsync(emprestimo);
