@@ -81,6 +81,36 @@ namespace App.ContaCorrente.API.Controllers
             return Ok(lancamentosFuturos);
         }
 
+        /// <summary>
+        /// Cancelar um lançamento futuro pelo Id
+        /// </summary>                      
+        [HttpPut("Cancelar/{id:int}")]
+        public async Task<ActionResult<LancamentoFuturoDTO>> PutCancelarLancamentoFuturo(int? id)
+        {
+            if (id == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
+
+            using var tr = await _appDbContexto.Database.BeginTransactionAsync();
+            try
+            {
+                var lancamentoFuturo = await _lancamentoFuturoServico.CancelarAsync(id);
+                
+                await tr.CommitAsync();
+
+                return Ok(lancamentoFuturo);
+            }
+            catch (DomainException e)
+            {
+                await tr.RollbackAsync();
+                return BadRequest(new { mensagem = e.Message });
+            }
+            catch (DomainExcepitonValidacao e)
+            {
+                await tr.RollbackAsync();
+                return BadRequest(new { mensagem = e.Message });
+            }
+
+            
+        }
 
 
         /// <summary>

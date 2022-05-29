@@ -169,6 +169,15 @@ namespace App.ContaCorrente.Domain.Mensagem {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a 0026| Não foi possível atualizar lançamento futuro..
+        /// </summary>
+        public static string ErroAoAlterarLancamentoFuturo {
+            get {
+                return ResourceManager.GetString("ErroAoAlterarLancamentoFuturo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a 0003| Erro ao atualizar entidade..
         /// </summary>
         public static string ErroAoAtualizarEntidade {

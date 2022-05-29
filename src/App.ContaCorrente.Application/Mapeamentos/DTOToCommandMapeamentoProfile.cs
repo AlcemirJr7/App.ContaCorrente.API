@@ -54,7 +54,9 @@ namespace App.ContaCorrente.Application.Mapeamentos
 
             //LancamentoFuturo
             CreateMap<LancamentoFuturoDTO, LancamentoFuturoCriarCommand>();
-            CreateMap<LancamentoFuturoDTO, LancamentoFuturoEfetivarCommand>();            
+            CreateMap<LancamentoFuturoDTO, LancamentoFuturoEfetivarCommand>();
+            CreateMap<LancamentoFuturoDTO, LancamentoFuturoCancelarCommand>();
+            
 
             //Emprestimo
             CreateMap<EmprestimoDTO, EmprestimoCriarCommand>();
