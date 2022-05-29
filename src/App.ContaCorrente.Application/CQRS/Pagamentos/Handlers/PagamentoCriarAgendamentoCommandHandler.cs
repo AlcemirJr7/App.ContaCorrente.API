@@ -34,7 +34,8 @@ namespace App.ContaCorrente.Application.CQRS.Pagamentos.Handlers
                 var agendamento = await _pagamentoRepositorio.CriarAsync(pagamento);
 
                 var lancamentoFuturo = new LancamentoFuturo(agendamento.Valor,DateTime.Now,agendamento.DataAgendamento.Value,EnumTipoLancamentoFuturo.Pagamento,
-                                                            EnumLancamentoFuturo.Pendente,null,StringFormata.ApenasNumeros(agendamento.CodigoBarra),pagamento.Id,(int)EnumPagamentoHistorico.historico,agendamento.CorrentistaId);
+                                                            EnumLancamentoFuturo.Pendente,null,StringFormata.ApenasNumeros(agendamento.CodigoBarra),pagamento.Id,
+                                                            EnumSituacaoLancamentoFuturo.Ativo,(int)EnumPagamentoHistorico.historico,agendamento.CorrentistaId);
                 
                 if (lancamentoFuturo == null)
                 {

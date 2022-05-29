@@ -23,6 +23,8 @@ namespace App.ContaCorrente.Domain.Entidades
 
         public int? IdDoLancamento { get; private set; }
 
+        public EnumSituacaoLancamentoFuturo Situacao { get; private set; }
+
         public int HistoricoId { get; set; }
 
         public Historico Historico { get; set; }
@@ -31,49 +33,46 @@ namespace App.ContaCorrente.Domain.Entidades
 
         public Correntista Correntista { get; set; }
 
-        public LancamentoFuturo()
-        {
-
-        }
-
+    
         public LancamentoFuturo(decimal valor,DateTime dataCadastro,DateTime dataParaLancamento, EnumTipoLancamentoFuturo tipoLancamento, EnumLancamentoFuturo flagLancamento, 
-                                DateTime? dataLancamento, string? observacao, int? idDoLancamento)
+                                DateTime? dataLancamento, string? observacao, int? idDoLancamento, EnumSituacaoLancamentoFuturo situacao)
         {
-            ValidarEntidade(valor, dataCadastro, dataParaLancamento, tipoLancamento ,flagLancamento, dataLancamento, observacao, idDoLancamento);
+            ValidarEntidade(valor, dataCadastro, dataParaLancamento, tipoLancamento ,flagLancamento, dataLancamento, observacao, idDoLancamento, situacao);
         }
 
         public LancamentoFuturo(int id,decimal valor, DateTime dataCadastro, DateTime dataParaLancamento, EnumTipoLancamentoFuturo tipoLancamento, EnumLancamentoFuturo flagLancamento, 
-                                DateTime? dataLancamento, string? observacao, int? idDoLancamento)
+                                DateTime? dataLancamento, string? observacao, int? idDoLancamento, EnumSituacaoLancamentoFuturo situacao)
         {
             DomainExcepitonValidacao.When(id < 0, "Id invalido.");
             Id = id;
-            ValidarEntidade(valor, dataCadastro, dataParaLancamento, tipoLancamento ,flagLancamento, dataLancamento, observacao,idDoLancamento);
+            ValidarEntidade(valor, dataCadastro, dataParaLancamento, tipoLancamento ,flagLancamento, dataLancamento, observacao,idDoLancamento, situacao);
         }
 
         public LancamentoFuturo(decimal valor, DateTime dataCadastro, DateTime dataParaLancamento, EnumTipoLancamentoFuturo tipoLancamento, EnumLancamentoFuturo flagLancamento, DateTime? dataLancamento,
-                                string? observacao, int? idDoLancamento, int historicoId, int correntistaId)
+                                string? observacao, int? idDoLancamento, EnumSituacaoLancamentoFuturo situacao, int historicoId, int correntistaId)
         {
-            ValidarEntidade(valor, dataCadastro, dataParaLancamento, tipoLancamento ,flagLancamento, dataLancamento, observacao, idDoLancamento);
+            ValidarEntidade(valor, dataCadastro, dataParaLancamento, tipoLancamento ,flagLancamento, dataLancamento, observacao, idDoLancamento, situacao);
             HistoricoId = historicoId;
             CorrentistaId = correntistaId;
         }
 
         public void Atualizar(decimal valor, DateTime dataCadastro, DateTime dataParaLancamento, EnumTipoLancamentoFuturo tipoLancamento, EnumLancamentoFuturo flagLancamento, DateTime? dataLancamento,
-                             string? observacao, int? idDoLancamento, int historicoId, int correntistaId)
+                             string? observacao, int? idDoLancamento, EnumSituacaoLancamentoFuturo situacao, int historicoId, int correntistaId)
         {
-            ValidarEntidade(valor, dataCadastro, dataParaLancamento, tipoLancamento ,flagLancamento, dataLancamento, observacao, idDoLancamento);
+            ValidarEntidade(valor, dataCadastro, dataParaLancamento, tipoLancamento ,flagLancamento, dataLancamento, observacao, idDoLancamento, situacao);
             HistoricoId = historicoId;
             CorrentistaId = correntistaId;
         }
 
         private void ValidarEntidade(decimal valor, DateTime dataCadastro, DateTime dataParaLancamento, EnumTipoLancamentoFuturo tipoLancamento, EnumLancamentoFuturo flagLancamento, 
-                                     DateTime? dataLancamento, string? observacao, int? idDoLancamento)
+                                     DateTime? dataLancamento, string? observacao, int? idDoLancamento, EnumSituacaoLancamentoFuturo situacao)
         {
             DomainExcepitonValidacao.When(valor <= 0, "Valor invalido.");
             DomainExcepitonValidacao.When(string.IsNullOrEmpty(Convert.ToString(dataCadastro)), "Data Cadastro invalido.");
             DomainExcepitonValidacao.When(string.IsNullOrEmpty(Convert.ToString(dataParaLancamento)), "Data para lançamento invalido.");
             DomainExcepitonValidacao.When(!Enum.IsDefined(typeof(EnumLancamentoFuturo),flagLancamento), "Flag lançamento invalido.");
             DomainExcepitonValidacao.When(!Enum.IsDefined(typeof(EnumTipoLancamentoFuturo), tipoLancamento), "Tipo lançamento invalido.");
+            DomainExcepitonValidacao.When(!Enum.IsDefined(typeof(EnumSituacaoLancamentoFuturo), situacao), "Situação lançamento invalido.");
 
             Valor = valor;
             DataCadastro = dataCadastro;
@@ -83,6 +82,7 @@ namespace App.ContaCorrente.Domain.Entidades
             TipoLancamento = tipoLancamento;
             Observacao = observacao;
             IdDoLancamento = idDoLancamento;
+            Situacao = situacao;
         }
     }
 }

@@ -38,7 +38,7 @@ namespace App.ContaCorrente.Application.CQRS.LancamentosFuturos.Handlers
             }
 
             var lancamentoFuturo = new LancamentoFuturo(request.Valor,DateTime.Now,request.DataParaLancamento, EnumTipoLancamentoFuturo.Outros ,EnumLancamentoFuturo.Pendente,
-                                                        request.DataLancamento,null,null,request.HistoricoId,request.CorrentistaId);
+                                                        request.DataLancamento,null,null,EnumSituacaoLancamentoFuturo.Ativo,request.HistoricoId,request.CorrentistaId);
 
             if(lancamentoFuturo == null)
             {

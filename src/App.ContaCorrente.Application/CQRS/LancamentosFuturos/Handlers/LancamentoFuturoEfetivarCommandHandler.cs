@@ -73,7 +73,7 @@ namespace App.ContaCorrente.Application.CQRS.LancamentosFuturos.Handlers
                     }
 
                     lancamentoFuturo.Atualizar(lancamentoFuturo.Valor,lancamentoFuturo.DataCadastro,lancamentoFuturo.DataParaLancamento,lancamentoFuturo.TipoLancamento,EnumLancamentoFuturo.Efetuado,
-                                               DateTime.Now,lancamentoFuturo.Observacao,lancamentoFuturo.IdDoLancamento,lancamentoFuturo.HistoricoId,lancamentoFuturo.CorrentistaId);
+                                               DateTime.Now,lancamentoFuturo.Observacao,lancamentoFuturo.IdDoLancamento,EnumSituacaoLancamentoFuturo.Processado, lancamentoFuturo.HistoricoId,lancamentoFuturo.CorrentistaId);
 
                     var result = await _lancamentoFuturoRepositorio.AlterarAsync(lancamentoFuturo);
 

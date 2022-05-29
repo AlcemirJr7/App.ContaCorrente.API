@@ -15,4 +15,11 @@
         Outros = 5 
 
     }
+
+    public enum EnumSituacaoLancamentoFuturo
+    {
+        Ativo = 1,
+        Cancelado = 2,
+        Processado = 3
+    }
 }
