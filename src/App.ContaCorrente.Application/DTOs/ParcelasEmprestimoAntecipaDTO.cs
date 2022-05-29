@@ -3,9 +3,9 @@ using System.Text.Json.Serialization;
 
 namespace App.ContaCorrente.Application.DTOs
 {
-    public class ParcelasEmprestimoDTO
+    public class ParcelasEmprestimoAntecipaDTO
     {
-        public ParcelasEmprestimoDTO()
+        public ParcelasEmprestimoAntecipaDTO()
         {
 
         }
@@ -16,12 +16,15 @@ namespace App.ContaCorrente.Application.DTOs
         public decimal Valor { get; set; }
 
         public int SeqParcelas { get; set; }
-       
-        public DateTime DataVencimento { get; set; }
         
+        [JsonIgnore]
+        public DateTime DataVencimento { get; set; }
+                
         public DateTime? DataPagamento { get; set; }
 
         public int EmprestimoId { get; set; }
+
+        public string? mensagem { get; set; }  
         
     }
 }

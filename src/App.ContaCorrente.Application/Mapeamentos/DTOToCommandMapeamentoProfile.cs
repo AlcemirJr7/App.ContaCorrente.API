@@ -7,6 +7,7 @@ using App.ContaCorrente.Application.CQRS.Lancamentos.Commands;
 using App.ContaCorrente.Application.CQRS.LancamentosFuturos.Commands;
 using App.ContaCorrente.Application.CQRS.LocalTrabalhos.Commands;
 using App.ContaCorrente.Application.CQRS.Pagamentos.Commands;
+using App.ContaCorrente.Application.CQRS.ParcelasEmprestimos.Commands;
 using App.ContaCorrente.Application.CQRS.Pessoas.Commands;
 using App.ContaCorrente.Application.DTOs;
 using App.ContaCorrente.Domain.Entidades;
@@ -61,6 +62,10 @@ namespace App.ContaCorrente.Application.Mapeamentos
             CreateMap<EmprestimoDTO, EmprestimoEfetivarCommand>();
             CreateMap<Emprestimo, EmprestimoEfetivarCommand>();
 
+            //Parclas Emprestimo
+            CreateMap<ParcelasEmprestimoDTO, ParcelasEmprestimoPagarCommand>();
+            CreateMap<ParcelasEmprestimoAntecipaDTO, ParcelasEmprestimoPagarAntecipadoCommand>();
+            CreateMap<ParcelasEmprestimo, ParcelasEmprestimoPagarAntecipadoCommand>();
 
 
 

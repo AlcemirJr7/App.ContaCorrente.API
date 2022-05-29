@@ -1,5 +1,6 @@
 ﻿using App.ContaCorrente.Application.DTOs;
 using App.ContaCorrente.Application.Servicos.Interfaces;
+using App.ContaCorrente.Domain.Entidades;
 using App.ContaCorrente.Domain.Mensagem;
 using App.ContaCorrente.Domain.Validacoes;
 using App.ContaCorrente.Infra.Data.Contexto;
@@ -9,6 +10,7 @@ namespace App.ContaCorrente.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Produces("application/json")]
     public class ParcelasEmprestimoController : ControllerBase
     {
         private readonly IParcelasEmprestimoServico _parcelasEmprestimoServico;
@@ -60,8 +62,51 @@ namespace App.ContaCorrente.API.Controllers
 
             try
             {
-                parcelas = await _parcelasEmprestimoServico.ProcessaPagamentoParcelaEmprestimo();
+                parcelas = await _parcelasEmprestimoServico.ProcessaPagamentoParcelasEmprestimoAsync();
                 
+            }
+            catch (DomainException e)
+            {
+                await tr.RollbackAsync();
+                return BadRequest(new { mensagem = e.Message });
+            }
+            catch (DomainExcepitonValidacao e)
+            {
+                await tr.RollbackAsync();
+                return BadRequest(new { mensagem = e.Message });
+            }
+
+            await tr.CommitAsync();
+
+            return Ok(parcelas);
+        }
+
+
+        /// <summary>
+        /// Efetua pagamento antecipado de parcelas emprestimo
+        /// </summary> 
+        [HttpPost("Antecipar/")]
+        public async Task<ActionResult<IEnumerable<ParcelasEmprestimoAntecipaDTO>>> PostPagarAntecipadoParcelasEmprestimo([FromBody] IEnumerable<ParcelasEmprestimoAntecipaDTO> parcelasDto)
+        {
+
+            var parcelas = new List<ParcelasEmprestimoAntecipaDTO>();
+
+            using var tr = await _appDbContexto.Database.BeginTransactionAsync();
+            
+
+            try
+            {
+                foreach (var parcela in parcelasDto)
+                {
+                    var parcelaDto = await _parcelasEmprestimoServico.PagamentoAntecipadoParcelaEmprestimoAsync(parcela);
+                    parcelas.Add(parcelaDto.First());
+                }
+                
+                foreach (var parcela in parcelas)
+                {
+                    parcela.mensagem = "Pagamento da parcela Efetuada com Sucesso!";
+                }
+                        
             }
             catch (DomainException e)
             {

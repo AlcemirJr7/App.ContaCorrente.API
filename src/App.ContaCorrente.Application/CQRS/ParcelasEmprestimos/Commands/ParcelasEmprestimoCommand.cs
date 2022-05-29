@@ -17,5 +17,7 @@ namespace App.ContaCorrente.Application.CQRS.ParcelasEmprestimos.Commands
         public DateTime? DataPagamento { get; set; }
 
         public int EmprestimoId { get; set; }
+
+        public string? mensagem { get; set; }
     }
 }
