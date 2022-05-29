@@ -4,11 +4,6 @@ using App.ContaCorrente.Domain.Mensagem;
 using App.ContaCorrente.Domain.Validacoes;
 using App.ContaCorrente.Infra.Data.Contexto;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace App.ContaCorrente.Infra.Data.Repositorios
 {
