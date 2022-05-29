@@ -9,7 +9,7 @@ using MediatR;
 
 namespace App.ContaCorrente.Application.CQRS.ParcelasEmprestimos.Handlers
 {
-    public class ParcelasEmprestimoPagarAntecipadoCommandHandler : IRequestHandler<ParcelasEmprestimoPagarAntecipadoCommand, IEnumerable<ParcelasEmprestimo>>
+    public class ParcelasEmprestimoPagarAntecipadoCommandHandler : IRequestHandler<ParcelasEmprestimoPagarAntecipadoCommand, ParcelasEmprestimo>
     {
         private readonly IParcelasEmprestimoServico _parcelasEmprestimoServico;
         private readonly IEmprestimoRepositorio _emprestimoRepositorio;
@@ -24,12 +24,11 @@ namespace App.ContaCorrente.Application.CQRS.ParcelasEmprestimos.Handlers
             _parcelasEmprestimoRepositorio = parcelasEmprestimoRepositorio;
         }
 
-        public async Task<IEnumerable<ParcelasEmprestimo>> Handle(ParcelasEmprestimoPagarAntecipadoCommand request, CancellationToken cancellationToken)
+        public async Task<ParcelasEmprestimo> Handle(ParcelasEmprestimoPagarAntecipadoCommand request, CancellationToken cancellationToken)
         {
 
             var emprestimo = await _emprestimoRepositorio.GetPeloIdAsync(request.EmprestimoId);
-
-            var listaParcelasEmprestimo = new List<ParcelasEmprestimo>();
+            
             try
             {
                 if (emprestimo == null)
@@ -43,7 +42,7 @@ namespace App.ContaCorrente.Application.CQRS.ParcelasEmprestimos.Handlers
 
                 parcela = _mapper.Map<ParcelasEmprestimo>(parcelaPaga);
 
-                listaParcelasEmprestimo.Add(parcela);   
+                return parcela;
 
             }
             catch (DomainException e)
@@ -59,7 +58,7 @@ namespace App.ContaCorrente.Application.CQRS.ParcelasEmprestimos.Handlers
                 throw new DomainException(Mensagens.ErroAoProcessarPagamentoParcelasEmprestimo);
             }
 
-            return listaParcelasEmprestimo;
+            
 
 
 

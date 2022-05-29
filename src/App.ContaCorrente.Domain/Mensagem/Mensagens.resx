@@ -198,6 +198,9 @@
   <data name="NaoFoiPossivelCompletarOperacao" xml:space="preserve">
     <value> Não foi possível completar a operação.</value>
   </data>
+  <data name="PagamentoAntecipadoParcelaEmprestimo" xml:space="preserve">
+    <value>Pagamentos antecipado da parcela efetuado com sucesso!</value>
+  </data>
   <data name="PagamentoRealizadoSucesso" xml:space="preserve">
     <value>Pagamento realizado com sucesso!</value>
   </data>

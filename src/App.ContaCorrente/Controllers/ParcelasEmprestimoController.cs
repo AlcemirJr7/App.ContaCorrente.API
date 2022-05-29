@@ -88,25 +88,18 @@ namespace App.ContaCorrente.API.Controllers
         [HttpPost("Antecipar/")]
         public async Task<ActionResult<IEnumerable<ParcelasEmprestimoAntecipaDTO>>> PostPagarAntecipadoParcelasEmprestimo([FromBody] IEnumerable<ParcelasEmprestimoAntecipaDTO> parcelasDto)
         {
-
-            var parcelas = new List<ParcelasEmprestimoAntecipaDTO>();
-
+            
             using var tr = await _appDbContexto.Database.BeginTransactionAsync();
             
-
             try
             {
-                foreach (var parcela in parcelasDto)
-                {
-                    var parcelaDto = await _parcelasEmprestimoServico.PagamentoAntecipadoParcelaEmprestimoAsync(parcela);
-                    parcelas.Add(parcelaDto.First());
-                }
                 
-                foreach (var parcela in parcelas)
-                {
-                    parcela.mensagem = "Pagamento da parcela Efetuada com Sucesso!";
-                }
-                        
+                var parcelasPagasDto = await _parcelasEmprestimoServico.PagamentoAntecipadoParcelaEmprestimoAsync(parcelasDto);
+                
+                await tr.CommitAsync();
+
+                return Ok(parcelasPagasDto);
+
             }
             catch (DomainException e)
             {
@@ -118,10 +111,7 @@ namespace App.ContaCorrente.API.Controllers
                 await tr.RollbackAsync();
                 return BadRequest(new { mensagem = e.Message });
             }
-
-            await tr.CommitAsync();
-
-            return Ok(parcelas);
+            
         }
     }
 }

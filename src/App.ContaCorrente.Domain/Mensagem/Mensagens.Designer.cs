@@ -304,6 +304,15 @@ namespace App.ContaCorrente.Domain.Mensagem {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Pagamentos antecipado da parcela efetuado com sucesso!.
+        /// </summary>
+        public static string PagamentoAntecipadoParcelaEmprestimo {
+            get {
+                return ResourceManager.GetString("PagamentoAntecipadoParcelaEmprestimo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Pagamento realizado com sucesso!.
         /// </summary>
         public static string PagamentoRealizadoSucesso {

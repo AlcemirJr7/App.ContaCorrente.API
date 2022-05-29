@@ -100,15 +100,25 @@ namespace App.ContaCorrente.Application.Servicos
 
         }
 
-        public async Task<IEnumerable<ParcelasEmprestimoAntecipaDTO>> PagamentoAntecipadoParcelaEmprestimoAsync(ParcelasEmprestimoAntecipaDTO parcelasDto)
+        public async Task<IEnumerable<ParcelasEmprestimoAntecipaDTO>> PagamentoAntecipadoParcelaEmprestimoAsync(IEnumerable<ParcelasEmprestimoAntecipaDTO> parcelasDto)
         {
-            var parcelaEmprestimoCommand = _mapper.Map<ParcelasEmprestimoPagarAntecipadoCommand>(parcelasDto);
 
-            var result = await _mediator.Send(parcelaEmprestimoCommand);
+            var listaParcelaEmprestimo = new List<ParcelasEmprestimoAntecipaDTO>();
 
-            var parcelaEmprestimo = _mapper.Map<IEnumerable<ParcelasEmprestimoAntecipaDTO>>(result);
+            foreach (var parcela in parcelasDto)
+            {
+                var parcelaEmprestimoCommand = _mapper.Map<ParcelasEmprestimoPagarAntecipadoCommand>(parcela);
 
-            return parcelaEmprestimo;
+                var result = await _mediator.Send(parcelaEmprestimoCommand);
+
+                var parcelaEmprestimo = _mapper.Map<ParcelasEmprestimoAntecipaDTO>(result);
+
+                parcelaEmprestimo.mensagem = Mensagens.PagamentoAntecipadoParcelaEmprestimo;
+
+                listaParcelaEmprestimo.Add(parcelaEmprestimo);
+            }
+
+            return listaParcelaEmprestimo;
         }
 
         public IEnumerable<ParcelasEmprestimoDTO> GerarParcelasEmprestimo(Emprestimo emprestimo)
