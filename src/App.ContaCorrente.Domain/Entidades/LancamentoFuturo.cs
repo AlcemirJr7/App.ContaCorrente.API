@@ -59,6 +59,7 @@ namespace App.ContaCorrente.Domain.Entidades
         public void Atualizar(decimal valor, DateTime dataCadastro, DateTime dataParaLancamento, EnumTipoLancamentoFuturo tipoLancamento, EnumLancamentoFuturo flagLancamento, DateTime? dataLancamento,
                              string? observacao, int? idDoLancamento, EnumSituacaoLancamentoFuturo situacao, int historicoId, int correntistaId)
         {
+            
             ValidarEntidade(valor, dataCadastro, dataParaLancamento, tipoLancamento ,flagLancamento, dataLancamento, observacao, idDoLancamento, situacao);
             HistoricoId = historicoId;
             CorrentistaId = correntistaId;
@@ -73,6 +74,8 @@ namespace App.ContaCorrente.Domain.Entidades
             DomainExcepitonValidacao.When(!Enum.IsDefined(typeof(EnumLancamentoFuturo),flagLancamento), "Flag lançamento invalido.");
             DomainExcepitonValidacao.When(!Enum.IsDefined(typeof(EnumTipoLancamentoFuturo), tipoLancamento), "Tipo lançamento invalido.");
             DomainExcepitonValidacao.When(!Enum.IsDefined(typeof(EnumSituacaoLancamentoFuturo), situacao), "Situação lançamento invalido.");
+            DomainExcepitonValidacao.When(EnumSituacaoLancamentoFuturo.Cancelado == situacao && EnumLancamentoFuturo.Efetuado == FlagLancamento,
+                                          "Não pode cancelar um lançamento futuro efetivado.");
 
             Valor = valor;
             DataCadastro = dataCadastro;

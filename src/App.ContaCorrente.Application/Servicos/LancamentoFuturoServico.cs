@@ -55,6 +55,18 @@ namespace App.ContaCorrente.Application.Servicos
 
         }
 
+        public async Task<LancamentoFuturoDTO> CancelarAsync(int? id)
+        {
+            var lancamentoFuturoCommand = new LancamentoFuturoCancelarCommand { Id = id.Value};
+
+            var result = await _mediator.Send(lancamentoFuturoCommand);
+
+            var lancamentoFuturo = _mapper.Map<LancamentoFuturoDTO>(result);
+
+            return lancamentoFuturo;
+
+        }
+
         public async Task<IEnumerable<LancamentoFuturoDTO>> GetPeloCorrentistaIdAsync(int? id)
         {
             var lancamentoQuery = new GetLancamentoFuturoPeloCorrentistaIdQuery(id.Value);

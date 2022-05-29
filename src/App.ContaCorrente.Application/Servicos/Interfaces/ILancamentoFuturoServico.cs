@@ -13,5 +13,7 @@ namespace App.ContaCorrente.Application.Servicos.Interfaces
         Task<IEnumerable<LancamentoFuturoDTO>> ProcessaLancamentosFuturos();
 
         Task AtualizaLancamentoFuturoPagamento(int? id);
+
+        Task<LancamentoFuturoDTO> CancelarAsync(int? id);
     }
 }

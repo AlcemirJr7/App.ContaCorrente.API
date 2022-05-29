@@ -153,6 +153,9 @@
   <data name="ErroAoAlterarEntidade" xml:space="preserve">
     <value>0002| Erro ao alterar entidade.</value>
   </data>
+  <data name="ErroAoAlterarLancamentoFuturo" xml:space="preserve">
+    <value>0026| Não foi possível atualizar lançamento futuro.</value>
+  </data>
   <data name="ErroAoAtualizarEntidade" xml:space="preserve">
     <value>0003| Erro ao atualizar entidade.</value>
   </data>

@@ -65,6 +65,7 @@ namespace App.ContaCorrente.Infra.Data.Repositorios
                 var data = new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day);
 
                 return await _appDbContexto.LancamentosFuturos.Where(l => l.FlagLancamento == EnumLancamentoFuturo.Pendente && 
+                                                                     l.Situacao == EnumSituacaoLancamentoFuturo.Ativo &&
                                                                      l.DataParaLancamento <= data).ToListAsync();
             }
             catch
