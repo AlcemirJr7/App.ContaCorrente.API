@@ -1,8 +1,7 @@
-﻿using MediatR;
-
+﻿
 namespace App.ContaCorrente.Application.CQRS.ParcelasEmprestimos.Commands
 {
-    public class ParcelasEmprestimoPagarAntecipadoCommand : ParcelasEmprestimoCommand
+    public class ParcelasEmprestimoPagarAntecipadoCommand : ParcelasEmprestimoAnteciparCommand
     {
     }
 }
