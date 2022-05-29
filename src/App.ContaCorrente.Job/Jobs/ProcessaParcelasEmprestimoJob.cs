@@ -37,7 +37,7 @@ namespace App.ContaCorrente.Job.Jobs
 
             try
             {
-                parcelasEmprestimos = await _parcelasEmprestimoServico.ProcessaPagamentoParcelaEmprestimo();
+                parcelasEmprestimos = await _parcelasEmprestimoServico.ProcessaPagamentoParcelasEmprestimoAsync();
                 
             }
             catch (DomainException e)

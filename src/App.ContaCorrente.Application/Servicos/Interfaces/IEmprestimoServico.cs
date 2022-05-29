@@ -19,6 +19,6 @@ namespace App.ContaCorrente.Application.Servicos.Interfaces
 
         Task<bool> AnaliseCreditoCorrentistaAsync(int? correntistaId, decimal valorEmprestimo);
 
-        Task AtualizaSaldoDevedor(decimal valorParcela, Emprestimo emprestimo);
+        Task AtualizaSaldoDevedorAsync(decimal valorParcela, Emprestimo emprestimo);
     }
 }

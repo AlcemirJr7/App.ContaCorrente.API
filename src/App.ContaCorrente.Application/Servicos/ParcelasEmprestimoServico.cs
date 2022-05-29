@@ -3,6 +3,8 @@ using App.ContaCorrente.Application.CQRS.ParcelasEmprestimos.Queries;
 using App.ContaCorrente.Application.DTOs;
 using App.ContaCorrente.Application.Servicos.Interfaces;
 using App.ContaCorrente.Domain.Entidades;
+using App.ContaCorrente.Domain.Enumerador;
+using App.ContaCorrente.Domain.Interfaces;
 using App.ContaCorrente.Domain.Mensagem;
 using App.ContaCorrente.Domain.Validacoes;
 using AutoMapper;
@@ -14,10 +16,19 @@ namespace App.ContaCorrente.Application.Servicos
     {
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
-        public ParcelasEmprestimoServico(IMediator mediator, IMapper mapper)
+        private readonly ISaldoContaCorrenteServico _saldoContaCorrenteServico;
+        private readonly ILancamentoRepositorio _lancamentoRepositorio;
+        private readonly IEmprestimoServico _emprestimoServico;
+        private readonly IParcelasEmprestimoRepositorio _parcelasEmprestimoRepositorio;
+        public ParcelasEmprestimoServico(IMediator mediator, IMapper mapper, IEmprestimoServico emprestimoServico, ILancamentoRepositorio lancamentoRepositorio,
+                                         ISaldoContaCorrenteServico saldoContaCorrenteServico, IParcelasEmprestimoRepositorio parcelasEmprestimoRepositorio)
         {
             _mediator = mediator;
             _mapper = mapper;
+            _emprestimoServico = emprestimoServico;
+            _lancamentoRepositorio = lancamentoRepositorio;
+            _saldoContaCorrenteServico = saldoContaCorrenteServico;
+            _parcelasEmprestimoRepositorio = parcelasEmprestimoRepositorio;
         }
 
         public Task<ParcelasEmprestimoDTO> AlterarAsync(ParcelasEmprestimoDTO parcelasEmprestimoDto)
@@ -42,7 +53,7 @@ namespace App.ContaCorrente.Application.Servicos
 
         }
 
-        public async Task<IEnumerable<ParcelasEmprestimoDTO>> ProcessaPagamentoParcelaEmprestimo()
+        public async Task<IEnumerable<ParcelasEmprestimoDTO>> ProcessaPagamentoParcelasEmprestimoAsync()
         {
             var parcelaEmprestimoCommand = new ParcelasEmprestimoPagarCommand();
 
@@ -56,6 +67,48 @@ namespace App.ContaCorrente.Application.Servicos
         public Task<IEnumerable<ParcelasEmprestimoDTO>> GetPeloIdAsync(int? id)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<ParcelasEmprestimoDTO> EfetivaPagamentoParcelaEmprestimoAsync(Emprestimo emprestimo, ParcelasEmprestimo parcela)
+        {
+            ParcelasEmprestimoDTO? parcelaDto = null;
+
+            try
+            {
+                await _saldoContaCorrenteServico.ValidaSaldoAsync(emprestimo.CorrentistaId, (int)EnumParcelasEmprestimoHistorico.Historico, parcela.Valor);
+            }
+            catch
+            {
+                return parcelaDto;
+            }
+
+            var lancamento = new Lancamento(DateTime.Now, parcela.Valor, $"Pagamento parcela: {parcela.SeqParcelas}  emprestimo ID: {emprestimo.Id}",
+                                            emprestimo.CorrentistaId, (int)EnumParcelasEmprestimoHistorico.Historico);
+
+            var lancamentoCriado = await _lancamentoRepositorio.CriarAsync(lancamento);
+
+            await _saldoContaCorrenteServico.AtulizaSaldoAsync(lancamentoCriado.CorrentistaId, lancamentoCriado.HistoricoId, lancamentoCriado.Valor);
+
+            parcela.Atualizar(parcela.Valor, parcela.SeqParcelas, parcela.DataVencimento, DateTime.Now, emprestimo.Id);
+
+            var parcelaAlterada = await _parcelasEmprestimoRepositorio.AlterarAsync(parcela);
+
+            await _emprestimoServico.AtualizaSaldoDevedorAsync(parcela.Valor, emprestimo);
+
+            return _mapper.Map<ParcelasEmprestimoDTO>(parcelaAlterada);
+
+
+        }
+
+        public async Task<IEnumerable<ParcelasEmprestimoAntecipaDTO>> PagamentoAntecipadoParcelaEmprestimoAsync(ParcelasEmprestimoAntecipaDTO parcelasDto)
+        {
+            var parcelaEmprestimoCommand = _mapper.Map<ParcelasEmprestimoPagarAntecipadoCommand>(parcelasDto);
+
+            var result = await _mediator.Send(parcelaEmprestimoCommand);
+
+            var parcelaEmprestimo = _mapper.Map<IEnumerable<ParcelasEmprestimoAntecipaDTO>>(result);
+
+            return parcelaEmprestimo;
         }
 
         public IEnumerable<ParcelasEmprestimoDTO> GerarParcelasEmprestimo(Emprestimo emprestimo)

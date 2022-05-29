@@ -55,7 +55,7 @@ namespace App.ContaCorrente.Application.Servicos
             return emprestimo;
         }
 
-        public async Task AtualizaSaldoDevedor(decimal valorParcela, Emprestimo emprestimo)
+        public async Task AtualizaSaldoDevedorAsync(decimal valorParcela, Emprestimo emprestimo)
         {
             var novoSaldoDevedor = emprestimo.SaldoDevedor - valorParcela;
 
