@@ -26,6 +26,8 @@ namespace App.ContaCorrente.Application.DTOs
 
         public string? Observacao { get; set; }
 
+        public EnumSituacaoLancamentoFuturo Situacao { get; set; }
+
         [JsonIgnore]
         public DateTime? DataLancamento { get; set; }
 

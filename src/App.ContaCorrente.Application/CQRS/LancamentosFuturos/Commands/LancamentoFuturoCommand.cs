@@ -20,6 +20,8 @@ namespace App.ContaCorrente.Application.CQRS.LancamentosFuturos.Commands
 
         public string? Observacao { get; set; }
 
+        public EnumSituacaoLancamentoFuturo Situacao { get; set; }
+
         public DateTime? DataLancamento { get; set; }
 
         public int HistoricoId { get; set; }
