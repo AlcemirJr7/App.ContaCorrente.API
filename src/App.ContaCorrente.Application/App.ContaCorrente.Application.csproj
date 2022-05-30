@@ -16,7 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="CQRS\ChavesPix\Queries\" />
     <Folder Include="CQRS\SaldoContaCorrentes\Commands\" />
   </ItemGroup>
 

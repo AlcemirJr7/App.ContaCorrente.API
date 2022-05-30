@@ -72,6 +72,7 @@ namespace App.ContaCorrente.Application.Mapeamentos
 
             //ChavePix
             CreateMap<ChavePixDTO, ChavePixCriarCommand>();
+            CreateMap<ChavePixDTO, ChavePixInativarCommand>();
 
 
 

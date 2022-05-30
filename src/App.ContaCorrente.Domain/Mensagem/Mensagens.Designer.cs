@@ -97,6 +97,15 @@ namespace App.ContaCorrente.Domain.Mensagem {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a 0030| Chave pix não localizada..
+        /// </summary>
+        public static string ChavePixNaoEncontrada {
+            get {
+                return ResourceManager.GetString("ChavePixNaoEncontrada", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a 0017| Correntista informado não existe..
         /// </summary>
         public static string CorrentistaInvalido {
@@ -165,6 +174,15 @@ namespace App.ContaCorrente.Domain.Mensagem {
         public static string ErroAoAgendarPagamento {
             get {
                 return ResourceManager.GetString("ErroAoAgendarPagamento", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a 0029| Não foi possível alterar chave pix..
+        /// </summary>
+        public static string ErroAoAlterarChavePix {
+            get {
+                return ResourceManager.GetString("ErroAoAlterarChavePix", resourceCulture);
             }
         }
         

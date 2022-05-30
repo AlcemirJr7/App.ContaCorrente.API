@@ -129,6 +129,9 @@
   <data name="ChavePixJaCadastradaParaCorrentista" xml:space="preserve">
     <value>0028| Correntista já tem uma chave pix ativa cadastrada.</value>
   </data>
+  <data name="ChavePixNaoEncontrada" xml:space="preserve">
+    <value>0030| Chave pix não localizada.</value>
+  </data>
   <data name="CorrentistaInvalido" xml:space="preserve">
     <value>0017| Correntista informado não existe.</value>
   </data>
@@ -152,6 +155,9 @@
   </data>
   <data name="ErroAoAgendarPagamento" xml:space="preserve">
     <value>0022| Não foi possível agendar o pagamento.</value>
+  </data>
+  <data name="ErroAoAlterarChavePix" xml:space="preserve">
+    <value>0029| Não foi possível alterar chave pix.</value>
   </data>
   <data name="ErroAoAlterarEntidade" xml:space="preserve">
     <value>0002| Erro ao alterar entidade.</value>
