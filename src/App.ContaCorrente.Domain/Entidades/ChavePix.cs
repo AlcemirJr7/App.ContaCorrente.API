@@ -39,7 +39,7 @@ namespace App.ContaCorrente.Domain.Entidades
             ValidarEntidade(chave, dataCadastro, tipoChave,situacao);
         }
 
-        private void Atualizar(string? chave, DateTime dataCadastro, EnumChavePixTipo tipoChave, EnumChavePixSituacao situacao, int correntistaId)
+        public void Atualizar(string? chave, DateTime dataCadastro, EnumChavePixTipo tipoChave, EnumChavePixSituacao situacao, int correntistaId)
         {
             ValidarEntidade(chave, dataCadastro, tipoChave, situacao);
             CorrentistaId = correntistaId;

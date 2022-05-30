@@ -10,6 +10,6 @@ namespace App.ContaCorrente.Application.Servicos.Interfaces
 
         Task<ChavePixDTO> CriarAsync(ChavePixDTO chavePixDto);
 
-        Task<ChavePixDTO> AlterarAsync(ChavePixDTO chavePixDto);
+        Task<ChavePixDTO> AlterarAsync(int? CorrentistaId);
     }
 }

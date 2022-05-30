@@ -1,4 +1,5 @@
 ﻿using App.ContaCorrente.Application.CQRS.ChavesPix.Commands;
+using App.ContaCorrente.Application.CQRS.ChavesPix.Queries;
 using App.ContaCorrente.Application.DTOs;
 using App.ContaCorrente.Application.Servicos.Interfaces;
 using AutoMapper;
@@ -16,9 +17,13 @@ namespace App.ContaCorrente.Application.Servicos
             _mapper = mapper;
         }
 
-        public Task<ChavePixDTO> AlterarAsync(ChavePixDTO chavePixDto)
+        public async Task<ChavePixDTO> AlterarAsync(int? correntistaId)
         {
-            throw new NotImplementedException();
+            var chavePixCommand = new ChavePixInativarCommand { CorrentistaId = correntistaId.Value };
+
+            var result = await _mediator.Send(chavePixCommand);
+
+            return _mapper.Map<ChavePixDTO>(result);
         }
 
         public async Task<ChavePixDTO> CriarAsync(ChavePixDTO chavePixDto)
@@ -31,14 +36,23 @@ namespace App.ContaCorrente.Application.Servicos
 
         }
 
-        public Task<ChavePixDTO> GetChavePixPelaChaveAsync(string? chave)
+        public async Task<ChavePixDTO> GetChavePixPelaChaveAsync(string? chave)
         {
-            throw new NotImplementedException();
+            var chavePixQuery = new GetChavePixPelaChaveQuery(chave);
+
+            var result = await _mediator.Send(chavePixQuery);
+
+            return _mapper.Map<ChavePixDTO>(result);
+
         }
 
-        public Task<ChavePixDTO> GetChavePixPeloCorrentistaIdAsync(int? id)
+        public async Task<ChavePixDTO> GetChavePixPeloCorrentistaIdAsync(int? id)
         {
-            throw new NotImplementedException();
+            var chavePixQuery = new GetChavePixPeloCorrentistaIdQuery(id.Value);
+
+            var result = await _mediator.Send(chavePixQuery);
+
+            return _mapper.Map<ChavePixDTO>(result);
         }
     }
 }
