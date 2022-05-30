@@ -16,10 +16,20 @@ namespace App.ContaCorrente.Domain.Entidades
 
         public EnumChavePixSituacao Situacao { get; private set; }
 
+        public int CorrentistaId { get; set; }
+
+        public Correntista correntista { get; set; }
+
 
         public ChavePix(string chave, DateTime dataCadastro, EnumChavePixTipo tipoChave, EnumChavePixSituacao situacao)
         {
             ValidarEntidade(chave, dataCadastro, tipoChave, situacao);
+        }
+
+        public ChavePix(string chave, DateTime dataCadastro, EnumChavePixTipo tipoChave, EnumChavePixSituacao situacao, int correntistaId)
+        {
+            ValidarEntidade(chave, dataCadastro, tipoChave, situacao);
+            correntistaId = correntistaId;
         }
 
         public ChavePix(int id,string chave, DateTime dataCadastro, EnumChavePixTipo tipoChave, EnumChavePixSituacao situacao)
@@ -29,9 +39,10 @@ namespace App.ContaCorrente.Domain.Entidades
             ValidarEntidade(chave, dataCadastro, tipoChave,situacao);
         }
 
-        private void Atualizar(string chave, DateTime dataCadastro, EnumChavePixTipo tipoChave, EnumChavePixSituacao situacao)
+        private void Atualizar(string chave, DateTime dataCadastro, EnumChavePixTipo tipoChave, EnumChavePixSituacao situacao, int correntistaId)
         {
             ValidarEntidade(chave, dataCadastro, tipoChave, situacao);
+            CorrentistaId = correntistaId;
         }
 
         private void ValidarEntidade(string chave, DateTime dataCadastro, EnumChavePixTipo tipoChave, EnumChavePixSituacao situacao)
