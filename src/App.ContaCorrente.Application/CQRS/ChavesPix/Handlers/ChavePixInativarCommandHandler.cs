@@ -27,7 +27,7 @@ namespace App.ContaCorrente.Application.CQRS.ChavesPix.Handlers
                     throw new DomainException(Mensagens.ChavePixNaoEncontrada);
                 }
 
-                chavePix.Atualizar(chavePix.Chave,chavePix.DataCadastro,chavePix.TipoChave,EnumChavePixSituacao.Inativo,chavePix.CorrentistaId);
+                chavePix.Atualizar(chavePix.Chave,chavePix.DataCadastro,DateTime.Now,chavePix.TipoChave,EnumChavePixSituacao.Inativo,chavePix.CorrentistaId);
 
                 var chavePixAlterado = await _chavePixRepositorio.AlterarAsync(chavePix);
 
