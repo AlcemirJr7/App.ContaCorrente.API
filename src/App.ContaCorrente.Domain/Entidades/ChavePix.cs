@@ -12,6 +12,8 @@ namespace App.ContaCorrente.Domain.Entidades
 
         public DateTime DataCadastro { get; private set; }
 
+        public DateTime? DataInativacao { get; private set; }
+
         public EnumChavePixTipo TipoChave { get; private set; }
 
         public EnumChavePixSituacao Situacao { get; private set; }
@@ -21,31 +23,31 @@ namespace App.ContaCorrente.Domain.Entidades
         public Correntista correntista { get; set; }
 
 
-        public ChavePix(string? chave, DateTime dataCadastro, EnumChavePixTipo tipoChave, EnumChavePixSituacao situacao)
+        public ChavePix(string? chave, DateTime dataCadastro, DateTime? dataInativacao, EnumChavePixTipo tipoChave, EnumChavePixSituacao situacao)
         {
-            ValidarEntidade(chave, dataCadastro, tipoChave, situacao);
+            ValidarEntidade(chave, dataCadastro, dataInativacao, tipoChave, situacao);
         }
 
-        public ChavePix(string? chave, DateTime dataCadastro, EnumChavePixTipo tipoChave, EnumChavePixSituacao situacao, int correntistaId)
+        public ChavePix(string? chave, DateTime dataCadastro, DateTime? dataInativacao, EnumChavePixTipo tipoChave, EnumChavePixSituacao situacao, int correntistaId)
         {
-            ValidarEntidade(chave, dataCadastro, tipoChave, situacao);
+            ValidarEntidade(chave, dataCadastro, dataInativacao, tipoChave, situacao);
             CorrentistaId = correntistaId;
         }
 
-        public ChavePix(int id,string? chave, DateTime dataCadastro, EnumChavePixTipo tipoChave, EnumChavePixSituacao situacao)
+        public ChavePix(int id,string? chave, DateTime dataCadastro, DateTime? dataInativacao, EnumChavePixTipo tipoChave, EnumChavePixSituacao situacao)
         {
             DomainExcepitonValidacao.When(id < 0, "Id invalido.");
             Id = id;
-            ValidarEntidade(chave, dataCadastro, tipoChave,situacao);
+            ValidarEntidade(chave, dataCadastro, dataInativacao, tipoChave,situacao);
         }
 
-        public void Atualizar(string? chave, DateTime dataCadastro, EnumChavePixTipo tipoChave, EnumChavePixSituacao situacao, int correntistaId)
+        public void Atualizar(string? chave, DateTime dataCadastro, DateTime? dataInativacao, EnumChavePixTipo tipoChave, EnumChavePixSituacao situacao, int correntistaId)
         {
-            ValidarEntidade(chave, dataCadastro, tipoChave, situacao);
+            ValidarEntidade(chave, dataCadastro, dataInativacao, tipoChave, situacao);
             CorrentistaId = correntistaId;
         }
 
-        private void ValidarEntidade(string? chave, DateTime dataCadastro, EnumChavePixTipo tipoChave, EnumChavePixSituacao situacao)
+        private void ValidarEntidade(string? chave, DateTime dataCadastro, DateTime? dataInativacao, EnumChavePixTipo tipoChave, EnumChavePixSituacao situacao)
         {
             if(tipoChave != EnumChavePixTipo.Aleatorio)
             {
@@ -89,6 +91,7 @@ namespace App.ContaCorrente.Domain.Entidades
             DataCadastro = dataCadastro;
             TipoChave = tipoChave;
             Situacao = situacao;
+            DataInativacao = dataInativacao;
 
         }
 

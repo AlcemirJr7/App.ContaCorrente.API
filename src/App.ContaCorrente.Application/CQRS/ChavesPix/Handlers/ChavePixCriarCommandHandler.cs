@@ -27,7 +27,7 @@ namespace App.ContaCorrente.Application.CQRS.ChavesPix.Handlers
                     throw new DomainException(Mensagens.ChavePixJaCadastradaParaCorrentista);
                 }
 
-                var chavePix = new ChavePix(request.Chave,DateTime.Now,request.TipoChave,EnumChavePixSituacao.Ativo,request.CorrentistaId);
+                var chavePix = new ChavePix(request.Chave,DateTime.Now,null,request.TipoChave,EnumChavePixSituacao.Ativo,request.CorrentistaId);
 
                 return await _chavePixRepositorio.CriarAsync(chavePix);
             }

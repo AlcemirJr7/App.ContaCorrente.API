@@ -12,6 +12,8 @@ namespace App.ContaCorrente.Application.CQRS.ChavesPix.Commands
 
         public DateTime DataCadastro { get; set; }
 
+        public DateTime? DataInativacao { get; set; }
+
         public EnumChavePixTipo TipoChave { get; set; }
 
         public EnumChavePixSituacao Situacao { get; set; }
