@@ -1,4 +1,5 @@
 ﻿using App.ContaCorrente.Application.CQRS.Bancos.Commands;
+using App.ContaCorrente.Application.CQRS.ChavesPix.Commands;
 using App.ContaCorrente.Application.CQRS.Correntistas.Commands;
 using App.ContaCorrente.Application.CQRS.Emprestimos.Commands;
 using App.ContaCorrente.Application.CQRS.Enderecos.Commands;
@@ -68,6 +69,9 @@ namespace App.ContaCorrente.Application.Mapeamentos
             CreateMap<ParcelasEmprestimoDTO, ParcelasEmprestimoPagarCommand>();
             CreateMap<ParcelasEmprestimoAntecipaDTO, ParcelasEmprestimoPagarAntecipadoCommand>();
             CreateMap<ParcelasEmprestimo, ParcelasEmprestimoPagarAntecipadoCommand>();
+
+            //ChavePix
+            CreateMap<ChavePixDTO, ChavePixCriarCommand>();
 
 
 

@@ -8,7 +8,7 @@ namespace App.ContaCorrente.Domain.Entidades
     {
         public int Id { get; protected  set; }
 
-        public string Chave { get; private set; }
+        public string? Chave { get; private set; }
 
         public DateTime DataCadastro { get; private set; }
 
@@ -21,53 +21,60 @@ namespace App.ContaCorrente.Domain.Entidades
         public Correntista correntista { get; set; }
 
 
-        public ChavePix(string chave, DateTime dataCadastro, EnumChavePixTipo tipoChave, EnumChavePixSituacao situacao)
+        public ChavePix(string? chave, DateTime dataCadastro, EnumChavePixTipo tipoChave, EnumChavePixSituacao situacao)
         {
             ValidarEntidade(chave, dataCadastro, tipoChave, situacao);
         }
 
-        public ChavePix(string chave, DateTime dataCadastro, EnumChavePixTipo tipoChave, EnumChavePixSituacao situacao, int correntistaId)
+        public ChavePix(string? chave, DateTime dataCadastro, EnumChavePixTipo tipoChave, EnumChavePixSituacao situacao, int correntistaId)
         {
             ValidarEntidade(chave, dataCadastro, tipoChave, situacao);
-            correntistaId = correntistaId;
+            CorrentistaId = correntistaId;
         }
 
-        public ChavePix(int id,string chave, DateTime dataCadastro, EnumChavePixTipo tipoChave, EnumChavePixSituacao situacao)
+        public ChavePix(int id,string? chave, DateTime dataCadastro, EnumChavePixTipo tipoChave, EnumChavePixSituacao situacao)
         {
             DomainExcepitonValidacao.When(id < 0, "Id invalido.");
             Id = id;
             ValidarEntidade(chave, dataCadastro, tipoChave,situacao);
         }
 
-        private void Atualizar(string chave, DateTime dataCadastro, EnumChavePixTipo tipoChave, EnumChavePixSituacao situacao, int correntistaId)
+        private void Atualizar(string? chave, DateTime dataCadastro, EnumChavePixTipo tipoChave, EnumChavePixSituacao situacao, int correntistaId)
         {
             ValidarEntidade(chave, dataCadastro, tipoChave, situacao);
             CorrentistaId = correntistaId;
         }
 
-        private void ValidarEntidade(string chave, DateTime dataCadastro, EnumChavePixTipo tipoChave, EnumChavePixSituacao situacao)
+        private void ValidarEntidade(string? chave, DateTime dataCadastro, EnumChavePixTipo tipoChave, EnumChavePixSituacao situacao)
         {
-            DomainExcepitonValidacao.When(string.IsNullOrEmpty(chave), "Chave pix deve ser informada.");
+            if(tipoChave != EnumChavePixTipo.Aleatorio)
+            {
+                DomainExcepitonValidacao.When(string.IsNullOrEmpty(chave), "Chave pix deve ser informada.");
+            }           
             DomainExcepitonValidacao.When(string.IsNullOrEmpty(Convert.ToString(dataCadastro)), "Data cadasto invalido.");
             DomainExcepitonValidacao.When(!Enum.IsDefined(typeof(EnumChavePixTipo), tipoChave), "Tipo chave pix invalido.");
             DomainExcepitonValidacao.When(!Enum.IsDefined(typeof(EnumChavePixSituacao), situacao), "Situação invalida.");
 
+
             switch (tipoChave)
             {
                 case EnumChavePixTipo.Cpf:
-                    DomainExcepitonValidacao.When(ValidadorDeCampos.ValidaCpf(StringFormata.ApenasNumeros(chave)), "Chave Cpf invalida.");
+                    DomainExcepitonValidacao.When(!ValidadorDeCampos.ValidaCpf(StringFormata.ApenasNumeros(chave)), "Chave Cpf invalida.");
                     break;
                 case EnumChavePixTipo.Cnpj:
-                    DomainExcepitonValidacao.When(ValidadorDeCampos.ValidaCnpj(StringFormata.ApenasNumeros(chave)), "Chave Cnpj invalida.");
+                    DomainExcepitonValidacao.When(!ValidadorDeCampos.ValidaCnpj(StringFormata.ApenasNumeros(chave)), "Chave Cnpj invalida.");
                     break;
                 case EnumChavePixTipo.Email:
-                    DomainExcepitonValidacao.When(ValidadorDeCampos.ValidaEmail(chave), "Chave Email invalida.");
+                    {
+                        DomainExcepitonValidacao.When(!ValidadorDeCampos.ValidaEmail(chave), "Chave Email invalida.");
+                        Chave = chave;
+                    }                    
                     break;
                 case EnumChavePixTipo.Celular:
-                    DomainExcepitonValidacao.When(ValidadorDeCampos.ValidaCelular(StringFormata.ApenasNumeros(chave)), "Chave Celular invalida.");
+                    DomainExcepitonValidacao.When(!ValidadorDeCampos.ValidaCelular(StringFormata.ApenasNumeros(chave)), "Chave Celular invalida.");
                     break;
-                case EnumChavePixTipo.Aleatorio:                    
-                    Chave = new Guid().ToString();                                        
+                case EnumChavePixTipo.Aleatorio:                                           
+                    Chave = Guid.NewGuid().ToString();                                                           
                     break;
                 default:
                     break;
@@ -77,6 +84,7 @@ namespace App.ContaCorrente.Domain.Entidades
             {
                 Chave = StringFormata.ApenasNumeros(chave);
             }
+
 
             DataCadastro = dataCadastro;
             TipoChave = tipoChave;
