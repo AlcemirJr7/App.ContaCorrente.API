@@ -17,6 +17,8 @@ namespace App.ContaCorrente.Infra.Data.ConfiguracoesEntidades
             builder.Property(t => t.Valor).HasPrecision(25,2).IsRequired();
             builder.Property(t => t.NumeroConta).HasMaxLength(15);
             builder.Property(t => t.Agencia).HasMaxLength(10);
+            builder.Property(t => t.DataAgendamento).HasColumnType("Date");
+            builder.Property(t => t.NomePessoa).HasMaxLength(200);
         }
     }
 }
