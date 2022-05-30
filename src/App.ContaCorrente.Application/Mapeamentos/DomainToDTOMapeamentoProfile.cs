@@ -25,6 +25,7 @@ namespace App.ContaCorrente.Application.Mapeamentos
             CreateMap<Emprestimo, EmprestimoEfetivarDTO>().ReverseMap();
             CreateMap<ParcelasEmprestimo, ParcelasEmprestimoDTO>().ReverseMap();
             CreateMap<ParcelasEmprestimo, ParcelasEmprestimoAntecipaDTO>().ReverseMap();
+            CreateMap<ChavePix, ChavePixDTO>().ReverseMap();
 
         }
     }

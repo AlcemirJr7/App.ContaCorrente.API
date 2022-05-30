@@ -88,6 +88,15 @@ namespace App.ContaCorrente.Domain.Mensagem {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a 0028| Correntista já tem uma chave pix ativa cadastrada..
+        /// </summary>
+        public static string ChavePixJaCadastradaParaCorrentista {
+            get {
+                return ResourceManager.GetString("ChavePixJaCadastradaParaCorrentista", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a 0017| Correntista informado não existe..
         /// </summary>
         public static string CorrentistaInvalido {
@@ -201,6 +210,15 @@ namespace App.ContaCorrente.Domain.Mensagem {
         public static string ErroAoAtualizarSaldoDevedorEmprestimo {
             get {
                 return ResourceManager.GetString("ErroAoAtualizarSaldoDevedorEmprestimo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a 0027| Não foi possível criar chave pix..
+        /// </summary>
+        public static string ErroAoCriarChavePix {
+            get {
+                return ResourceManager.GetString("ErroAoCriarChavePix", resourceCulture);
             }
         }
         

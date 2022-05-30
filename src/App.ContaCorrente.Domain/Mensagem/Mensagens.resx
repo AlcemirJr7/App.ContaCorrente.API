@@ -126,6 +126,9 @@
   <data name="BancoJaExistente" xml:space="preserve">
     <value>0007| Banco {0} já existe na base.</value>
   </data>
+  <data name="ChavePixJaCadastradaParaCorrentista" xml:space="preserve">
+    <value>0028| Correntista já tem uma chave pix ativa cadastrada.</value>
+  </data>
   <data name="CorrentistaInvalido" xml:space="preserve">
     <value>0017| Correntista informado não existe.</value>
   </data>
@@ -164,6 +167,9 @@
   </data>
   <data name="ErroAoAtualizarSaldoDevedorEmprestimo" xml:space="preserve">
     <value>0025| Não foi possível atualizar o saldo devedor do emprestimo.</value>
+  </data>
+  <data name="ErroAoCriarChavePix" xml:space="preserve">
+    <value>0027| Não foi possível criar chave pix.</value>
   </data>
   <data name="ErroAoCriarEntidade" xml:space="preserve">
     <value>0001| Erro ao criar entidade.</value>
