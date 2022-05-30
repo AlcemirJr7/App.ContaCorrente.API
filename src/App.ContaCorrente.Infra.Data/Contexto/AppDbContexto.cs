@@ -28,6 +28,10 @@ namespace App.ContaCorrente.Infra.Data.Contexto
         public DbSet<LogContaCorrente> LogContaCorrente { get; set; }
         public DbSet<LogSistema> LogSistema { get; set; }
 
+        public DbSet<ChavePix> ChavesPix { get; set; }
+
+        
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

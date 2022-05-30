@@ -16,7 +16,8 @@ namespace App.ContaCorrente.Infra.Data.ConfiguracoesEntidades
             builder.HasKey(e => e.Id);
             builder.Property(e => e.Juros).HasPrecision(10, 2);
             builder.Property(e => e.Valor).HasPrecision(25, 2);
-            builder.Property(e => e.ValorParcela).HasPrecision(25, 2);            
+            builder.Property(e => e.ValorParcela).HasPrecision(25, 2);
+            builder.Property(e => e.SaldoDevedor).HasPrecision(25, 2);
 
         }
     }

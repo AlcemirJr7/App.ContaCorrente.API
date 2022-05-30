@@ -37,6 +37,18 @@
                 return true;
             }
         }
-       
+
+        public static bool ValidaCelular(string valor)
+        {
+            if (valor.Length != 11)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
     }
 }
