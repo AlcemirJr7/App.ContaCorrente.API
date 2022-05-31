@@ -126,11 +126,17 @@
   <data name="BancoJaExistente" xml:space="preserve">
     <value>0007| Banco {0} já existe na base.</value>
   </data>
+  <data name="ChavePixEnviaInvalido" xml:space="preserve">
+    <value>0032| Chave pix envia invalido.</value>
+  </data>
   <data name="ChavePixJaCadastradaParaCorrentista" xml:space="preserve">
     <value>0028| Correntista já tem uma chave pix ativa cadastrada.</value>
   </data>
   <data name="ChavePixNaoEncontrada" xml:space="preserve">
     <value>0030| Chave pix não localizada.</value>
+  </data>
+  <data name="ChavePixRecebeInvalido" xml:space="preserve">
+    <value>0031| Chave pix recebe invalido.</value>
   </data>
   <data name="CorrentistaInvalido" xml:space="preserve">
     <value>0017| Correntista informado não existe.</value>

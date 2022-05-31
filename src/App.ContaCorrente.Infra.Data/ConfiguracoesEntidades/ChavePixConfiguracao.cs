@@ -1,4 +1,4 @@
-﻿using App.ContaCorrente.Domain.Entidades;
+﻿    using App.ContaCorrente.Domain.Entidades;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
