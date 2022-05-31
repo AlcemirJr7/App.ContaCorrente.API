@@ -1,4 +1,4 @@
-﻿
+﻿using App.ContaCorrente.Domain.Entidades.Transferencia;
 using App.ContaCorrente.Domain.Entidades;
 using App.ContaCorrente.Domain.Entidades.Logs;
 using Microsoft.EntityFrameworkCore;

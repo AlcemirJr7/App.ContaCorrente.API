@@ -1,4 +1,4 @@
-﻿using App.ContaCorrente.Domain.Entidades;
+﻿using App.ContaCorrente.Domain.Entidades.Transferencia;
 
 namespace App.ContaCorrente.Domain.Interfaces
 {

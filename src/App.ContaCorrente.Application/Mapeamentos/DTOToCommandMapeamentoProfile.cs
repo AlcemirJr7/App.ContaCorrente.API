@@ -10,6 +10,7 @@ using App.ContaCorrente.Application.CQRS.LocalTrabalhos.Commands;
 using App.ContaCorrente.Application.CQRS.Pagamentos.Commands;
 using App.ContaCorrente.Application.CQRS.ParcelasEmprestimos.Commands;
 using App.ContaCorrente.Application.CQRS.Pessoas.Commands;
+using App.ContaCorrente.Application.CQRS.Transferencias.Commands;
 using App.ContaCorrente.Application.DTOs;
 using App.ContaCorrente.Domain.Entidades;
 using AutoMapper;
@@ -73,6 +74,9 @@ namespace App.ContaCorrente.Application.Mapeamentos
             //ChavePix
             CreateMap<ChavePixDTO, ChavePixCriarCommand>();
             CreateMap<ChavePixDTO, ChavePixInativarCommand>();
+
+            //Transferencia
+            CreateMap<TransferenciaInternaPixDTO, TransferenciaInternaPixCriarCommand>();
 
 
 

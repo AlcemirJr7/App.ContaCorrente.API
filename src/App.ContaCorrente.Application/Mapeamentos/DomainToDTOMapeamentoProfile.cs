@@ -1,5 +1,6 @@
 ﻿using App.ContaCorrente.Application.DTOs;
 using App.ContaCorrente.Domain.Entidades;
+using App.ContaCorrente.Domain.Entidades.Transferencia;
 using AutoMapper;
 
 namespace App.ContaCorrente.Application.Mapeamentos
@@ -26,6 +27,8 @@ namespace App.ContaCorrente.Application.Mapeamentos
             CreateMap<ParcelasEmprestimo, ParcelasEmprestimoDTO>().ReverseMap();
             CreateMap<ParcelasEmprestimo, ParcelasEmprestimoAntecipaDTO>().ReverseMap();
             CreateMap<ChavePix, ChavePixDTO>().ReverseMap();
+            CreateMap<Transferencia, TransferenciaInternaPixDTO>().ReverseMap();
+            
 
         }
     }

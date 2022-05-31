@@ -88,6 +88,15 @@ namespace App.ContaCorrente.Domain.Mensagem {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a 0032| Chave pix envia invalido..
+        /// </summary>
+        public static string ChavePixEnviaInvalido {
+            get {
+                return ResourceManager.GetString("ChavePixEnviaInvalido", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a 0028| Correntista já tem uma chave pix ativa cadastrada..
         /// </summary>
         public static string ChavePixJaCadastradaParaCorrentista {
@@ -102,6 +111,15 @@ namespace App.ContaCorrente.Domain.Mensagem {
         public static string ChavePixNaoEncontrada {
             get {
                 return ResourceManager.GetString("ChavePixNaoEncontrada", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a 0031| Chave pix recebe invalido..
+        /// </summary>
+        public static string ChavePixRecebeInvalido {
+            get {
+                return ResourceManager.GetString("ChavePixRecebeInvalido", resourceCulture);
             }
         }
         
