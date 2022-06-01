@@ -13,9 +13,15 @@
         
     }
 
-    public enum EnumTransferenciaHistoricoPix
+    public enum EnumTransferenciaInternaHistoricoPix
     {
         RecebePix = 5,
         EnviaPix = 6
+    }
+
+    public enum EnumTransferenciaInternaHistoricoTed
+    {
+        RecebeTed = 7,
+        EnviaTed = 8
     }
 }

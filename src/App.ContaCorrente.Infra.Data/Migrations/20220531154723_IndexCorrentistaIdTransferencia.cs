@@ -16,6 +16,7 @@ namespace App.ContaCorrente.Infra.Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Transferencias_CorrentistaRecebeId",
                 table: "Transferencias",
+                
                 column: "CorrentistaRecebeId");
         }
 

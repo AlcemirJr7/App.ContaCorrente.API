@@ -22,13 +22,23 @@ namespace App.ContaCorrente.Application.Servicos
             throw new NotImplementedException();
         }
 
-        public async Task<TransferenciaInternaPixDTO> CriarPixAsync(TransferenciaInternaPixDTO transferenciaDto)
+        public async Task<TransferenciaInternaPixDTO> CriarPixInternoAsync(TransferenciaInternaPixDTO transferenciaDto)
         {
             var transferenciaCommand = _mapper.Map<TransferenciaInternaPixCriarCommand>(transferenciaDto);
 
             var result = await _mediator.Send(transferenciaCommand);
 
             return _mapper.Map<TransferenciaInternaPixDTO>(result);
+
+        }
+
+        public async Task<TransferenciaInternaTedDTO> CriarTedInternoAsync(TransferenciaInternaTedDTO transferenciaDto)
+        {
+            var transferenciaCommand = _mapper.Map<TransferenciaInternaTedCriarCommand>(transferenciaDto);
+
+            var result = await _mediator.Send(transferenciaCommand);
+
+            return _mapper.Map<TransferenciaInternaTedDTO>(result);
 
         }
 

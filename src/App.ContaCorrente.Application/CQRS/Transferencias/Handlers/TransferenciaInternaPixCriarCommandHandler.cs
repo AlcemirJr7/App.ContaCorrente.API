@@ -53,7 +53,7 @@ namespace App.ContaCorrente.Application.CQRS.Transferencias.Handlers
                 try
                 {
                     //valida receber
-                    await _saldoContaCorrenteServico.ValidaSaldoAsync(chavePixRecebe.CorrentistaId,(int)EnumTransferenciaHistoricoPix.RecebePix,transferencia.Valor);
+                    await _saldoContaCorrenteServico.ValidaSaldoAsync(chavePixRecebe.CorrentistaId,(int)EnumTransferenciaInternaHistoricoPix.RecebePix,transferencia.Valor);
                 }
                 catch (DomainException e)
                 {
@@ -63,7 +63,7 @@ namespace App.ContaCorrente.Application.CQRS.Transferencias.Handlers
                 try
                 {
                     //valida envio
-                    await _saldoContaCorrenteServico.ValidaSaldoAsync(chavePixEnvia.CorrentistaId, (int)EnumTransferenciaHistoricoPix.EnviaPix, transferenciaCriada.Valor);
+                    await _saldoContaCorrenteServico.ValidaSaldoAsync(chavePixEnvia.CorrentistaId, (int)EnumTransferenciaInternaHistoricoPix.EnviaPix, transferenciaCriada.Valor);
                 }
                 catch (DomainException e)
                 {
@@ -72,20 +72,20 @@ namespace App.ContaCorrente.Application.CQRS.Transferencias.Handlers
 
                 // lancamento recebe
                 var lancamentoRecebe = new Lancamento(DateTime.Now, transferenciaCriada.Valor,"Recebimento Pix Transferencia ID:" + transferenciaCriada.Id.ToString(),
-                                                chavePixRecebe.CorrentistaId, (int)EnumTransferenciaHistoricoPix.RecebePix);
+                                                chavePixRecebe.CorrentistaId, (int)EnumTransferenciaInternaHistoricoPix.RecebePix);
 
                 await _lancamentoRepositorio.CriarAsync(lancamentoRecebe);
                 
-                await _saldoContaCorrenteServico.AtulizaSaldoAsync(chavePixRecebe.CorrentistaId, (int)EnumTransferenciaHistoricoPix.RecebePix, lancamentoRecebe.Valor);
+                await _saldoContaCorrenteServico.AtulizaSaldoAsync(chavePixRecebe.CorrentistaId, (int)EnumTransferenciaInternaHistoricoPix.RecebePix, lancamentoRecebe.Valor);
 
 
                 // lancamento envia
                 var lancamentoEnvia = new Lancamento(DateTime.Now, transferenciaCriada.Valor, "Envio Pix Transferencia ID:" + transferenciaCriada.Id.ToString(),
-                                                    chavePixEnvia.CorrentistaId, (int)EnumTransferenciaHistoricoPix.RecebePix);
+                                                    chavePixEnvia.CorrentistaId, (int)EnumTransferenciaInternaHistoricoPix.RecebePix);
 
                 await _lancamentoRepositorio.CriarAsync(lancamentoEnvia);
 
-                await _saldoContaCorrenteServico.AtulizaSaldoAsync(chavePixEnvia.CorrentistaId, (int)EnumTransferenciaHistoricoPix.EnviaPix, lancamentoEnvia.Valor);
+                await _saldoContaCorrenteServico.AtulizaSaldoAsync(chavePixEnvia.CorrentistaId, (int)EnumTransferenciaInternaHistoricoPix.EnviaPix, lancamentoEnvia.Valor);
 
                 return transferenciaCriada;
 

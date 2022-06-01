@@ -1,5 +1,4 @@
 ﻿using App.ContaCorrente.Domain.Enumerador;
-using App.ContaCorrente.Domain.Utils;
 using App.ContaCorrente.Domain.Validacoes;
 
 namespace App.ContaCorrente.Domain.Entidades.Transferencias
@@ -20,12 +19,7 @@ namespace App.ContaCorrente.Domain.Entidades.Transferencias
 
         public DateTime? DataAgendamento { get; protected set; }
 
-
-        public Transferencia()
-        {
-
-        }
-
+  
         public Transferencia(DateTime? dataTransferencia, decimal valor, DateTime dataCadatro, EnumTransferenciaModo modoTransferencia, EnumTransferenciaTipo tipoTransferencia, DateTime? dataAgendamento)
         {
             ValidarEntidade(dataTransferencia, valor, dataCadatro, modoTransferencia, tipoTransferencia, dataAgendamento);

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace App.ContaCorrente.Domain.Enumerador
 {
@@ -16,7 +11,7 @@ namespace App.ContaCorrente.Domain.Enumerador
 
     public enum EnumAgencia
     {        
-        [Description("0001")]
+        [AmbientValue("0001")]
         Agencia = 1
     }
 
@@ -24,4 +19,6 @@ namespace App.ContaCorrente.Domain.Enumerador
     {        
         Banco = 999
     }
+
+
 }

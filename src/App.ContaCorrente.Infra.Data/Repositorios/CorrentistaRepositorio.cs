@@ -63,6 +63,18 @@ namespace App.ContaCorrente.Infra.Data.Repositorios
                 throw new DomainException(Mensagens.ErroAoEfetuarConsulta);
             }
             
-        }       
+        }   
+        
+        public async Task<Correntista> GetPelaContaAgenciaBancoAsync(int? banco, string? agencia, string? conta)
+        {
+            try
+            {
+                return await _appDbContexto.Correntistas.Where(c => c.BancoId == banco && c.Conta == conta && c.Agencia == agencia).FirstOrDefaultAsync();
+            }
+            catch 
+            {
+                throw new DomainException(Mensagens.ErroAoEfetuarConsulta);
+            }
+        }
     }
 }
