@@ -1,4 +1,4 @@
-﻿using App.ContaCorrente.Domain.Entidades.Transferencia;
+﻿using App.ContaCorrente.Domain.Entidades.Transferencias;
 using App.ContaCorrente.Domain.Entidades;
 using App.ContaCorrente.Domain.Entidades.Logs;
 using Microsoft.EntityFrameworkCore;
@@ -35,6 +35,8 @@ namespace App.ContaCorrente.Infra.Data.Contexto
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Ignore<TransferenciaInterna>();
+            builder.Ignore<TransferenciaExterna>();          
             base.OnModelCreating(builder);            
             builder.ApplyConfigurationsFromAssembly(typeof(AppDbContexto).Assembly);
 

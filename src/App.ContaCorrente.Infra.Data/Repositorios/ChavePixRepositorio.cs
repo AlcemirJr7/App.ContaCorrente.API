@@ -45,11 +45,11 @@ namespace App.ContaCorrente.Infra.Data.Repositorios
             }
         }
 
-        public async Task<ChavePix> GetChavePixPelaChaveAsync(string? chave)
+        public async Task<ChavePix> GetChavePixAtivaPelaChaveAsync(string? chave)
         {
             try
             {
-                return await _appDbContexto.ChavesPix.FirstOrDefaultAsync(c => c.Chave == chave);
+                return await _appDbContexto.ChavesPix.FirstOrDefaultAsync(c => c.Chave == chave && c.Situacao == EnumChavePixSituacao.Ativo);
             }
             catch
             {

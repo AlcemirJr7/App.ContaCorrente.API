@@ -1,7 +1,7 @@
 ﻿using App.ContaCorrente.Application.CQRS.Transferencias.Commands;
 using App.ContaCorrente.Application.Servicos.Interfaces;
 using App.ContaCorrente.Domain.Entidades;
-using App.ContaCorrente.Domain.Entidades.Transferencia;
+using App.ContaCorrente.Domain.Entidades.Transferencias;
 using App.ContaCorrente.Domain.Enumerador;
 using App.ContaCorrente.Domain.Interfaces;
 using App.ContaCorrente.Domain.Mensagem;
@@ -29,14 +29,14 @@ namespace App.ContaCorrente.Application.CQRS.Transferencias.Handlers
         {
             try
             {
-                var chavePixRecebe = await _chavePixRepositorio.GetChavePixPelaChaveAsync(request.ChavePixRecebe);
+                var chavePixRecebe = await _chavePixRepositorio.GetChavePixAtivaPelaChaveAsync(request.ChavePixRecebe);
 
                 if(chavePixRecebe == null)
                 {
                     throw new DomainException(Mensagens.ChavePixRecebeInvalido);
                 }
 
-                var chavePixEnvia = await _chavePixRepositorio.GetChavePixPelaChaveAsync(request.ChavePixEnvia);
+                var chavePixEnvia = await _chavePixRepositorio.GetChavePixAtivaPelaChaveAsync(request.ChavePixEnvia);
 
                 if (chavePixEnvia == null)
                 {
@@ -44,8 +44,9 @@ namespace App.ContaCorrente.Application.CQRS.Transferencias.Handlers
                 }
 
 
-                var transferencia = new Transferencia(DateTime.Now,request.Valor,DateTime.Now,EnumTransferenciaModo.Interna,EnumTransferenciaTipo.Pix,
-                                                      request.DataAgendamento,chavePixRecebe.CorrentistaId,chavePixEnvia.CorrentistaId,request.ChavePixRecebe,request.ChavePixEnvia,null,null);
+                var transferencia = new TransferenciaInterna(DateTime.Now,request.Valor,DateTime.Now,EnumTransferenciaModo.Interna,EnumTransferenciaTipo.Pix,
+                                                             request.DataAgendamento,request.ChavePixRecebe,request.ChavePixEnvia,null,null,
+                                                             chavePixRecebe.CorrentistaId,chavePixEnvia.CorrentistaId);
 
                 var transferenciaCriada = await _transferenciaRepositorio.CriarAsync(transferencia);
 
@@ -85,7 +86,6 @@ namespace App.ContaCorrente.Application.CQRS.Transferencias.Handlers
                 await _lancamentoRepositorio.CriarAsync(lancamentoEnvia);
 
                 await _saldoContaCorrenteServico.AtulizaSaldoAsync(chavePixEnvia.CorrentistaId, (int)EnumTransferenciaHistoricoPix.EnviaPix, lancamentoEnvia.Valor);
-
 
                 return transferenciaCriada;
 

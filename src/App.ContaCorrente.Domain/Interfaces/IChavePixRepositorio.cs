@@ -7,7 +7,7 @@ namespace App.ContaCorrente.Domain.Interfaces
        
         Task<ChavePix> GetChavePixPeloCorrentistaIdAsync(int? id);
 
-        Task<ChavePix> GetChavePixPelaChaveAsync(string? chave);
+        Task<ChavePix> GetChavePixAtivaPelaChaveAsync(string? chave);
 
         Task<ChavePix> CriarAsync(ChavePix chavePix);
 
