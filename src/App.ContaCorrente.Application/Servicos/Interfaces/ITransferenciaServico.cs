@@ -8,6 +8,8 @@ namespace App.ContaCorrente.Application.Servicos.Interfaces
 
         Task<TransferenciaInternaPixDTO> AlterarAsync(TransferenciaInternaPixDTO transferenciaDto);
 
-        Task<TransferenciaInternaPixDTO> CriarPixAsync(TransferenciaInternaPixDTO transferenciaDto);
+        Task<TransferenciaInternaPixDTO> CriarPixInternoAsync(TransferenciaInternaPixDTO transferenciaDto);
+
+        Task<TransferenciaInternaTedDTO> CriarTedInternoAsync(TransferenciaInternaTedDTO transferenciaDto);
     }
 }

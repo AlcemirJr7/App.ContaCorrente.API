@@ -18,12 +18,7 @@ namespace App.ContaCorrente.Domain.Entidades.Transferencias
                                    : base(dataTransferencia, valor, dataCadatro, modoTransferencia, tipoTransferencia, dataAgendamento)
         {            
             ValidarEntidade(chavePixRecebe, chavePixEnvia, numeroContaRecebe, numeroContaEnvia, correntistaRecebeId, correntistaEnviaId);
-            //DataTransferencia = dataTransferencia;
-            //Valor = valor;
-            //DataCadatro = dataCadatro;
-            //TipoTransferencia = tipoTransferencia;
-            //ModoTransferencia = modoTransferencia;
-            //DataAgendamento = dataAgendamento;
+            
         }
         
         private void ValidarEntidade(string? chavePixRecebe, string? chavePixEnvia, string? numeroContaRecebe, string? numeroContaEnvia,
