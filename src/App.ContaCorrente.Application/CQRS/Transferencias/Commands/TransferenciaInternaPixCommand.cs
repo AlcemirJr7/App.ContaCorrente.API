@@ -1,4 +1,4 @@
-﻿using App.ContaCorrente.Domain.Entidades.Transferencia;
+﻿using App.ContaCorrente.Domain.Entidades.Transferencias;
 using App.ContaCorrente.Domain.Enumerador;
 using MediatR;
 
@@ -23,6 +23,10 @@ namespace App.ContaCorrente.Application.CQRS.Transferencias.Commands
         public string? ChavePixRecebe { get; set; }
 
         public string? ChavePixEnvia { get; set; }
+
+        public int CorrentistaRecebeId { get; set; }
+
+        public int CorrentistaEnviaId { get; set; }
 
         public string? Mensagen { get; set; }
     }

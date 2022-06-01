@@ -4,6 +4,7 @@ using App.ContaCorrente.Infra.Data.Contexto;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.ContaCorrente.Infra.Data.Migrations
 {
     [DbContext(typeof(AppDbContexto))]
-    partial class AppDbContextoModelSnapshot : ModelSnapshot
+    [Migration("20220601012024_AddColunaDiscriminatorTransferencia")]
+    partial class AddColunaDiscriminatorTransferencia
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -630,7 +632,7 @@ namespace App.ContaCorrente.Infra.Data.Migrations
 
                     b.Property<string>("Discriminator")
                         .IsRequired()
-                        .HasColumnType("nvarchar(1000)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ModoTransferencia")
                         .HasColumnType("int");

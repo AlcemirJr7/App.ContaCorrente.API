@@ -17,7 +17,7 @@ namespace App.ContaCorrente.Application.CQRS.ChavesPix.Handlers
         {
             try
             {
-                return await _chavePixRepositorio.GetChavePixPelaChaveAsync(request.Chave);
+                return await _chavePixRepositorio.GetChavePixAtivaPelaChaveAsync(request.Chave);
             }
             catch (DomainException e)
             {

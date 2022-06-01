@@ -1,4 +1,4 @@
-﻿using App.ContaCorrente.Domain.Entidades.Transferencia;
+﻿using App.ContaCorrente.Domain.Entidades.Transferencias;
 using App.ContaCorrente.Domain.Interfaces;
 using App.ContaCorrente.Domain.Mensagem;
 using App.ContaCorrente.Domain.Validacoes;
