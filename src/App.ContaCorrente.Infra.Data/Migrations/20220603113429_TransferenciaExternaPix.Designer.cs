@@ -4,6 +4,7 @@ using App.ContaCorrente.Infra.Data.Contexto;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.ContaCorrente.Infra.Data.Migrations
 {
     [DbContext(typeof(AppDbContexto))]
-    partial class AppDbContextoModelSnapshot : ModelSnapshot
+    [Migration("20220603113429_TransferenciaExternaPix")]
+    partial class TransferenciaExternaPix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -653,15 +655,27 @@ namespace App.ContaCorrente.Infra.Data.Migrations
 
             modelBuilder.Entity("App.ContaCorrente.Domain.Entidades.Transferencias.TransferenciaExternaPix", b =>
                 {
-                    b.HasBaseType("App.ContaCorrente.Domain.Entidades.Transferencias.Transferencia");                    
+                    b.HasBaseType("App.ContaCorrente.Domain.Entidades.Transferencias.Transferencia");
+
+                    b.Property<string>("ChavePixEnvia")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ChavePixEnviaExterno")
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");                    
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("ChavePixRecebe")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ChavePixRecebeExterno")
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");                    
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int?>("CorrentistaEnviaId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CorrentistaRecebeId")
+                        .HasColumnType("int");
 
                     b.Property<int>("TipoChave")
                         .HasColumnType("int");

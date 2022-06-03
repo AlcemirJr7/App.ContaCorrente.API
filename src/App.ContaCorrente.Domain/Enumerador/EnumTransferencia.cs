@@ -24,4 +24,10 @@
         RecebeTed = 7,
         EnviaTed = 8
     }
+
+    public enum EnumTransferenciaExternaHistoricoPix
+    {
+        RecebePix = 1007,
+        EnviaPix = 1008
+    }
 }

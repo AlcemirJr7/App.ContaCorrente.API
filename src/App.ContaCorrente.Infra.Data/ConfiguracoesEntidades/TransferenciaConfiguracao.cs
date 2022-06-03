@@ -11,8 +11,7 @@ namespace App.ContaCorrente.Infra.Data.ConfiguracoesEntidades
         {
             builder.HasKey(t => t.Id);
             builder.Property(t => t.Valor).HasPrecision(25,2).IsRequired();
-            builder.Property(t => t.DataAgendamento).HasColumnType("Date");            
-            
+            builder.Property(t => t.DataAgendamento).HasColumnType("Date");                            
 
         }
     }
