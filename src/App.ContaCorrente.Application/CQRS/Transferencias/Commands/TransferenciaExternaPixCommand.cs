@@ -1,0 +1,44 @@
+﻿using App.ContaCorrente.Domain.Entidades.Transferencias;
+using App.ContaCorrente.Domain.Enumerador;
+using MediatR;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace App.ContaCorrente.Application.CQRS.Transferencias.Commands
+{
+    public abstract class TransferenciaExternaPixCommand : IRequest<Transferencia>
+    {
+        public int Id { get; set; }
+
+        public DateTime? DataTransferencia { get; set; }
+
+        public DateTime DataCadatro { get; set; }
+
+        public decimal Valor { get; set; }
+
+        public EnumTransferenciaTipo TipoTransferencia { get; set; }
+
+        public EnumTransferenciaModo ModoTransferencia { get; set; }
+
+        public DateTime? DataAgendamento { get; set; }
+
+        public string? ChavePixRecebe { get; set; }
+
+        public string? ChavePixEnvia { get; set; }
+
+        public int CorrentistaRecebeId { get; set; }
+
+        public int CorrentistaEnviaId { get; set; }
+
+        public EnumChavePixTipo TipoChave { get; set; }
+
+        public string? ChavePixRecebeExterno { get; set; }
+        
+        public string? ChavePixEnviaExterno { get; set; }
+
+        public string? Mensagen { get; set; }
+    }
+}

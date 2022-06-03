@@ -331,6 +331,15 @@ namespace App.ContaCorrente.Domain.Mensagem {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a 0033| Não foi possível enviar transação pix externa..
+        /// </summary>
+        public static string ErroAoEnviarTransacaoPixExterna {
+            get {
+                return ResourceManager.GetString("ErroAoEnviarTransacaoPixExterna", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a 0024| Erro ao processar pagamento de parcelas emprestimo..
         /// </summary>
         public static string ErroAoProcessarPagamentoParcelasEmprestimo {

@@ -29,6 +29,7 @@ namespace App.ContaCorrente.Application.Mapeamentos
             CreateMap<ChavePix, ChavePixDTO>().ReverseMap();
             CreateMap<TransferenciaInterna, TransferenciaInternaPixDTO>().ReverseMap();
             CreateMap<TransferenciaInterna, TransferenciaInternaTedDTO>().ReverseMap();
+            CreateMap<TransferenciaExternaPix, TransferenciaExternaEnvaPixDTO>().ReverseMap();
 
 
         }

@@ -96,5 +96,42 @@ namespace App.ContaCorrente.API.Controllers
 
         }
 
+        /// <summary>
+        /// Fazer uma transferencia Pix externa
+        /// </summary>        
+        /// <param name="transferenciaInternaPixDto"> Dados para efetuar a transferencia Pix </param>
+        [HttpPost("Externo/Pix")]
+        public async Task<ActionResult<TransferenciaExternaEnvaPixDTO>> PostTransferenciaExternaPix([FromBody] TransferenciaExternaEnvaPixDTO transferenciaExternaEnvaPixDto)
+        {
+            if (transferenciaExternaEnvaPixDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
+
+            using var tr = await _appDbContexto.Database.BeginTransactionAsync();
+
+            try
+            {
+                transferenciaExternaEnvaPixDto = await _transferenciaServico.CriarPixExternoEnvioAsync(transferenciaExternaEnvaPixDto);
+                transferenciaExternaEnvaPixDto.Mensagem = "Transferencia Pix Realizada com Sucesso!";
+
+
+                await tr.CommitAsync();
+
+                return Ok(transferenciaExternaEnvaPixDto);
+
+            }
+            catch (DomainException e)
+            {
+                await tr.RollbackAsync();
+                return BadRequest(new { mensagem = e.Message });
+            }
+            catch (DomainExcepitonValidacao e)
+            {
+                await tr.RollbackAsync();
+                return BadRequest(new { mensagem = e.Message });
+            }
+
+
+
+        }
+
     }
 }

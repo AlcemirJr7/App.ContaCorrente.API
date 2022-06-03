@@ -207,6 +207,9 @@
   <data name="ErroAoEfetuarPagamento" xml:space="preserve">
     <value>0021| Erro ao efetuar pagamento.</value>
   </data>
+  <data name="ErroAoEnviarTransacaoPixExterna" xml:space="preserve">
+    <value>0033| Não foi possível enviar transação pix externa.</value>
+  </data>
   <data name="ErroAoProcessarPagamentoParcelasEmprestimo" xml:space="preserve">
     <value>0024| Erro ao processar pagamento de parcelas emprestimo.</value>
   </data>

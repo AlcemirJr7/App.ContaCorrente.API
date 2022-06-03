@@ -32,6 +32,16 @@ namespace App.ContaCorrente.Application.Servicos
 
         }
 
+        public async Task<TransferenciaExternaEnvaPixDTO> CriarPixExternoEnvioAsync(TransferenciaExternaEnvaPixDTO transferenciaDto)
+        {
+            var transferenciaCommand = _mapper.Map<TransferenciaExternaPixCriarEnvioCommand>(transferenciaDto);
+
+            var result = await _mediator.Send(transferenciaCommand);
+
+            return _mapper.Map<TransferenciaExternaEnvaPixDTO>(result);
+
+        }
+
         public async Task<TransferenciaInternaTedDTO> CriarTedInternoAsync(TransferenciaInternaTedDTO transferenciaDto)
         {
             var transferenciaCommand = _mapper.Map<TransferenciaInternaTedCriarCommand>(transferenciaDto);
