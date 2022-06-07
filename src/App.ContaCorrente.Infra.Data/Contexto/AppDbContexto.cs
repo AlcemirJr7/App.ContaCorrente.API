@@ -36,7 +36,8 @@ namespace App.ContaCorrente.Infra.Data.Contexto
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Ignore<TransferenciaInterna>();
-            builder.Ignore<TransferenciaExternaPix>();           
+            builder.Ignore<TransferenciaExternaPix>();
+            builder.Ignore<TransferenciaExternaTed>();            
             base.OnModelCreating(builder);            
             builder.ApplyConfigurationsFromAssembly(typeof(AppDbContexto).Assembly);
 
