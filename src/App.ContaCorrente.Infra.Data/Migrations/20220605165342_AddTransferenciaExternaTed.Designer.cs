@@ -4,6 +4,7 @@ using App.ContaCorrente.Infra.Data.Contexto;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.ContaCorrente.Infra.Data.Migrations
 {
     [DbContext(typeof(AppDbContexto))]
-    partial class AppDbContextoModelSnapshot : ModelSnapshot
+    [Migration("20220605165342_AddTransferenciaExternaTed")]
+    partial class AddTransferenciaExternaTed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -656,38 +658,24 @@ namespace App.ContaCorrente.Infra.Data.Migrations
                     b.HasBaseType("App.ContaCorrente.Domain.Entidades.Transferencias.Transferencia");
 
                     b.Property<string>("ChavePixEnvia")
-                        .ValueGeneratedOnUpdateSometimes()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
-                        .HasColumnName("ChavePixEnvia");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ChavePixEnviaExterno")
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
-                        .HasColumnName("ChavePixEnviaExterno");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("ChavePixRecebe")
-                        .ValueGeneratedOnUpdateSometimes()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
-                        .HasColumnName("ChavePixRecebe");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ChavePixRecebeExterno")
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
-                        .HasColumnName("ChavePixRecebeExterno");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<int?>("CorrentistaEnviaId")
-                        .ValueGeneratedOnUpdateSometimes()
-                        .HasPrecision(10)
-                        .HasColumnType("int")
-                        .HasColumnName("CorrentistaEnviaId");
+                        .HasColumnType("int");
 
                     b.Property<int?>("CorrentistaRecebeId")
-                        .ValueGeneratedOnUpdateSometimes()
-                        .HasPrecision(10)
-                        .HasColumnType("int")
-                        .HasColumnName("CorrentistaRecebeId");
+                        .HasColumnType("int");
 
                     b.Property<int>("TipoChave")
                         .HasColumnType("int");
@@ -707,10 +695,8 @@ namespace App.ContaCorrente.Infra.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<int?>("CorrentistaEnviaId")
-                        .ValueGeneratedOnUpdateSometimes()
-                        .HasPrecision(10)
                         .HasColumnType("int")
-                        .HasColumnName("CorrentistaEnviaId");
+                        .HasColumnName("TransferenciaExternaTed_CorrentistaEnviaId");
 
                     b.Property<string>("NomePessoaExtero")
                         .HasMaxLength(200)
@@ -732,28 +718,24 @@ namespace App.ContaCorrente.Infra.Data.Migrations
                     b.HasBaseType("App.ContaCorrente.Domain.Entidades.Transferencias.Transferencia");
 
                     b.Property<string>("ChavePixEnvia")
-                        .ValueGeneratedOnUpdateSometimes()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)")
-                        .HasColumnName("ChavePixEnvia");
+                        .HasColumnName("TransferenciaInterna_ChavePixEnvia");
 
                     b.Property<string>("ChavePixRecebe")
-                        .ValueGeneratedOnUpdateSometimes()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)")
-                        .HasColumnName("ChavePixRecebe");
+                        .HasColumnName("TransferenciaInterna_ChavePixRecebe");
 
                     b.Property<int>("CorrentistaEnviaId")
-                        .ValueGeneratedOnUpdateSometimes()
                         .HasPrecision(10)
                         .HasColumnType("int")
-                        .HasColumnName("CorrentistaEnviaId");
+                        .HasColumnName("TransferenciaInterna_CorrentistaEnviaId");
 
                     b.Property<int>("CorrentistaRecebeId")
-                        .ValueGeneratedOnUpdateSometimes()
                         .HasPrecision(10)
                         .HasColumnType("int")
-                        .HasColumnName("CorrentistaRecebeId");
+                        .HasColumnName("TransferenciaInterna_CorrentistaRecebeId");
 
                     b.Property<string>("NumeroContaEnvia")
                         .HasMaxLength(15)

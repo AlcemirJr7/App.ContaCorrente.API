@@ -3,9 +3,9 @@ using System.Text.Json.Serialization;
 
 namespace App.ContaCorrente.Application.DTOs
 {
-    public class TransferenciaExternaEnvaPixDTO
+    public class TransferenciaExternaEnviaPixDTO
     {
-        public TransferenciaExternaEnvaPixDTO()
+        public TransferenciaExternaEnviaPixDTO()
         {
 
         }

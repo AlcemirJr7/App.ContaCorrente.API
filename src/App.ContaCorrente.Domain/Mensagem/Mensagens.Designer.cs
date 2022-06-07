@@ -340,6 +340,15 @@ namespace App.ContaCorrente.Domain.Mensagem {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a 0034| Não foi possível enviar transação ted externa..
+        /// </summary>
+        public static string ErroAoEnviarTransacaoTedExterna {
+            get {
+                return ResourceManager.GetString("ErroAoEnviarTransacaoTedExterna", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a 0024| Erro ao processar pagamento de parcelas emprestimo..
         /// </summary>
         public static string ErroAoProcessarPagamentoParcelasEmprestimo {

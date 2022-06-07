@@ -99,9 +99,9 @@ namespace App.ContaCorrente.API.Controllers
         /// <summary>
         /// Fazer uma transferencia Pix externa
         /// </summary>        
-        /// <param name="transferenciaInternaPixDto"> Dados para efetuar a transferencia Pix </param>
+        /// <param name="transferenciaExternaEnvaPixDto"> Dados para efetuar a transferencia Pix externa </param>
         [HttpPost("Externo/Pix")]
-        public async Task<ActionResult<TransferenciaExternaEnvaPixDTO>> PostTransferenciaExternaPix([FromBody] TransferenciaExternaEnvaPixDTO transferenciaExternaEnvaPixDto)
+        public async Task<ActionResult<TransferenciaExternaEnviaPixDTO>> PostTransferenciaExternaPix([FromBody] TransferenciaExternaEnviaPixDTO transferenciaExternaEnvaPixDto)
         {
             if (transferenciaExternaEnvaPixDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
 
@@ -116,6 +116,43 @@ namespace App.ContaCorrente.API.Controllers
                 await tr.CommitAsync();
 
                 return Ok(transferenciaExternaEnvaPixDto);
+
+            }
+            catch (DomainException e)
+            {
+                await tr.RollbackAsync();
+                return BadRequest(new { mensagem = e.Message });
+            }
+            catch (DomainExcepitonValidacao e)
+            {
+                await tr.RollbackAsync();
+                return BadRequest(new { mensagem = e.Message });
+            }
+
+
+
+        }
+
+        /// <summary>
+        /// Fazer uma transferencia Ted externa
+        /// </summary>        
+        /// <param name="transferenciaExternaEnviaTedDto"> Dados para efetuar a transferencia Ted externa </param>
+        [HttpPost("Externo/Ted")]
+        public async Task<ActionResult<TransferenciaExternaEnviaTedDTO>> PostTransferenciaExternaTed([FromBody] TransferenciaExternaEnviaTedDTO transferenciaExternaEnviaTedDto)
+        {
+            if (transferenciaExternaEnviaTedDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
+
+            using var tr = await _appDbContexto.Database.BeginTransactionAsync();
+
+            try
+            {
+                transferenciaExternaEnviaTedDto = await _transferenciaServico.CriarTedExternoEnvioAsync(transferenciaExternaEnviaTedDto);
+                transferenciaExternaEnviaTedDto.Mensagem = "Transferencia Ted Realizada com Sucesso!";
+
+
+                await tr.CommitAsync();
+
+                return Ok(transferenciaExternaEnviaTedDto);
 
             }
             catch (DomainException e)

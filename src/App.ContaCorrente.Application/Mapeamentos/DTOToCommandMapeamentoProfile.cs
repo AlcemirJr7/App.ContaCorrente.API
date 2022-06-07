@@ -78,9 +78,12 @@ namespace App.ContaCorrente.Application.Mapeamentos
             //Transferencia
             CreateMap<TransferenciaInternaPixDTO, TransferenciaInternaPixCriarCommand>();
             CreateMap<TransferenciaInternaTedDTO, TransferenciaInternaTedCriarCommand>();
-            CreateMap<TransferenciaExternaEnvaPixDTO, TransferenciaExternaPixCriarEnvioCommand>();
-
+            CreateMap<TransferenciaExternaEnviaPixDTO, TransferenciaExternaPixCriarEnvioCommand>();
+            CreateMap<TransferenciaExternaEnviaTedDTO, TransferenciaExternaTedCriaEnvioCommand>();
             
+
+
+
 
 
 

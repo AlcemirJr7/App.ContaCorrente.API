@@ -12,6 +12,8 @@ namespace App.ContaCorrente.Application.Servicos.Interfaces
 
         Task<TransferenciaInternaTedDTO> CriarTedInternoAsync(TransferenciaInternaTedDTO transferenciaDto);
 
-        Task<TransferenciaExternaEnvaPixDTO> CriarPixExternoEnvioAsync(TransferenciaExternaEnvaPixDTO transferenciaDto);
+        Task<TransferenciaExternaEnviaPixDTO> CriarPixExternoEnvioAsync(TransferenciaExternaEnviaPixDTO transferenciaDto);
+
+        Task<TransferenciaExternaEnviaTedDTO> CriarTedExternoEnvioAsync(TransferenciaExternaEnviaTedDTO transferenciaDto);
     }
 }
