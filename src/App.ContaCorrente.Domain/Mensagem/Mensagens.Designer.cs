@@ -196,6 +196,15 @@ namespace App.ContaCorrente.Domain.Mensagem {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a 0035| Não foi possível agendar o pix interno..
+        /// </summary>
+        public static string ErroAoAgendarTransferenciaPixInterno {
+            get {
+                return ResourceManager.GetString("ErroAoAgendarTransferenciaPixInterno", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a 0029| Não foi possível alterar chave pix..
         /// </summary>
         public static string ErroAoAlterarChavePix {

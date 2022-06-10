@@ -162,6 +162,9 @@
   <data name="ErroAoAgendarPagamento" xml:space="preserve">
     <value>0022| Não foi possível agendar o pagamento.</value>
   </data>
+  <data name="ErroAoAgendarTransferenciaPixInterno" xml:space="preserve">
+    <value>0035| Não foi possível agendar o pix interno.</value>
+  </data>
   <data name="ErroAoAlterarChavePix" xml:space="preserve">
     <value>0029| Não foi possível alterar chave pix.</value>
   </data>

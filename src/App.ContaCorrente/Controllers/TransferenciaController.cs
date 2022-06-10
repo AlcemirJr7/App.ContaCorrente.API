@@ -58,6 +58,44 @@ namespace App.ContaCorrente.API.Controllers
             
         }
 
+        /// <summary>
+        /// Fazer um agendamento transferencia Pix interno
+        /// </summary>        
+        /// <param name="transferenciaInternaPixAgendaDto"> Dados para efetuar o agendamento Pix interno </param>
+        [HttpPost("Agendamento/Interna/Pix")]
+        public async Task<ActionResult<TransferenciaInternaPixAgendaDTO>> PostAgendamentoTransferenciaInternaPix([FromBody] 
+                                                                                                                 TransferenciaInternaPixAgendaDTO 
+                                                                                                                 transferenciaInternaPixAgendaDto)
+        {
+            if (transferenciaInternaPixAgendaDto == null) return BadRequest(new { mensagem = Mensagens.DataInvalida });
+
+            using var tr = await _appDbContexto.Database.BeginTransactionAsync();
+
+            try
+            {
+                transferenciaInternaPixAgendaDto = await _transferenciaServico.CriarPixInternoAgendamentoAsync(transferenciaInternaPixAgendaDto);
+                transferenciaInternaPixAgendaDto.Mensagem = "Agendametno Pix Realizada com Sucesso!";
+
+
+                await tr.CommitAsync();
+
+                return Ok(transferenciaInternaPixAgendaDto);
+
+            }
+            catch (DomainException e)
+            {
+                await tr.RollbackAsync();
+                return BadRequest(new { mensagem = e.Message });
+            }
+            catch (DomainExcepitonValidacao e)
+            {
+                await tr.RollbackAsync();
+                return BadRequest(new { mensagem = e.Message });
+            }
+
+
+
+        }
 
         /// <summary>
         /// Fazer uma transferencia Ted entre contas internas
