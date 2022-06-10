@@ -31,6 +31,15 @@ namespace App.ContaCorrente.Application.Servicos
             return _mapper.Map<TransferenciaInternaPixDTO>(result);
 
         }
+        public async Task<TransferenciaInternaPixAgendaDTO> CriarPixInternoAgendamentoAsync(TransferenciaInternaPixAgendaDTO transferenciaDto)
+        {
+            var transferenciaCommand = _mapper.Map<TransferenciaInternaPixCriarAgendamentoCommand>(transferenciaDto);
+
+            var result = await _mediator.Send(transferenciaCommand);
+
+            return _mapper.Map<TransferenciaInternaPixAgendaDTO>(result);
+
+        }
 
         public async Task<TransferenciaExternaEnviaPixDTO> CriarPixExternoEnvioAsync(TransferenciaExternaEnviaPixDTO transferenciaDto)
         {

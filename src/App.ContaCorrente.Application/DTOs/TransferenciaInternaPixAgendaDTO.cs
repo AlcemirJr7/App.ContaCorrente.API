@@ -3,16 +3,15 @@ using System.Text.Json.Serialization;
 
 namespace App.ContaCorrente.Application.DTOs
 {
-    public class TransferenciaInternaPixAgendaDTO
+    public class TransferenciaInternaPixDTO
     {
-        public TransferenciaInternaPixAgendaDTO()
+        public TransferenciaInternaPixDTO()
         {
 
         }
 
         public int Id { get; set; }
 
-        [JsonIgnore]
         public DateTime? DataTransferencia { get; set; }
 
         [JsonIgnore]
@@ -25,7 +24,8 @@ namespace App.ContaCorrente.Application.DTOs
         
         [JsonIgnore]
         public EnumTransferenciaModo ModoTransferencia { get; set; }
-                
+        
+        [JsonIgnore]
         public DateTime? DataAgendamento { get; set; }
 
         public string? ChavePixRecebe { get; set; }
